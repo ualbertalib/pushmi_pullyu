@@ -1,0 +1,61 @@
+# List of cops can be found here:
+# https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+# https://github.com/bbatsov/rubocop/blob/master/config/disabled.yml
+# https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - 'tmp/**/*'
+  ExtraDetails: true
+  TargetRubyVersion: 2.3
+
+# A calculated magnitude based on number of assignments,
+# branches, and conditions.
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 500 # default 100
+
+# A complexity metric that is strongly correlated to the number
+# of test cases needed to validate a method.
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 120 # default is 80
+
+# Avoid methods longer than 10 lines of code.
+Metrics/MethodLength:
+  Max: 20 # default 10
+
+Metrics/ModuleLength:
+  Max: 500 # default 100
+
+# A complexity metric geared towards measuring complexity for a human reader.
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# Style/ClassAndModuleChildren:
+#   EnforcedStyle: compact
+
+Style/Documentation:
+  Enabled: false
+
+# Checks if there is a magic comment to enforce string literals
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: rails
+
+# Perfer to use // but %r can be better in certain scenarios
+Style/RegexpLiteral:
+  Enabled: false
+
+# Use %w or %W for arrays of words.
+Style/WordArray:
+  Enabled: false
