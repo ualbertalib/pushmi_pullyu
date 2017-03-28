@@ -29,7 +29,10 @@ Metrics/LineLength:
 
 # Avoid methods longer than 10 lines of code.
 Metrics/MethodLength:
-  Max: 20 # default 10
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
 
 Metrics/ModuleLength:
   Max: 500 # default 100

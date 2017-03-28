@@ -18,8 +18,11 @@ Gem::Specification.new do |spec|
   spec.executables = ['pushmi_pullyu']
   spec.require_paths = ['lib']
 
+  spec.add_dependency 'stomp'
+
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.45'
+  spec.add_development_dependency 'pry'
 end
