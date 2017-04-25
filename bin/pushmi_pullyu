@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'pushmi_pullyu'
+
+PushmiPullyu::CLI.new(ARGV).run!
