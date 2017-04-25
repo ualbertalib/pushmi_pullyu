@@ -4,6 +4,8 @@ PushmiPullyu will be a Ruby application, running behind the firewall that protec
 
 It's primary job will be to manage the flow of content from Fedora into Swift for preservation.
 
+![image](https://cloud.githubusercontent.com/assets/1930474/25407462/99193a5c-29c7-11e7-8aa0-0a43554e6eb1.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
