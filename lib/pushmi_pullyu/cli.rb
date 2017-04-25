@@ -3,7 +3,6 @@ require 'optparse'
 module PushmiPullyu
   # CLI runner
   class CLI
-
     # Parsed options
     attr_accessor :options
 
@@ -49,17 +48,14 @@ module PushmiPullyu
       end
     end
 
-
     # Parse the current shell arguments and run the command.
     # Exits on error.
     def run!
       # Trap interrupts to quit cleanly.
       Signal.trap('INT') { abort }
 
-
       # If we're running in the foreground sync the output.
       $stdout.sync = $stderr.sync = true unless @options[:daemon]
-
 
       loop do
         sleep(10)
@@ -74,6 +70,5 @@ module PushmiPullyu
         # 7. Log successful preservation event to log files
       end
     end
-
   end
 end
