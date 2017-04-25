@@ -1,3 +1,5 @@
+require 'optparse'
+
 module PushmiPullyu
   # CLI runner
   class CLI
@@ -10,13 +12,7 @@ module PushmiPullyu
 
       # Default options values
       @options = {
-        host: 'localhost',
-        port: 61_613,
-        user: nil,
-        password: nil,
-        topic: '/topic/fedora',
         debug: false,
-        reliable: true,
         daemon: false
       }
 
@@ -29,26 +25,6 @@ module PushmiPullyu
         opts.banner = 'Usage: pushmi_pullyu [options]'
         opts.separator ''
         opts.separator 'Specific options:'
-
-        opts.on('-o', '--host HOST', 'Set the host address of the fedora JMS server') do |host|
-          @options[:host] = host
-        end
-
-        opts.on('-p', '--port PORT', 'Set the port of the fedora JMS server') do |port|
-          @options[:port] = port.to_i
-        end
-
-        opts.on('-u', '--username USERNAME', 'Set the username for fedora JMS server') do |username|
-          @options[:user] = username
-        end
-
-        opts.on('-w', '--password PASSWORD', 'Set the password for fedora JMS server') do |password|
-          @options[:password] = password
-        end
-
-        opts.on('-t', '--topic TOPIC', 'Set the fedora JMS topic to listen on') do |topic|
-          @options[:topic] = topic
-        end
 
         opts.on('-d', '--daemonize', 'Run daemonized in the background') do
           @options[:daemon] = true
@@ -85,33 +61,18 @@ module PushmiPullyu
       $stdout.sync = $stderr.sync = true unless @options[:daemon]
 
 
-      puts "Connecting to stomp://#{@options[:host]}:#{@options[:port]}"
-
-      client = Stomp::Client.new(@options[:user], @options[:password], @options[:host], @options[:port], @options[:reliable])
-
-      puts "Subscripting to #{@options[:topic]}"
-
-      client.subscribe(@options[:topic],
-                       ack: 'client',
-                       'activemq.prefetchSize' => 1,
-                       'activemq.exclusive' => true) do |msg|
-
-        puts "Message: #{msg}"
-
-        # Preservation (TODO):
-        # 1. Get msg, look up object in fedora...
-        # 2. Determine if preservation effort is required?
-        # 3. If so, get all it's information and bagit
-        # 4. Push bag to swift API
-
-        client.acknowledge(msg)
-      end
-
       loop do
         sleep(10)
-      end
 
-      client.close
+        # Preservation (TODO):
+        # 1. Montior queue
+        # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
+        # 3. Retrieve GenericFile data in fedora
+        # 4. creation of AIP
+        # 5. bagging and tarring of AIP
+        # 6. Push bag to swift API
+        # 7. Log successful preservation event to log files
+      end
     end
 
   end
