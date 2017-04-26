@@ -16,6 +16,7 @@ module PushmiPullyu
       }
 
       parser.parse!(@argv)
+      @queue = PushmiPullyu::PreservationQueue.new
     end
 
     # Parse the options.
@@ -58,7 +59,7 @@ module PushmiPullyu
       $stdout.sync = $stderr.sync = true unless @options[:daemon]
 
       loop do
-        sleep(10)
+        item = @queue.wait_next_item
 
         # Preservation (TODO):
         # 1. Montior queue
