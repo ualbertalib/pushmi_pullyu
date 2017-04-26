@@ -1,5 +1,9 @@
 # PushmiPullyu
 
+[![Gem Version](https://badge.fury.io/rb/pushmi_pullyu.svg)](https://badge.fury.io/rb/pushmi_pullyu)
+[![Dependency Status](https://gemnasium.com/badges/github.com/ualbertalib/pushmi_pullyu.svg)](https://gemnasium.com/github.com/ualbertalib/pushmi_pullyu)
+[![Build Status](https://travis-ci.org/ualbertalib/pushmi_pullyu.svg?branch=master)](https://travis-ci.org/ualbertalib/pushmi_pullyu)
+
 PushmiPullyu will be a Ruby application, running behind the firewall that protects our Swift environment.
 
 It's primary job will be to manage the flow of content from Fedora into Swift for preservation.
