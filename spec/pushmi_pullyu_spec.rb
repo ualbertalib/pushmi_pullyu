@@ -6,6 +6,7 @@ RSpec.describe PushmiPullyu do
   end
 
   it 'does something useful' do
+    pending('the competion of some features')
     expect(false).to eq(true)
   end
 end
