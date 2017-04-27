@@ -11,6 +11,14 @@ AllCops:
   ExtraDetails: true
   TargetRubyVersion: 2.3
 
+# readability is Actually Good
+Style/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+# indentation is an endangered resource
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
 # A calculated magnitude based on number of assignments,
 # branches, and conditions.
 Metrics/AbcSize:
@@ -54,7 +62,7 @@ Style/FrozenStringLiteralComment:
 
 Style/IndentationConsistency:
   Enabled: true
-  EnforcedStyle: rails
+  EnforcedStyle: normal
 
 # Perfer to use // but %r can be better in certain scenarios
 Style/RegexpLiteral:
