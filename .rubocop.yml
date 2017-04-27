@@ -71,3 +71,6 @@ Style/RegexpLiteral:
 # Use %w or %W for arrays of words.
 Style/WordArray:
   Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
