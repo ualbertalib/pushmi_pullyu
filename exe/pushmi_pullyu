@@ -2,4 +2,13 @@
 
 require 'pushmi_pullyu'
 
-PushmiPullyu::CLI.new(ARGV).run!
+begin
+  cli = PushmiPullyu::CLI.instance
+  cli.parse
+  cli.run
+rescue => e
+  raise e if $DEBUG
+  STDERR.puts e.message
+  STDERR.puts e.backtrace.join("\n")
+  exit 1
+end
