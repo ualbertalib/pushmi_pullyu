@@ -1,8 +1,6 @@
 require 'optparse'
 require 'singleton'
 
-require 'pushmi_pullyu/logging'
-
 # CLI runner
 class PushmiPullyu::CLI
 
