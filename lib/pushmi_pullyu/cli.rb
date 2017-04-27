@@ -6,15 +6,10 @@ class PushmiPullyu::CLI
 
   include Singleton
 
-  # Parsed options
-  attr_accessor :options
+  attr_accessor :config
 
   def initialize
-    # Default options values
-    @options = {
-      debug: false,
-      daemon: false
-    }
+    self.config = PushmiPullyu::Config.new
   end
 
   def parse(args = ARGV)
@@ -29,7 +24,7 @@ class PushmiPullyu::CLI
     # Trap interrupts to quit cleanly.
     Signal.trap('INT') { abort }
 
-    if options[:daemon]
+    if config.daemonize
       start_working_loop_in_daemon
     else
       # If we're running in the foreground sync the output.
@@ -68,11 +63,11 @@ class PushmiPullyu::CLI
       opts.separator 'Specific options:'
 
       opts.on('-d', '--daemonize', 'Run daemonized in the background') do
-        options[:daemon] = true
+        config.daemonize = true
       end
 
       opts.on('-D', '--debug', 'Enable debug logging') do
-        options[:debug] = true
+        config.debug = true
       end
 
       opts.separator ''

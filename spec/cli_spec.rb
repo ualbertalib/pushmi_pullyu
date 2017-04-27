@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pushmi_pullyu/cli'
 
 describe PushmiPullyu::CLI do
   let(:cli) { PushmiPullyu::CLI.instance }
@@ -19,7 +18,7 @@ describe PushmiPullyu::CLI do
     end
 
     context 'should run as daemon' do
-      before { cli.options[:daemon] = true }
+      before { cli.config.daemonize = true }
 
       it 'should start working loop as daemon' do
         expect(cli).to receive(:start_working_loop_in_daemon)
@@ -31,12 +30,12 @@ describe PushmiPullyu::CLI do
   describe '#parse_options' do
     it 'should set to debug mode' do
       cli.send(:parse_options, ['--debug'])
-      expect(cli.options[:debug]).to be true
+      expect(cli.config.debug).to be true
     end
 
     it 'should set to daemonize mode' do
       cli.send(:parse_options, ['--daemonize'])
-      expect(cli.options[:daemon]).to be true
+      expect(cli.config.daemonize).to be true
     end
   end
 end
