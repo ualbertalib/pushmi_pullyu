@@ -27,6 +27,9 @@ module PushmiPullyu::Logging
     @logger = log
   end
 
+  # def self.reopen_log(_log_file)
+  # end
+
   def logger
     PushmiPullyu::Logging.logger
   end

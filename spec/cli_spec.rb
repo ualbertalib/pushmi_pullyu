@@ -7,16 +7,14 @@ describe PushmiPullyu::CLI do
     it 'should parse and initialize setup' do
       expect(cli).to receive(:parse_options)
       expect(cli).to receive(:parse_commands)
-      expect(cli).to receive(:setup_log)
       cli.parse
     end
   end
 
   describe '#run' do
     it 'should start working loop' do
-      expect(cli).to receive(:start_working_loop)
-      expect(cli).to receive(:print_banner)
-      expect(cli).not_to receive(:start_working_loop_in_daemon)
+      expect(cli).to receive(:start_server)
+      expect(cli).not_to receive(:start_server_as_daemon)
       cli.run
     end
 
@@ -24,11 +22,20 @@ describe PushmiPullyu::CLI do
       before { cli.config.daemonize = true }
 
       it 'should start working loop as daemon' do
-        expect(cli).to receive(:start_working_loop_in_daemon)
-        expect(cli).to receive(:print_banner)
-        expect(cli).not_to receive(:start_working_loop)
+        expect(cli).to receive(:start_server_as_daemon)
+        expect(cli).not_to receive(:start_server)
         cli.run
       end
+    end
+  end
+
+  describe '#start_server' do
+    it 'should start run tick loop' do
+      expect(cli).to receive(:setup_signal_traps)
+      expect(cli).to receive(:setup_log)
+      expect(cli).to receive(:print_banner)
+      expect(cli).to receive(:run_tick_loop)
+      cli.start_server
     end
   end
 

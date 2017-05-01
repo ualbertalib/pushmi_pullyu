@@ -18,25 +18,46 @@ class PushmiPullyu::CLI
   def parse(args = ARGV)
     parse_options(args)
     parse_commands(args)
-    setup_log
   end
 
   def run
-    # Trap interrupts to quit cleanly.
-    Signal.trap('INT') { abort }
-
-    print_banner
-
     if config.daemonize
-      start_working_loop_in_daemon
+      start_server_as_daemon
     else
       # If we're running in the foreground sync the output.
       $stdout.sync = $stderr.sync = true
-      start_working_loop
+      start_server
+    end
+  end
+
+  def start_server
+    setup_signal_traps
+    setup_log
+    print_banner
+
+    begin
+      run_tick_loop
+    rescue Interrupt
+      logger.info 'Shutting down'
+      @running = false
+      logger.info 'Bye!'
+      exit(0)
     end
   end
 
   private
+
+  def setup_signal_traps
+    Signal.trap('INT') { raise Interrupt }
+    Signal.trap('TERM') { raise Interrupt }
+    Signal.trap('HUP') do
+      if config.logfile
+        logger.debug 'Received SIGHUP, reopening log file'
+        # TODO: reopen logs
+        # PushmiPullyu::Logging.reopen_logs(config.logfile)
+      end
+    end
+  end
 
   def parse_commands(argv)
     config.daemonize = true if COMMANDS.include? argv[0]
@@ -86,6 +107,7 @@ class PushmiPullyu::CLI
   def print_banner
     logger.info "Loading PushmiPullyu #{PushmiPullyu::VERSION}"
     logger.info "Running in #{RUBY_DESCRIPTION}"
+    logger.info 'Starting processing, hit Ctrl-C to stop' unless config.daemonize
   end
 
   def setup_log
@@ -97,9 +119,11 @@ class PushmiPullyu::CLI
     logger.level = ::Logger::DEBUG if config.debug
   end
 
-  def start_working_loop
-    loop do
-      sleep(10)
+  def run_tick_loop
+    @running = true # set to false by signal trap
+
+    while @running
+      sleep(5)
       logger.debug('.')
       # Preservation (TODO):
       # 1. Montior queue
@@ -112,14 +136,17 @@ class PushmiPullyu::CLI
     end
   end
 
-  def start_working_loop_in_daemon
+  def start_server_as_daemon
     require 'daemons'
 
+    pwd = Dir.pwd # Current directory is changed during daemonization, so store it
     Daemons.run_proc(config.process_name, dir: config.piddir,
                                           dir_mode: :normal,
                                           monitor: config.monitor,
                                           ARGV: @options) do |*_argv|
-      start_working_loop
+
+      Dir.chdir(pwd)
+      start_server
     end
   end
 
