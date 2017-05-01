@@ -7,6 +7,8 @@ class PushmiPullyu::CLI
   include Singleton
   include PushmiPullyu::Logging
 
+  COMMANDS = ['start', 'stop', 'restart', 'reload', 'run', 'zap', 'status'].freeze
+
   attr_accessor :config
 
   def initialize
@@ -15,10 +17,7 @@ class PushmiPullyu::CLI
 
   def parse(args = ARGV)
     parse_options(args)
-    # TODO
-    # parse_commands
-    # other setup like logging intilization
-    # daemon/pidfile
+    parse_commands(args)
     setup_log
   end
 
@@ -39,19 +38,34 @@ class PushmiPullyu::CLI
 
   private
 
-  # Parse the options.
+  def parse_commands(argv)
+    config.daemonize = true if COMMANDS.include? argv[0]
+  end
+
   def parse_options(argv)
-    @parser ||= OptionParser.new do |opts|
-      opts.banner = 'Usage: pushmi_pullyu [options]'
+    @options = OptionParser.new do |opts|
+      opts.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
       opts.separator ''
       opts.separator 'Specific options:'
 
-      opts.on('-d', '--daemonize', 'Run daemonized in the background') do
-        config.daemonize = true
+      opts.on('-d', '--debug', 'Enable debug logging') do
+        config.debug = true
       end
 
-      opts.on('-D', '--debug', 'Enable debug logging') do
-        config.debug = true
+      opts.on('-L', '--logfile PATH', "Path to writable logfile (Default: #{config.logfile})") do |logfile|
+        config.logfile = logfile
+      end
+
+      opts.on('-D', '--piddir PATH', "Path to piddir (Default: #{config.piddir})") do |piddir|
+        config.piddir = piddir
+      end
+
+      opts.on('-N', '--process_name NAME', "Name of the process (Default: #{config.process_name})") do |process_name|
+        config.process_name = process_name
+      end
+
+      opts.on('-m', '--monitor', "Start monitor process for a deamon (Default #{config.monitor})") do
+        config.monitor = true
       end
 
       opts.separator ''
@@ -65,8 +79,8 @@ class PushmiPullyu::CLI
       opts.on_tail('-h', '--help', 'Show this message') do
         puts opts
         exit
-      end.parse!(argv)
-    end
+      end
+    end.parse!(argv)
   end
 
   def print_banner
@@ -99,8 +113,14 @@ class PushmiPullyu::CLI
   end
 
   def start_working_loop_in_daemon
-    # TODO: Need to bring in daemons gem or something similar and wrap below logic
-    start_working_loop
+    require 'daemons'
+
+    Daemons.run_proc(config.process_name, dir: config.piddir,
+                                          dir_mode: :normal,
+                                          monitor: config.monitor,
+                                          ARGV: @options) do |*_argv|
+      start_working_loop
+    end
   end
 
 end

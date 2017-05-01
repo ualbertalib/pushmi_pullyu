@@ -10,7 +10,6 @@ class LoggerTest
 end
 
 describe PushmiPullyu::Logging do
-
   it 'has a default logger' do
     expect(PushmiPullyu::Logging.logger).to be_a(Logger)
   end
@@ -42,5 +41,4 @@ describe PushmiPullyu::Logging do
       dummy_class.logger.info('test')
     end
   end
-
 end
