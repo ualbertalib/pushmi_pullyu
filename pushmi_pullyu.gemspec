@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.3.1'
 
   spec.add_runtime_dependency 'activesupport'
+  spec.add_runtime_dependency 'daemons', '~> 1.2.4'
   spec.add_runtime_dependency 'redis'
   spec.add_runtime_dependency 'connection_pool'
 

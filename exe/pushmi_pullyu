@@ -2,4 +2,6 @@
 
 require 'pushmi_pullyu'
 
-PushmiPullyu::CLI.new(ARGV).run!
+cli = PushmiPullyu::CLI.instance
+cli.parse(ARGV)
+cli.run
