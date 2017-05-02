@@ -32,13 +32,14 @@ class PushmiPullyu::CLI
 
   def start_server
     setup_signal_traps
+
     setup_log
     print_banner
 
     begin
       run_tick_loop
     rescue Interrupt
-      logger.info 'Shutting down'
+      logger.info 'Shutting down...'
       @running = false
       logger.info 'Bye!'
       exit(0)
@@ -51,10 +52,9 @@ class PushmiPullyu::CLI
     Signal.trap('INT') { raise Interrupt }
     Signal.trap('TERM') { raise Interrupt }
     Signal.trap('HUP') do
-      if config.logfile
+      Thread.new do
         logger.debug 'Received SIGHUP, reopening log file'
-        # TODO: reopen logs
-        # PushmiPullyu::Logging.reopen_logs(config.logfile)
+        PushmiPullyu::Logging.reopen
       end
     end
   end
@@ -64,7 +64,7 @@ class PushmiPullyu::CLI
   end
 
   def parse_options(argv)
-    @options = OptionParser.new do |opts|
+    @parsed_opts = OptionParser.new do |opts|
       opts.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
       opts.separator ''
       opts.separator 'Specific options:'
@@ -140,11 +140,19 @@ class PushmiPullyu::CLI
     require 'daemons'
 
     pwd = Dir.pwd # Current directory is changed during daemonization, so store it
-    Daemons.run_proc(config.process_name, dir: config.piddir,
-                                          dir_mode: :normal,
-                                          monitor: config.monitor,
-                                          ARGV: @options) do |*_argv|
 
+    options = {
+      ARGV:       @parsed_opts,
+      dir:        config.piddir,
+      dir_mode:   :normal,
+      monitor:    config.monitor,
+      log_output: true,
+      log_dir: File.join(pwd, File.dirname(config.logfile)),
+      logfilename: File.basename(config.logfile),
+      output_logfilename: File.basename(config.logfile)
+    }
+
+    Daemons.run_proc(config.process_name, options) do |*_argv|
       Dir.chdir(pwd)
       start_server
     end
