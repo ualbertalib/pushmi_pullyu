@@ -63,6 +63,7 @@ class PushmiPullyu::CLI
     config.daemonize = true if COMMANDS.include? argv[0]
   end
 
+  # Parse the options.
   def parse_options(argv)
     @options = OptionParser.new do |opts|
       opts.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
@@ -123,11 +124,11 @@ class PushmiPullyu::CLI
     @running = true # set to false by signal trap
 
     while @running
-      sleep(5)
-      logger.debug('.')
       # Preservation (TODO):
       # 1. Montior queue
       # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
+      item = @queue.wait_next_item
+      logger.debug(item)
       # 3. Retrieve GenericFile data in fedora
       # 4. creation of AIP
       # 5. bagging and tarring of AIP
