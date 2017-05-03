@@ -13,6 +13,7 @@ class PushmiPullyu::CLI
 
   def initialize
     self.config = PushmiPullyu::Config.new
+    @running = true # set to false by signal trap
   end
 
   def parse(args = ARGV)
@@ -44,17 +45,17 @@ class PushmiPullyu::CLI
   def setup_signal_traps
     Signal.trap('INT') { Thread.new { shutdown } }
     Signal.trap('TERM') { Thread.new { shutdown } }
-    Signal.trap('HUP') do
-      Thread.new do
-        PushmiPullyu::Logging.reopen
-      end
-    end
+    Signal.trap('HUP') { Thread.new { PushmiPullyu::Logging.reopen } }
   end
 
   def shutdown
-    exit!(1) unless @running
+    exit!(1) unless running?
     logger.info 'Exiting...  Interrupt again to force quit.'
     @running = false
+  end
+
+  def running?
+    @running
   end
 
   def parse_commands(argv)
@@ -118,9 +119,7 @@ class PushmiPullyu::CLI
   end
 
   def run_tick_loop
-    @running = true # set to false by signal trap
-
-    while @running
+    while running?
       sleep(5)
       logger.debug('.')
       # Preservation (TODO):
