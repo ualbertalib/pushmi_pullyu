@@ -47,7 +47,7 @@ class PushmiPullyu::PreservationQueue
       conn.watch(@queue_name) do |rd| # transactional mutation of the set is dependent on the set key
         element, score = rd.zrange(@queue_name, 0, 0, with_scores: true).first
 
-        if element && (Time.now.to_f - @age_at_least >= score)
+        if element && ((Time.now.to_f - @age_at_least) >= score)
           rd.multi do |tx|
             tx.zrem(@queue_name, element) # remove the top element transactionally
           end

@@ -9,10 +9,11 @@ class PushmiPullyu::CLI
 
   COMMANDS = ['start', 'stop', 'restart', 'reload', 'run', 'zap', 'status'].freeze
 
-  attr_accessor :config
+  attr_accessor :config, :queue
 
   def initialize
     self.config = PushmiPullyu::Config.new
+    self.queue = PushmiPullyu::PreservationQueue.new
   end
 
   def parse(args = ARGV)
@@ -127,7 +128,7 @@ class PushmiPullyu::CLI
       # Preservation (TODO):
       # 1. Montior queue
       # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
-      item = @queue.wait_next_item
+      item = queue.wait_next_item
       logger.debug(item)
       # 3. Retrieve GenericFile data in fedora
       # 4. creation of AIP
