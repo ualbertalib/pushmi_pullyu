@@ -36,27 +36,25 @@ class PushmiPullyu::CLI
     setup_log
     print_banner
 
-    begin
-      run_tick_loop
-    rescue Interrupt
-      logger.info 'Shutting down...'
-      @running = false
-      logger.info 'Bye!'
-      exit(0)
-    end
+    run_tick_loop
   end
 
   private
 
   def setup_signal_traps
-    Signal.trap('INT') { raise Interrupt }
-    Signal.trap('TERM') { raise Interrupt }
+    Signal.trap('INT') { Thread.new { shutdown } }
+    Signal.trap('TERM') { Thread.new { shutdown } }
     Signal.trap('HUP') do
       Thread.new do
-        logger.debug 'Received SIGHUP, reopening log file'
         PushmiPullyu::Logging.reopen
       end
     end
+  end
+
+  def shutdown
+    exit!(1) unless @running
+    logger.info 'Exiting...  Interrupt again to force quit.'
+    @running = false
   end
 
   def parse_commands(argv)
