@@ -37,36 +37,28 @@ class PushmiPullyu::CLI
     setup_log
     print_banner
 
+    setup_queue
+
     run_tick_loop
   end
 
   private
 
-  def setup_signal_traps
-    Signal.trap('INT') { Thread.new { shutdown } }
-    Signal.trap('TERM') { Thread.new { shutdown } }
-    Signal.trap('HUP') { Thread.new { PushmiPullyu::Logging.reopen } }
-  end
-
-  def shutdown
-    exit!(1) unless running?
-    logger.info 'Exiting...  Interrupt again to force quit.'
-    @running = false
-  end
-
-  def running?
-    @running
-  end
-
   def parse_commands(argv)
     config.daemonize = true if COMMANDS.include? argv[0]
   end
 
+  # Parse the options.
   def parse_options(argv)
     @parsed_opts = OptionParser.new do |opts|
       opts.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
       opts.separator ''
       opts.separator 'Specific options:'
+
+      opts.on('-a', '--minimum-age AGE', Float, 'Minimum amount of time an item must spend in the queue, in seconds.'\
+              " (Default: #{config.minimum_age})") do |minimum_age|
+        config.minimum_age = minimum_age
+      end
 
       opts.on('-d', '--debug', 'Enable debug logging') do
         config.debug = true
@@ -86,6 +78,20 @@ class PushmiPullyu::CLI
 
       opts.on('-m', '--monitor', "Start monitor process for a deamon (Default #{config.monitor})") do
         config.monitor = true
+      end
+
+      opts.on('-rh', '--redis-host IP', 'Host IP of Redis instance to read from.'\
+              " (Default: #{config.redis_host})") do |ip|
+        config.redis_host = ip
+      end
+
+      opts.on('-rp', '--redis-port PORT', OptionParser::DecimalInteger,
+              "Port of Redis instance to read from. (Default: #{config.redis_port})") do |port|
+        config.redis_port = port
+      end
+
+      opts.on('-q', '--queue NAME', "Name of the queue to read from. (Default: #{config.queue_name})") do |queue|
+        config.queue_name = queue
       end
 
       opts.separator ''
@@ -109,6 +115,25 @@ class PushmiPullyu::CLI
     logger.info 'Starting processing, hit Ctrl-C to stop' unless config.daemonize
   end
 
+  def run_tick_loop
+    while running?
+      # Preservation (TODO):
+      # 1. Montior queue
+      # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
+      item = @queue.wait_next_item
+      logger.debug(item)
+      # 3. Retrieve GenericFile data in fedora
+      # 4. creation of AIP
+      # 5. bagging and tarring of AIP
+      # 6. Push bag to swift API
+      # 7. Log successful preservation event to log files
+    end
+  end
+
+  def running?
+    @running
+  end
+
   def setup_log
     if config.daemonize
       PushmiPullyu::Logging.initialize_logger(config.logfile)
@@ -118,19 +143,22 @@ class PushmiPullyu::CLI
     logger.level = ::Logger::DEBUG if config.debug
   end
 
-  def run_tick_loop
-    while running?
-      sleep(5)
-      logger.debug('.')
-      # Preservation (TODO):
-      # 1. Montior queue
-      # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
-      # 3. Retrieve GenericFile data in fedora
-      # 4. creation of AIP
-      # 5. bagging and tarring of AIP
-      # 6. Push bag to swift API
-      # 7. Log successful preservation event to log files
-    end
+  def setup_signal_traps
+    Signal.trap('INT') { Thread.new { shutdown } }
+    Signal.trap('TERM') { Thread.new { shutdown } }
+    Signal.trap('HUP') { Thread.new { PushmiPullyu::Logging.reopen } }
+  end
+
+  def setup_queue
+    @queue = PushmiPullyu::PreservationQueue.new(connection: { host: config.redis_host, port: config.redis_port },
+                                                 queue_name: config.queue_name,
+                                                 age_at_least: config.minimum_age)
+  end
+
+  def shutdown
+    exit!(1) unless running?
+    logger.info 'Exiting...  Interrupt again to force quit.'
+    @running = false
   end
 
   def start_server_as_daemon

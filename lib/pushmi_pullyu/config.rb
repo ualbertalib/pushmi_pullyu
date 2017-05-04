@@ -7,7 +7,8 @@ class PushmiPullyu::Config
 
   # TODO: Add config for redis, swift, fedora, solr, daemon (pids,process info), logging
   # where to override this? consume this from a yaml file? env vars? command line?
-  attr_accessor :debug, :daemonize, :logfile, :monitor, :piddir, :process_name
+  attr_accessor :debug, :daemonize, :logfile, :minimum_age, :monitor, :piddir, :process_name, :queue_name, :redis_host,
+                :redis_port
 
   def initialize
     self.daemonize = false
@@ -16,6 +17,10 @@ class PushmiPullyu::Config
     self.monitor = false
     self.piddir = PIDDIR
     self.process_name = PROCESS_NAME
+    self.redis_host = 'localhost'
+    self.redis_port = 6379
+    self.queue_name = 'dev:pmpy_queue'
+    self.minimum_age = 0
   end
 
 end
