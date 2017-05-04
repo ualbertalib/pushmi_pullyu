@@ -64,6 +64,26 @@ describe PushmiPullyu::CLI do
       cli.send(:parse_options, ['--monitor'])
       expect(cli.config.monitor).to be true
     end
+
+    it 'should set minimum-age' do
+      cli.send(:parse_options, ['--minimum-age', '900'])
+      expect(cli.config.minimum_age).to eql 900.0
+    end
+
+    it 'should set redis-host' do
+      cli.send(:parse_options, ['--redis-host', '192.168.77.11'])
+      expect(cli.config.redis_host).to eql '192.168.77.11'
+    end
+
+    it 'should set redis-port' do
+      cli.send(:parse_options, ['--redis-port', '1234'])
+      expect(cli.config.redis_port).to eql 1234
+    end
+
+    it 'should set queue' do
+      cli.send(:parse_options, ['--queue', 'test:pmpy:queue'])
+      expect(cli.config.queue_name).to eql 'test:pmpy:queue'
+    end
   end
 
   describe '#parse_commands' do

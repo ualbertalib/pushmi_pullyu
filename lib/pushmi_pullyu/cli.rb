@@ -63,11 +63,17 @@ class PushmiPullyu::CLI
     config.daemonize = true if COMMANDS.include? argv[0]
   end
 
+  # Parse the options.
   def parse_options(argv)
     @options = OptionParser.new do |opts|
       opts.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
       opts.separator ''
       opts.separator 'Specific options:'
+
+      opts.on('-a', '--minimum-age AGE', Float, 'Minimum amount of time an item must spend in the queue, in seconds.'\
+              " (Default: #{config.minimum_age})") do |minimum_age|
+        config.minimum_age = minimum_age
+      end
 
       opts.on('-d', '--debug', 'Enable debug logging') do
         config.debug = true
@@ -87,6 +93,20 @@ class PushmiPullyu::CLI
 
       opts.on('-m', '--monitor', "Start monitor process for a deamon (Default #{config.monitor})") do
         config.monitor = true
+      end
+
+      opts.on('-rh', '--redis-host IP', 'Host IP of Redis instance to read from.'\
+              " (Default: #{config.redis_host})") do |ip|
+        config.redis_host = ip
+      end
+
+      opts.on('-rp', '--redis-port PORT', OptionParser::DecimalInteger,
+              "Port of Redis instance to read from. (Default: #{config.redis_port})") do |port|
+        config.redis_port = port
+      end
+
+      opts.on('-q', '--queue NAME', "Name of the queue to read from. (Default: #{config.queue_name})") do |queue|
+        config.queue_name = queue
       end
 
       opts.separator ''
@@ -120,14 +140,18 @@ class PushmiPullyu::CLI
   end
 
   def run_tick_loop
+    queue = PushmiPullyu::PreservationQueue.new(connection: { host: config.redis_host, port: config.redis_port },
+                                                queue_name: config.queue_name,
+                                                age_at_least: config.minimum_age)
+
     @running = true # set to false by signal trap
 
     while @running
-      sleep(5)
-      logger.debug('.')
       # Preservation (TODO):
       # 1. Montior queue
       # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
+      item = queue.wait_next_item
+      logger.debug(item)
       # 3. Retrieve GenericFile data in fedora
       # 4. creation of AIP
       # 5. bagging and tarring of AIP
