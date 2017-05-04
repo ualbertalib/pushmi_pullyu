@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.3.1'
 
   spec.add_runtime_dependency 'daemons', '~> 1.2.4'
+  spec.add_runtime_dependency 'dotenv', '~> 2.2'
 
   spec.add_development_dependency 'bundler', '>= 1.14'
   spec.add_development_dependency 'rake', '>= 10.0'

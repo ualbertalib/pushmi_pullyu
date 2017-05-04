@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'optparse'
 require 'singleton'
 
@@ -89,7 +90,8 @@ class PushmiPullyu::CLI
         config.monitor = true
       end
 
-      opts.separator ''
+      config.fedora.process_options(opts)
+
       opts.separator 'Common options:'
 
       opts.on_tail('-v', '--version', 'Show version') do
