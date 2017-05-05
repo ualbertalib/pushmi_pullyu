@@ -10,6 +10,7 @@
 /tmp/
 /vendor/bundle
 *.gem
+/.env
 
 # rspec failure tracking
 .rspec_status

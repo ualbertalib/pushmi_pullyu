@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
   spec.add_runtime_dependency 'redis', '~> 3.3'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
+  spec.add_runtime_dependency 'dotenv', '~> 2.2'
 
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 12.0'
