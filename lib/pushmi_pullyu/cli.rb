@@ -110,6 +110,9 @@ class PushmiPullyu::CLI
       end
 
       opts.separator ''
+
+      config.fedora.process_options(opts)
+
       opts.separator 'Common options:'
 
       opts.on_tail('-v', '--version', 'Show version') do
