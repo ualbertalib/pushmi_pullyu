@@ -21,7 +21,7 @@ class PushmiPullyu::Config
     self.redis_port = 6379
     self.queue_name = 'dev:pmpy_queue'
     self.minimum_age = 0
-    self.fedora = PushmiPullyu::FedoraConfig.new()
+    self.fedora = PushmiPullyu::FedoraConfig.new
   end
 
 end
