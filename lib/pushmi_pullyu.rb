@@ -8,6 +8,7 @@ require 'pushmi_pullyu/version'
 require 'active_support'
 require 'active_support/core_ext'
 require 'pushmi_pullyu/fedora_config'
+require 'pushmi_pullyu/solr_config'
 
 # PushmiPullyu main module
 module PushmiPullyu
