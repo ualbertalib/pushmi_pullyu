@@ -5,7 +5,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
   describe 'a queue with 3 items in it' do
     let(:queue) { described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
 
-    before(:all) do
+    before do
       direct_redis = Redis.new
       direct_redis.del  'test:pmpy_queue'
       direct_redis.zadd 'test:pmpy_queue', 1, 'noid1'
@@ -26,14 +26,14 @@ RSpec.describe PushmiPullyu::PreservationQueue do
       described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue', age_at_least: 15.minutes)
     end
 
-    before(:all) do
+    before do
       direct_redis = Redis.new
       direct_redis.del 'test:pmpy_queue'
 
       direct_redis.zadd 'test:pmpy_queue', Time.now.to_f, 'noid1'
     end
 
-    after(:all) { Timecop.return }
+    after { Timecop.return }
 
     it 'does not retrieve too young items' do
       now = Time.now
