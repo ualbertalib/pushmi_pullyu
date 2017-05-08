@@ -2,6 +2,8 @@
 # https://github.com/bbatsov/rubocop/blob/master/config/default.yml
 # https://github.com/bbatsov/rubocop/blob/master/config/disabled.yml
 # https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml
+require: rubocop-rspec
+
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
@@ -73,4 +75,10 @@ Style/WordArray:
   Enabled: false
 
 Style/SymbolArray:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false

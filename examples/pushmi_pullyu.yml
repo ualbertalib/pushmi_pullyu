@@ -1,0 +1,39 @@
+# Sample configuration file for PushmiPullyu.
+# Options here can still be overridden by cmd line args.
+
+# Pass this file at config/pushmi_pullyu.yml and PushmiPullyu will
+# pick it up automatically. Or pass this file into pushmi_pullyu on command line
+# via `pushmi_pullyu -C path/to/pushmi_pullyu.yml`
+
+# PushmiPullyu will run this file through ERB when reading it so you can
+# even put in dynamic logic, like consuming ENV Variables.
+
+debug: false
+logfile: log/pushmi_pullyu.log
+monitor: false
+piddir: tmp/pids
+process_name: pushmi_pullyu
+
+
+redis:
+  host: localhost
+  port: 6379
+  queue_name: dev:pmpy_queue
+  minimum_age: 0
+
+solr:
+  url: http://localhost:8983/solr/hydra-development
+
+fedora:
+  url: http://localhost:8984/rest
+  user: fedoraAdmin
+  password: fedoraAdmin
+  base_path: /dev
+
+swift:
+  auth_version: 2.0
+  tenant: Millennium Falcon
+  username: han
+  password: YT-1300
+  endpoint: https//corellia.lan
+  temp_url_key: 492727ZED

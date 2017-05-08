@@ -3,7 +3,7 @@ require 'timecop'
 
 RSpec.describe PushmiPullyu::PreservationQueue do
   describe 'a queue with 3 items in it' do
-    let(:queue) { PushmiPullyu::PreservationQueue.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
+    let(:queue) { described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
 
     before(:all) do
       direct_redis = Redis.new
@@ -14,7 +14,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
       direct_redis.zadd 'test:pmpy_queue', 10, 'noid1'
     end
 
-    it 'should retrieve 3 items in priority order' do
+    it 'retrieves 3 items in priority order' do
       expect(queue.wait_next_item).to eq 'noid3'
       expect(queue.wait_next_item).to eq 'noid2'
       expect(queue.wait_next_item).to eq 'noid1'
@@ -23,7 +23,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
 
   describe 'a queue with items under a minimum age' do
     let(:queue) do
-      PushmiPullyu::PreservationQueue.new(poll_interval: 0, queue_name: 'test:pmpy_queue', age_at_least: 15.minutes)
+      described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue', age_at_least: 15.minutes)
     end
 
     before(:all) do
@@ -35,7 +35,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
 
     after(:all) { Timecop.return }
 
-    it 'should not retrieve too young items' do
+    it 'does not retrieve too young items' do
       now = Time.now
       Timecop.freeze(now)
 
