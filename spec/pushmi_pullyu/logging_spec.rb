@@ -9,7 +9,7 @@ class LoggerTest
 
 end
 
-describe PushmiPullyu::Logging do
+RSpec.describe PushmiPullyu::Logging do
   it 'has a default logger' do
     expect(described_class.logger).to be_a(Logger)
   end

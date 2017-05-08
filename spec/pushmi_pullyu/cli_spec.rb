@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'tempfile'
 
-describe PushmiPullyu::CLI do
+RSpec.describe PushmiPullyu::CLI do
   let(:cli) { described_class.instance }
 
   describe '#run' do
@@ -200,7 +200,7 @@ describe PushmiPullyu::CLI do
       end
 
       it 'results in an identical options hash, except for config_file' do
-        cli.parse
+        cli.parse([])
         old_options = PushmiPullyu.options.clone
 
         cli.parse(['-C', tmp_path])
