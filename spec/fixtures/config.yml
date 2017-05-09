@@ -1,0 +1,13 @@
+# Dummy sample file for testing parsing of configuration file into PushmiPullyu
+
+debug: true
+logfile: tmp/pushmi_pullyu.log
+piddir: tmp
+process_name: test_pushmi_pullyu
+minimum_age: 10
+
+redis:
+  host: localhost
+  port: 9999
+  queue_name: test:pmpy_queue
+

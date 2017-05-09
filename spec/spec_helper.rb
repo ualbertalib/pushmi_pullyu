@@ -9,4 +9,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.disable_monkey_patching!
+
+  config.profile_examples = 2
+
+  config.order = :random
+
+  Kernel.srand config.seed
 end
