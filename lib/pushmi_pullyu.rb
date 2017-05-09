@@ -5,11 +5,14 @@ require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/version'
 require 'active_support'
 require 'active_support/core_ext'
+require 'pushmi_pullyu/fedora_object_fetcher'
+require 'pushmi_pullyu/aip_assembler'
 
 # PushmiPullyu main module
 module PushmiPullyu
   LOGFILE = 'log/pushmi_pullyu.log'.freeze
   PIDDIR  = 'tmp/pids'.freeze
+  WORKDIR = 'tmp/work'.freeze
   PROCESS_NAME = 'pushmi_pullyu'.freeze
 
   DEFAULTS = {
@@ -19,6 +22,7 @@ module PushmiPullyu
     minimum_age: 0,
     monitor: false,
     piddir: PIDDIR,
+    workdir: WORKDIR,
     process_name: PROCESS_NAME,
     redis: {
       host: 'localhost',
@@ -30,7 +34,7 @@ module PushmiPullyu
       url: 'http://localhost:8983/solr/hydra-development'
     },
     fedora: {
-      url: 'http://localhost:8984/rest',
+      url: 'http://localhost:8983/fedora/rest',
       user: 'fedoraAdmin',
       password: 'fedoraAdmin',
       base_path: '/dev'

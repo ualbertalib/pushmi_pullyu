@@ -27,6 +27,9 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
   spec.add_runtime_dependency 'redis', '~> 3.3'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
+  spec.add_runtime_dependency 'rsolr', '~>1.0'
+  spec.add_runtime_dependency 'rdf', '~>1.1'
+  spec.add_runtime_dependency 'linkeddata'
 
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 12.0'
@@ -35,4 +38,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', '~> 1.10'
   spec.add_development_dependency 'pry', '~> 0.10', '>= 0.10.4'
   spec.add_development_dependency 'timecop', '~> 0.8'
+  spec.add_development_dependency 'vcr', '~> 3.0'
+  spec.add_development_dependency 'webmock', '~> 2.1'
 end

@@ -12,6 +12,7 @@ debug: false
 logfile: log/pushmi_pullyu.log
 monitor: false
 piddir: tmp/pids
+workdir: tmp/work
 process_name: pushmi_pullyu
 
 
@@ -25,7 +26,7 @@ solr:
   url: http://localhost:8983/solr/hydra-development
 
 fedora:
-  url: http://localhost:8984/rest
+  url: http://localhost:8983/fedora/rest
   user: fedoraAdmin
   password: fedoraAdmin
   base_path: /dev

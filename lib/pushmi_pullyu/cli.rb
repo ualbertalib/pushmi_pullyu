@@ -104,6 +104,10 @@ class PushmiPullyu::CLI
         opts[:piddir] = piddir
       end
 
+      o.on('-W', '--workdir PATH', 'Path where downloads, etc. are done ') do |workdir|
+        opts[:workdir] = workdir
+      end
+
       o.on('-N', '--process_name NAME', 'Name of the process') do |process_name|
         opts[:process_name] = process_name
       end
