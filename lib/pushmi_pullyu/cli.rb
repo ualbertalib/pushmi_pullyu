@@ -1,5 +1,8 @@
+require 'erb'
+require 'fileutils'
 require 'optparse'
 require 'singleton'
+require 'yaml'
 
 # CLI runner
 class PushmiPullyu::CLI
@@ -9,21 +12,21 @@ class PushmiPullyu::CLI
 
   COMMANDS = ['start', 'stop', 'restart', 'reload', 'run', 'zap', 'status'].freeze
 
-  attr_accessor :config
-
   def initialize
-    self.config = PushmiPullyu::Config.new
     @running = true # set to false by interrupt signal trap
     @reset_logger = false # set to true by SIGHUP trap
   end
 
-  def parse(args = ARGV)
-    parse_options(args)
-    parse_commands(args)
+  def parse(argv = ARGV)
+    opts = parse_options(argv)
+    opts[:daemonize] = true if COMMANDS.include? argv[0]
+    opts = parse_config(opts[:config_file]).merge(opts) if opts[:config_file]
+
+    options.merge!(opts)
   end
 
   def run
-    if config.daemonize
+    if options[:daemonize]
       start_server_as_daemon
     else
       # If we're running in the foreground sync the output.
@@ -45,75 +48,82 @@ class PushmiPullyu::CLI
 
   private
 
-  def parse_commands(argv)
-    config.daemonize = true if COMMANDS.include? argv[0]
+  def options
+    PushmiPullyu.options
+  end
+
+  def parse_config(config_file)
+    opts = {}
+    if File.exist?(config_file)
+      opts = YAML.safe_load(ERB.new(IO.read(config_file)).result).deep_symbolize_keys || opts
+    end
+
+    opts
   end
 
   # Parse the options.
   def parse_options(argv)
-    @parsed_opts = OptionParser.new do |opts|
-      opts.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
-      opts.separator ''
-      opts.separator 'Specific options:'
+    opts = {}
 
-      opts.on('-a', '--minimum-age AGE', Float, 'Minimum amount of time an item must spend in the queue, in seconds.'\
-              " (Default: #{config.minimum_age})") do |minimum_age|
-        config.minimum_age = minimum_age
+    @parsed_opts = OptionParser.new do |o|
+      o.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
+      o.separator ''
+      o.separator 'Specific options:'
+
+      o.on('-a', '--minimum-age AGE',
+           Float, 'Minimum amount of time an item must spend in the queue, in seconds.') do |minimum_age|
+        opts[:minimum_age] = minimum_age
       end
 
-      opts.on('-d', '--debug', 'Enable debug logging') do
-        config.debug = true
+      o.on('-d', '--debug', 'Enable debug logging') do
+        opts[:debug] = true
       end
 
-      opts.on('-L', '--logfile PATH', "Path to writable logfile (Default: #{config.logfile})") do |logfile|
-        config.logfile = logfile
+      o.on '-C', '--config PATH', 'path to YAML config file' do |config_file|
+        opts[:config_file] = config_file
       end
 
-      opts.on('-D', '--piddir PATH', "Path to piddir (Default: #{config.piddir})") do |piddir|
-        config.piddir = piddir
+      o.on('-L', '--logfile PATH', 'Path to writable logfile') do |logfile|
+        opts[:logfile] = logfile
       end
 
-      opts.on('-N', '--process_name NAME', "Name of the process (Default: #{config.process_name})") do |process_name|
-        config.process_name = process_name
+      o.on('-D', '--piddir PATH', 'Path to piddir') do |piddir|
+        opts[:piddir] = piddir
       end
 
-      opts.on('-m', '--monitor', "Start monitor process for a deamon (Default #{config.monitor})") do
-        config.monitor = true
+      o.on('-N', '--process_name NAME', 'Name of the process') do |process_name|
+        opts[:process_name] = process_name
       end
 
-      opts.on('-rh', '--redis-host IP', 'Host IP of Redis instance to read from.'\
-              " (Default: #{config.redis_host})") do |ip|
-        config.redis_host = ip
+      o.on('-m', '--monitor', 'Start monitor process for a deamon') do
+        opts[:monitor] = true
       end
 
-      opts.on('-rp', '--redis-port PORT', OptionParser::DecimalInteger,
-              "Port of Redis instance to read from. (Default: #{config.redis_port})") do |port|
-        config.redis_port = port
-      end
+      o.separator ''
+      o.separator 'Common options:'
 
-      opts.on('-q', '--queue NAME', "Name of the queue to read from. (Default: #{config.queue_name})") do |queue|
-        config.queue_name = queue
-      end
-
-      opts.separator ''
-      opts.separator 'Common options:'
-
-      opts.on_tail('-v', '--version', 'Show version') do
+      o.on_tail('-v', '--version', 'Show version') do
         puts "PushmiPullyu version: #{PushmiPullyu::VERSION}"
         exit
       end
 
-      opts.on_tail('-h', '--help', 'Show this message') do
-        puts opts
+      o.on_tail('-h', '--help', 'Show this message') do
+        puts o
         exit
       end
     end.parse!(argv)
+
+    ['config/pushmi_pullyu.yml', 'config/pushmi_pullyu.yml.erb'].each do |filename|
+      opts[:config_file] ||= filename if File.exist?(filename)
+    end
+
+    opts
   end
 
   def print_banner
     logger.info "Loading PushmiPullyu #{PushmiPullyu::VERSION}"
     logger.info "Running in #{RUBY_DESCRIPTION}"
-    logger.info 'Starting processing, hit Ctrl-C to stop' unless config.daemonize
+    logger.info 'Starting processing, hit Ctrl-C to stop' unless options[:daemonize]
   end
 
   def rotate_logs
@@ -144,12 +154,12 @@ class PushmiPullyu::CLI
   end
 
   def setup_log
-    if config.daemonize
-      PushmiPullyu::Logging.initialize_logger(config.logfile)
+    if options[:daemonize]
+      PushmiPullyu::Logging.initialize_logger(options[:logfile])
     else
       logger.formatter = PushmiPullyu::Logging::SimpleFormatter.new
     end
-    logger.level = ::Logger::DEBUG if config.debug
+    logger.level = ::Logger::DEBUG if options[:debug]
   end
 
   def setup_signal_traps
@@ -159,18 +169,24 @@ class PushmiPullyu::CLI
   end
 
   def setup_queue
-    @queue = PushmiPullyu::PreservationQueue.new(connection: { host: config.redis_host, port: config.redis_port },
-                                                 queue_name: config.queue_name,
-                                                 age_at_least: config.minimum_age)
+    @queue = PushmiPullyu::PreservationQueue.new(connection: {
+                                                   host: options[:redis][:host],
+                                                   port: options[:redis][:port]
+                                                 },
+                                                 queue_name: options[:redis][:queue_name],
+                                                 age_at_least: options[:minimum_age])
   end
 
   # On first call of shutdown, this will gracefully close the main run loop
   # which let's the program exit itself. Calling shutdown again will force shutdown the program
   def shutdown
-    exit!(1) unless running?
-    # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
-    $stderr.puts 'Exiting...  Interrupt again to force quit.'
-    @running = false
+    if !running?
+      exit!(1)
+    else
+      # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
+      $stderr.puts 'Exiting...  Interrupt again to force quit.'
+      @running = false
+    end
   end
 
   def start_server_as_daemon
@@ -180,16 +196,16 @@ class PushmiPullyu::CLI
 
     options = {
       ARGV:       @parsed_opts,
-      dir:        config.piddir,
+      dir:        options[:piddir],
       dir_mode:   :normal,
-      monitor:    config.monitor,
+      monitor:    options[:monitor],
       log_output: true,
-      log_dir: File.join(pwd, File.dirname(config.logfile)),
-      logfilename: File.basename(config.logfile),
-      output_logfilename: File.basename(config.logfile)
+      log_dir: File.join(pwd, File.dirname(options[:logfile])),
+      logfilename: File.basename(options[:logfile]),
+      output_logfilename: File.basename(options[:logfile])
     }
 
-    Daemons.run_proc(config.process_name, options) do |*_argv|
+    Daemons.run_proc(options[:process_name], options) do |*_argv|
       Dir.chdir(pwd)
       start_server
     end

@@ -1,0 +1,10 @@
+# File is for testing out if ERB can be used within config.yml
+
+debug: true
+
+redis:
+  <% ENV['REDIS_HOST'] = '192.168.77.11' %>
+  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
+  port: 9999
+  queue_name: <%= 'erb_' %>test:pmpy_queue
+
