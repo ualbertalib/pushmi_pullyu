@@ -5,6 +5,9 @@ require 'pushmi_pullyu/fedora_object_fetcher'
 # Download all of the metadata/datastreams and associated data
 # related to an object
 
+# Was not able to get the filename from downloaded RDF
+class PushmiPullyu::NoContentFilename < StandardError; end
+
 class PushmiPullyu::AipAssembler
 
   attr_reader :config, :noid, :fetcher,
@@ -12,6 +15,8 @@ class PushmiPullyu::AipAssembler
               :main_object_filename, :fixity_report_filename,
               :content_datastream_metadata_filename,
               :characterization_filename, :versions_filename
+
+  attr_accessor :got_characterization
 
   FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
 
@@ -41,6 +46,9 @@ class PushmiPullyu::AipAssembler
       "#{metadatadir}/content_fcr_metadata.n3"
     @characterization_filename = "#{logsdir}/content_characterization.xml"
     @versions_filename = "#{metadatadir}/content_versions.n3"
+
+    # If characterization isn't found, we can still archive
+    self.got_characterization = false
   end
 
   def download_object_and_data
@@ -83,8 +91,10 @@ class PushmiPullyu::AipAssembler
   end
 
   def download_characterization
-    @fetcher.download_object(url_extra: CHARACTERIZATION_PATH,
-                             download_path: characterization_filename)
+    success = @fetcher.download_object(url_extra: CHARACTERIZATION_PATH,
+                                       download_path: characterization_filename,
+                                       return_false_on_404: true)
+    self.got_characterization = success
   end
 
   def download_versions
@@ -102,6 +112,7 @@ class PushmiPullyu::AipAssembler
         break
       end
     end
+    raise PushmiPullyu::NoContentFilename unless @content_filename
     @content_filename
   end
 

@@ -32,11 +32,19 @@ RSpec.describe PushmiPullyu::FedoraObjectFetcher do
       end
     end
 
-    it 'fails on an object with a bad noid' do
+    it 'raises an error on an object with a bad noid' do
       allow($stdout).to receive(:puts)
       VCR.use_cassette('fof_404') do
         fof.noid = 'ohnoimbad'
-        fof.download_object
+        expect { fof.download_object }.to raise_error(PushmiPullyu::FetchError)
+      end
+    end
+
+    it 'can return false object with a bad noid' do
+      allow($stdout).to receive(:puts)
+      VCR.use_cassette('fof_404') do
+        fof.noid = 'ohnoimbad'
+        expect(fof.download_object(return_false_on_404: true)).to eq(false)
       end
     end
   end
