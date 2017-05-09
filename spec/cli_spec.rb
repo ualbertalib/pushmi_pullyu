@@ -42,16 +42,16 @@ describe PushmiPullyu::CLI do
   describe 'shutdown handling' do
     it 'prints a message the first time, then exits the second time' do
       allow(cli).to receive(:exit!)
-      allow(cli.logger).to receive(:info)
+      allow($stderr).to receive(:puts)
 
       expect { cli.send(:shutdown) }.to change { cli.send(:running?) }.from(true).to(false)
-      expect(cli.logger).to receive(:info).with('Exiting...  Interrupt again to force quit.')
+      expect($stderr).to receive(:puts).with('Exiting...  Interrupt again to force quit.')
 
       expect(cli).not_to have_received(:exit!)
 
       cli.send(:shutdown)
 
-      expect(cli.logger).not_to receive(:info).with('Exiting...  Interrupt again to force quit.')
+      expect($stderr).not_to receive(:puts).with('Exiting...  Interrupt again to force quit.')
       expect(cli).to have_received(:exit!)
     end
   end

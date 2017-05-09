@@ -13,7 +13,8 @@ class PushmiPullyu::CLI
 
   def initialize
     self.config = PushmiPullyu::Config.new
-    @running = true # set to false by signal trap
+    @running = true # set to false by interrupt signal trap
+    @reset_logger = false # set to true by SIGHUP trap
   end
 
   def parse(args = ARGV)
@@ -115,6 +116,12 @@ class PushmiPullyu::CLI
     logger.info 'Starting processing, hit Ctrl-C to stop' unless config.daemonize
   end
 
+  def rotate_logs
+    PushmiPullyu::Logging.reopen
+    Daemonize.redirect_io(config.logfile) if config.daemonize
+    @reset_logger = false
+  end
+
   def run_tick_loop
     while running?
       # Preservation (TODO):
@@ -127,6 +134,8 @@ class PushmiPullyu::CLI
       # 5. bagging and tarring of AIP
       # 6. Push bag to swift API
       # 7. Log successful preservation event to log files
+
+      rotate_logs if @reset_logger
     end
   end
 
@@ -144,9 +153,9 @@ class PushmiPullyu::CLI
   end
 
   def setup_signal_traps
-    Signal.trap('INT') { Thread.new { shutdown } }
-    Signal.trap('TERM') { Thread.new { shutdown } }
-    Signal.trap('HUP') { Thread.new { PushmiPullyu::Logging.reopen } }
+    Signal.trap('INT') { shutdown }
+    Signal.trap('TERM') { shutdown }
+    Signal.trap('HUP') { @reset_logger = true }
   end
 
   def setup_queue
@@ -155,9 +164,12 @@ class PushmiPullyu::CLI
                                                  age_at_least: config.minimum_age)
   end
 
+  # On first call of shutdown, this will gracefully close the main run loop
+  # which let's the program exit itself. Calling shutdown again will force shutdown the program
   def shutdown
     exit!(1) unless running?
-    logger.info 'Exiting...  Interrupt again to force quit.'
+    # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
+    $stderr.puts 'Exiting...  Interrupt again to force quit.'
     @running = false
   end
 

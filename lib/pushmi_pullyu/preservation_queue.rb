@@ -61,11 +61,11 @@ class PushmiPullyu::PreservationQueue
   end
 
   def wait_next_item
-    loop do
-      element = next_item
-      return element if element.present?
-      sleep @poll_interval
-    end
+    # loop do
+    element = next_item
+    return element if element.present?
+    sleep @poll_interval
+    # end
   end
 
   protected

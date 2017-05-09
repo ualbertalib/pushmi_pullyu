@@ -29,8 +29,10 @@ module PushmiPullyu::Logging
 
   def self.reopen
     if @logger
+      logger.info 'reopen!'
       @logger.reopen
     else
+      logger.info 'new log!'
       @logger = initialize_logger
     end
   end
