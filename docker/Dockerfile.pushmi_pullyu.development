@@ -1,0 +1,10 @@
+# create pushmi_pullyu container from source
+
+FROM ruby:latest 
+
+RUN mkdir -p /gem/
+WORKDIR /gem/
+ADD . /gem/
+
+ENTRYPOINT ["bundle", "exec"]
+CMD ["pushmi_pullyu", "start"]
