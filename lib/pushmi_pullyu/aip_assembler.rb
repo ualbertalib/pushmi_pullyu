@@ -1,4 +1,5 @@
-require 'linkeddata'
+require 'rdf'
+require 'rdf/n3'
 require 'fileutils'
 require 'pushmi_pullyu/fedora_object_fetcher'
 
