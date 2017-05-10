@@ -10,11 +10,16 @@ RSpec.describe PushmiPullyu::AipAssembler do
 
   describe '#initialize' do
     it 'sets the download directories properly' do
-      expect(aip_assembler.basedir).to eq(basedir)
-      expect(aip_assembler.objectsdir).to eq("#{basedir}/objects")
-      expect(aip_assembler.metadatadir).to eq("#{basedir}/objects/metadata")
-      expect(aip_assembler.logsdir).to eq("#{basedir}/logs")
-      expect(aip_assembler.thumbnailsdir).to eq("#{basedir}/thumbnails")
+      expect(aip_assembler.basedir)
+        .to eq('/tmp/whatever/abc123whatever')
+      expect(aip_assembler.objectsdir)
+        .to eq('/tmp/whatever/abc123whatever/objects')
+      expect(aip_assembler.metadatadir)
+        .to eq('/tmp/whatever/abc123whatever/objects/metadata')
+      expect(aip_assembler.logsdir)
+        .to eq('/tmp/whatever/abc123whatever/logs')
+      expect(aip_assembler.thumbnailsdir)
+        .to eq('/tmp/whatever/abc123whatever/thumbnails')
     end
   end
 
@@ -22,11 +27,16 @@ RSpec.describe PushmiPullyu::AipAssembler do
     it 'creates the directories needed for the AIP' do
       allow(FileUtils).to receive(:mkdir_p)
       aip_assembler.make_object_directories
-      expect(FileUtils).to have_received(:mkdir_p).with(aip_assembler.basedir)
-      expect(FileUtils).to have_received(:mkdir_p).with(aip_assembler.objectsdir)
-      expect(FileUtils).to have_received(:mkdir_p).with(aip_assembler.metadatadir)
-      expect(FileUtils).to have_received(:mkdir_p).with(aip_assembler.logsdir)
-      expect(FileUtils).to have_received(:mkdir_p).with(aip_assembler.thumbnailsdir)
+      expect(FileUtils)
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever')
+      expect(FileUtils)
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/objects')
+      expect(FileUtils)
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/objects/metadata')
+      expect(FileUtils)
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/logs')
+      expect(FileUtils)
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/thumbnails')
       expect(FileUtils).to have_received(:mkdir_p).exactly(5).times
     end
   end
