@@ -10,13 +10,14 @@ class PushmiPullyu::NoContentFilename < StandardError; end
 
 class PushmiPullyu::AipAssembler
 
-  attr_reader :config, :noid, :fetcher,
+  attr_reader :noid, :config, :logger, :fetcher,
               :basedir, :objectsdir, :metadatadir, :logsdir, :thumbnailsdir,
               :main_object_filename, :fixity_report_filename,
               :content_datastream_metadata_filename,
-              :characterization_filename, :versions_filename
+              :characterization_filename, :versions_filename,
+              :thumbnail_filename
 
-  attr_accessor :got_characterization
+  attr_accessor :got_characterization, :got_thumbnail
 
   FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
 
@@ -27,13 +28,15 @@ class PushmiPullyu::AipAssembler
   CONTENT_PATH = '/content'.freeze
   THUMBNAIL_PATH = '/thumbnail'.freeze
 
-  def initialize(config, noid)
-    @config = config
+  def initialize(noid, config = nil, logger = nil)
     @noid = noid
-    @fetcher = PushmiPullyu::FedoraObjectFetcher.new(config, noid)
+
+    @config = config || PushmiPullyu.options
+    @logger = logger || PushmiPullyu.logger
+    @fetcher = PushmiPullyu::FedoraObjectFetcher.new(self.config, self.noid)
 
     # Directories
-    @basedir = File.expand_path("#{config[:workdir]}/#{noid}")
+    @basedir = File.expand_path("#{self.config[:workdir]}/#{noid}")
     @objectsdir = "#{basedir}/objects"
     @metadatadir = "#{basedir}/objects/metadata"
     @logsdir = "#{basedir}/logs"
@@ -46,12 +49,15 @@ class PushmiPullyu::AipAssembler
       "#{metadatadir}/content_fcr_metadata.n3"
     @characterization_filename = "#{logsdir}/content_characterization.xml"
     @versions_filename = "#{metadatadir}/content_versions.n3"
+    @thumbnail_filename = "#{thumbnailsdir}/thumbnail"
 
-    # If characterization isn't found, we can still archive
+    # We can still archive if some things aren't found, in particular ...
     self.got_characterization = false
+    self.got_thumbnail = false
   end
 
   def download_object_and_data
+    logger.info("#{noid}: Retreiving data from Fedora ...")
     make_object_directories
 
     download_main_object
@@ -62,44 +68,56 @@ class PushmiPullyu::AipAssembler
 
     # The next ones depend on the previous ones to get filenames, etc.
     download_content_datastream
-    # download_thumbnail_datastream
+    download_thumbnail_datastream
     # download_permissions
   end
 
   # Below should all be private
 
   def make_object_directories
+    logger.debug("#{noid}: Creating directories ...")
     FileUtils.mkdir_p(basedir)
     FileUtils.mkdir_p(objectsdir)
     FileUtils.mkdir_p(metadatadir)
     FileUtils.mkdir_p(logsdir)
     FileUtils.mkdir_p(thumbnailsdir)
+    logger.debug("#{noid}: Creating directories done")
   end
 
   def download_main_object
+    log_fetching(main_object_filename)
     @fetcher.download_rdf_object(download_path: main_object_filename)
+    log_saved(main_object_filename)
   end
 
   def download_fixity_report
+    log_fetching(fixity_report_filename)
     @fetcher.download_rdf_object(url_extra: FIXITY_PATH,
                                  download_path: fixity_report_filename)
+    log_saved(fixity_report_filename)
   end
 
   def download_content_datastream_metadata
+    log_fetching(content_datastream_metadata_filename)
     @fetcher.download_rdf_object(url_extra: CONTENT_DATASTREAM_METADATA_PATH,
                                  download_path: content_datastream_metadata_filename)
+    log_saved(content_datastream_metadata_filename)
   end
 
   def download_characterization
+    log_fetching(characterization_filename)
     success = @fetcher.download_object(url_extra: CHARACTERIZATION_PATH,
                                        download_path: characterization_filename,
                                        return_false_on_404: true)
+    log_save_status(characterization_filename, success)
     self.got_characterization = success
   end
 
   def download_versions
+    log_fetching(versions_filename)
     @fetcher.download_rdf_object(url_extra: VERSIONS_PATH,
                                  download_path: versions_filename)
+    log_saved(versions_filename)
   end
 
   def content_filename
@@ -117,8 +135,39 @@ class PushmiPullyu::AipAssembler
   end
 
   def download_content_datastream
+    log_fetching(content_filename)
     @fetcher.download_object(url_extra: CONTENT_PATH,
                              download_path: content_filename)
+    log_saved(content_filename)
+  end
+
+  def download_thumbnail_datastream
+    log_fetching(thumbnail_filename)
+    success = @fetcher.download_object(url_extra: THUMBNAIL_PATH,
+                                       download_path: thumbnail_filename,
+                                       return_false_on_404: true)
+    log_save_status(thumbnail_filename, success)
+    self.got_thumbnail = success
+  end
+
+  def log_fetching(filename)
+    logger.info("#{noid}: #{filename} -- fetching ...")
+  end
+
+  def log_saved(filename)
+    logger.info("#{noid}: #{filename} -- saved")
+  end
+
+  def log_not_found(filename)
+    logger.info("#{noid}: #{filename} -- not_found")
+  end
+
+  def log_save_status(filename, success)
+    if success
+      log_saved(filename)
+    else
+      log_not_found(filename)
+    end
   end
 
 end

@@ -5,7 +5,7 @@ RSpec.describe PushmiPullyu::AipAssembler do
     { workdir: '/tmp/whatever' }
   end
   let(:noid) { 'abc123whatever' }
-  let(:aip_assembler) { described_class.new(options, noid) }
+  let(:aip_assembler) { described_class.new(noid, options) }
   let(:basedir) { "#{options[:workdir]}/#{noid}" }
 
   describe '#initialize' do

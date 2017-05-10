@@ -40,7 +40,7 @@ RSpec.describe PushmiPullyu::FedoraObjectFetcher do
       end
     end
 
-    it 'can return false object with a bad noid' do
+    it 'can return false for an object with a bad noid' do
       allow($stdout).to receive(:puts)
       VCR.use_cassette('fof_404') do
         fof.noid = 'ohnoimbad'
