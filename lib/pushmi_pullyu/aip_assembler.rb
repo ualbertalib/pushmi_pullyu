@@ -33,7 +33,7 @@ class PushmiPullyu::AipAssembler
 
     @config = config || PushmiPullyu.options
     @logger = logger || PushmiPullyu.logger
-    @fetcher = PushmiPullyu::FedoraObjectFetcher.new(self.config, self.noid)
+    @fetcher = PushmiPullyu::FedoraObjectFetcher.new(self.noid, self.config)
 
     # Directories
     @basedir = File.expand_path("#{self.config[:workdir]}/#{noid}")

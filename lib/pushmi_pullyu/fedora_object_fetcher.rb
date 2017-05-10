@@ -10,9 +10,9 @@ class PushmiPullyu::FedoraObjectFetcher
 
   RDF_FORMAT = 'text/rdf+n3'.freeze
 
-  def initialize(config, noid)
-    self.config = config
+  def initialize(noid, config = nil)
     self.noid = noid
+    self.config = config || PushmiPullyu.options
   end
 
   def object_url

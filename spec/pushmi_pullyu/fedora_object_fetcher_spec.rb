@@ -8,7 +8,7 @@ RSpec.describe PushmiPullyu::FedoraObjectFetcher do
                 password: 'iH8zH0bb1tzeZ' } }
   end
   let(:noid) { 'abc123whatever' }
-  let(:fof) { described_class.new(options, noid) }
+  let(:fof) { described_class.new(noid, options) }
   let(:basedir) { "#{options[:workdir]}/#{noid}" }
 
   describe '#pairtree' do
