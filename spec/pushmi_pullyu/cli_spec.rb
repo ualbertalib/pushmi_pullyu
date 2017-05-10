@@ -52,7 +52,7 @@ RSpec.describe PushmiPullyu::CLI do
       allow(cli).to receive(:exit!)
       allow($stderr).to receive(:puts)
 
-      expect { cli.send(:shutdown) }.to change { cli.send(:running?) }.from(true).to(false)
+      expect { cli.send(:shutdown) }.to change { PushmiPullyu.server_running? }.from(true).to(false)
 
       expect(cli).not_to have_received(:exit!)
       expect($stderr).to have_received(:puts).with('Exiting...  Interrupt again to force quit.').once

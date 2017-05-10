@@ -60,4 +60,24 @@ module PushmiPullyu
   def self.logger=(log)
     PushmiPullyu::Logging.logger = log
   end
+
+  def self.server_running=(boolean)
+    @server_running = boolean
+  end
+
+  def self.reset_logger=(boolean)
+    @reset_logger = boolean
+  end
+
+  def self.server_running?
+    @server_running
+  end
+
+  def self.continue_run_loop?
+    server_running? && !reset_logger?
+  end
+
+  def self.reset_logger?
+    @reset_logger
+  end
 end

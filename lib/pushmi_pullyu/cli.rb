@@ -13,8 +13,8 @@ class PushmiPullyu::CLI
   COMMANDS = ['start', 'stop', 'restart', 'reload', 'run', 'zap', 'status'].freeze
 
   def initialize
-    @running = true # set to false by interrupt signal trap
-    @reset_logger = false # set to true by SIGHUP trap
+    PushmiPullyu.server_running = true # set to false by interrupt signal trap
+    PushmiPullyu.reset_logger = false # set to true by SIGHUP trap
   end
 
   def parse(argv = ARGV)
@@ -128,12 +128,12 @@ class PushmiPullyu::CLI
 
   def rotate_logs
     PushmiPullyu::Logging.reopen
-    Daemonize.redirect_io(config.logfile) if config.daemonize
-    @reset_logger = false
+    Daemonize.redirect_io(options[:logfile]) if options[:daemonize]
+    PushmiPullyu.reset_logger = false
   end
 
   def run_tick_loop
-    while running?
+    while PushmiPullyu.server_running?
       # Preservation (TODO):
       # 1. Montior queue
       # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
@@ -145,12 +145,8 @@ class PushmiPullyu::CLI
       # 6. Push bag to swift API
       # 7. Log successful preservation event to log files
 
-      rotate_logs if @reset_logger
+      rotate_logs if PushmiPullyu.reset_logger?
     end
-  end
-
-  def running?
-    @running
   end
 
   def setup_log
@@ -165,7 +161,7 @@ class PushmiPullyu::CLI
   def setup_signal_traps
     Signal.trap('INT') { shutdown }
     Signal.trap('TERM') { shutdown }
-    Signal.trap('HUP') { @reset_logger = true }
+    Signal.trap('HUP') { PushmiPullyu.reset_logger = true }
   end
 
   def setup_queue
@@ -180,12 +176,12 @@ class PushmiPullyu::CLI
   # On first call of shutdown, this will gracefully close the main run loop
   # which let's the program exit itself. Calling shutdown again will force shutdown the program
   def shutdown
-    if !running?
+    if !PushmiPullyu.server_running?
       exit!(1)
     else
       # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
       $stderr.puts 'Exiting...  Interrupt again to force quit.'
-      @running = false
+      PushmiPullyu.server_running = false
     end
   end
 
@@ -194,7 +190,7 @@ class PushmiPullyu::CLI
 
     pwd = Dir.pwd # Current directory is changed during daemonization, so store it
 
-    options = {
+    opts = {
       ARGV:       @parsed_opts,
       dir:        options[:piddir],
       dir_mode:   :normal,
@@ -205,7 +201,7 @@ class PushmiPullyu::CLI
       output_logfilename: File.basename(options[:logfile])
     }
 
-    Daemons.run_proc(options[:process_name], options) do |*_argv|
+    Daemons.run_proc(options[:process_name], opts) do |*_argv|
       Dir.chdir(pwd)
       start_server
     end
