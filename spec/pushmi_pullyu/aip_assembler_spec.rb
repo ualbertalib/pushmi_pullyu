@@ -12,14 +12,16 @@ RSpec.describe PushmiPullyu::AipAssembler do
     it 'sets the download directories properly' do
       expect(aip_assembler.basedir)
         .to eq('/tmp/whatever/abc123whatever')
+      expect(aip_assembler.datadir)
+        .to eq('/tmp/whatever/abc123whatever/data')
       expect(aip_assembler.objectsdir)
-        .to eq('/tmp/whatever/abc123whatever/objects')
+        .to eq('/tmp/whatever/abc123whatever/data/objects')
       expect(aip_assembler.metadatadir)
-        .to eq('/tmp/whatever/abc123whatever/objects/metadata')
+        .to eq('/tmp/whatever/abc123whatever/data/objects/metadata')
       expect(aip_assembler.logsdir)
-        .to eq('/tmp/whatever/abc123whatever/logs')
+        .to eq('/tmp/whatever/abc123whatever/data/logs')
       expect(aip_assembler.thumbnailsdir)
-        .to eq('/tmp/whatever/abc123whatever/thumbnails')
+        .to eq('/tmp/whatever/abc123whatever/data/thumbnails')
     end
   end
 
@@ -30,19 +32,23 @@ RSpec.describe PushmiPullyu::AipAssembler do
       expect(FileUtils)
         .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever')
       expect(FileUtils)
-        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/objects')
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/data')
       expect(FileUtils)
-        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/objects/metadata')
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/data/objects')
       expect(FileUtils)
-        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/logs')
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/data/objects/metadata')
       expect(FileUtils)
-        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/thumbnails')
-      expect(FileUtils).to have_received(:mkdir_p).exactly(5).times
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/data/logs')
+      expect(FileUtils)
+        .to have_received(:mkdir_p).with('/tmp/whatever/abc123whatever/data/thumbnails')
+      expect(FileUtils).to have_received(:mkdir_p).exactly(6).times
     end
   end
 
   it 'downloads the main object' do
     download_args = { download_path: aip_assembler.main_object_filename }
+    allow(aip_assembler).to receive(:aip_logger)
+    allow(aip_assembler.aip_logger).to receive(:info)
     allow(aip_assembler.fetcher).to receive(:download_rdf_object)
     aip_assembler.download_main_object
     expect(aip_assembler.fetcher)

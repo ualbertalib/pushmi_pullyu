@@ -1,22 +1,27 @@
+require 'archive/tar/minitar'
 require 'rdf'
 require 'rdf/n3'
 require 'fileutils'
+require 'bagit'
 require 'pushmi_pullyu/fedora_object_fetcher'
+require 'pushmi_pullyu/solr_fetcher'
 
 # Download all of the metadata/datastreams and associated data
 # related to an object
 
 # Was not able to get the filename from downloaded RDF
 class PushmiPullyu::NoContentFilename < StandardError; end
+class PushmiPullyu::BagInvalid < StandardError; end
 
 class PushmiPullyu::AipAssembler
 
   attr_reader :noid, :config, :logger, :fetcher,
-              :basedir, :objectsdir, :metadatadir, :logsdir, :thumbnailsdir,
-              :main_object_filename, :fixity_report_filename,
+              :workdir, :basedir, :datadir, :objectsdir, :metadatadir, :logsdir,
+              :thumbnailsdir,
+              :tar_filename, :main_object_filename, :fixity_report_filename,
               :content_datastream_metadata_filename,
               :characterization_filename, :versions_filename,
-              :thumbnail_filename
+              :thumbnail_filename, :aip_logging_on
 
   attr_accessor :got_characterization, :got_thumbnail
 
@@ -37,13 +42,16 @@ class PushmiPullyu::AipAssembler
     @fetcher = PushmiPullyu::FedoraObjectFetcher.new(self.noid, self.config)
 
     # Directories
-    @basedir = File.expand_path("#{self.config[:workdir]}/#{noid}")
-    @objectsdir = "#{basedir}/objects"
-    @metadatadir = "#{basedir}/objects/metadata"
-    @logsdir = "#{basedir}/logs"
-    @thumbnailsdir = "#{basedir}/thumbnails"
+    @workdir = File.expand_path(self.config[:workdir])
+    @basedir = "#{workdir}/#{noid}"
+    @datadir = "#{basedir}/data"
+    @objectsdir = "#{datadir}/objects"
+    @metadatadir = "#{datadir}/objects/metadata"
+    @logsdir = "#{datadir}/logs"
+    @thumbnailsdir = "#{datadir}/thumbnails"
 
     # Files
+    @tar_filename = "#{workdir}/#{noid}.tar"
     @main_object_filename = "#{metadatadir}/object_metadata.n3"
     @fixity_report_filename = "#{logsdir}/content_fixity_report.n3"
     @content_datastream_metadata_filename =
@@ -51,16 +59,49 @@ class PushmiPullyu::AipAssembler
     @characterization_filename = "#{logsdir}/content_characterization.xml"
     @versions_filename = "#{metadatadir}/content_versions.n3"
     @thumbnail_filename = "#{thumbnailsdir}/thumbnail"
+    @aipcreation_log = "#{logsdir}/aipcreation.txt"
 
     # We can still archive if some things aren't found, in particular ...
     self.got_characterization = false
     self.got_thumbnail = false
   end
 
+  def aip_logger
+    @aip_logger ||= Logger.new(@aipcreation_log) do |logger|
+      logger.level = Logger::INFO
+    end
+  end
+
+  # We want to log to the main application log, and to the AIP creation log
+  def aip_log(msg)
+    logger.info(msg)
+    aip_logger.info(msg)
+  end
+
+  def run
+    download_object_and_data
+    bag.manifest!
+    raise PushmiPullyu::BagInvalid unless bag.valid?
+    tar_bag
+    clean_directories
+  end
+
+  def bag
+    @bag ||= BagIt::Bag.new(basedir)
+  end
+
+  def tar_bag
+    Dir.chdir(workdir) do
+      File.open(tar_filename, 'wb') do |tar|
+        Archive::Tar::Minitar.pack(noid, tar)
+      end
+    end
+  end
+
   def download_object_and_data
-    logger.info("#{noid}: Retreiving data from Fedora ...")
     make_object_directories
 
+    aip_log("#{noid}: Retreiving data from Fedora ...")
     download_main_object
     download_fixity_report
     download_content_datastream_metadata
@@ -75,9 +116,17 @@ class PushmiPullyu::AipAssembler
 
   # Below should all be private
 
+  def clean_directories
+    return unless File.exist?(basedir)
+    logger.debug("#{noid}: Nuking directories ...")
+    FileUtils.rm_rf(basedir)
+  end
+
   def make_object_directories
+    clean_directories
     logger.debug("#{noid}: Creating directories ...")
     FileUtils.mkdir_p(basedir)
+    FileUtils.mkdir_p(datadir)
     FileUtils.mkdir_p(objectsdir)
     FileUtils.mkdir_p(metadatadir)
     FileUtils.mkdir_p(logsdir)
@@ -152,16 +201,16 @@ class PushmiPullyu::AipAssembler
   end
 
   def download_permissions
-    logger.info("#{noid}: looking up permissions from Solr ...")
+    aip_log("#{noid}: looking up permissions from Solr ...")
     solr = PushmiPullyu::SolrFetcher.new(config)
     results = solr.fetch_query_array("accessTo_ssim:#{noid}", fields: 'id')
     if results.empty?
-      logger.info("#{noid}: permissions not found")
+      aip_log("#{noid}: permissions not found")
       return
     end
     results.each do |result|
       permission_id = result['id']
-      logger.info("#{noid}: permission object #{permission_id} found")
+      aip_log("#{noid}: permission object #{permission_id} found")
       download_permission(permission_id)
     end
   end
@@ -180,15 +229,15 @@ class PushmiPullyu::AipAssembler
   end
 
   def log_fetching(filename)
-    logger.info("#{noid}: #{filename} -- fetching ...")
+    aip_log("#{noid}: #{filename} -- fetching ...")
   end
 
   def log_saved(filename)
-    logger.info("#{noid}: #{filename} -- saved")
+    aip_log("#{noid}: #{filename} -- saved")
   end
 
   def log_not_found(filename)
-    logger.info("#{noid}: #{filename} -- not_found")
+    aip_log("#{noid}: #{filename} -- not_found")
   end
 
   def log_save_status(filename, success)
