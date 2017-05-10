@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
   spec.add_runtime_dependency 'redis', '~> 3.3'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
-  spec.add_runtime_dependency 'rsolr', '~>1.0'
   spec.add_runtime_dependency 'rdf', '~>1.1'
   spec.add_runtime_dependency 'linkeddata'
 
