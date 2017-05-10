@@ -6,6 +6,7 @@ require 'pushmi_pullyu/version'
 require 'active_support'
 require 'active_support/core_ext'
 require 'pushmi_pullyu/fedora_object_fetcher'
+require 'pushmi_pullyu/solr_fetcher'
 require 'pushmi_pullyu/aip_assembler'
 
 # PushmiPullyu main module
@@ -31,7 +32,7 @@ module PushmiPullyu
     },
     # TODO: rest of these are examples for solr/fedora/swift... feel free to fill them in correctly
     solr: {
-      url: 'http://localhost:8983/solr/hydra-development'
+      url: 'http://localhost:8983/solr/development'
     },
     fedora: {
       url: 'http://localhost:8983/fedora/rest',

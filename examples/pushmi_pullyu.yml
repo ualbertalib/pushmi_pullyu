@@ -23,7 +23,7 @@ redis:
   minimum_age: 0
 
 solr:
-  url: http://localhost:8983/solr/hydra-development
+  url: http://localhost:8983/solr/development
 
 fedora:
   url: http://localhost:8983/fedora/rest
