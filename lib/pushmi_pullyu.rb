@@ -50,7 +50,7 @@ module PushmiPullyu
   end
 
   def self.options=(opts)
-    @options.merge!(opts)
+    options.merge!(opts)
   end
 
   def self.override_options(opts)
