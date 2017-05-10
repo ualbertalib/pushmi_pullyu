@@ -69,7 +69,7 @@ class PushmiPullyu::AipAssembler
     # The next ones depend on the previous ones to get filenames, etc.
     download_content_datastream
     download_thumbnail_datastream
-    # download_permissions
+    download_permissions
   end
 
   # Below should all be private
@@ -148,6 +148,34 @@ class PushmiPullyu::AipAssembler
                                        return_false_on_404: true)
     log_save_status(thumbnail_filename, success)
     self.got_thumbnail = success
+  end
+
+  def download_permissions
+    logger.info("#{noid}: looking up permissions from Solr ...")
+    solr = PushmiPullyu::SolrFetcher.new(config)
+    results = solr.fetch_query_array("accessTo_ssim:#{noid}", fields: 'id')
+    if results.empty?
+      logger.info("#{noid}: permissions not found")
+      return
+    end
+    results.each do |result|
+      permission_id = result['id']
+      logger.info("#{noid}: permission object #{permission_id} found")
+      download_permission(permission_id)
+    end
+  end
+
+  def permission_filename(permission_id)
+    "#{metadatadir}/permission_#{permission_id}.n3"
+  end
+
+  def download_permission(permission_id)
+    permission_fetcher =
+      PushmiPullyu::FedoraObjectFetcher.new(permission_id, config)
+    filename = permission_filename(permission_id)
+    log_fetching(filename)
+    permission_fetcher.download_rdf_object(download_path: filename)
+    log_saved(filename)
   end
 
   def log_fetching(filename)
