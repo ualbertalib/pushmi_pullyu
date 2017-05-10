@@ -20,10 +20,10 @@ module PushmiPullyu
     monitor: false,
     piddir: PIDDIR,
     process_name: PROCESS_NAME,
+    queue_name: 'dev:pmpy_queue',
     redis: {
       host: 'localhost',
-      port: 6379,
-      queue_name: 'dev:pmpy_queue'
+      port: 6379
     },
     # TODO: rest of these are examples for solr/fedora/swift... feel free to fill them in correctly
     solr: {
@@ -50,6 +50,10 @@ module PushmiPullyu
   end
 
   def self.options=(opts)
+    @options.merge!(opts)
+  end
+
+  def self.override_options(opts)
     @options = opts
   end
 
