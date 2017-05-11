@@ -12,7 +12,10 @@ class PushmiPullyu::CLI
 
   COMMANDS = ['start', 'stop', 'restart', 'reload', 'run', 'zap', 'status'].freeze
 
-  def initialize; end
+  def initialize
+    PushmiPullyu.server_running = true # set to false by interrupt signal trap
+    PushmiPullyu.reset_logger = false # set to true by SIGHUP trap
+  end
 
   def parse(argv = ARGV)
     opts = parse_options(argv)
@@ -34,35 +37,19 @@ class PushmiPullyu::CLI
 
   def start_server
     setup_signal_traps
+
     setup_log
     print_banner
 
-    begin
-      run_tick_loop
-    rescue Interrupt
-      logger.info 'Shutting down'
-      @running = false
-      logger.info 'Bye!'
-      exit(0)
-    end
+    setup_queue
+
+    run_tick_loop
   end
 
   private
 
   def options
     PushmiPullyu.options
-  end
-
-  def setup_signal_traps
-    Signal.trap('INT') { raise Interrupt }
-    Signal.trap('TERM') { raise Interrupt }
-    Signal.trap('HUP') do
-      if options[:logfile]
-        logger.debug 'Received SIGHUP, reopening log file'
-        # TODO: reopen logs
-        # PushmiPullyu::Logging.reopen_logs(options[:logfile])
-      end
-    end
   end
 
   def parse_config(config_file)
@@ -78,7 +65,7 @@ class PushmiPullyu::CLI
   def parse_options(argv)
     opts = {}
 
-    @arguments = OptionParser.new do |o|
+    @parsed_opts = OptionParser.new do |o|
       o.banner = 'Usage: pushmi_pullyu [options] [start|stop|restart|run]'
       o.separator ''
       o.separator 'Specific options:'
@@ -143,6 +130,29 @@ class PushmiPullyu::CLI
     logger.info 'Starting processing, hit Ctrl-C to stop' unless options[:daemonize]
   end
 
+  def rotate_logs
+    PushmiPullyu::Logging.reopen
+    Daemonize.redirect_io(options[:logfile]) if options[:daemonize]
+    PushmiPullyu.reset_logger = false
+  end
+
+  def run_tick_loop
+    while PushmiPullyu.server_running?
+      # Preservation (TODO):
+      # 1. Montior queue
+      # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
+      item = @queue.wait_next_item
+      logger.debug(item)
+      # 3. Retrieve GenericFile data in fedora
+      # 4. creation of AIP
+      # 5. bagging and tarring of AIP
+      # 6. Push bag to swift API
+      # 7. Log successful preservation event to log files
+
+      rotate_logs if PushmiPullyu.reset_logger?
+    end
+  end
+
   def setup_log
     if options[:daemonize]
       PushmiPullyu::Logging.initialize_logger(options[:logfile])
@@ -152,27 +162,30 @@ class PushmiPullyu::CLI
     logger.level = ::Logger::DEBUG if options[:debug]
   end
 
-  def run_tick_loop
-    queue = PushmiPullyu::PreservationQueue.new(connection: {
-                                                  host: options[:redis][:host],
-                                                  port: options[:redis][:port]
-                                                },
-                                                queue_name: options[:queue_name],
-                                                age_at_least: options[:minimum_age])
+  def setup_signal_traps
+    Signal.trap('INT') { shutdown }
+    Signal.trap('TERM') { shutdown }
+    Signal.trap('HUP') { PushmiPullyu.reset_logger = true }
+  end
 
-    @running = true # set to false by signal trap
+  def setup_queue
+    @queue = PushmiPullyu::PreservationQueue.new(connection: {
+                                                   host: options[:redis][:host],
+                                                   port: options[:redis][:port]
+                                                 },
+                                                 queue_name: options[:queue_name],
+                                                 age_at_least: options[:minimum_age])
+  end
 
-    while @running
-      # Preservation (TODO):
-      # 1. Montior queue
-      # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
-      item = queue.wait_next_item
-      logger.debug(item)
-      # 3. Retrieve GenericFile data in fedora
-      # 4. creation of AIP
-      # 5. bagging and tarring of AIP
-      # 6. Push bag to swift API
-      # 7. Log successful preservation event to log files
+  # On first call of shutdown, this will gracefully close the main run loop
+  # which let's the program exit itself. Calling shutdown again will force shutdown the program
+  def shutdown
+    if !PushmiPullyu.server_running?
+      exit!(1)
+    else
+      # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
+      $stderr.puts 'Exiting...  Interrupt again to force quit.'
+      PushmiPullyu.server_running = false
     end
   end
 
@@ -180,11 +193,19 @@ class PushmiPullyu::CLI
     require 'daemons'
 
     pwd = Dir.pwd # Current directory is changed during daemonization, so store it
-    Daemons.run_proc(options[:process_name], dir: options[:piddir],
-                                             dir_mode: :normal,
-                                             monitor: options[:monitor],
-                                             ARGV: @arguments) do |*_argv|
 
+    opts = {
+      ARGV:       @parsed_opts,
+      dir:        options[:piddir],
+      dir_mode:   :normal,
+      monitor:    options[:monitor],
+      log_output: true,
+      log_dir: File.join(pwd, File.dirname(options[:logfile])),
+      logfilename: File.basename(options[:logfile]),
+      output_logfilename: File.basename(options[:logfile])
+    }
+
+    Daemons.run_proc(options[:process_name], opts) do |*_argv|
       Dir.chdir(pwd)
       start_server
     end

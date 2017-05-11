@@ -34,6 +34,7 @@ RSpec.describe PushmiPullyu::CLI do
       allow(cli).to receive(:setup_signal_traps)
       allow(cli).to receive(:setup_log)
       allow(cli).to receive(:print_banner)
+      allow(cli).to receive(:setup_queue)
       allow(cli).to receive(:run_tick_loop)
 
       cli.start_server
@@ -41,7 +42,25 @@ RSpec.describe PushmiPullyu::CLI do
       expect(cli).to have_received(:setup_signal_traps).once
       expect(cli).to have_received(:setup_log).once
       expect(cli).to have_received(:print_banner).once
+      expect(cli).to have_received(:setup_queue).once
       expect(cli).to have_received(:run_tick_loop).once
+    end
+  end
+
+  describe 'shutdown handling' do
+    it 'prints a message the first time and exits on second time' do
+      allow(cli).to receive(:exit!)
+      allow($stderr).to receive(:puts)
+
+      expect { cli.send(:shutdown) }.to change { PushmiPullyu.server_running? }.from(true).to(false)
+
+      expect(cli).not_to have_received(:exit!)
+      expect($stderr).to have_received(:puts).with('Exiting...  Interrupt again to force quit.').once
+
+      cli.send(:shutdown)
+
+      expect($stderr).to have_received(:puts).with('Exiting...  Interrupt again to force quit.').once
+      expect(cli).to have_received(:exit!)
     end
   end
 

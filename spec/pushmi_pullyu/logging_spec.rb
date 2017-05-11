@@ -20,6 +20,43 @@ RSpec.describe PushmiPullyu::Logging do
     expect(described_class.logger).to eq(new_logger)
   end
 
+  it 'logs' do
+    allow(described_class.logger).to receive(:debug)
+
+    described_class.logger.debug('test')
+
+    expect(described_class.logger).to have_received(:debug).with(an_instance_of(String)).once
+  end
+
+  describe '#reopen' do
+    let!(:tmp_dir) { 'tmp/test_dir' }
+    let(:logfile) { "#{tmp_dir}/pushmi_pullyu.log" }
+    let(:logger) { described_class.initialize_logger(logfile) }
+
+    before do
+      FileUtils.mkdir_p(tmp_dir)
+    end
+
+    after do
+      FileUtils.rm_rf(tmp_dir)
+    end
+
+    it 'reopens and rotates logs' do
+      logger.info 'Line 1'
+      FileUtils.mv(logfile, "#{logfile}.1")
+      logger.info 'Line 2'
+      expect(described_class.reopen).to be(logger)
+      logger.info 'Line 3'
+
+      expect(File.read("#{logfile}.1")).to include('Line 1')
+      expect(File.read("#{logfile}.1")).to include('Line 2')
+      expect(File.read("#{logfile}.1")).not_to include('Line 3')
+      expect(File.read(logfile)).not_to include('Line 1')
+      expect(File.read(logfile)).not_to include('Line 2')
+      expect(File.read(logfile)).to include('Line 3')
+    end
+  end
+
   context 'when included in classes' do
     let(:dummy_class) { LoggerTest.new }
 
