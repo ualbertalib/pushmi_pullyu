@@ -173,7 +173,7 @@ class PushmiPullyu::CLI
                                                    host: options[:redis][:host],
                                                    port: options[:redis][:port]
                                                  },
-                                                 queue_name: options[:redis][:queue_name],
+                                                 queue_name: options[:queue_name],
                                                  age_at_least: options[:minimum_age])
   end
 
