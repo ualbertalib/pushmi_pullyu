@@ -39,8 +39,8 @@ class PushmiPullyu::AipCreator
     aip_downloader.clean_directories
   end
 
-  alias aip_tar_filename tar_filename
-  alias aip_directory workdir
+  alias aip_filename tar_filename
+  alias aip_directory basedir
 
   private
 
