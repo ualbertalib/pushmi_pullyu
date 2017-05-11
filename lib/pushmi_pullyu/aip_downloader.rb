@@ -1,6 +1,4 @@
-require 'rdf'
-require 'rdf/n3'
-require 'fileutils'
+require 'pushmi_pullyu/aip_downloader_files_directories'
 require 'pushmi_pullyu/aip_logger'
 require 'pushmi_pullyu/fedora_object_fetcher'
 require 'pushmi_pullyu/solr_fetcher'
@@ -10,29 +8,13 @@ require 'pushmi_pullyu/solr_fetcher'
 
 class PushmiPullyu::AipDownloader
 
+  include PushmiPullyu::AipDownloaderFilesDirectories
+
   attr_reader :noid, :config, :logger, :aip_logger, :fetcher,
-              :workdir, :basedir, :datadir, :objectsdir, :metadatadir, :logsdir,
-              :thumbnailsdir,
-              :tar_filename, :main_object_filename, :fixity_report_filename,
-              :content_datastream_metadata_filename,
-              :characterization_filename, :versions_filename,
-              :thumbnail_filename, :fedora3foxml_filename,
-              :fedora3foxml_metadata_filename,
               :aipcreation_log
 
   attr_accessor :got_characterization, :got_thumbnail,
                 :got_fedora3foxml, :got_fedora3foxml_metadata
-
-  FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
-
-  FIXITY_PATH = '/content/fcr:fixity'.freeze
-  CONTENT_DATASTREAM_METADATA_PATH = '/content/fcr:metadata'.freeze
-  CHARACTERIZATION_PATH = '/characterization'.freeze
-  VERSIONS_PATH = '/content/fcr:versions'.freeze
-  CONTENT_PATH = '/content'.freeze
-  THUMBNAIL_PATH = '/thumbnail'.freeze
-  FEDORA3FOXML_PATH = '/fedora3foxml'.freeze
-  FEDORA3FOXML_METADATA_PATH = '/fedora3foxml/fcr:metadata'.freeze
 
   def initialize(noid, config = nil, application_logger = nil)
     @noid = noid
@@ -72,67 +54,6 @@ class PushmiPullyu::AipDownloader
     download_permissions
   end
 
-  def clean_directories
-    return unless File.exist?(basedir)
-    logger.debug("#{noid}: Nuking directories ...")
-    FileUtils.rm_rf(basedir)
-  end
-
-  def initialize_directory_names
-    @workdir = File.expand_path(config[:workdir])
-    @basedir = "#{workdir}/#{noid}"
-    @datadir = "#{basedir}/data"
-    @objectsdir = "#{datadir}/objects"
-    @metadatadir = "#{datadir}/objects/metadata"
-    @logsdir = "#{datadir}/logs"
-    @thumbnailsdir = "#{datadir}/thumbnails"
-  end
-
-  def initialize_filenames
-    @main_object_filename = "#{metadatadir}/object_metadata.n3"
-    @fixity_report_filename = "#{logsdir}/content_fixity_report.n3"
-    @content_datastream_metadata_filename =
-      "#{metadatadir}/content_fcr_metadata.n3"
-    @characterization_filename = "#{logsdir}/content_characterization.xml"
-    @versions_filename = "#{metadatadir}/content_versions.n3"
-    @thumbnail_filename = "#{thumbnailsdir}/thumbnail"
-    @fedora3foxml_filename = "#{metadatadir}/fedora3foxml.xml"
-    @fedora3foxml_metadata_filename = "#{metadatadir}/fedora3foxml.n3"
-    @aipcreation_log = "#{logsdir}/aipcreation.txt"
-  end
-
-  def make_object_directories
-    clean_directories
-    logger.debug("#{noid}: Creating directories ...")
-    FileUtils.mkdir_p(basedir)
-    FileUtils.mkdir_p(datadir)
-    FileUtils.mkdir_p(objectsdir)
-    FileUtils.mkdir_p(metadatadir)
-    FileUtils.mkdir_p(logsdir)
-    FileUtils.mkdir_p(thumbnailsdir)
-    logger.debug("#{noid}: Creating directories done")
-  end
-
-  def fetch_and_log(path, url_extra: nil, fetcher: nil, rdf: false)
-    fetcher ||= @fetcher
-    aip_logger.log_fetching(path)
-    fetcher.download_object(download_path: path,
-                            url_extra: url_extra,
-                            rdf: rdf)
-    aip_logger.log_saved(path)
-  end
-
-  def fetch_and_log_optional(path, url_extra: nil, fetcher: nil, rdf: false)
-    fetcher ||= @fetcher
-    aip_logger.log_fetching(path)
-    success = fetcher.download_object(download_path: path,
-                                      url_extra: url_extra,
-                                      return_false_on_404: true,
-                                      rdf: rdf)
-    aip_logger.log_save_status(path, success)
-    success
-  end
-
   def download_main_object
     fetch_and_log(main_object_filename, rdf: true)
   end
@@ -154,20 +75,6 @@ class PushmiPullyu::AipDownloader
 
   def download_versions
     fetch_and_log(versions_filename, url_extra: VERSIONS_PATH, rdf: true)
-  end
-
-  def content_filename
-    return @content_filename unless @content_filename.nil?
-    # Extract filename from main object metadata
-    graph = RDF::Graph.load(main_object_filename)
-    graph.each_statement do |statement|
-      if statement.predicate == FILENAME_PREDICATE
-        @content_filename = "#{objectsdir}/#{statement.object}"
-        break
-      end
-    end
-    raise PushmiPullyu::NoContentFilename unless @content_filename
-    @content_filename
   end
 
   def download_content_datastream
@@ -194,10 +101,6 @@ class PushmiPullyu::AipDownloader
     end
   end
 
-  def permission_filename(permission_id)
-    "#{metadatadir}/permission_#{permission_id}.n3"
-  end
-
   def download_permission(permission_id)
     permission_fetcher =
       PushmiPullyu::FedoraObjectFetcher.new(permission_id, config)
@@ -217,6 +120,28 @@ class PushmiPullyu::AipDownloader
     success = fetch_and_log_optional(fedora3foxml_metadata_filename,
                                      url_extra: FEDORA3FOXML_METADATA_PATH, rdf: true)
     self.got_fedora3foxml_metadata = success
+  end
+
+  private
+
+  def fetch_and_log(path, url_extra: nil, fetcher: nil, rdf: false)
+    fetcher ||= @fetcher
+    aip_logger.log_fetching(path)
+    fetcher.download_object(download_path: path,
+                            url_extra: url_extra,
+                            rdf: rdf)
+    aip_logger.log_saved(path)
+  end
+
+  def fetch_and_log_optional(path, url_extra: nil, fetcher: nil, rdf: false)
+    fetcher ||= @fetcher
+    aip_logger.log_fetching(path)
+    success = fetcher.download_object(download_path: path,
+                                      url_extra: url_extra,
+                                      return_false_on_404: true,
+                                      rdf: rdf)
+    aip_logger.log_save_status(path, success)
+    success
   end
 
 end
