@@ -19,7 +19,7 @@ class PushmiPullyu::CLI
     opts[:daemonize] = true if COMMANDS.include? argv[0]
     opts = parse_config(opts[:config_file]).merge(opts) if opts[:config_file]
 
-    options.merge!(opts)
+    PushmiPullyu.options = opts
   end
 
   def run
@@ -112,6 +112,10 @@ class PushmiPullyu::CLI
         opts[:monitor] = true
       end
 
+      o.on('-q', '--queue NAME', 'Name of the queue to read from') do |queue|
+        opts[:queue_name] = queue
+      end
+
       o.separator ''
       o.separator 'Common options:'
 
@@ -153,7 +157,7 @@ class PushmiPullyu::CLI
                                                   host: options[:redis][:host],
                                                   port: options[:redis][:port]
                                                 },
-                                                queue_name: options[:redis][:queue_name],
+                                                queue_name: options[:queue_name],
                                                 age_at_least: options[:minimum_age])
 
     @running = true # set to false by signal trap
