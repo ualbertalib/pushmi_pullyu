@@ -2,7 +2,7 @@
 
 ## What is this? ##
 
-This directory contains the apperatus to create a Docker Container for the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/blob/master/README.md) utility in both a development and production context. This container is meant to be used in conjuction with a [HydraNorth (Fedora and Solr)](https://github.com/ualbertalib/di_docker_hydranorth) container (source content layer) and an [OpenStack Swift](https://github.com/ualbertalib/DIDocker_Swift) container (i.e., preservation layer). For more details on inner workings of Pushmi-Pullyu see the [readme](https://github.com/ualbertalib/pushmi_pullyu/blob/master/README.md) at the root of the Pushmi-Pullyu repo.
+This directory contains the apparatus to create a Docker Container for the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/blob/master/README.md) utility in both a development and production context. This container is meant to be used in conjunction with a [HydraNorth (Fedora and Solr)](https://github.com/ualbertalib/di_docker_hydranorth) container (source content layer) and an [OpenStack Swift](https://github.com/ualbertalib/DIDocker_Swift) container (i.e., preservation layer). For more details on inner workings of Pushmi-Pullyu see the [readme](https://github.com/ualbertalib/pushmi_pullyu/blob/master/README.md) at the root of the Pushmi-Pullyu repo - the idea, decouple components into minimalistic images each addressing a single concern allowing reuse.
 
 
 
@@ -21,7 +21,7 @@ A minimalistic, as simple as possible but no simpler container.
 
 * base off Ruby Docker image
 * shared code directory between host and container 
-* start pushmi_pullyu at startup
+* start pushmi_pullyu at start-up
 
 
 ### Production Environment Docker Container ###
@@ -34,17 +34,72 @@ A minimalistic, as simple as possible but no simpler container.
 
 ## Usage ##
 
-### Container creation ###
+### Pushmi-Pully Usage ###
+
+*ToDo*
+
+Add Docker Compose usage once written. 
+
+The below is a placeholder
+
+
+### Pushmi-Pullyu image creation ###
+
+Work with Pushmi-Pullyu in isolation
+
+First usage:
+
+  (1) Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
+
+  (2) Acquire the Docker image in one of two ways:
+    (a) Download the prebuilt images from [ualibraries DockerHub](https://hub.docker.com/r/ualibraries/) 
+      * Development
+        * `docker pull ualibraries/pushmi-pullyu:development_x.x`
+      * Production 
+        * `docker pull ualibraries/pushmi-pullyu:production_x.x`
+    (b) Build from `Dockerfile` definition in [Pushmi-pullyu GitHub repo](https://github.com/ualbertalib/pushmi_pullyu/docker) 
+      * Development:
+        * `docker build -t ualibraries/pushmi_pullyu:development_x.x -f Dockerfile.pushmi_pullyu.development .` 
+      * Production:
+        * `docker build -t ualibraries/pushmi_pullyu:production_x.x -f Dockerfile.pushmi_pullyu.production .` 
+
+  (3) Run the Docker image 
+      * Development:
+        * docker run -d -v $PUSHMI_PULLYU_DIR:/mnt --name pushmi_pullyu ualibraries/pushmi_pullyu:development
+      * Production:
+        * docker run -d -v $PUSHMI_PULLYU_DIR:/mnt --name pushmi_pullyu ualibraries/pushmi_pullyu:development
+
+
+After initial `docker run`:
+
+  * Exec shell within container
+    * docker exec -it ${container_id}  bash
+  * docker stop ${container_id}
+  * docker start ${container_id}
+
+
+
+
+### Pushmi-Pullyu Docker Compose Usage ###
 
 (1) Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
 
 **ToDo** is there a dot_env file? If yes, use to define env vars to pass to DockerFile. Create `.env` that is in the .gitignore list and a dotenv.example to build from. 
 
-(2) Download the prebuilt images from [ualibraries DockerHub](https://hub.docker.com/r/ualibraries/) 
+(2) Acquire the Docker images :
+  (a) Download the prebuilt images from [ualibraries DockerHub](https://hub.docker.com/r/ualibraries/) 
     * Development
-      * `docker-compose pull ualibraries/pushmi-pullyu:development_x.x
+      * docker-compose -f docker-compose-development.yml pull 
     * Production 
-      * `docker-compose pull ualibraries/pushmi-pullyu:production_x.x
+      * docker-compose -f docker-compose-production.yml pull
+
+(3) Run the Docker Compose 
+    * Development:
+      * docker-compose -f docker-compose-development.yml up -d 
+    * Production:
+      * docker-compose -f docker-compose-production.yml up -d 
+
+
 
 (3) From inside the clone of the GitHub pushmi-pullyu/docker directory
   * `docker-compose up` to start the container (i.e., pushmi-pullyu stack) 
@@ -59,10 +114,16 @@ A minimalistic, as simple as possible but no simpler container.
 **ToDo** add test rake tasks and other useful things to see within the container
 
 
+### Debugging ###
+
+Start a docker container and execute `bash` within container allowing user to test commands:
+
+* `docker run -v ${path_to_github_clone_source_code}:/mnt -it  ruby:2.3.4  bash;`
+
 
 ## Maintenance ##
 
-### Updating DockerHub ###
+### Updating Docker Hub ###
 
 University of Alberta maintains a Docker Hub repository at https://hub.docker.com/r/ualibraries. Two Docker images are registered with Docker Hub:
 
@@ -71,7 +132,7 @@ University of Alberta maintains a Docker Hub repository at https://hub.docker.co
 (2) Production 
   * ualibraries/pushmi_pullyu:production_x.x
 
-To push to a Docker Hub repository:
+#### To update the Docker Hub repository: ####
 
 (1) name your local using the `ualibraries` username and the repository name [reference](https://docs.docker.com/docker-hub/repos/#pushing-a-repository-image-to-docker-hub)
   * Development:
@@ -81,9 +142,9 @@ To push to a Docker Hub repository:
 
 (2) push to the Docker Hub registry - `docker push <hub-user>/<repo-name>:<tag>`
   * Development:
-    * `docker push ualibraries/pushmi_pullyu:development_0.0` 
+    * `docker push ualibraries/pushmi_pullyu:development_x.x` 
   * Production:
-    * `docker push ualibraries/pushmi_pullyu:production_0.0` 
+    * `docker push ualibraries/pushmi_pullyu:production_x.x` 
 
 
 
@@ -107,50 +168,16 @@ To upgrade to a newer release of Pushmi-Pullyu (applicable in the `production` c
 
 ## Frequently used commands ##
 
-* Shell access
-  * docker exec -it ${container_id}  bash 
-
-* Low-level container information 
-  * docker inspect ${container_id}
-
-* Display container log files 
-  * docker logs --details --follow ${container_id}
-
-* Remove containers and associated volumes
-  * docker rm --volumes
-
-* List containers
-  * docker ps --all --size
-
-* Network listing
-  * docker network ls
-
-* Other Docker CLI commands
-  * [Docker documentation](https://docs.docker.com/engine/reference/commandline/docker/)
-
-
 * to see the container(s) logs
   * docker-compose logs ${container_id} 
 
 * to build the image(s) from scratch
   * docker-compose build --no-cache <service_name> 
 
-* Allow a non-root user to administer Docker
-  * add user to the `docker` group
-  * warning, only add trusted users - [reference](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface) - allows the user to share a directory between the Docker host and guest container without limiting access rights (i.e., it will have root level access to the shared directory). Requiring `sudo` to start Docker leaves a log trail. 
+* Link to [Developer Handbook](https://github.com/ualbertalib/Developer-Handbook/blob/master/docker/README.md#Frequently-used-commands)
+
+
+## Special notes / warnings / gotchas
 
 
 ## Future considerations ##
-
-* [Configure automated builds on Docker Hub](https://docs.docker.com/docker-hub/builds/)
-
-* don't use the Docker Hub ":latest" tag because "the last build/tag that ran without a specific tag/version specified" [reference](https://medium.com/@mccode/the-misunderstood-docker-tag-latest-af3babfd6375)
-
-* link/depends_on in docker-compose to handle dependencies and determine the order of service startup. 
-  * [links](https://docs.docker.com/compose/compose-file/compose-file-v2/#links)
-  * [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v2/#dependson)
-
-* Terminology
-  * Docker container versus image
-    * image: created by the build process, stored in Docker Hub registry, inert, essentially a snapshot of a container
-    * container: running instance of an image
