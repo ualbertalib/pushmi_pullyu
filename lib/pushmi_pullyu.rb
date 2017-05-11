@@ -67,6 +67,6 @@ module PushmiPullyu
   # Exceptions
   class BagInvalid < StandardError; end
   class NoContentFilename < StandardError; end
-  class PushmiPullyu::FedoraFetchError < StandardError; end
-  class PushmiPullyu::SolrFetchError < StandardError; end
+  class FedoraFetchError < StandardError; end
+  class SolrFetchError < StandardError; end
 end
