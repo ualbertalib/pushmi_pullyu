@@ -13,13 +13,12 @@ logfile: log/pushmi_pullyu.log
 monitor: false
 piddir: tmp/pids
 process_name: pushmi_pullyu
-
+queue_name: dev:pmpy_queue
+minimum_age: 0
 
 redis:
   host: localhost
   port: 6379
-  queue_name: dev:pmpy_queue
-  minimum_age: 0
 
 solr:
   url: http://localhost:8983/solr/hydra-development

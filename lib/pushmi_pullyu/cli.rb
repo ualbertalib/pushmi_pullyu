@@ -22,7 +22,7 @@ class PushmiPullyu::CLI
     opts[:daemonize] = true if COMMANDS.include? argv[0]
     opts = parse_config(opts[:config_file]).merge(opts) if opts[:config_file]
 
-    options.merge!(opts)
+    PushmiPullyu.options = opts
   end
 
   def run
@@ -97,6 +97,10 @@ class PushmiPullyu::CLI
 
       o.on('-m', '--monitor', 'Start monitor process for a deamon') do
         opts[:monitor] = true
+      end
+
+      o.on('-q', '--queue NAME', 'Name of the queue to read from') do |queue|
+        opts[:queue_name] = queue
       end
 
       o.separator ''
