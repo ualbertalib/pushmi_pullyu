@@ -54,25 +54,25 @@ Work with Pushmi-Pullyu in isolation
 
 First usage:
 
-  (1) Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
+1. Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
 
-  (2) Acquire the Docker image in one of two ways:
-    (a) Download the prebuilt images from [ualibraries DockerHub](https://hub.docker.com/r/ualibraries/) 
-      * Development
-        * `docker pull ualibraries/pushmi-pullyu:development_x.x`
-      * Production 
-        * `docker pull ualibraries/pushmi-pullyu:production_x.x`
-    (b) Build from `Dockerfile` definition in [Pushmi-pullyu GitHub repo](https://github.com/ualbertalib/pushmi_pullyu/docker) 
-      * Development:
-        * `docker build -t ualibraries/pushmi_pullyu:development_x.x -f Dockerfile.pushmi_pullyu.development .` 
-      * Production:
-        * `docker build -t ualibraries/pushmi_pullyu:production_x.x -f Dockerfile.pushmi_pullyu.production .` 
+2. Acquire the Docker image in one of two ways:
+    1. Download the prebuilt images from [ualibraries DockerHub](https://hub.docker.com/r/ualibraries/) 
+        * Development
+          * `docker pull ualibraries/pushmi-pullyu:development_x.x`
+        * Production 
+          * `docker pull ualibraries/pushmi-pullyu:production_x.x`
+    2. Build from `Dockerfile` definition in [Pushmi-pullyu GitHub repo](https://github.com/ualbertalib/pushmi_pullyu/docker) 
+        * Development:
+          * `docker build -t ualibraries/pushmi_pullyu:development_x.x -f Dockerfile.pushmi_pullyu.development .` 
+        * Production:
+          * `docker build -t ualibraries/pushmi_pullyu:production_x.x -f Dockerfile.pushmi_pullyu.production .` 
 
-  (3) Run the Docker image 
-      * Development:
-        * `docker run -d -v $PUSHMI_PULLYU_DIR:/mnt --name pushmi_pullyu ualibraries/pushmi_pullyu:development`
-      * Production:
-        * `docker run -d -v $PUSHMI_PULLYU_DIR:/mnt --name pushmi_pullyu ualibraries/pushmi_pullyu:development`
+3. Run the Docker image 
+    * Development:
+      * `docker run -d -v $PUSHMI_PULLYU_DIR:/mnt --name pushmi_pullyu ualibraries/pushmi_pullyu:development`
+    * Production:
+      * `docker run -d -v $PUSHMI_PULLYU_DIR:/mnt --name pushmi_pullyu ualibraries/pushmi_pullyu:development`
 
 
 After initial `docker run`:
