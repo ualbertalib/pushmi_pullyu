@@ -1,8 +1,6 @@
+require 'pushmi_pullyu'
 require 'net/http'
 require 'fileutils'
-
-# Any error (except possibly 404, see below)
-class PushmiPullyu::FetchError < StandardError; end
 
 class PushmiPullyu::FedoraObjectFetcher
 
@@ -39,10 +37,10 @@ class PushmiPullyu::FedoraObjectFetcher
 
     unless response.is_a?(Net::HTTPSuccess)
       if response.is_a?(Net::HTTPNotFound)
-        raise PushmiPullyu::FetchError unless options[:return_false_on_404]
+        raise PushmiPullyu::FedoraFetchError unless options[:return_false_on_404]
         return false
       end
-      raise PushmiPullyu::FetchError
+      raise PushmiPullyu::FedoraFetchError
     end
 
     if options[:download_path]

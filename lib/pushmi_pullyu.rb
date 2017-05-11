@@ -5,9 +5,7 @@ require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/version'
 require 'active_support'
 require 'active_support/core_ext'
-require 'pushmi_pullyu/fedora_object_fetcher'
-require 'pushmi_pullyu/solr_fetcher'
-require 'pushmi_pullyu/aip_assembler'
+require 'pushmi_pullyu/aip_creator'
 
 # PushmiPullyu main module
 module PushmiPullyu
@@ -65,4 +63,10 @@ module PushmiPullyu
   def self.logger=(log)
     PushmiPullyu::Logging.logger = log
   end
+
+  # Exceptions
+  class BagInvalid < StandardError; end
+  class NoContentFilename < StandardError; end
+  class PushmiPullyu::FedoraFetchError < StandardError; end
+  class PushmiPullyu::SolrFetchError < StandardError; end
 end

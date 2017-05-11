@@ -1,8 +1,6 @@
+require 'pushmi_pullyu'
 require 'net/http'
 require 'csv'
-
-# Any error (except possibly 404, see below)
-class PushmiPullyu::SolrError < StandardError; end
 
 class PushmiPullyu::SolrFetcher
 
@@ -32,7 +30,7 @@ class PushmiPullyu::SolrFetcher
 
     return response.body if response.is_a?(Net::HTTPSuccess)
 
-    raise PushmiPullyu::SolrError
+    raise PushmiPullyu::SolrFetchError
   end
 
   # Return output as an array of hashes

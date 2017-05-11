@@ -36,7 +36,7 @@ RSpec.describe PushmiPullyu::FedoraObjectFetcher do
       allow($stdout).to receive(:puts)
       VCR.use_cassette('fof_404') do
         fof.noid = 'ohnoimbad'
-        expect { fof.download_object }.to raise_error(PushmiPullyu::FetchError)
+        expect { fof.download_object }.to raise_error(PushmiPullyu::FedoraFetchError)
       end
     end
 

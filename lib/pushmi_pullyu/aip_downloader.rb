@@ -1,19 +1,13 @@
-require 'archive/tar/minitar'
 require 'rdf'
 require 'rdf/n3'
 require 'fileutils'
-require 'bagit'
 require 'pushmi_pullyu/fedora_object_fetcher'
 require 'pushmi_pullyu/solr_fetcher'
 
 # Download all of the metadata/datastreams and associated data
 # related to an object
 
-# Was not able to get the filename from downloaded RDF
-class PushmiPullyu::NoContentFilename < StandardError; end
-class PushmiPullyu::BagInvalid < StandardError; end
-
-class PushmiPullyu::AipAssembler
+class PushmiPullyu::AipDownloader
 
   attr_reader :noid, :config, :logger, :fetcher,
               :workdir, :basedir, :datadir, :objectsdir, :metadatadir, :logsdir,
@@ -21,9 +15,9 @@ class PushmiPullyu::AipAssembler
               :tar_filename, :main_object_filename, :fixity_report_filename,
               :content_datastream_metadata_filename,
               :characterization_filename, :versions_filename,
-              :thumbnail_filename, :aip_logging_on
+              :thumbnail_filename
 
-  attr_accessor :got_characterization, :got_thumbnail
+  attr_accessor :got_characterization, :got_thumbnail, :got_fedora3foxml
 
   FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
 
@@ -33,6 +27,8 @@ class PushmiPullyu::AipAssembler
   VERSIONS_PATH = '/content/fcr:versions'.freeze
   CONTENT_PATH = '/content'.freeze
   THUMBNAIL_PATH = '/thumbnail'.freeze
+  FEDORA3FOXML_PATH = '/fedora3foxml'.freeze
+  FEDORA3FOXML_METADATA_PATH = '/fedora3foxml/fcr:metadata'.freeze
 
   def initialize(noid, config = nil, logger = nil)
     @noid = noid
@@ -41,64 +37,18 @@ class PushmiPullyu::AipAssembler
     @logger = logger || PushmiPullyu.logger
     @fetcher = PushmiPullyu::FedoraObjectFetcher.new(self.noid, self.config)
 
-    # Directories
-    @workdir = File.expand_path(self.config[:workdir])
-    @basedir = "#{workdir}/#{noid}"
-    @datadir = "#{basedir}/data"
-    @objectsdir = "#{datadir}/objects"
-    @metadatadir = "#{datadir}/objects/metadata"
-    @logsdir = "#{datadir}/logs"
-    @thumbnailsdir = "#{datadir}/thumbnails"
+    initialize_directory_names
+    initialize_filenames
 
-    # Files
-    @tar_filename = "#{workdir}/#{noid}.tar"
-    @main_object_filename = "#{metadatadir}/object_metadata.n3"
-    @fixity_report_filename = "#{logsdir}/content_fixity_report.n3"
-    @content_datastream_metadata_filename =
-      "#{metadatadir}/content_fcr_metadata.n3"
-    @characterization_filename = "#{logsdir}/content_characterization.xml"
-    @versions_filename = "#{metadatadir}/content_versions.n3"
-    @thumbnail_filename = "#{thumbnailsdir}/thumbnail"
     @aipcreation_log = "#{logsdir}/aipcreation.txt"
 
     # We can still archive if some things aren't found, in particular ...
     self.got_characterization = false
     self.got_thumbnail = false
+    self.got_fedora3foxml = false
   end
 
-  def aip_logger
-    @aip_logger ||= Logger.new(@aipcreation_log) do |logger|
-      logger.level = Logger::INFO
-    end
-  end
-
-  # We want to log to the main application log, and to the AIP creation log
-  def aip_log(msg)
-    logger.info(msg)
-    aip_logger.info(msg)
-  end
-
-  def run
-    download_object_and_data
-    bag.manifest!
-    raise PushmiPullyu::BagInvalid unless bag.valid?
-    tar_bag
-    clean_directories
-  end
-
-  def bag
-    @bag ||= BagIt::Bag.new(basedir)
-  end
-
-  def tar_bag
-    Dir.chdir(workdir) do
-      File.open(tar_filename, 'wb') do |tar|
-        Archive::Tar::Minitar.pack(noid, tar)
-      end
-    end
-  end
-
-  def download_object_and_data
+  def download_objects_and_metadata
     make_object_directories
 
     aip_log("#{noid}: Retreiving data from Fedora ...")
@@ -115,6 +65,40 @@ class PushmiPullyu::AipAssembler
   end
 
   # Below should all be private
+
+  def initialize_directory_names
+    @workdir = File.expand_path(config[:workdir])
+    @basedir = "#{workdir}/#{noid}"
+    @datadir = "#{basedir}/data"
+    @objectsdir = "#{datadir}/objects"
+    @metadatadir = "#{datadir}/objects/metadata"
+    @logsdir = "#{datadir}/logs"
+    @thumbnailsdir = "#{datadir}/thumbnails"
+  end
+
+  def initialize_filenames
+    @main_object_filename = "#{metadatadir}/object_metadata.n3"
+    @fixity_report_filename = "#{logsdir}/content_fixity_report.n3"
+    @content_datastream_metadata_filename =
+      "#{metadatadir}/content_fcr_metadata.n3"
+    @characterization_filename = "#{logsdir}/content_characterization.xml"
+    @versions_filename = "#{metadatadir}/content_versions.n3"
+    @thumbnail_filename = "#{thumbnailsdir}/thumbnail"
+    @fedora3foxml_filename = "#{metadatadir}/fedora3foxml.n3"
+    @fedora3foxml_xml_filename = "#{metadatadir}/fedora3foxml.xml"
+  end
+
+  def aip_logger
+    @aip_logger ||= Logger.new(@aipcreation_log) do |logger|
+      logger.level = Logger::INFO
+    end
+  end
+
+  # We want to log to the main application log, and to the AIP creation log
+  def aip_log(msg)
+    logger.info(msg)
+    aip_logger.info(msg)
+  end
 
   def clean_directories
     return unless File.exist?(basedir)
