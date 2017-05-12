@@ -1,8 +1,9 @@
 # PushmiPullyu
 
-[![Gem Version](https://badge.fury.io/rb/pushmi_pullyu.svg)](https://badge.fury.io/rb/pushmi_pullyu)
+[![Gem Version](https://badge.fury.io/rb/pushmi_pullyu.svg)](https://rubygems.org/gems/pushmi_pullyu)
 [![Dependency Status](https://gemnasium.com/badges/github.com/ualbertalib/pushmi_pullyu.svg)](https://gemnasium.com/github.com/ualbertalib/pushmi_pullyu)
 [![Build Status](https://travis-ci.org/ualbertalib/pushmi_pullyu.svg?branch=master)](https://travis-ci.org/ualbertalib/pushmi_pullyu)
+[![Coverage Status](https://coveralls.io/repos/github/ualbertalib/pushmi_pullyu/badge.svg?branch=master)](https://coveralls.io/github/ualbertalib/pushmi_pullyu?branch=master)
 
 PushmiPullyu will be a Ruby application, running behind the firewall that protects our Swift environment.
 

@@ -6,6 +6,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
     let(:queue) { described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
 
     before do
+      PushmiPullyu.server_running = true
       direct_redis = Redis.new
       direct_redis.del  'test:pmpy_queue'
       direct_redis.zadd 'test:pmpy_queue', 1, 'noid1'
