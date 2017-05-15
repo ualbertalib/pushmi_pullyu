@@ -15,7 +15,7 @@ class PushmiPullyu::SwiftDepositer
                                            :username => user,
                                            :api_key=>pass,
                                            :auth_method=>authMethod,
-                                           :auth_url=>endpoint+auth_version,
+                                           :auth_url=>"#{endpoint}/auth/#{auth_version}",
                                            :authtenant_name =>tenant,
                                            :service_type=>serviceType})
      @swiftContainer = container

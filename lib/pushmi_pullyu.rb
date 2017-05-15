@@ -41,7 +41,7 @@ module PushmiPullyu
       tenant: 'tester',
       username: 'test:tester',
       password: 'testing',
-      endpoint: 'http://127.0.0.1:8080/auth/',
+      endpoint: 'http://127.0.0.1:8080',
       container: 'era'
     }
   }.freeze
