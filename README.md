@@ -31,19 +31,19 @@ PushmiPullyu supports Ruby 2.3.1+
 PushmiPullyu is hosted on rubygems.org. Therefore it can be installed via:
 
 ```bash
-    gem install pushmi_pullyu
+  gem install pushmi_pullyu
 ```
 
 ## Usage
 
 Foreground mode:
 ```bash
-    pushmi_pullyu
+  pushmi_pullyu
 ```
 
 Run as a daemon:
 ```bash
-    pushmi_pullyu start
+  pushmi_pullyu start
 ```
 
 PushmiPullyu is quite flexible in that many options can be specified at the command line.
@@ -55,19 +55,18 @@ Example:
 Usage: pushmi_pullyu [options] [start|stop|restart|run]
 
 Specific options:
-    -a, --minimum-age AGE            Minimum amount of time an item must spend in the queue, in seconds.
-    -d, --debug                      Enable debug logging
-    -C, --config PATH                path to YAML config file
-    -L, --logfile PATH               Path to writable logfile
-    -D, --piddir PATH                Path to piddir
-    -N, --process_name NAME          Name of the process
-    -m, --monitor                    Start monitor process for a deamon
-    -q, --queue NAME                 Name of the queue to read from
+  -a, --minimum-age AGE            Minimum amount of time an item must spend in the queue, in seconds.
+  -d, --debug                      Enable debug logging
+  -C, --config PATH                path to YAML config file
+  -L, --logfile PATH               Path to writable logfile
+  -D, --piddir PATH                Path to piddir
+  -N, --process_name NAME          Name of the process
+  -m, --monitor                    Start monitor process for a deamon
+  -q, --queue NAME                 Name of the queue to read from
 
 Common options:
-    -v, --version                    Show version
-    -h, --help                       Show this message
-
+  -v, --version                    Show version
+  -h, --help                       Show this message
 ```
 
 ## Configuration file
@@ -75,7 +74,7 @@ Common options:
 You can also provide a configuration file which PushmiPullyu will use with the -C (or --config) flag:
 
 ```bash
-    pushmi_pullyu start -C /path/to/config
+  pushmi_pullyu start -C /path/to/config
 ```
 
 By default, if no configuration file is specified, PushmiPullyu will look for a configuration file at config/pushmi_pullyu.yml.
@@ -88,9 +87,9 @@ Options passed on the command line will also override options specified in the c
 
 PushmiPullyu responds to these signals:
 
-* `INT` equivalent of sending Ctrl-C to PushmiPullyu. Will attempt to finish then exit.
-* `TERM` Similar to `INT`. PushmiPullyu will attempt to finish then exit.
-* `HUP` reopen log files as defined in logfile configuration options
+* `INT`: Equivalent of sending Ctrl-C to PushmiPullyu. Will attempt to finish then exit.
+* `TERM`: Similar to `INT`. PushmiPullyu will attempt to finish then exit.
+* `HUP`: Reopens log files as defined in logfile configuration options.
 
 ## Development
 
@@ -103,8 +102,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 To run the test suite:
 
 ```bash
-bundle install
-bundle exec rake
+  bundle install
+  bundle exec rake
 ```
 
 This will run both rspec and rubocop together.
@@ -112,12 +111,12 @@ This will run both rspec and rubocop together.
 To run rspec by itself:
 
 ```bash
-bundle exec rspec
+  bundle exec rspec
 ```
 To run rubocop by itself:
 
 ```bash
-bundle exec rubocop
+  bundle exec rubocop
 ```
 
 ## Deployment
