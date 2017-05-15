@@ -2,7 +2,7 @@ require 'openstack'
 
 class PushmiPullyu::SwiftDepositer
 
-  def initialize(connection = {}, container, logger: nil)
+  def initialize(connection, container, logger: nil)
      user         = connection[:username]
      pass         = connection[:password]
      tenant       = connection[:tenant]
