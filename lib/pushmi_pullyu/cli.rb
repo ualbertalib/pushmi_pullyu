@@ -42,6 +42,7 @@ class PushmiPullyu::CLI
     print_banner
 
     setup_queue
+    setup_swift
 
     run_tick_loop
   end
@@ -147,6 +148,9 @@ class PushmiPullyu::CLI
       # 4. creation of AIP
       # 5. bagging and tarring of AIP
       # 6. Push bag to swift API
+        fileToDeposit="./examples/pushmi_pullyu.yml"
+        storage.depositFile(fileToDeposit)
+        logger.debug("Deposited file into the swift storage #{fileToDeposit}")
       # 7. Log successful preservation event to log files
 
       rotate_logs if PushmiPullyu.reset_logger?
@@ -177,6 +181,15 @@ class PushmiPullyu::CLI
                                                  age_at_least: options[:minimum_age])
   end
 
+  def setup_swift
+    @storage = PushmiPullyu::SwiftDepositer.new(connection: {
+                                                   username: options[:swift][:username],
+                                                   password: options[:swift][:password],
+                                                   tenant: options[:swift][:tenant],
+                                                   URL: options[:swift][:endpoint]
+                                                 },
+                                                 container: options[:swift][:container])
+  end
   # On first call of shutdown, this will gracefully close the main run loop
   # which let's the program exit itself. Calling shutdown again will force shutdown the program
   def shutdown
