@@ -1,20 +1,22 @@
 require 'pushmi_pullyu'
+require 'pushmi_pullyu/aip'
 require 'net/http'
 require 'fileutils'
 
-class PushmiPullyu::FedoraObjectFetcher
-
-  attr_accessor :config, :noid
+class PushmiPullyu::Aip::FedoraFetcher
 
   RDF_FORMAT = 'text/rdf+n3'.freeze
 
-  def initialize(noid, config = nil)
+  def initialize(noid)
     self.noid = noid
-    self.config = config || PushmiPullyu.options
+  end
+
+  def base_path
+    PushmiPullyu.options[:fedora][:base_path]
   end
 
   def object_url
-    "#{config[:fedora][:url]}#{config[:fedora][:base_path]}/#{pairtree}"
+    "#{config[:fedora][:url]}#{base_path}/#{pairtree}"
   end
 
   def pairtree
@@ -39,10 +41,10 @@ class PushmiPullyu::FedoraObjectFetcher
 
     unless response.is_a?(Net::HTTPSuccess)
       if response.is_a?(Net::HTTPNotFound)
-        raise PushmiPullyu::FedoraFetchError unless return_false_on_404
+        raise PushmiPullyu::Aip::FedoraFetchError unless return_false_on_404
         return false
       end
-      raise PushmiPullyu::FedoraFetchError
+      raise PushmiPullyu::Aip::FedoraFetchError
     end
 
     if download_path
@@ -50,7 +52,7 @@ class PushmiPullyu::FedoraObjectFetcher
       file.write(response.body)
       file.close
     else
-      puts response.body
+      PushmiPullyu.logger.debug(response.body)
     end
 
     true
