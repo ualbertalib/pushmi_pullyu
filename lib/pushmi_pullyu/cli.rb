@@ -188,8 +188,7 @@ class PushmiPullyu::CLI
                                                    tenant:   options[:swift][:tenant],
                                                    URL:      options[:swift][:endpoint]
                                                  },
-                                                 container: options[:swift][:container],
-                                                 logger: logger )
+                                                 container: options[:swift][:container])
   end
   # On first call of shutdown, this will gracefully close the main run loop
   # which let's the program exit itself. Calling shutdown again will force shutdown the program
