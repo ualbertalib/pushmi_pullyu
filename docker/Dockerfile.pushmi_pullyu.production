@@ -1,7 +1,18 @@
-# create pushmi_pullyu container from Gem 
-FROM ruby:latest
+# Create production pushmi_pullyu container from Gem 
+FROM ruby:2.3.4
 
-RUN gem install pushmi_pullyu
+WORKDIR /app/
 
+# Grab gem from https://rubygems.org/gems/pushmi_pullyu 
+RUN gem install pushmi_pullyu --force
+
+# Run `bundle install` after grabbing `Gemfile`, `pushmi_pullyu.gemspec and `version.rb` files 
+ADD ["https://raw.githubusercontent.com/ualbertalib/pushmi_pullyu/master/Gemfile", "/app"]
+ADD ["https://raw.githubusercontent.com/ualbertalib/pushmi_pullyu/master/pushmi_pullyu.gemspec", "/app"]
+ADD ["https://raw.githubusercontent.com/ualbertalib/pushmi_pullyu/master/lib/pushmi_pullyu/version.rb", "/app/lib/pushmi_pullyu/version.rb"]
+
+RUN bundle install --without development test 
+
+#by default, execute Pushmi-Pullyu - `bundle exec pushmi_pullyu start`
 ENTRYPOINT ["bundle", "exec"]
 CMD ["pushmi_pullyu", "start"]

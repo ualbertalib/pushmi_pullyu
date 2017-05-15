@@ -1,14 +1,14 @@
-# create pushmi_pullyu container from source
-FROM ruby:latest 
+# create pushmi_pullyu container from source.
+# entry point is bash to allow running of rake and other tests by a developer.
 
-RUN mkdir -p /gem/
-WORKDIR /gem/
-ADD . /gem/
+FROM ruby:2.3.4
 
-#CMD ["bundle", "install"] #assume new clone of GitHub
+WORKDIR /app/ 
 
-#CMD "/bin/sh -c 'usr/local/bin/bundle install'; /bin/sh -c '/usr/local/bin/bundle exec pushmi_pullyu start';"
+ADD Gemfile /app/
+ADD pushmi_pullyu.gemspec /app/
+ADD lib/pushmi_pullyu/version.rb /app/lib/pushmi_pullyu/version.rb
+ADD . /app
+RUN bundle install
 
-ENTRYPOINT ["bundle", "exec"]
-CMD ["pushmi_pullyu", "start"]
-
+CMD ["bash"]

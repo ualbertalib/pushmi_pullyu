@@ -1,35 +1,35 @@
-# Pushmi-Pullyu Docker Container Creation #
+# Pushmi-Pullyu Docker Container Creation
 
 *ToDo*
 
 *in progress - not yet functional*
 
 
-## What is this? ##
+## What is this?
 
 This directory contains the apparatus to create a Docker Container for the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/blob/master/README.md) utility in both a development and production context. This container is meant to be used in conjunction with a [HydraNorth (Fedora and Solr)](https://github.com/ualbertalib/di_docker_hydranorth) container (source content layer) and an [OpenStack Swift](https://github.com/ualbertalib/DIDocker_Swift) container (i.e., preservation layer). For more details on inner workings of Pushmi-Pullyu see the [readme](https://github.com/ualbertalib/pushmi_pullyu/blob/master/README.md) at the root of the Pushmi-Pullyu repo - the idea, decouple components into minimalistic images each addressing a single concern allowing reuse.
 
 
 
-## Requirements ##
+## Requirements
 
 * [Docker](https://docs.docker.com/engine/installation/) - tested with version 17.05 
 * [Docker Compose](https://docs.docker.com/compose/install/) - tested with version 1.13
 
 
 
-## In this Docker Container ##
+## In this Docker Container
 
 A minimalistic, as simple as possible but no simpler container. 
 
-### Development Environment Docker Container ###
+### Development Environment Docker Container
 
 * base off Ruby Docker image
 * shared code directory between host and container 
 * start pushmi_pullyu at start-up
 
 
-### Production Environment Docker Container ###
+### Production Environment Docker Container 
 
 * base off Ruby Docker image
 * pull from RubyGems
@@ -37,9 +37,9 @@ A minimalistic, as simple as possible but no simpler container.
 
 
 
-## Usage ##
+## Usage
 
-### Pushmi-Pully Usage ###
+### Pushmi-Pully Usage
 
 *ToDo*
 
@@ -48,7 +48,7 @@ Add Docker Compose usage once written.
 The below is a placeholder
 
 
-### Pushmi-Pullyu image creation ###
+### Pushmi-Pullyu image creation
 
 Work with Pushmi-Pullyu in isolation
 
@@ -85,7 +85,7 @@ After initial `docker run`:
 
 
 
-### Pushmi-Pullyu Docker Compose Usage ###
+### Pushmi-Pullyu Docker Compose Usage
 
 1. Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
 
@@ -110,7 +110,7 @@ From inside the clone of the GitHub pushmi-pullyu/docker directory
   * **ToDo** does one need to be inside the directory or is this dependent on the .env file? "Compose supports declaring default environment variables in an environment file named .env placed in the folder where the docker-compose command is executed (current working directory)." [reference](https://docs.docker.com/compose/env-file/)
 
 
-### Rake tasks ###
+### Rake tasks
 
 * Shell access within the container
   * `docker exec -it ${container_id}  bash`
@@ -118,16 +118,16 @@ From inside the clone of the GitHub pushmi-pullyu/docker directory
 **ToDo** add test rake tasks and other useful things to see within the container
 
 
-### Debugging ###
+### Debugging
 
 Start a docker container and execute `bash` within container allowing user to test commands:
 
 * `docker run -v ${path_to_github_clone_source_code}:/mnt -it  ruby:2.3.4  bash;`
 
 
-## Maintenance ##
+## Maintenance
 
-### Updating Docker Hub ###
+### Updating Docker Hub 
 
 University of Alberta maintains a Docker Hub repository at https://hub.docker.com/r/ualibraries. Two tagged Docker images are registered with Docker Hub:
 
@@ -136,7 +136,7 @@ University of Alberta maintains a Docker Hub repository at https://hub.docker.co
 2. Production 
     * ualibraries/pushmi_pullyu:production_x.x
 
-#### To update the Docker Hub repository: ####
+#### To update the Docker Hub repository: 
 
 1. name your local using the `ualibraries` username and the repository name [reference](https://docs.docker.com/docker-hub/repos/#pushing-a-repository-image-to-docker-hub)
     * Development:
@@ -152,7 +152,7 @@ University of Alberta maintains a Docker Hub repository at https://hub.docker.co
 
 
 
-### Upgrading local Pushmi-Pullyu container ###
+### Upgrading local Pushmi-Pullyu container
 
 To upgrade to a newer release of Pushmi-Pullyu (applicable in the `production` container as the `development` container leverages a local codebase):
 
@@ -170,12 +170,12 @@ To upgrade to a newer release of Pushmi-Pullyu (applicable in the `production` c
 
 
 
-## Frequently used commands ##
+## Frequently used commands
 
 * Link to [Developer Handbook](https://github.com/ualbertalib/Developer-Handbook/blob/master/docker/README.md#Frequently-used-commands)
 
 
-## Special notes / warnings / gotchas ##
+## Special notes / warnings / gotchas
 
 
-## Future considerations ##
+## Future considerations
