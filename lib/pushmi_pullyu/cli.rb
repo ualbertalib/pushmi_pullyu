@@ -25,7 +25,7 @@ class PushmiPullyu::CLI
     PushmiPullyu.options = opts
   end
 
-  def run
+  def run version = ">= 0.a"
     if options[:daemonize]
       start_server_as_daemon
     else
@@ -185,8 +185,8 @@ class PushmiPullyu::CLI
     @storage = PushmiPullyu::SwiftDepositer.new(connection: {
                                                    username: options[:swift][:username],
                                                    password: options[:swift][:password],
-                                                   tenant: options[:swift][:tenant],
-                                                   URL: options[:swift][:endpoint]
+                                                   tenant:   options[:swift][:tenant],
+                                                   URL:      options[:swift][:endpoint]
                                                  },
                                                  container: options[:swift][:container])
   end
