@@ -25,7 +25,7 @@ class PushmiPullyu::CLI
     PushmiPullyu.options = opts
   end
 
-  def run version = ">= 0.a"
+  def run
     if options[:daemonize]
       start_server_as_daemon
     else
