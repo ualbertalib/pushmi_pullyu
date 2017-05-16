@@ -140,7 +140,7 @@ class PushmiPullyu::CLI
   def run_tick_loop
     while PushmiPullyu.server_running?
       # Preservation (TODO):
-      # 1. Montior queue
+      # 1. Montior queuek
       # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
       item = @queue.wait_next_item
       logger.debug(item)
@@ -148,9 +148,9 @@ class PushmiPullyu::CLI
       # 4. creation of AIP
       # 5. bagging and tarring of AIP
       # 6. Push bag to swift API
-      fileToDeposit="./pushmi_pullyu"
-      @storage.depositFile(fileToDeposit)
-      logger.debug("Deposited file into the swift storage #{fileToDeposit}")
+      file_to_deposit = './pushmi_pullyu'
+      @storage.deposit_file(file_to_deposit)
+      logger.debug("Deposited file into the swift storage #{file_to_deposit}")
       # 7. Log successful preservation event to log files
 
       rotate_logs if PushmiPullyu.reset_logger?
@@ -183,14 +183,15 @@ class PushmiPullyu::CLI
 
   def setup_swift
     @storage = PushmiPullyu::SwiftDepositer.new(connection: {
-                                                   username:     options[:swift][:username],
-                                                   password:     options[:swift][:password],
-                                                   tenant:       options[:swift][:tenant],
-                                                   endpoint:     options[:swift][:endpoint],
-                                                   auth_version: options[:swift][:auth_version]
-                                                 },
-                                                 container: options[:swift][:container])
+                                                  username: options[:swift][:username],
+                                                  password: options[:swift][:password],
+                                                  tenant: options[:swift][:tenant],
+                                                  endpoint: options[:swift][:endpoint],
+                                                  auth_version: options[:swift][:auth_version]
+                                                },
+                                                container: options[:swift][:container])
   end
+
   # On first call of shutdown, this will gracefully close the main run loop
   # which let's the program exit itself. Calling shutdown again will force shutdown the program
   def shutdown

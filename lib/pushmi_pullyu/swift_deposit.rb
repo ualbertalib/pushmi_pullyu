@@ -2,71 +2,57 @@ require 'openstack'
 
 class PushmiPullyu::SwiftDepositer
 
-  def initialize(connection: nil, container: nil )
+  def initialize(connection: nil, container: nil)
+    raise 'conection can not be nil' if connection.nil?
+    raise 'container can not be nil' if container.nil?
 
-    if(connection.nil? )
-      raise "conection can not be nil"
-    end
+    user         = connection[:username]
+    pass         = connection[:password]
+    tenant       = connection[:tenant]
+    endpoint     = connection[:endpoint]
+    service_type  = 'object-store'
+    auth_method   = 'password'
+    auth_version = connection[:auth_version]
 
-    if(container.nil? )
-      raise "container can not be nil"
-    end
-
-     user         = connection[:username]
-     pass         = connection[:password]
-     tenant       = connection[:tenant]
-     endpoint     = connection[:endpoint]
-     serviceType  = "object-store"
-     authMethod   = "password"
-     auth_version = connection[:auth_version]
-
-     @swiftConnection = OpenStack::Connection.create({
-                                           :username => user,
-                                           :api_key=>pass,
-                                           :auth_method=>authMethod,
-                                           :auth_url=>"#{endpoint}/auth/#{auth_version}",
-                                           :authtenant_name =>tenant,
-                                           :service_type=>serviceType})
-     @swiftContainer = container
-     @logger = PushmiPullyu.logger
+    @swift_connection = OpenStack::Connection.create(username: user,
+                                                     api_key: pass,
+                                                     auth_method: auth_method,
+                                                     auth_url: "#{endpoint}/auth/#{auth_version}",
+                                                     authtenant_name: tenant,
+                                                     service_type: service_type)
+    @swift_container = container
+    @logger = PushmiPullyu.logger
   end
 
-
-  def depositFile (fileName)
-
-    #check if file exists
-    if !File.file?(fileName)
-      raise "File #{fileName} does not exist"
-    end
-    fileBaseName=File.basename(fileName)
+  def deposit_file(file_name)
+    # check if file exists
+    raise "File #{file_name} does not exist" unless File.file?(file_name)
+    file_base_name = File.basename(file_name)
 
     # calculate file hash
-    hash = Digest::MD5.file(fileName).hexdigest
+    hash = Digest::MD5.file(file_name).hexdigest
 
-    #check that container exits
-    if ! @swiftConnection.container_exists?(@swiftContainer)
-      raise "Container #{@swiftContainer} does not exist"
-    end
+    # check that container exits
+    raise "Container #{@swift_container} does not exist" unless @swift_connection.container_exists?(@swift_container)
 
     # get container object
-    eraContainer=@swiftConnection.container(@swiftContainer)
+    era_container = @swift_connection.container(@swift_container)
 
-    if eraContainer.object_exists?(fileBaseName)
-      #if file already exists, update it with new data
-      @logger.debug("File object #{@swiftContainer}/#{fileBaseName} aleary in the swift, updating content")
-      depositedFile=eraContainer.object(fileBaseName)
-      depositedFile.write(File.open(fileName),
-                          {:etag=>hash, :content_type=>"application/octet-stream"})
+    if era_container.object_exists?(file_base_name)
+      # if file already exists, update it with new data
+      @logger.debug("File object #{@swift_container}/#{file_base_name} aleary in the swift, updating content")
+      deposited_file = era_container.object(file_base_name)
+      deposited_file.write(File.open(file_name),
+                           etag: hash, content_type: 'application/octet-stream')
     else
-      #create new deposit file
-      @logger.debug("Creating new file object #{@swiftContainer}/#{fileBaseName} in the swift")
-      depositedFile=eraContainer.create_object(fileBaseName,
-                                               {:etag=>hash, :content_type=>"application/octet-stream"},
-                                               File.open(fileName))
+      # create new deposit file
+      @logger.debug("Creating new file object #{@swift_container}/#{file_base_name} in the swift")
+      deposited_file = era_container.create_object(file_base_name,
+                                                   { etag: hash, content_type: 'application/octet-stream' },
+                                                   File.open(file_name))
     end
 
-    return depositedFile
-
+    deposited_file
   end
 
 end
