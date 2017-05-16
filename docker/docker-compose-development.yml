@@ -1,1 +1,28 @@
-#Docker Compose for a development version of Pushmi-Pullyu
+# Docker Compose for a development version of Pushmi-Pullyu
+# 
+version: '3'
+
+services:
+  hydranorth:
+    image: "ualibraries/hydra_north:deb"
+    volumes: 
+      # di_docker_hydranorth expects codebase in `app` within the container
+      - ${HYDRANORTH_SRC_HOME:-../../HydraNorth}:/app
+    environment:
+      # di_docker_hydranorth expects codebase path defined in `LOCAL_SRC_PATH` 
+      - LOCAL_SRC_PATH=${HYDRANORTH_SRC_HOME:-../../HydraNorth}
+
+  swift: 
+    image: "ualibraries/swift_dev"
+
+  pushmi-pullyu:
+    # assumes GitHup repo clone & run `docker-compose up` from repo root
+    # `..` context changes to `docker` dir, change to root or repo
+    build: 
+      context: ..
+      dockerfile: ./docker/Dockerfile.pushmi_pullyu.development
+    volumes: 
+      - ..:/app/pushmi-pullyu
+    depends_on:
+      - hydranorth
+      - swift

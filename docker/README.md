@@ -93,15 +93,15 @@ After initial `docker run`:
 
 2. Grab the prebuilt images from [ualibraries DockerHub](https://hub.docker.com/r/ualibraries/) 
     * Development
-      * docker-compose -f docker-compose-development.yml pull 
+      * docker-compose -f docker/docker-compose-development.yml pull 
     * Production 
-      * docker-compose -f docker-compose-production.yml pull
+      * docker-compose -f docker/docker-compose-production.yml pull
 
 3. Run the Docker Compose 
     * Development:
-      * docker-compose -f docker-compose-development.yml up -d 
+      * docker-compose -f docker/docker-compose-development.yml up -d 
     * Production:
-      * docker-compose -f docker-compose-production.yml up -d 
+      * docker-compose -f docker/docker-compose-production.yml up -d 
 
 
 [ToDo] likely wrong
