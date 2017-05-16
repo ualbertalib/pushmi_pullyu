@@ -2,24 +2,19 @@ require 'openstack'
 
 class PushmiPullyu::SwiftDepositer
 
-  def initialize(connection: nil, container: nil)
+  def initialize(connection, container)
     raise 'conection can not be nil' if connection.nil?
     raise 'container can not be nil' if container.nil?
 
-    user         = connection[:username]
-    pass         = connection[:password]
-    tenant       = connection[:tenant]
     endpoint     = connection[:endpoint]
-    service_type  = 'object-store'
-    auth_method   = 'password'
     auth_version = connection[:auth_version]
 
-    @swift_connection = OpenStack::Connection.create(username: user,
-                                                     api_key: pass,
-                                                     auth_method: auth_method,
+    @swift_connection = OpenStack::Connection.create(username: connection[:username],
+                                                     api_key: connection[:password],
+                                                     auth_method: 'password',
                                                      auth_url: "#{endpoint}/auth/#{auth_version}",
-                                                     authtenant_name: tenant,
-                                                     service_type: service_type)
+                                                     authtenant_name: connection[:tenant],
+                                                     service_type: 'object-store')
     @swift_container = container
     @logger = PushmiPullyu.logger
   end
@@ -32,11 +27,11 @@ class PushmiPullyu::SwiftDepositer
     # calculate file hash
     hash = Digest::MD5.file(file_name).hexdigest
 
-    # check that container exits
-    raise "Container #{@swift_container} does not exist" unless @swift_connection.container_exists?(@swift_container)
-
     # get container object
     era_container = @swift_connection.container(@swift_container)
+
+    # check that container exits
+    raise "Container #{@swift_container} does not exist" if era_container.nil?
 
     if era_container.object_exists?(file_base_name)
       # if file already exists, update it with new data

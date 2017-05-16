@@ -140,7 +140,7 @@ class PushmiPullyu::CLI
   def run_tick_loop
     while PushmiPullyu.server_running?
       # Preservation (TODO):
-      # 1. Montior queuek
+      # 1. Montior queue
       # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
       item = @queue.wait_next_item
       logger.debug(item)
@@ -182,14 +182,14 @@ class PushmiPullyu::CLI
   end
 
   def setup_swift
-    @storage = PushmiPullyu::SwiftDepositer.new(connection: {
+    @storage = PushmiPullyu::SwiftDepositer.new({
                                                   username: options[:swift][:username],
                                                   password: options[:swift][:password],
                                                   tenant: options[:swift][:tenant],
                                                   endpoint: options[:swift][:endpoint],
                                                   auth_version: options[:swift][:auth_version]
                                                 },
-                                                container: options[:swift][:container])
+                                                options[:swift][:container])
   end
 
   # On first call of shutdown, this will gracefully close the main run loop
