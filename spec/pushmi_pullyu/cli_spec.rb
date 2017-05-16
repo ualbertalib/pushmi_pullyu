@@ -28,8 +28,8 @@ RSpec.describe PushmiPullyu::CLI do
       end
     end
 
-    context 'should set up Rollbar' do
-      it 'starts working loop as daemon' do
+    context 'Rollbar' do
+      it 'sets up Rollbar' do
         PushmiPullyu.options[:rollbar_token] = 'xyzzy'
 
         cli.run
