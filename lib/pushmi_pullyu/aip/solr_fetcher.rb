@@ -2,18 +2,18 @@ require 'pushmi_pullyu'
 require 'net/http'
 require 'json'
 
-class PushmiPullyu::SolrFetcher
+class PushmiPullyu::AIP::SolrFetcher
 
   def self.get_permission_object_ids(noid)
     # Return array of ids
-    new.get_permisson_object_ids(noid)
+    new.get_permission_object_ids(noid)
   end
 
   def get_permission_object_ids(noid)
-    json = fetch_query_array("accessTo_ssim:#{noid}", fields: 'id', url_extra: nil)
+    json = run_query_json("accessTo_ssim:#{noid}", fields: 'id', url_extra: nil)
     hash = JSON.parse(json)
     return [] if hash['response']['docs'].empty?
-    hash['response']['docs'].values
+    hash['response']['docs'].map { |hit| hit['id'] }
   end
 
   private
@@ -42,7 +42,7 @@ class PushmiPullyu::SolrFetcher
 
     return response.body if response.is_a?(Net::HTTPSuccess)
 
-    raise PushmiPullyu::Aip::SolrFetchError
+    raise PushmiPullyu::AIP::SolrFetchError
   end
 
 end

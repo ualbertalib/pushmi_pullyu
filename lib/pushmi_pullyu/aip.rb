@@ -1,35 +1,33 @@
 require 'pushmi_pullyu'
-require 'pushmi_pullyu/aip/downloader'
-require 'pushmi_pullyu/aip/fedora_fetcher'
-require 'pushmi_pullyu/aip/solr_fetcher'
 require 'bagit'
 require 'archive/tar/minitar'
 
-module PushmiPullyu::Aip
+module PushmiPullyu::AIP
   # Exceptions
   class BagInvalid < StandardError; end
   class NoContentFilename < StandardError; end
   class FedoraFetchError < StandardError; end
   class SolrFetchError < StandardError; end
 
-  def create(noid, skip_download: false, clean_work_directories: true)
+  def self.create(noid, skip_download: false, clean_work_directories: true)
     download_aip(noid) unless skip_download
     bag_aip(noid)
     tar_bag(noid)
     destroy_aip_directory(noid) if clean_work_directories
+    # Return the filename of the created file
     aip_filename(noid)
   end
 
-  def destroy(noid)
+  def self.destroy(noid)
     destroy_aip_directory(noid)
     destroy_aip_file(noid)
   end
 
-  def aip_directory(noid)
-    File.expand_path("#{PushmiPullyu.options[:worddir]}/#{noid}")
+  def self.aip_directory(noid)
+    File.expand_path("#{PushmiPullyu.options[:workdir]}/#{noid}")
   end
 
-  def aip_filename(noid)
+  def self.aip_filename(noid)
     "#{aip_directory(noid)}/#{noid}.tar"
   end
 
@@ -48,7 +46,7 @@ module PushmiPullyu::Aip
   end
 
   def download_aip(noid)
-    PushmiPullyu::Aip::Downloader.run(noid)
+    PushmiPullyu::AIP::Downloader.run(noid)
   end
 
   def bag_aip(noid)
