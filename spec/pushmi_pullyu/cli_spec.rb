@@ -35,6 +35,7 @@ RSpec.describe PushmiPullyu::CLI do
       allow(cli).to receive(:setup_log)
       allow(cli).to receive(:print_banner)
       allow(cli).to receive(:setup_queue)
+      allow(cli).to receive(:setup_swift)
       allow(cli).to receive(:run_tick_loop)
 
       cli.start_server
@@ -43,6 +44,7 @@ RSpec.describe PushmiPullyu::CLI do
       expect(cli).to have_received(:setup_log).once
       expect(cli).to have_received(:print_banner).once
       expect(cli).to have_received(:setup_queue).once
+      expect(cli).to have_received(:setup_swift).once
       expect(cli).to have_received(:run_tick_loop).once
     end
   end
