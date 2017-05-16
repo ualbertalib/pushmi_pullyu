@@ -35,9 +35,6 @@ class PushmiPullyu::PreservationQueue
     @poll_interval = poll_interval
     @age_at_least = age_at_least
     @queue_name = queue_name
-  rescue StandardError => e
-    # TODO: logging
-    abort("Could not get a valid connection to Redis. #{e}")
   end
 
   def next_item
