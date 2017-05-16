@@ -148,9 +148,9 @@ class PushmiPullyu::CLI
       # 4. creation of AIP
       # 5. bagging and tarring of AIP
       # 6. Push bag to swift API
-        fileToDeposit="./examples/pushmi_pullyu.yml"
-        storage.depositFile(fileToDeposit)
-        logger.debug("Deposited file into the swift storage #{fileToDeposit}")
+      fileToDeposit="./pushmi_pullyu"
+      @storage.depositFile(fileToDeposit)
+      logger.debug("Deposited file into the swift storage #{fileToDeposit}")
       # 7. Log successful preservation event to log files
 
       rotate_logs if PushmiPullyu.reset_logger?
@@ -183,10 +183,11 @@ class PushmiPullyu::CLI
 
   def setup_swift
     @storage = PushmiPullyu::SwiftDepositer.new(connection: {
-                                                   username: options[:swift][:username],
-                                                   password: options[:swift][:password],
-                                                   tenant:   options[:swift][:tenant],
-                                                   URL:      options[:swift][:endpoint]
+                                                   username:     options[:swift][:username],
+                                                   password:     options[:swift][:password],
+                                                   tenant:       options[:swift][:tenant],
+                                                   endpoint:     options[:swift][:endpoint],
+                                                   auth_version: options[:swift][:auth_version]
                                                  },
                                                  container: options[:swift][:container])
   end

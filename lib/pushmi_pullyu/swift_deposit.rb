@@ -2,7 +2,16 @@ require 'openstack'
 
 class PushmiPullyu::SwiftDepositer
 
-  def initialize(connection, container, logger: nil)
+  def initialize(connection: nil, container: nil )
+
+    if(connection.nil? )
+      raise "conection can not be nil"
+    end
+
+    if(container.nil? )
+      raise "container can not be nil"
+    end
+
      user         = connection[:username]
      pass         = connection[:password]
      tenant       = connection[:tenant]
@@ -19,11 +28,12 @@ class PushmiPullyu::SwiftDepositer
                                            :authtenant_name =>tenant,
                                            :service_type=>serviceType})
      @swiftContainer = container
-     @logger = logger || PushmiPullyu.logger
+     @logger = PushmiPullyu.logger
   end
 
 
   def depositFile (fileName)
+
     #check if file exists
     if !File.file?(fileName)
       raise "File #{fileName} does not exist"
@@ -43,13 +53,13 @@ class PushmiPullyu::SwiftDepositer
 
     if eraContainer.object_exists?(fileBaseName)
       #if file already exists, update it with new data
-      @logger.debug("File object #{@swiftContainer}/#{fileName} aleary in the swift, updating content")
-      depositedFile=eraContainer.object(fileName)
+      @logger.debug("File object #{@swiftContainer}/#{fileBaseName} aleary in the swift, updating content")
+      depositedFile=eraContainer.object(fileBaseName)
       depositedFile.write(File.open(fileName),
                           {:etag=>hash, :content_type=>"application/octet-stream"})
     else
       #create new deposit file
-      @logger.debug("Creating new file object #{@swiftContainer}/#{fileName} in the swift")
+      @logger.debug("Creating new file object #{@swiftContainer}/#{fileBaseName} in the swift")
       depositedFile=eraContainer.create_object(fileBaseName,
                                                {:etag=>hash, :content_type=>"application/octet-stream"},
                                                File.open(fileName))
