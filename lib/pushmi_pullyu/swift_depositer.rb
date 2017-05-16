@@ -2,6 +2,8 @@ require 'openstack'
 
 class PushmiPullyu::SwiftDepositer
 
+  attr_reader :swift_connection, :swift_container
+
   def initialize(connection, container)
     raise 'conection can not be nil' if connection.nil?
     raise 'container can not be nil' if container.nil?
