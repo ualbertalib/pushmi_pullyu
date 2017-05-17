@@ -1,6 +1,7 @@
 # Docker Compose for a development version of Pushmi-Pullyu
-# 
+# with the full HydraNorth
 version: '3'
+
 
 services:
   hydranorth:
@@ -20,12 +21,7 @@ services:
     build: 
       context: ..
       dockerfile: ./docker/Dockerfile.pushmi_pullyu.development
-    env_file:
-      - .env-pushmi_pullyu
     volumes: 
-      - ..:/app
+      - ..:/app/pushmi-pullyu
     depends_on:
       - swift
-    stdin_open: true # help debug: keep STDIN open even if not attached
-    tty: true # help debug: Allocate a pseudo-TTY
-
