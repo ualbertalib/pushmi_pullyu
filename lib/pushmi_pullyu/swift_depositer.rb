@@ -31,21 +31,18 @@ class PushmiPullyu::SwiftDepositer
     # get container object
     era_container = @swift_connection.container(@swift_container)
 
-    if era_container.object_exists?(file_base_name)
-      # if file already exists, update it with new data
-      PushmiPullyu.logger.debug(
-        "File object #{@swift_container}/#{file_base_name} already in the swift, updating content"
-      )
-      deposited_file = era_container.object(file_base_name)
-      deposited_file.write(File.open(file_name),
-                           etag: hash, content_type: 'application/octet-stream')
-    else
-      # create new deposit file
-      PushmiPullyu.logger.debug("Creating new file object #{@swift_container}/#{file_base_name} in the swift")
-      deposited_file = era_container.create_object(file_base_name,
-                                                   { etag: hash, content_type: 'application/octet-stream' },
-                                                   File.open(file_name))
-    end
+    deposited_file = if era_container.object_exists?(file_base_name)
+                       PushmiPullyu.logger.debug(
+                         "File object #{@swift_container}/#{file_base_name} already in the swift, updating content"
+                       )
+                       era_container.object(file_base_name)
+                     else
+                       PushmiPullyu.logger.debug(
+                         "Creating new file object #{@swift_container}/#{file_base_name} in the swift"
+                       )
+                       era_container.create_object(file_base_name)
+                     end
+    deposited_file.write(File.open(file_name), {'etag' => hash, 'content-type' => 'application/x-tar' } )
 
     deposited_file
   end

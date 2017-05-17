@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe PushmiPullyu::SwiftDepositer do
-  it 'not valid without arguments' do
-    expect { described_class.new }.to raise_error(ArgumentError)
-  end
-
   it 'not valid with nil arguments' do
     expect { described_class.new(nil, nil) }.to raise_error(RuntimeError)
   end
