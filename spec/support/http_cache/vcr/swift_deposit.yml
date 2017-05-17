@@ -25,7 +25,7 @@ http_interactions:
       X-Storage-Url:
       - http://www.example.com:8080/v1/AUTH_test
       X-Auth-Token-Expires:
-      - '77564'
+      - '68707'
       X-Auth-Token:
       - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
       Content-Type:
@@ -35,14 +35,14 @@ http_interactions:
       Content-Length:
       - '0'
       X-Trans-Id:
-      - tx31d9066771144505b5782-00591c9d67
+      - txd93a008d19aa473ba7554-00591cc000
       Date:
-      - Wed, 17 May 2017 18:58:47 GMT
+      - Wed, 17 May 2017 21:26:24 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 18:58:47 GMT
+  recorded_at: Wed, 17 May 2017 21:26:24 GMT
 - request:
     method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA
@@ -80,22 +80,22 @@ http_interactions:
       X-Container-Bytes-Used:
       - '45674'
       X-Timestamp:
-      - '1493315078.56908'
+      - '1493315078.87413'
       Content-Type:
       - application/json; charset=utf-8
       X-Versions-Location:
       - archive
       X-Trans-Id:
-      - tx27358688d7014de1925eb-00591c9d67
+      - tx3043b3f8a32740ac90c41-00591cc000
       Date:
-      - Wed, 17 May 2017 18:58:48 GMT
+      - Wed, 17 May 2017 21:26:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 18:58:48 GMT
+  recorded_at: Wed, 17 May 2017 21:26:24 GMT
 - request:
     method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
@@ -125,16 +125,61 @@ http_interactions:
       Content-Type:
       - text/html; charset=UTF-8
       X-Trans-Id:
-      - txa475e255b606470d85080-00591c9d68
+      - tx1f2150384ba749e2b53c0-00591cc000
       Date:
-      - Wed, 17 May 2017 18:58:48 GMT
+      - Wed, 17 May 2017 21:26:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 18:58:48 GMT
+  recorded_at: Wed, 17 May 2017 21:26:24 GMT
+- request:
+    method: put
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      X-Storage-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Last-Modified:
+      - Wed, 17 May 2017 21:26:25 GMT
+      Content-Length:
+      - '0'
+      Etag:
+      - d41d8cd98f00b204e9800998ecf8427e
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - txe459bdac23a044c19179f-00591cc000
+      Date:
+      - Wed, 17 May 2017 21:26:25 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 17 May 2017 21:26:25 GMT
 - request:
     method: put
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
@@ -164,10 +209,10 @@ http_interactions:
       - OpenStack Ruby API 2.6.10
       Accept:
       - application/json
-      Content-Type:
-      - application/octet-stream
       Etag:
       - 965e26a67cf99d2648f65a54704c02a9
+      Content-Type:
+      - application/x-tar
       Transfer-Encoding:
       - chunked
       Accept-Encoding:
@@ -178,7 +223,7 @@ http_interactions:
       message: Created
     headers:
       Last-Modified:
-      - Wed, 17 May 2017 18:58:49 GMT
+      - Wed, 17 May 2017 21:26:26 GMT
       Content-Length:
       - '0'
       Etag:
@@ -186,14 +231,14 @@ http_interactions:
       Content-Type:
       - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx7801c62624394698bf25b-00591c9d68
+      - tx8cb3d31ff3e24d62b34ee-00591cc001
       Date:
-      - Wed, 17 May 2017 18:58:48 GMT
+      - Wed, 17 May 2017 21:26:25 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 18:58:48 GMT
+  recorded_at: Wed, 17 May 2017 21:26:25 GMT
 recorded_with: VCR 3.0.3
