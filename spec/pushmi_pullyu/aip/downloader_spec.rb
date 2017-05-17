@@ -26,10 +26,49 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   describe '#run' do
     it 'creates the expected structure' do
       VCR.use_cassette('aip_downloader_run') do
-        expect(File.exist?("#{workdir}/#{noid}")).to eq(false)
+        # Should not exist yet
+        expect(File.exist?('tmp/downloader_spec/9p2909328')).to eq(false)
+
         downloader.run
-        expect(File.exist?("#{workdir}/#{noid}")).to eq(true)
-        # Add specs for other files here ...
+
+        # Now it exists
+        expect(File.exist?('tmp/downloader_spec/9p2909328')).to eq(true)
+
+        # Six directories exist?
+        ['tmp/downloader_spec/9p2909328/data',
+         'tmp/downloader_spec/9p2909328/data/objects',
+         'tmp/downloader_spec/9p2909328/data/objects/metadata',
+         'tmp/downloader_spec/9p2909328/data/logs',
+         'tmp/downloader_spec/9p2909328/data/thumbnails'].each do |dir|
+          expect(File.exist?(dir)).to eq(true)
+        end
+
+        # Ten files exist?
+        ['tmp/downloader_spec/9p2909328/data/objects/whatever.pdf',
+         'tmp/downloader_spec/9p2909328/data/content_versions.n3',
+         'tmp/downloader_spec/9p2909328/data/logs/aipcreation.log',
+         'tmp/downloader_spec/9p2909328/data/logs/content_fixity_report.n3',
+         'tmp/downloader_spec/9p2909328/data/logs/content_characterization.n3',
+         'tmp/downloader_spec/9p2909328/data/objects/metadata/object_metadata.n3',
+
+         'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
+         'permission_e1910293-34b3-42bb-9179-f67f37eb145e.n3',
+
+         'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
+         'permission_ffd40638-290a-41f7-bcb2-4e0e54fc3ffd.n3',
+
+         'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
+         'permission_ef4319c0-2f7a-44c0-b1b5-cd650aa4a075.n3',
+
+         'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
+         'content_fcr_metadata.n3',
+
+         'tmp/downloader_spec/9p2909328/data/thumbnails/thumbnail'].each do |file|
+          expect(File.exist?(file)).to eq(true)
+        end
+
+        # Sixteen files and directories total were created
+        expect(Dir['tmp/downloader_spec/9p2909328/**/*'].length).to eq(16)
       end
     end
   end

@@ -15,8 +15,10 @@ class PushmiPullyu::AIP::FedoraFetcher
     PushmiPullyu.options[:fedora][:base_path]
   end
 
-  def object_url
-    "#{PushmiPullyu.options[:fedora][:url]}#{base_path}/#{pairtree}"
+  def object_url(url_extra = nil)
+    url = "#{PushmiPullyu.options[:fedora][:url]}#{base_path}/#{pairtree}"
+    url += url_extra if url_extra
+    url
   end
 
   def pairtree
@@ -28,8 +30,7 @@ class PushmiPullyu::AIP::FedoraFetcher
     # Return true on success, raise an error otherwise
     # (or use 'optional' to return false on 404)
 
-    url = object_url
-    url += url_extra if url_extra
+    url = object_url(url_extra)
     uri = URI(url)
 
     request = Net::HTTP::Get.new(uri)
@@ -42,23 +43,23 @@ class PushmiPullyu::AIP::FedoraFetcher
       http.request(request)
     end
 
-    unless response.is_a?(Net::HTTPSuccess)
-      if response.is_a?(Net::HTTPNotFound)
-        raise PushmiPullyu::AIP::FedoraFetchError unless optional
-        return false
+    if response.is_a?(Net::HTTPSuccess)
+      if download_path
+        file = File.open(download_path, 'wb')
+        file.write(response.body)
+        file.close
+      else
+        PushmiPullyu.logger.debug(response.body)
       end
-      raise PushmiPullyu::AIP::FedoraFetchError
+      return true
     end
 
-    if download_path
-      file = File.open(download_path, 'wb')
-      file.write(response.body)
-      file.close
-    else
-      PushmiPullyu.logger.debug(response.body)
+    if response.is_a?(Net::HTTPNotFound)
+      raise PushmiPullyu::AIP::FedoraFetchError unless optional
+      return false
     end
 
-    true
+    raise PushmiPullyu::AIP::FedoraFetchError
   end
 
 end

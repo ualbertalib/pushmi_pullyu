@@ -40,8 +40,11 @@ class PushmiPullyu::AIP::Downloader
     # Fetcher is either for current object, or for a permission object
     fedora_fetcher ||= @fedora_fetcher
 
+    # Sometimes we don't know filename in advance, so we use local_path ...
     output_file = full_local_path(local_path || path_spec.local)
-    log_fetching(path_spec, local_path: output_file)
+    url = fedora_fetcher.object_url(path_spec.remote)
+
+    log_fetching(path_spec, url, local_path: output_file)
 
     rdf = (output_file =~ /\.n3$/)
 
@@ -81,10 +84,10 @@ class PushmiPullyu::AIP::Downloader
 
   ### Logging
 
-  def log_fetching(path_spec, local_path: nil)
+  def log_fetching(path_spec, url, local_path: nil)
     local_path ||= path_spec.local
-    message = "#{@noid}: #{local_path} -- fetching ..."
-    PushmiPullyu.logger.info(message)
+    message = "#{@noid}: #{local_path} -- fetching from #{url} ..."
+    PushmiPullyu::Logging.log_aip_activity(@noid, message)
   end
 
   def log_saved(path_spec, success = true, local_path: nil)
@@ -94,7 +97,7 @@ class PushmiPullyu::AIP::Downloader
               else
                 "#{@noid}: #{local_path} -- not_found"
               end
-    PushmiPullyu.logger.info(message)
+    PushmiPullyu::Logging.log_aip_activity(@noid, message)
   end
 
   ### Directories

@@ -1,6 +1,6 @@
-require 'pushmi_pullyu/aip'
-require 'bagit'
 require 'archive/tar/minitar'
+require 'bagit'
+require 'pushmi_pullyu/aip'
 
 class PushmiPullyu::AIP::Creator
 
