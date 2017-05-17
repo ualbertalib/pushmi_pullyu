@@ -42,7 +42,7 @@ class PushmiPullyu::SwiftDepositer
                        )
                        era_container.create_object(file_base_name)
                      end
-    deposited_file.write(File.open(file_name), {'etag' => hash, 'content-type' => 'application/x-tar' } )
+    deposited_file.write(File.open(file_name), 'etag' => hash, 'content-type' => 'application/x-tar')
 
     deposited_file
   end
