@@ -21,15 +21,15 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
 
   it 'deposit file' do
     VCR.use_cassette('swift_deposit') do
-      swift_connection = described_class.new({ username: 'test:tester',
-                                               password: 'testing',
-                                               tenant: 'tester',
-                                               endpoint: 'http://www.example.com:8080',
-                                               auth_version: 'v1.0' },
-                                             'ERA')
+      swift_depositer = described_class.new({ username: 'test:tester',
+                                              password: 'testing',
+                                              tenant: 'tester',
+                                              endpoint: 'http://www.example.com:8080',
+                                              auth_version: 'v1.0' },
+                                            'ERA')
 
-      sample_file = "#{File.dirname(__FILE__)}/../fixtures/config.yml"
-      deposited_file = swift_connection.deposit_file(sample_file)
+      sample_file = 'spec/fixtures/config.yml'
+      deposited_file = swift_depositer.deposit_file(sample_file)
 
       expect(deposited_file).not_to be_nil
       expect(deposited_file).to be_an_instance_of(OpenStack::Swift::StorageObject)
