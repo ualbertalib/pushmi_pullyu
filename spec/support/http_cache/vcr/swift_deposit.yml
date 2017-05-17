@@ -1,0 +1,199 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.example.com:8080/auth/v1.0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-User:
+      - test:tester
+      X-Auth-Key:
+      - testing
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Storage-Url:
+      - http://www.example.com:8080/v1/AUTH_test
+      X-Auth-Token-Expires:
+      - '77564'
+      X-Auth-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Storage-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      Content-Length:
+      - '0'
+      X-Trans-Id:
+      - tx31d9066771144505b5782-00591c9d67
+      Date:
+      - Wed, 17 May 2017 18:58:47 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 17 May 2017 18:58:47 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      X-Storage-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '4'
+      Accept-Ranges:
+      - bytes
+      X-Storage-Policy:
+      - gold
+      Last-Modified:
+      - Thu, 27 Apr 2017 22:02:08 GMT
+      X-Container-Bytes-Used:
+      - '45674'
+      X-Timestamp:
+      - '1493315078.56908'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Versions-Location:
+      - archive
+      X-Trans-Id:
+      - tx27358688d7014de1925eb-00591c9d67
+      Date:
+      - Wed, 17 May 2017 18:58:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 17 May 2017 18:58:48 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      X-Storage-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Length:
+      - '0'
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - txa475e255b606470d85080-00591c9d68
+      Date:
+      - Wed, 17 May 2017 18:58:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 17 May 2017 18:58:48 GMT
+- request:
+    method: put
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        # Dummy sample file for testing parsing of configuration file into PushmiPullyu
+
+        debug: true
+        logfile: tmp/pushmi_pullyu.log
+        piddir: tmp
+        process_name: test_pushmi_pullyu
+        minimum_age: 10
+        queue_name: test:pmpy_queue
+
+        redis:
+          host: localhost
+          port: 9999
+    headers:
+      X-Auth-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      X-Storage-Token:
+      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Type:
+      - application/octet-stream
+      Etag:
+      - 965e26a67cf99d2648f65a54704c02a9
+      Transfer-Encoding:
+      - chunked
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Last-Modified:
+      - Wed, 17 May 2017 18:58:49 GMT
+      Content-Length:
+      - '0'
+      Etag:
+      - 965e26a67cf99d2648f65a54704c02a9
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - tx7801c62624394698bf25b-00591c9d68
+      Date:
+      - Wed, 17 May 2017 18:58:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 17 May 2017 18:58:48 GMT
+recorded_with: VCR 3.0.3
