@@ -33,7 +33,9 @@ class PushmiPullyu::SwiftDepositer
 
     if era_container.object_exists?(file_base_name)
       # if file already exists, update it with new data
-      PushmiPullyu.logger.debug("File object #{@swift_container}/#{file_base_name} already in the swift, updating content")
+      PushmiPullyu.logger.debug(
+        "File object #{@swift_container}/#{file_base_name} already in the swift, updating content"
+      )
       deposited_file = era_container.object(file_base_name)
       deposited_file.write(File.open(file_name),
                            etag: hash, content_type: 'application/octet-stream')
