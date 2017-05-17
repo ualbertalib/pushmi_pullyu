@@ -34,7 +34,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
         # Now it exists
         expect(File.exist?('tmp/downloader_spec/9p2909328')).to eq(true)
 
-        # Six directories exist?
+        # 5 directories exist?
         ['tmp/downloader_spec/9p2909328/data',
          'tmp/downloader_spec/9p2909328/data/objects',
          'tmp/downloader_spec/9p2909328/data/objects/metadata',
@@ -43,7 +43,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
           expect(File.exist?(dir)).to eq(true)
         end
 
-        # Ten files exist?
+        # 11 files exist?
         ['tmp/downloader_spec/9p2909328/data/objects/whatever.pdf',
          'tmp/downloader_spec/9p2909328/data/content_versions.n3',
          'tmp/downloader_spec/9p2909328/data/logs/aipcreation.log',
@@ -67,7 +67,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
           expect(File.exist?(file)).to eq(true)
         end
 
-        # Sixteen files and directories total were created
+        # 16 files and directories total were created
         expect(Dir['tmp/downloader_spec/9p2909328/**/*'].length).to eq(16)
       end
     end
