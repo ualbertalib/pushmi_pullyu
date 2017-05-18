@@ -25,24 +25,24 @@ http_interactions:
       X-Storage-Url:
       - http://www.example.com:8080/v1/AUTH_test
       X-Auth-Token-Expires:
-      - '68707'
+      - '86207'
       X-Auth-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       Content-Type:
       - text/html; charset=UTF-8
       X-Storage-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       Content-Length:
       - '0'
       X-Trans-Id:
-      - txd93a008d19aa473ba7554-00591cc000
+      - txf2283c5d3d044540bb432-00591dfc87
       Date:
-      - Wed, 17 May 2017 21:26:24 GMT
+      - Thu, 18 May 2017 19:56:55 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 21:26:24 GMT
+  recorded_at: Thu, 18 May 2017 19:56:55 GMT
 - request:
     method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA
@@ -51,9 +51,9 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       X-Storage-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       Connection:
       - Keep-Alive
       User-Agent:
@@ -70,7 +70,7 @@ http_interactions:
       Content-Length:
       - '0'
       X-Container-Object-Count:
-      - '4'
+      - '5'
       Accept-Ranges:
       - bytes
       X-Storage-Policy:
@@ -78,7 +78,7 @@ http_interactions:
       Last-Modified:
       - Thu, 27 Apr 2017 22:02:08 GMT
       X-Container-Bytes-Used:
-      - '45674'
+      - '45926'
       X-Timestamp:
       - '1493315078.87413'
       Content-Type:
@@ -86,16 +86,16 @@ http_interactions:
       X-Versions-Location:
       - archive
       X-Trans-Id:
-      - tx3043b3f8a32740ac90c41-00591cc000
+      - tx97181debe9754336a445e-00591dfc87
       Date:
-      - Wed, 17 May 2017 21:26:24 GMT
+      - Thu, 18 May 2017 19:56:56 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 21:26:24 GMT
+  recorded_at: Thu, 18 May 2017 19:56:56 GMT
 - request:
     method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
@@ -104,9 +104,9 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       X-Storage-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       Connection:
       - Keep-Alive
       User-Agent:
@@ -117,69 +117,79 @@ http_interactions:
       - application/json
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
     headers:
       Content-Length:
-      - '0'
+      - '252'
+      Accept-Ranges:
+      - bytes
+      Last-Modified:
+      - Wed, 17 May 2017 21:26:26 GMT
+      Etag:
+      - 965e26a67cf99d2648f65a54704c02a9
+      X-Timestamp:
+      - '1495056385.33988'
       Content-Type:
-      - text/html; charset=UTF-8
+      - application/x-tar
       X-Trans-Id:
-      - tx1f2150384ba749e2b53c0-00591cc000
+      - tx68bf863cf3b44e2781768-00591dfc88
       Date:
-      - Wed, 17 May 2017 21:26:24 GMT
+      - Thu, 18 May 2017 19:56:56 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 21:26:24 GMT
+  recorded_at: Thu, 18 May 2017 19:56:56 GMT
 - request:
-    method: put
+    method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
     body:
-      encoding: UTF-8
+      encoding: US-ASCII
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       X-Storage-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       Connection:
       - Keep-Alive
       User-Agent:
       - OpenStack Ruby API 2.6.10
       Accept:
       - application/json
-      Content-Length:
-      - '0'
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Content-Type:
+      - application/json
   response:
     status:
-      code: 201
-      message: Created
+      code: 200
+      message: OK
     headers:
-      Last-Modified:
-      - Wed, 17 May 2017 21:26:25 GMT
       Content-Length:
-      - '0'
+      - '252'
+      Accept-Ranges:
+      - bytes
+      Last-Modified:
+      - Wed, 17 May 2017 21:26:26 GMT
       Etag:
-      - d41d8cd98f00b204e9800998ecf8427e
+      - 965e26a67cf99d2648f65a54704c02a9
+      X-Timestamp:
+      - '1495056385.33988'
       Content-Type:
-      - text/html; charset=UTF-8
+      - application/x-tar
       X-Trans-Id:
-      - txe459bdac23a044c19179f-00591cc000
+      - tx14a22023a75945649b7c4-00591dfc88
       Date:
-      - Wed, 17 May 2017 21:26:25 GMT
+      - Thu, 18 May 2017 19:56:56 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 21:26:25 GMT
+  recorded_at: Thu, 18 May 2017 19:56:56 GMT
 - request:
     method: put
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
@@ -194,15 +204,16 @@ http_interactions:
         process_name: test_pushmi_pullyu
         minimum_age: 10
         queue_name: test:pmpy_queue
+        rollbar_token: 'abc123xyz'
 
         redis:
           host: localhost
           port: 9999
     headers:
       X-Auth-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       X-Storage-Token:
-      - AUTH_tk116a8b3cad1c4647868c6fe50e8eaa38
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
       Connection:
       - Keep-Alive
       User-Agent:
@@ -210,7 +221,7 @@ http_interactions:
       Accept:
       - application/json
       Etag:
-      - 965e26a67cf99d2648f65a54704c02a9
+      - 0f32868de20f3b1d4685bfa497a2c243
       Content-Type:
       - application/x-tar
       Transfer-Encoding:
@@ -223,22 +234,22 @@ http_interactions:
       message: Created
     headers:
       Last-Modified:
-      - Wed, 17 May 2017 21:26:26 GMT
+      - Thu, 18 May 2017 19:56:57 GMT
       Content-Length:
       - '0'
       Etag:
-      - 965e26a67cf99d2648f65a54704c02a9
+      - 0f32868de20f3b1d4685bfa497a2c243
       Content-Type:
       - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx8cb3d31ff3e24d62b34ee-00591cc001
+      - tx881b8136c0bd417e8055a-00591dfc88
       Date:
-      - Wed, 17 May 2017 21:26:25 GMT
+      - Thu, 18 May 2017 19:56:57 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 17 May 2017 21:26:25 GMT
+  recorded_at: Thu, 18 May 2017 19:56:57 GMT
 recorded_with: VCR 3.0.3
