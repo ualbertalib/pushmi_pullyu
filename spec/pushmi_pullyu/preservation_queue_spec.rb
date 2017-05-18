@@ -3,7 +3,7 @@ require 'timecop'
 
 RSpec.describe PushmiPullyu::PreservationQueue do
   describe 'a queue with 3 items in it' do
-    let(:queue) { described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
+    let(:queue) { PushmiPullyu::PreservationQueue.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
 
     before do
       PushmiPullyu.server_running = true
@@ -24,7 +24,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
 
   describe 'a queue with items under a minimum age' do
     let(:queue) do
-      described_class.new(poll_interval: 0, queue_name: 'test:pmpy_queue', age_at_least: 15.minutes)
+      PushmiPullyu::PreservationQueue.new(poll_interval: 0, queue_name: 'test:pmpy_queue', age_at_least: 15.minutes)
     end
 
     before do
