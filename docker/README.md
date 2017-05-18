@@ -39,13 +39,44 @@ A minimalistic, as simple as possible but no simpler container.
 
 ## Usage
 
-### Pushmi-Pully Usage
+### PUshmi-Pullyu Development: Hydranorth (Solr/Fedora/Redis), Swift, and Pushmi-Pullyu networked
 
-*ToDo*
+Goal: Development environment for Pushmi-Pullyu sharing source with container. Docker-compose builds a network of three containers: Pushmi-Pullyu, HydyraNorth(Solr/Fedora/Redis), and Swift. 
 
-Add Docker Compose usage once written. 
+1. Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
 
-The below is a placeholder
+**ToDo** is there a dot_env file? If yes, use to define env vars to pass to DockerFile. Create `.env` that is in the .gitignore list and a dotenv.example to build from. 
+
+2. Clone the [HydraNorth](https://github.com/ualbertalib/HydraNorth/) GitHub repository
+    * purpose: use to mount volume for HydraNorth docker container
+
+3. Copy example `.env-hydranorth_example` to `.env-hydranorth` and update with environment variables
+
+4. Copy example `.env-pushmi_pullyu` to `.env-pushmi_pullyu` and update with environment variables
+
+5. Run the Docker Compose 
+    * Development:
+      * docker-compose -f docker/docker-compose-development.yml up -d 
+
+6. Enter the `HydraNorth` container and update the `/etc/redis/redis.conf` with `bind 127.0.0.1 hydra-north` and restart `redis` (to bind Redis to an interface reachable via another container on the same network).
+    * Note: restarting `redis` might `kill -kill` if `service redis-server restart` fails
+    * `docker exec -it docker_hydranorth_1 bash`
+
+7. Test redis by entering the `pushmi-pullyu` container and inspect the pushmi-pullyu log `/app/log/pushmi_pullyu.log` or try the command `telnet hydranorth 6379`
+    * `docker exec -it docker_pushmi-pullyu_1 bash`
+    * note: networking setup by docker compose allows referencing containers by their service names as defined in the `docker-compose-development.yml` file
+
+
+#### Notes:
+
+* Within a container, the following DNS entries are available: swift, hydranorth, pushmi-pullyu (e.g., ping swift)
+* From outside the container, access either via: 
+  * Mapped ports to the host as defined in `docker-compose-development.yml` 
+    * E.g., `http://localhost:3000`
+  * `container_IP` 
+    * E.g., `http://172.18.0.3:3000` (IP is a sample)
+
+
 
 
 ### Pushmi-Pullyu image creation
