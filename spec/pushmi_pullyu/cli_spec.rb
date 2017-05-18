@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'tempfile'
 
 RSpec.describe PushmiPullyu::CLI do
-  let(:cli) { described_class.instance }
+  let(:cli) { PushmiPullyu::CLI.instance }
 
   describe '#run' do
     before do
