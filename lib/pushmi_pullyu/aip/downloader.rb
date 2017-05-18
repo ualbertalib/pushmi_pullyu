@@ -16,6 +16,7 @@ class PushmiPullyu::AIP::Downloader
   def initialize(noid)
     @noid = noid
     @fedora_fetcher = PushmiPullyu::AIP::FedoraFetcher.new(@noid)
+    PushmiPullyu::AIP.validate(noid)
   end
 
   def run

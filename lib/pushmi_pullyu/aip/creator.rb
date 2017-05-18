@@ -10,6 +10,7 @@ class PushmiPullyu::AIP::Creator
     @noid = noid
     @aip_directory = "#{workdir}/#{@noid}"
     @aip_filename = "#{workdir}/#{@noid}.tar"
+    PushmiPullyu::AIP.validate(noid)
   end
 
   def self.run(noid, should_skip_download: false, should_clean_work_directories: true)
