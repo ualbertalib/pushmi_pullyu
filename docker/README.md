@@ -39,35 +39,44 @@ A minimalistic, as simple as possible but no simpler container.
 
 ## Usage
 
-### PUshmi-Pullyu Development: Hydranorth (Solr/Fedora/Redis), Swift, and Pushmi-Pullyu networked
+### Pushmi-Pullyu Development: Hydranorth (Solr/Fedora/Redis), Swift, and Pushmi-Pullyu networked
 
-Goal: Development environment for Pushmi-Pullyu sharing source with container. Docker-compose builds a network of three containers: Pushmi-Pullyu, HydyraNorth(Solr/Fedora/Redis), and Swift. 
+Goal: Development environment for Pushmi-Pullyu where the codebase on the host is shared with the PUshmi-Pullyu container. Docker-compose builds a network of three containers: Pushmi-Pullyu, HydyraNorth(Solr/Fedora/Redis), and Swift. A Pushmi-Pullyu config li . 
 
 1. Clone the [Pushmi-Pullyu](https://github.com/ualbertalib/pushmi_pullyu/) GitHub repository
-
-**ToDo** is there a dot_env file? If yes, use to define env vars to pass to DockerFile. Create `.env` that is in the .gitignore list and a dotenv.example to build from. 
 
 2. Clone the [HydraNorth](https://github.com/ualbertalib/HydraNorth/) GitHub repository
     * purpose: use to mount volume for HydraNorth docker container
 
 3. Copy example `.env-hydranorth_example` to `.env-hydranorth` and update with environment variables
+    * LOCAL_SRC_PATH: location of codebase in step #2.
+    * EZID_PASSWORD: EZID password. 
 
-4. Copy example `.env-pushmi_pullyu` to `.env-pushmi_pullyu` and update with environment variables
+4. Copy example `.env-pushmi_pullyu` to `.env-pushmi_pullyu` and update with environment variables. These environment variables are defined in `pushmi_pullyu_config_docker.yml`. Defaults will work except for the following:
+    * FEDORA_USER
+    * FEDORA_PASS
 
-5. Run the Docker Compose 
+5. Run Docker Compose 
     * Development:
       * docker-compose -f docker/docker-compose-development.yml up -d 
+        * or without `-d` if one want the interactive mode where ctrl-c will shutdown the containers
 
-6. Enter the `HydraNorth` container and update the `/etc/redis/redis.conf` with `bind 127.0.0.1 hydra-north` and restart `redis` (to bind Redis to an interface reachable via another container on the same network).
-    * Note: restarting `redis` might `kill -kill` if `service redis-server restart` fails
+6. Enter the `HydraNorth` container and update the `/etc/redis/redis.conf` with `bind 127.0.0.1 hydra-north` and restart `redis` (to bind Redis to an interface reachable via another container on the same network i.e., bind to interface other than localhost).
+    * Note: restarting `redis` might require `kill -kill` if `service redis-server restart` fails
     * `docker exec -it docker_hydranorth_1 bash`
+    * reference: (GitHub issue)[https://github.com/ualbertalib/di_docker_hydranorth/issues/12]
 
 7. Test redis by entering the `pushmi-pullyu` container and inspect the pushmi-pullyu log `/app/log/pushmi_pullyu.log` or try the command `telnet hydranorth 6379`
     * `docker exec -it docker_pushmi-pullyu_1 bash`
     * note: networking setup by docker compose allows referencing containers by their service names as defined in the `docker-compose-development.yml` file
 
-8. Command on the Pushmi-Pullyu container to start the daemon
-   * `bundle exec pushmi_pullyu stop -C docker/files/pushmi_pullyu_config_docker.yml`
+8. Within the Pushmi-Pullyu container: to start the daemon
+    * `bundle exec pushmi_pullyu stop -C docker/files/pushmi_pullyu_config_docker.yml`
+    * `pushmi_pullyu stop -C docker/files/pushmi_pullyu_config_docker.yml`
+
+9. Within the Pushmi-Pullyu container: to run tests:
+   * `rspec` 
+
 
 #### Notes:
 
