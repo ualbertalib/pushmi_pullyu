@@ -8,8 +8,8 @@ class PushmiPullyu::AIP::Creator
 
   def initialize(noid)
     @noid = noid
-    @aip_directory = "#{workdir}/#{@noid}"
-    @aip_filename = "#{workdir}/#{@noid}.tar"
+    @aip_directory = PushmiPullyu::AIP.aip_directory(noid)
+    @aip_filename = PushmiPullyu::AIP.aip_filename(noid)
     PushmiPullyu::AIP.validate(noid)
   end
 

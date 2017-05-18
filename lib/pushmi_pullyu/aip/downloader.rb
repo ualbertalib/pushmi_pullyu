@@ -33,6 +33,9 @@ class PushmiPullyu::AIP::Downloader
     download_and_log(aip_paths.content, local_path: content_filename)
 
     download_permissions
+
+    # Return directory name
+    PushmiPullyu::AIP.aip_directory(@noid)
   end
 
   private
