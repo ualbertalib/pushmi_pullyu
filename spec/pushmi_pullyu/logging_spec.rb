@@ -11,27 +11,27 @@ end
 
 RSpec.describe PushmiPullyu::Logging do
   it 'has a default logger' do
-    expect(described_class.logger).to be_a(Logger)
+    expect(PushmiPullyu::Logging.logger).to be_a(Logger)
   end
 
   it 'allows setting of a logger' do
     new_logger = Logger.new(STDERR)
-    described_class.logger = new_logger
-    expect(described_class.logger).to eq(new_logger)
+    PushmiPullyu::Logging.logger = new_logger
+    expect(PushmiPullyu::Logging.logger).to eq(new_logger)
   end
 
   it 'logs' do
-    allow(described_class.logger).to receive(:debug)
+    allow(PushmiPullyu::Logging.logger).to receive(:debug)
 
-    described_class.logger.debug('test')
+    PushmiPullyu::Logging.logger.debug('test')
 
-    expect(described_class.logger).to have_received(:debug).with(an_instance_of(String)).once
+    expect(PushmiPullyu::Logging.logger).to have_received(:debug).with(an_instance_of(String)).once
   end
 
   describe '#reopen' do
     let!(:tmp_dir) { 'tmp/test_dir' }
     let(:logfile) { "#{tmp_dir}/pushmi_pullyu.log" }
-    let(:logger) { described_class.initialize_logger(logfile) }
+    let(:logger) { PushmiPullyu::Logging.initialize_logger(logfile) }
 
     before do
       FileUtils.mkdir_p(tmp_dir)
@@ -45,7 +45,7 @@ RSpec.describe PushmiPullyu::Logging do
       logger.info 'Line 1'
       FileUtils.mv(logfile, "#{logfile}.1")
       logger.info 'Line 2'
-      expect(described_class.reopen).to be(logger)
+      expect(PushmiPullyu::Logging.reopen).to be(logger)
       logger.info 'Line 3'
 
       expect(File.read("#{logfile}.1")).to include('Line 1')
@@ -65,20 +65,20 @@ RSpec.describe PushmiPullyu::Logging do
     end
 
     it 'uses the default logger' do
-      expect(dummy_class.logger).to be described_class.logger
+      expect(dummy_class.logger).to be PushmiPullyu::Logging.logger
     end
 
     it 'allows custom loggers' do
-      described_class.logger = Logger.new(STDERR)
-      expect(dummy_class.logger).to be described_class.logger
+      PushmiPullyu::Logging.logger = Logger.new(STDERR)
+      expect(dummy_class.logger).to be PushmiPullyu::Logging.logger
     end
 
     it 'logs' do
-      allow(described_class.logger).to receive(:info)
+      allow(PushmiPullyu::Logging.logger).to receive(:info)
 
       dummy_class.logger.info('test')
 
-      expect(described_class.logger).to have_received(:info).with(an_instance_of(String)).once
+      expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once
     end
   end
 end
