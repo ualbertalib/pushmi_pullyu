@@ -47,7 +47,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
         expect(File.exist?('tmp/creator_spec/9p2909328')).to eq(false)
         expect(File.exist?('tmp/creator_spec/9p2909328.tar')).to eq(false)
 
-        creator.run(clean_work_directories: false)
+        creator.run(should_clean_work_directories: false)
 
         # Work directory is NOT removed
         expect(File.exist?('tmp/creator_spec/9p2909328')).to eq(true)
@@ -58,7 +58,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
 
     it 'creates the correct files in the bag' do
       VCR.use_cassette('aip_downloader_run') do
-        creator.run(clean_work_directories: false)
+        creator.run(should_clean_work_directories: false)
 
         expect(File.exist?('tmp/creator_spec/9p2909328/manifest-sha1.txt')).to eq(true)
         expect(File.exist?('tmp/creator_spec/9p2909328/manifest-md5.txt')).to eq(true)
@@ -76,7 +76,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
 
     it 'the created manifest is correct' do
       VCR.use_cassette('aip_downloader_run') do
-        creator.run(clean_work_directories: false)
+        creator.run(should_clean_work_directories: false)
 
         lines = File.readlines('tmp/creator_spec/9p2909328/manifest-sha1.txt').map(&:strip).sort
         expect(lines.length).to eq(11)

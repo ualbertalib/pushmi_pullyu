@@ -12,16 +12,16 @@ class PushmiPullyu::AIP::Creator
     @aip_filename = "#{workdir}/#{@noid}.tar"
   end
 
-  def self.run(noid, skip_download: false, clean_work_directories: true)
-    new(noid).run(skip_download: skip_download,
-                  clean_work_directories: clean_work_directories)
+  def self.run(noid, should_skip_download: false, should_clean_work_directories: true)
+    new(noid).run(should_skip_download: should_skip_download,
+                  should_clean_work_directories: should_clean_work_directories)
   end
 
-  def run(skip_download: false, clean_work_directories: true)
-    download_aip unless skip_download
+  def run(should_skip_download: false, should_clean_work_directories: true)
+    download_aip unless should_skip_download
     bag_aip
     tar_bag
-    destroy_aip_directory if clean_work_directories
+    destroy_aip_directory if should_clean_work_directories
     # Return the filename of the created file
     aip_filename
   end
