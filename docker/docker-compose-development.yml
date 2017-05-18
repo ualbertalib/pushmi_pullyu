@@ -10,6 +10,9 @@ services:
     volumes: 
       # di_docker_hydranorth expects codebase in `app` within the container
       - ${LOCAL_SRC_PATH:-../../HydraNorth}:/app
+    ports:
+      - "3000:3000"
+      - "8983:8983"
 
   swift: 
     image: "ualibraries/swift_dev"
