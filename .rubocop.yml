@@ -82,3 +82,6 @@ RSpec/ExampleLength:
 
 RSpec/MultipleExpectations:
   Enabled: false
+
+RSpec/DescribedClass:
+  EnforcedStyle: explicit

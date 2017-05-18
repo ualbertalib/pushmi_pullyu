@@ -16,6 +16,7 @@ workdir: tmp/work
 process_name: pushmi_pullyu
 queue_name: dev:pmpy_queue
 minimum_age: 0
+rollbar_token: 'abc123xyz'
 
 redis:
   host: localhost

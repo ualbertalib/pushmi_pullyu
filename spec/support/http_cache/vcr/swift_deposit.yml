@@ -1,0 +1,255 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.example.com:8080/auth/v1.0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-User:
+      - test:tester
+      X-Auth-Key:
+      - testing
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Storage-Url:
+      - http://www.example.com:8080/v1/AUTH_test
+      X-Auth-Token-Expires:
+      - '86207'
+      X-Auth-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Storage-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      Content-Length:
+      - '0'
+      X-Trans-Id:
+      - txf2283c5d3d044540bb432-00591dfc87
+      Date:
+      - Thu, 18 May 2017 19:56:55 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 18 May 2017 19:56:55 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      X-Storage-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '5'
+      Accept-Ranges:
+      - bytes
+      X-Storage-Policy:
+      - gold
+      Last-Modified:
+      - Thu, 27 Apr 2017 22:02:08 GMT
+      X-Container-Bytes-Used:
+      - '45926'
+      X-Timestamp:
+      - '1493315078.87413'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Versions-Location:
+      - archive
+      X-Trans-Id:
+      - tx97181debe9754336a445e-00591dfc87
+      Date:
+      - Thu, 18 May 2017 19:56:56 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 18 May 2017 19:56:56 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      X-Storage-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '252'
+      Accept-Ranges:
+      - bytes
+      Last-Modified:
+      - Wed, 17 May 2017 21:26:26 GMT
+      Etag:
+      - 965e26a67cf99d2648f65a54704c02a9
+      X-Timestamp:
+      - '1495056385.33988'
+      Content-Type:
+      - application/x-tar
+      X-Trans-Id:
+      - tx68bf863cf3b44e2781768-00591dfc88
+      Date:
+      - Thu, 18 May 2017 19:56:56 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 18 May 2017 19:56:56 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      X-Storage-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '252'
+      Accept-Ranges:
+      - bytes
+      Last-Modified:
+      - Wed, 17 May 2017 21:26:26 GMT
+      Etag:
+      - 965e26a67cf99d2648f65a54704c02a9
+      X-Timestamp:
+      - '1495056385.33988'
+      Content-Type:
+      - application/x-tar
+      X-Trans-Id:
+      - tx14a22023a75945649b7c4-00591dfc88
+      Date:
+      - Thu, 18 May 2017 19:56:56 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 18 May 2017 19:56:56 GMT
+- request:
+    method: put
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        # Dummy sample file for testing parsing of configuration file into PushmiPullyu
+
+        debug: true
+        logfile: tmp/pushmi_pullyu.log
+        piddir: tmp
+        process_name: test_pushmi_pullyu
+        minimum_age: 10
+        queue_name: test:pmpy_queue
+        rollbar_token: 'abc123xyz'
+
+        redis:
+          host: localhost
+          port: 9999
+    headers:
+      X-Auth-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      X-Storage-Token:
+      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.10
+      Accept:
+      - application/json
+      Etag:
+      - 0f32868de20f3b1d4685bfa497a2c243
+      Content-Type:
+      - application/x-tar
+      Transfer-Encoding:
+      - chunked
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Last-Modified:
+      - Thu, 18 May 2017 19:56:57 GMT
+      Content-Length:
+      - '0'
+      Etag:
+      - 0f32868de20f3b1d4685bfa497a2c243
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - tx881b8136c0bd417e8055a-00591dfc88
+      Date:
+      - Thu, 18 May 2017 19:56:57 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 18 May 2017 19:56:57 GMT
+recorded_with: VCR 3.0.3

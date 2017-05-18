@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'tempfile'
 
 RSpec.describe PushmiPullyu::CLI do
-  let(:cli) { described_class.instance }
+  let(:cli) { PushmiPullyu::CLI.instance }
 
   describe '#run' do
     before do
@@ -27,6 +27,16 @@ RSpec.describe PushmiPullyu::CLI do
         expect(cli).not_to have_received(:start_server)
       end
     end
+
+    context 'Rollbar' do
+      it 'sets up Rollbar' do
+        PushmiPullyu.options[:rollbar_token] = 'xyzzy'
+
+        cli.run
+
+        expect(Rollbar.configuration.access_token).to eq 'xyzzy'
+      end
+    end
   end
 
   describe '#start_server' do
@@ -35,6 +45,7 @@ RSpec.describe PushmiPullyu::CLI do
       allow(cli).to receive(:setup_log)
       allow(cli).to receive(:print_banner)
       allow(cli).to receive(:setup_queue)
+      allow(cli).to receive(:setup_swift)
       allow(cli).to receive(:run_tick_loop)
 
       cli.start_server
@@ -43,6 +54,7 @@ RSpec.describe PushmiPullyu::CLI do
       expect(cli).to have_received(:setup_log).once
       expect(cli).to have_received(:print_banner).once
       expect(cli).to have_received(:setup_queue).once
+      expect(cli).to have_received(:setup_swift).once
       expect(cli).to have_received(:run_tick_loop).once
     end
   end
@@ -95,6 +107,11 @@ RSpec.describe PushmiPullyu::CLI do
       it 'sets to debug mode' do
         cli.parse(['--debug'])
         expect(PushmiPullyu.options[:debug]).to be_truthy
+      end
+
+      it 'sets up Rollbar integration' do
+        cli.parse(['-r', 'asdfjkl11234eieio'])
+        expect(PushmiPullyu.options[:rollbar_token]).to eq 'asdfjkl11234eieio'
       end
 
       it 'sets logfile' do
@@ -170,7 +187,6 @@ RSpec.describe PushmiPullyu::CLI do
         cli.parse(['-C', 'spec/fixtures/config.yml'])
 
         expect(PushmiPullyu.options[:config_file]).to eq 'spec/fixtures/config.yml'
-        expect(PushmiPullyu.options[:debug]).to be_truthy
         expect(PushmiPullyu.options[:logfile]).to eq 'tmp/pushmi_pullyu.log'
         expect(PushmiPullyu.options[:piddir]).to eq 'tmp'
         expect(PushmiPullyu.options[:process_name]).to eq 'test_pushmi_pullyu'
@@ -178,6 +194,7 @@ RSpec.describe PushmiPullyu::CLI do
         expect(PushmiPullyu.options[:queue_name]).to eq 'test:pmpy_queue'
         expect(PushmiPullyu.options[:redis][:host]).to eq 'localhost'
         expect(PushmiPullyu.options[:redis][:port]).to be 9999
+        expect(PushmiPullyu.options[:rollbar_token]).to eq 'abc123xyz'
       end
 
       it 'still allows command line arguments to take precedence' do

@@ -1,6 +1,7 @@
 require 'erb'
 require 'fileutils'
 require 'optparse'
+require 'rollbar'
 require 'singleton'
 require 'yaml'
 
@@ -26,12 +27,19 @@ class PushmiPullyu::CLI
   end
 
   def run
-    if options[:daemonize]
-      start_server_as_daemon
-    else
-      # If we're running in the foreground sync the output.
-      $stdout.sync = $stderr.sync = true
-      start_server
+    configure_rollbar
+    begin
+      if options[:daemonize]
+        start_server_as_daemon
+      else
+        # If we're running in the foreground sync the output.
+        $stdout.sync = $stderr.sync = true
+        start_server
+      end
+    # rubocop:disable Lint/RescueException
+    rescue Exception => e
+      Rollbar.error(e)
+      raise e
     end
   end
 
@@ -42,11 +50,19 @@ class PushmiPullyu::CLI
     print_banner
 
     setup_queue
+    setup_swift
 
     run_tick_loop
   end
 
   private
+
+  def configure_rollbar
+    Rollbar.configure do |config|
+      config.enabled = false unless options[:rollbar_token].present?
+      config.access_token = options[:rollbar_token]
+    end
+  end
 
   def options
     PushmiPullyu.options
@@ -77,6 +93,10 @@ class PushmiPullyu::CLI
 
       o.on('-d', '--debug', 'Enable debug logging') do
         opts[:debug] = true
+      end
+
+      o.on('-r', '--rollbar-token TOKEN', 'Enable error reporting to Rollbar') do |token|
+        opts[:rollbar_token] = token if token.present?
       end
 
       o.on '-C', '--config PATH', 'path to YAML config file' do |config_file|
@@ -143,15 +163,27 @@ class PushmiPullyu::CLI
   def run_tick_loop
     while PushmiPullyu.server_running?
       # Preservation (TODO):
-      # 1. Montior queue
-      # 2. Pop off GenericFile element off queue that are ready to begin process preservation event
       item = @queue.wait_next_item
-      logger.debug(item)
-      # 3. Retrieve GenericFile data in fedora
-      # 4. creation of AIP
-      # 5. bagging and tarring of AIP
-      # 6. Push bag to swift API
-      # 7. Log successful preservation event to log files
+
+      # add additional information about the error context to errors that occur while processing this item.
+      Rollbar.scoped(noid: item) do
+        begin
+          # 3. Retrieve GenericFile data in fedora
+          # 4. creation of AIP
+          # 5. bagging and tarring of AIP
+
+          # 6. Push bag to swift API
+          file_to_deposit = './pushmi_pullyu'
+          @storage.deposit_file(file_to_deposit)
+          logger.debug("Deposited file into the swift storage #{file_to_deposit}")
+
+          # 7. Log successful preservation event to log files
+        rescue => e
+          Rollbar.error(e)
+          # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
+          # move on to the next item.
+        end
+      end
 
       rotate_logs if PushmiPullyu.reset_logger?
     end
@@ -179,6 +211,17 @@ class PushmiPullyu::CLI
                                                  },
                                                  queue_name: options[:queue_name],
                                                  age_at_least: options[:minimum_age])
+  end
+
+  def setup_swift
+    @storage = PushmiPullyu::SwiftDepositer.new({
+                                                  username: options[:swift][:username],
+                                                  password: options[:swift][:password],
+                                                  tenant: options[:swift][:tenant],
+                                                  endpoint: options[:swift][:endpoint],
+                                                  auth_version: options[:swift][:auth_version]
+                                                },
+                                                options[:swift][:container])
   end
 
   # On first call of shutdown, this will gracefully close the main run loop
