@@ -66,6 +66,8 @@ Goal: Development environment for Pushmi-Pullyu sharing source with container. D
     * `docker exec -it docker_pushmi-pullyu_1 bash`
     * note: networking setup by docker compose allows referencing containers by their service names as defined in the `docker-compose-development.yml` file
 
+8. Command on the Pushmi-Pullyu container to start the daemon
+   * `bundle exec pushmi_pullyu stop -C docker/files/pushmi_pullyu_config_docker.yml`
 
 #### Notes:
 
