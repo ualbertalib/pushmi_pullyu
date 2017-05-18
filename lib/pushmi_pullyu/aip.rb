@@ -9,12 +9,12 @@ module PushmiPullyu::AIP
   class FedoraFetchError < StandardError; end
   class SolrFetchError < StandardError; end
 
-  def self.create(noid, skip_download: false, clean_work_directories: true)
+  def self.create(noid, should_skip_download: false, should_clean_work_directories: true)
     # Return the filename of the created AIP tarball
     PushmiPullyu::AIP::Creator
       .new(noid)
-      .run(skip_download: skip_download,
-           clean_work_directories: clean_work_directories)
+      .run(should_skip_download: should_skip_download,
+           should_clean_work_directories: should_clean_work_directories)
     aip_filename(noid)
   end
 
