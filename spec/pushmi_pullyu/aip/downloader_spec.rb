@@ -11,7 +11,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       solr: { url: 'http://www.example.com:8983/solr/development' } }
   end
   let(:noid) { '9p2909328' }
-  let(:downloader) { described_class.new(noid) }
+  let(:downloader) { PushmiPullyu::AIP::Downloader.new(noid) }
 
   before do
     allow(PushmiPullyu.logger).to receive(:info)

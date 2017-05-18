@@ -2,8 +2,8 @@ require 'spec_helper'
 
 RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
   let(:noid) { 'abc123whatever' }
-  let(:fedora_fetcher) { described_class.new(noid) }
-  let(:fedora_fetcher_404) { described_class.new('ohnoimbad') }
+  let(:fedora_fetcher) { PushmiPullyu::AIP::FedoraFetcher.new(noid) }
+  let(:fedora_fetcher_404) { PushmiPullyu::AIP::FedoraFetcher.new('ohnoimbad') }
   let(:basedir) { "#{options[:workdir]}/#{noid}" }
 
   before do

@@ -12,7 +12,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
   end
   let(:noid) { '9p2909328' }
   let(:aip_file) { "#{workdir}/#{noid}.tar" }
-  let(:creator) { described_class.new(noid) }
+  let(:creator) { PushmiPullyu::AIP::Creator.new(noid) }
 
   before do
     allow(PushmiPullyu.logger).to receive(:info)
