@@ -3,9 +3,14 @@ sudo: false
 cache: bundler
 services:
   - redis-server
+
 before_install:
   - gem install bundler
   - gem update bundler
+
 rvm:
   - 2.3.3
   - 2.4.0
+
+before_script:
+  - bundle exec danger
