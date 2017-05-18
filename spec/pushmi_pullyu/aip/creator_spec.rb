@@ -78,6 +78,9 @@ RSpec.describe PushmiPullyu::AIP::Creator do
       VCR.use_cassette('aip_downloader_run') do
         creator.run(clean_work_directories: false)
 
+        lines = File.readlines('tmp/creator_spec/9p2909328/manifest-sha1.txt').map(&:strip).sort
+        expect(lines.length).to eq(11)
+
         # We can't know the sha1 of the aipcreation.log in advance (timestamps are recorded)
         sha1 = Digest::SHA1.file('tmp/creator_spec/9p2909328/data/logs/aipcreation.log').hexdigest
 
@@ -100,26 +103,9 @@ RSpec.describe PushmiPullyu::AIP::Creator do
            'data/objects/metadata/permission_ef4319c0-2f7a-44c0-b1b5-cd650aa4a075.n3',
 
            '50b065c7cf19ed3e282a2a98b70f6e9429cc56ea data/objects/metadata/content_fcr_metadata.n3',
-           '5eb6d58841f4196cc682ef1af3054dddacb6d40c data/objects/whatever.pdf']
+           '5eb6d58841f4196cc682ef1af3054dddacb6d40c data/objects/whatever.pdf'].sort
 
-        # Test should not expect a specific order of these lines
-        num_lines = 0
-        lines_matched = 0
-        File.foreach('tmp/creator_spec/9p2909328/manifest-sha1.txt') do |line|
-          num_lines += 1
-          expected_file_sums.each do |expected|
-            if line.strip == expected
-              lines_matched += 1
-              next
-            end
-          end
-        end
-
-        # 11 lines in manifest
-        expect(num_lines).to eq(11)
-
-        # 11 matches
-        expect(lines_matched).to eq(11)
+        expect(lines).to eq(expected_file_sums)
       end
     end
   end
