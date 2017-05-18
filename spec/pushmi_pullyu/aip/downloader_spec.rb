@@ -15,6 +15,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
 
   before do
     allow(PushmiPullyu.logger).to receive(:info)
+    allow(PushmiPullyu.logger).to receive(:debug)
     allow(PushmiPullyu).to receive(:options) { options }
     FileUtils.mkdir_p(workdir)
   end
