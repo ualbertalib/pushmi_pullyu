@@ -159,7 +159,7 @@ class PushmiPullyu::AIP::Downloader
       ),
       versions: OpenStruct.new(
         remote: '/content/fcr:versions',
-        local: "#{@aip_dirs.metadataobjects}/content_versions.n3",
+        local: "#{@aip_dirs.metadata}/content_versions.n3",
         optional: false
       ),
       content: OpenStruct.new(

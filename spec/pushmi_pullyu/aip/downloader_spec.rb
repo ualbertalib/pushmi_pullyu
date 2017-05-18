@@ -45,7 +45,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
 
         # 11 files exist?
         ['tmp/downloader_spec/9p2909328/data/objects/whatever.pdf',
-         'tmp/downloader_spec/9p2909328/data/content_versions.n3',
+         'tmp/downloader_spec/9p2909328/data/objects/metadata/content_versions.n3',
          'tmp/downloader_spec/9p2909328/data/logs/aipcreation.log',
          'tmp/downloader_spec/9p2909328/data/logs/content_fixity_report.n3',
          'tmp/downloader_spec/9p2909328/data/logs/content_characterization.n3',
