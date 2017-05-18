@@ -24,9 +24,10 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.3.1'
 
   spec.add_runtime_dependency 'activesupport', '~> 5.0'
+  spec.add_runtime_dependency 'connection_pool', '~> 2.2'
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
   spec.add_runtime_dependency 'redis', '~> 3.3'
-  spec.add_runtime_dependency 'connection_pool', '~> 2.2'
+  spec.add_runtime_dependency 'rollbar', '~> 2.14'
   spec.add_runtime_dependency 'openstack', '~> 3.3', '>= 3.3.10'
 
   spec.add_development_dependency 'bundler', '~> 1.14'

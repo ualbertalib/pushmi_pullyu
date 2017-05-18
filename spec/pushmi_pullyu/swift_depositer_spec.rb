@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe PushmiPullyu::SwiftDepositer do
-  it 'not valid with nil arguments' do
-    expect { described_class.new(nil, nil) }.to raise_error(RuntimeError)
-  end
-
   it 'valid connection established' do
+    expect { described_class.new(nil, nil) }.to raise_error(RuntimeError)
+
     VCR.use_cassette('swift_connect') do
       swift_connection = described_class.new({ username: 'test:tester',
                                                password: 'testing',

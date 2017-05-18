@@ -6,6 +6,7 @@ piddir: tmp
 process_name: test_pushmi_pullyu
 minimum_age: 10
 queue_name: test:pmpy_queue
+rollbar_token: 'abc123xyz'
 
 redis:
   host: localhost
