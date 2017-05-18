@@ -29,7 +29,7 @@ module PushmiPullyu::AIP
   end
 
   def self.aip_filename(noid)
-    "#{aip_directory(noid)}/#{noid}.tar"
+    File.expand_path("#{PushmiPullyu.options[:workdir]}/#{noid}.tar")
   end
 
   def self.destroy(noid)
