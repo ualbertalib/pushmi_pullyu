@@ -2,6 +2,7 @@ require 'pushmi_pullyu/logging'
 
 require 'pushmi_pullyu/cli'
 require 'pushmi_pullyu/preservation_queue'
+require 'pushmi_pullyu/swift_depositer'
 require 'pushmi_pullyu/version'
 require 'active_support'
 require 'active_support/core_ext'
@@ -36,12 +37,12 @@ module PushmiPullyu
       base_path: '/dev'
     },
     swift: {
-      auth_version: 2.0,
-      tenant: 'Millennium Falcon',
-      username: 'han',
-      password: 'YT-1300',
-      endpoint: 'https//corellia.lan',
-      temp_url_key: '492727ZED'
+      auth_version: 'v1.0',
+      tenant: 'tester',
+      username: 'test:tester',
+      password: 'testing',
+      endpoint: 'http://127.0.0.1:8080',
+      container: 'ERA'
     }
   }.freeze
 
