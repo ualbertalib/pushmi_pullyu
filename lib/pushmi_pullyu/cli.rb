@@ -168,16 +168,16 @@ class PushmiPullyu::CLI
       # add additional information about the error context to errors that occur while processing this item.
       Rollbar.scoped(noid: item) do
         begin
-          # 3. Retrieve GenericFile data in fedora
-          # 4. creation of AIP
-          # 5. bagging and tarring of AIP
+          # Download AIP from Fedora, bag and tar AIP directory
+          aip_filename = PushmiPullyu::AIP.create(item)
 
-          # 6. Push bag to swift API
-          file_to_deposit = './pushmi_pullyu'
-          @storage.deposit_file(file_to_deposit)
-          logger.debug("Deposited file into the swift storage #{file_to_deposit}")
+          # Push bag to swift API
+          @storage.deposit_file(aip_filename)
+          logger.debug("Deposited file into the swift storage #{aip_filename}")
 
           # 7. Log successful preservation event to log files
+          # Cleanup
+          PushmiPullyu::AIP.destroy(item)
         rescue => e
           Rollbar.error(e)
           # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
