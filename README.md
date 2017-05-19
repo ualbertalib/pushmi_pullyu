@@ -1,4 +1,8 @@
-# PushmiPullyu
+<p align="center">
+  <a href="https://github.com/ualbertalib/pushmi_pullyu/">
+    <img src="docs/images/pushmi-pullyu.png" alt="PushmiPullyu logo">
+  </a>
+</p>
 
 [![Gem Version](https://badge.fury.io/rb/pushmi_pullyu.svg)](https://rubygems.org/gems/pushmi_pullyu)
 [![Dependency Status](https://gemnasium.com/badges/github.com/ualbertalib/pushmi_pullyu.svg)](https://gemnasium.com/github.com/ualbertalib/pushmi_pullyu)
@@ -9,7 +13,7 @@ PushmiPullyu will be a Ruby application, running behind the firewall that protec
 
 It's primary job will be to manage the flow of content from Fedora into Swift for preservation.
 
-![image](https://cloud.githubusercontent.com/assets/1930474/25407462/99193a5c-29c7-11e7-8aa0-0a43554e6eb1.png)
+![System Infrastructure Diagram](docs/images/system-infrastructure-diagram.png)
 
 ## Workflow
 
