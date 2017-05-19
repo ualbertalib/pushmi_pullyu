@@ -28,8 +28,8 @@ solr:
 
 fedora:
   url: http://<%= ENV['FEDORA_HOST'] %>:8983/rest
-  user: fedoraAdmin
-  password: fedoraAdmin
+  user: <%= ENV['FEDORA_USER'] %>
+  password: <%= ENV['FEDORA_PASS'] %>
   base_path: /dev
 
 swift:
@@ -37,5 +37,5 @@ swift:
   tenant: Millennium Falcon
   username: han
   password: YT-1300
-  endpoint: <%= ENV['SWIFT_ENDPOINT'] %> 
+  endpoint: <%= ENV['SWIFT_ENDPOINT'] %>
   temp_url_key: 492727ZED

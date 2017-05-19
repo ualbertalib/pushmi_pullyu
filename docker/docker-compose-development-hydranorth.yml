@@ -1,27 +1,20 @@
 # Docker Compose for a development version of Pushmi-Pullyu
+# assumption: run pushmi_pullyu within the HydraNorth container
 # with the full HydraNorth
 version: '3'
-
 
 services:
   hydranorth:
     image: "ualibraries/hydra_north:deb"
     env_file:
       - .env-hydranorth
+      - .env-pushmi_pullyu
     volumes: 
       # di_docker_hydranorth expects codebase in `app` within the container
       - ${LOCAL_SRC_PATH:-../../HydraNorth}:/app
+      - ..:/app_pushmi-pullyu
+    stdin_open: true # help debug: keep STDIN open even if not attached
+    tty: true # help debug: Allocate a pseudo-TTY
 
   swift: 
     image: "ualibraries/swift_dev"
-
-  pushmi-pullyu:
-    # assumes GitHup repo clone & run `docker-compose up` from repo root
-    # `..` context changes to `docker` dir, change to root of repo
-    build: 
-      context: ..
-      dockerfile: ./docker/Dockerfile.pushmi_pullyu.development
-    volumes: 
-      - ..:/app/pushmi-pullyu
-    depends_on:
-      - swift
