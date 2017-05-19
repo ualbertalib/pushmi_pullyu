@@ -1,16 +1,13 @@
-# Make sure code changes come with corresponding tests
+# Make sure non-trivial amounts of code changes come with corresponding tests
 has_app_changes = !git.modified_files.grep(/lib/).empty?
 has_spec_changes = !git.modified_files.grep(/spec/).empty?
 
-if has_app_changes && !has_spec_changes
+if  git.lines_of_code > 50 && has_app_changes && !has_spec_changes
   warn('There are code changes, but no corresponding tests. '\
          'Please include tests if this PR introduces any modifications in '\
          'behavior.',
        sticky: false)
 end
-
-# Make it more obvious that a PR is a work in progress and shouldn't be merged yet
-warn('PR is classed as Work in Progress') if github.pr_title.include? '[WIP]'
 
 # Mainly to encourage writing up some reasoning about the PR, rather than
 # just leaving a title
