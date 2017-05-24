@@ -9,9 +9,6 @@ require 'pushmi_pullyu/aip/fedora_fetcher'
 class PushmiPullyu::AIP::Downloader
 
   FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
-  def self.run(noid)
-    new(noid).run
-  end
 
   def initialize(noid)
     @noid = noid
@@ -61,7 +58,7 @@ class PushmiPullyu::AIP::Downloader
 
   def download_permissions
     PushmiPullyu.logger.info("#{@noid}: looking up permissions from Solr ...")
-    results = PushmiPullyu::AIP::SolrFetcher.get_permission_object_ids(@noid)
+    results = PushmiPullyu::AIP::SolrFetcher.new(@noid).fetch_permission_object_ids
     if results.empty?
       PushmiPullyu.logger.info("#{@noid}: permissions not found")
       return

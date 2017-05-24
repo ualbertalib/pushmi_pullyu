@@ -4,13 +4,12 @@ require 'json'
 
 class PushmiPullyu::AIP::SolrFetcher
 
-  def self.get_permission_object_ids(noid)
-    # Return array of ids
-    new.get_permission_object_ids(noid)
+  def initialize(noid)
+    @noid = noid
   end
 
-  def get_permission_object_ids(noid)
-    json = run_query_json("accessTo_ssim:#{noid}", fields: 'id', url_extra: nil)
+  def fetch_permission_object_ids
+    json = run_query_json("accessTo_ssim:#{@noid}", fields: 'id', url_extra: nil)
     hash = JSON.parse(json)
     return [] if hash['response']['docs'].empty?
     hash['response']['docs'].map { |hit| hit['id'] }

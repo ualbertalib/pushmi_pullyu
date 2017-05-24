@@ -13,11 +13,6 @@ class PushmiPullyu::AIP::Creator
     PushmiPullyu::AIP.validate(noid)
   end
 
-  def self.run(noid, should_skip_download: false, should_clean_work_directories: true)
-    new(noid).run(should_skip_download: should_skip_download,
-                  should_clean_work_directories: should_clean_work_directories)
-  end
-
   def run(should_skip_download: false, should_clean_work_directories: true)
     download_aip unless should_skip_download
     bag_aip
@@ -49,7 +44,8 @@ class PushmiPullyu::AIP::Creator
   end
 
   def download_aip
-    PushmiPullyu::AIP::Downloader.run(@noid)
+    # Note: returns directory name for AIP
+    PushmiPullyu::AIP::Downloader.new(@noid).run
   end
 
   def bag_aip
