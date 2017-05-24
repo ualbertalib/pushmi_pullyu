@@ -19,4 +19,4 @@ if git.commits.any? { |c| c.message =~ /^Merge branch '#{github.branch_for_base}
 end
 
 # Warn when there is a big PR
-warn('This PR is too big! Consider breaking it down into smaller PRs.') if git.lines_of_code > 1000
+warn('This PR is too big! Consider breaking it down into smaller PRs.') if git.lines_of_code > 500
