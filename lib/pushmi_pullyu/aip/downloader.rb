@@ -6,6 +6,8 @@ require 'rdf/n3'
 # related to an object
 class PushmiPullyu::AIP::Downloader
 
+  class NoContentFilename < StandardError; end
+
   FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
 
   def initialize(noid)
@@ -202,7 +204,7 @@ class PushmiPullyu::AIP::Downloader
         break
       end
     end
-    raise PushmiPullyu::AIP::NoContentFilename unless @content_filename
+    raise NoContentFilename unless @content_filename
     @content_filename
   end
 

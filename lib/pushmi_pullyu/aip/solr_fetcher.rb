@@ -3,6 +3,8 @@ require 'net/http'
 
 class PushmiPullyu::AIP::SolrFetcher
 
+  class SolrFetchError < StandardError; end
+
   def initialize(noid)
     @noid = noid
   end
@@ -40,7 +42,7 @@ class PushmiPullyu::AIP::SolrFetcher
 
     return response.body if response.is_a?(Net::HTTPSuccess)
 
-    raise PushmiPullyu::AIP::SolrFetchError
+    raise SolrFetchError
   end
 
 end

@@ -39,7 +39,7 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
     it 'raises an error on an object with a bad noid' do
       VCR.use_cassette('fedora_fetcher_404') do
         expect { fedora_fetcher_404.download_object }
-          .to raise_error(PushmiPullyu::AIP::FedoraFetchError)
+          .to raise_error(PushmiPullyu::AIP::FedoraFetcher::FedoraFetchError)
       end
     end
 

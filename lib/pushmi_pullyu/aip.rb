@@ -2,10 +2,6 @@ require 'fileutils'
 
 module PushmiPullyu::AIP
   # Exceptions
-  class BagInvalid < StandardError; end
-  class NoContentFilename < StandardError; end
-  class FedoraFetchError < StandardError; end
-  class SolrFetchError < StandardError; end
   class WorkdirInvalid < StandardError; end
   class NoidInvalid < StandardError; end
 

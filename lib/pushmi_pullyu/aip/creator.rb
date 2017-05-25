@@ -4,6 +4,8 @@ require 'fileutils'
 
 class PushmiPullyu::AIP::Creator
 
+  class BagInvalid < StandardError; end
+
   # Assumption: the AIP has already been downloaded
 
   def initialize(noid)
@@ -50,7 +52,7 @@ class PushmiPullyu::AIP::Creator
   def bag_aip
     bag = BagIt::Bag.new(@aip_directory)
     bag.manifest!
-    raise PushmiPullyu::AIP::BagInvalid unless bag.valid?
+    raise BagInvalid unless bag.valid?
   end
 
   def tar_bag

@@ -2,6 +2,8 @@ require 'net/http'
 
 class PushmiPullyu::AIP::FedoraFetcher
 
+  class FedoraFetchError < StandardError; end
+
   RDF_FORMAT = 'text/rdf+n3'.freeze
 
   def initialize(noid)
@@ -52,11 +54,11 @@ class PushmiPullyu::AIP::FedoraFetcher
     end
 
     if response.is_a?(Net::HTTPNotFound)
-      raise PushmiPullyu::AIP::FedoraFetchError unless optional
+      raise FedoraFetchError unless optional
       return false
     end
 
-    raise PushmiPullyu::AIP::FedoraFetchError
+    raise FedoraFetchError
   end
 
 end
