@@ -10,9 +10,9 @@
 # PushmiPullyu will run this file through ERB when reading it so you can
 # even put in dynamic logic, like consuming ENV Variables.
 
-debug: true 
+debug: true
 logfile: log/pushmi_pullyu.log
-monitor: true 
+monitor: true
 piddir: tmp/pids
 process_name: pushmi_pullyu
 queue_name: dev:pmpy_queue
@@ -20,22 +20,22 @@ minimum_age: 0
 rollbar_token: 'abc123xyz'
 
 redis:
-  host: <%= ENV['REDIS_HOST'] %> 
+  host: <%= ENV['REDIS_HOST'] %>
   port: 6379
 
 solr:
   url: http://<%= ENV['SOLR_HOST'] %>:8983/solr/development
 
 fedora:
-  url: http://<%= ENV['FEDORA_HOST'] %>:8983/rest
+  url: http://<%= ENV['FEDORA_HOST'] %>:8983/fedora/rest
   user: <%= ENV['FEDORA_USER'] %>
   password: <%= ENV['FEDORA_PASS'] %>
   base_path: /dev
 
 swift:
-  auth_version: 2.0
-  tenant: Millennium Falcon
-  username: han
-  password: YT-1300
+  auth_version: 1.0
+  tenant: 'tester',
+  username: 'test:tester',
+  password: 'testing',
   endpoint: <%= ENV['SWIFT_ENDPOINT'] %>
-  temp_url_key: 492727ZED
+  container: 'ERA'

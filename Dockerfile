@@ -3,12 +3,12 @@
 
 FROM ruby:2.3.4
 
-WORKDIR /app/ 
+RUN mkdir /app
+WORKDIR /app
 
 ADD Gemfile /app/
 ADD pushmi_pullyu.gemspec /app/
-ADD lib/pushmi_pullyu/version.rb /app/lib/pushmi_pullyu/version.rb
 ADD . /app
-RUN bundle install
+RUN cd /app && bundle install
 
 CMD ["bundle", "exec", "pushmi_pullyu", "start", "-C", "/app/docker/files/pushmi_pullyu_config_docker.yml"]
