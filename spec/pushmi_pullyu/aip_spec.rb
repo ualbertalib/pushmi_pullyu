@@ -13,6 +13,7 @@ RSpec.describe PushmiPullyu::AIP do
       solr: { url: 'http://www.example.com:8983/solr/development' } }
   end
   let(:noid) { '9p2909328' }
+  let(:mock_download_data) { "spec/fixtures/aip_download/#{noid}" }
   let(:aip_file) { "#{workdir}/#{noid}.tar" }
 
   before do
@@ -20,6 +21,7 @@ RSpec.describe PushmiPullyu::AIP do
     allow(PushmiPullyu.logger).to receive(:debug)
     allow(PushmiPullyu).to receive(:options) { options }
     FileUtils.mkdir_p(workdir)
+    FileUtils.cp_r(mock_download_data, workdir)
   end
 
   after do
@@ -30,8 +32,10 @@ RSpec.describe PushmiPullyu::AIP do
   describe '#create' do
     it 'creates the aip, removes work directory by default' do
       VCR.use_cassette('aip_downloader_run') do
+        # Mocked download data should exist
+        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
+
         # Should not exist yet
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(false)
         expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(false)
 
         filename = PushmiPullyu::AIP.create(noid)
@@ -46,10 +50,13 @@ RSpec.describe PushmiPullyu::AIP do
 
     it 'creates the AIP, can keep the AIP directory' do
       VCR.use_cassette('aip_downloader_run') do
+        # Mocked download data should exist
+        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
+
         # Should not exist yet
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(false)
         expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(false)
 
+        PushmiPullyu::AIP.download(noid)
         PushmiPullyu::AIP.create(noid, should_clean_work_directories: false)
 
         # Work directory is NOT removed

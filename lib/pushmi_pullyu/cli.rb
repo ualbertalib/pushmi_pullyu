@@ -169,6 +169,7 @@ class PushmiPullyu::CLI
       Rollbar.scoped(noid: item) do
         begin
           # Download AIP from Fedora, bag and tar AIP directory
+          PushmiPullyu::AIP.download(item)
           aip_filename = PushmiPullyu::AIP.create(item)
 
           # Push bag to swift API

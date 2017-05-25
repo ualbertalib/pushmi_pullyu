@@ -4,7 +4,7 @@ require 'pushmi_pullyu/aip'
 
 class PushmiPullyu::AIP::Creator
 
-  attr_reader :aip_filename, :aip_directory
+  # Assumption: the AIP has already been downloaded
 
   def initialize(noid)
     @noid = noid
@@ -13,13 +13,12 @@ class PushmiPullyu::AIP::Creator
     PushmiPullyu::AIP.validate(noid)
   end
 
-  def run(should_skip_download: false, should_clean_work_directories: true)
-    download_aip unless should_skip_download
+  def run(should_clean_work_directories: true)
     bag_aip
     tar_bag
     destroy_aip_directory if should_clean_work_directories
     # Return the filename of the created file
-    aip_filename
+    @aip_filename
   end
 
   def destroy
@@ -34,13 +33,13 @@ class PushmiPullyu::AIP::Creator
   end
 
   def destroy_aip_file
-    FileUtils.rm(aip_filename) if File.exist?(aip_filename)
+    FileUtils.rm(@aip_filename) if File.exist?(@aip_filename)
   end
 
   def destroy_aip_directory
-    return unless File.exist?(aip_directory)
+    return unless File.exist?(@aip_directory)
     PushmiPullyu.logger.info("#{@noid}: Nuking directories ...")
-    FileUtils.rm_rf(aip_directory)
+    FileUtils.rm_rf(@aip_directory)
   end
 
   def download_aip
@@ -49,7 +48,7 @@ class PushmiPullyu::AIP::Creator
   end
 
   def bag_aip
-    bag = BagIt::Bag.new(aip_directory)
+    bag = BagIt::Bag.new(@aip_directory)
     bag.manifest!
     raise PushmiPullyu::AIP::BagInvalid unless bag.valid?
   end
@@ -57,7 +56,7 @@ class PushmiPullyu::AIP::Creator
   def tar_bag
     destroy_aip_file
     Dir.chdir(workdir) do
-      File.open(aip_filename, 'wb') do |tar|
+      File.open(@aip_filename, 'wb') do |tar|
         Archive::Tar::Minitar.pack(@noid, tar)
       end
     end
