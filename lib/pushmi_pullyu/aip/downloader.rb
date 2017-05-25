@@ -22,7 +22,7 @@ class PushmiPullyu::AIP::Downloader
 
     [:main_object, :fixity, :content_datastream_metadata, :versions, :thumbnail,
      :characterization, :fedora3foxml, :fedora3foxml_metadata].each do |item|
-      path_spec = aip_paths.send(item)
+      path_spec = aip_paths[item]
       download_and_log(path_spec)
     end
 
