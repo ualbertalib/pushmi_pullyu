@@ -1,6 +1,4 @@
-require 'pushmi_pullyu'
-require 'bagit'
-require 'archive/tar/minitar'
+require 'fileutils'
 
 module PushmiPullyu::AIP
   # Exceptions

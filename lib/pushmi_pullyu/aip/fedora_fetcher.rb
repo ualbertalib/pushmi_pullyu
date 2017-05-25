@@ -1,7 +1,4 @@
-require 'pushmi_pullyu'
-require 'pushmi_pullyu/aip'
 require 'net/http'
-require 'fileutils'
 
 class PushmiPullyu::AIP::FedoraFetcher
 

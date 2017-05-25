@@ -1,11 +1,9 @@
+require 'fileutils'
+require 'ostruct'
 require 'rdf/n3'
-require 'pushmi_pullyu/aip'
-require 'pushmi_pullyu/aip/solr_fetcher'
-require 'pushmi_pullyu/aip/fedora_fetcher'
 
 # Download all of the metadata/datastreams and associated data
 # related to an object
-
 class PushmiPullyu::AIP::Downloader
 
   FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze

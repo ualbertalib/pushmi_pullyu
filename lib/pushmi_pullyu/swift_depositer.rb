@@ -1,3 +1,4 @@
+require 'digest/md5'
 require 'openstack'
 
 class PushmiPullyu::SwiftDepositer

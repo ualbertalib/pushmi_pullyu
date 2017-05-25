@@ -1,6 +1,5 @@
-require 'pushmi_pullyu'
-require 'net/http'
 require 'json'
+require 'net/http'
 
 class PushmiPullyu::AIP::SolrFetcher
 
