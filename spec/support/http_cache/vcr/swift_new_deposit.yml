@@ -24,25 +24,23 @@ http_interactions:
     headers:
       X-Storage-Url:
       - http://www.example.com:8080/v1/AUTH_test
-      X-Auth-Token-Expires:
-      - '86207'
       X-Auth-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       Content-Type:
       - text/html; charset=UTF-8
       X-Storage-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       Content-Length:
       - '0'
       X-Trans-Id:
-      - txf2283c5d3d044540bb432-00591dfc87
+      - txcc4dfacb7c1a45bb8b977-005928b172
       Date:
-      - Thu, 18 May 2017 19:56:55 GMT
+      - Fri, 26 May 2017 22:51:30 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 18 May 2017 19:56:55 GMT
+  recorded_at: Fri, 26 May 2017 22:51:30 GMT
 - request:
     method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA
@@ -51,13 +49,13 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       X-Storage-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 2.6.10
+      - OpenStack Ruby API 2.6.8
       Accept:
       - application/json
       Content-Type:
@@ -70,32 +68,26 @@ http_interactions:
       Content-Length:
       - '0'
       X-Container-Object-Count:
-      - '5'
+      - '1'
       Accept-Ranges:
       - bytes
-      X-Storage-Policy:
-      - gold
-      Last-Modified:
-      - Thu, 27 Apr 2017 22:02:08 GMT
-      X-Container-Bytes-Used:
-      - '45926'
       X-Timestamp:
-      - '1493315078.87413'
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '230'
       Content-Type:
       - application/json; charset=utf-8
-      X-Versions-Location:
-      - archive
       X-Trans-Id:
-      - tx97181debe9754336a445e-00591dfc87
+      - tx1965971658ea48339660c-005928b172
       Date:
-      - Thu, 18 May 2017 19:56:56 GMT
+      - Fri, 26 May 2017 22:51:30 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 18 May 2017 19:56:56 GMT
+  recorded_at: Fri, 26 May 2017 22:51:30 GMT
 - request:
     method: head
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
@@ -104,92 +96,82 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       X-Storage-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 2.6.10
+      - OpenStack Ruby API 2.6.8
       Accept:
       - application/json
       Content-Type:
       - application/json
   response:
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
     headers:
       Content-Length:
-      - '252'
-      Accept-Ranges:
-      - bytes
-      Last-Modified:
-      - Wed, 17 May 2017 21:26:26 GMT
-      Etag:
-      - 965e26a67cf99d2648f65a54704c02a9
-      X-Timestamp:
-      - '1495056385.33988'
+      - '0'
       Content-Type:
-      - application/x-tar
+      - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx68bf863cf3b44e2781768-00591dfc88
+      - tx06873d1706824beaa36a4-005928b172
       Date:
-      - Thu, 18 May 2017 19:56:56 GMT
+      - Fri, 26 May 2017 22:51:30 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 18 May 2017 19:56:56 GMT
+  recorded_at: Fri, 26 May 2017 22:51:30 GMT
 - request:
-    method: head
+    method: put
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       X-Storage-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 2.6.10
+      - OpenStack Ruby API 2.6.8
       Accept:
       - application/json
-      Content-Type:
-      - application/json
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
     status:
-      code: 200
-      message: OK
+      code: 201
+      message: Created
     headers:
-      Content-Length:
-      - '252'
-      Accept-Ranges:
-      - bytes
       Last-Modified:
-      - Wed, 17 May 2017 21:26:26 GMT
+      - Fri, 26 May 2017 22:51:31 GMT
+      Content-Length:
+      - '0'
       Etag:
-      - 965e26a67cf99d2648f65a54704c02a9
-      X-Timestamp:
-      - '1495056385.33988'
+      - d41d8cd98f00b204e9800998ecf8427e
       Content-Type:
-      - application/x-tar
+      - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx14a22023a75945649b7c4-00591dfc88
+      - tx62828675531a4799806fe-005928b172
       Date:
-      - Thu, 18 May 2017 19:56:56 GMT
+      - Fri, 26 May 2017 22:51:30 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 18 May 2017 19:56:56 GMT
+  recorded_at: Fri, 26 May 2017 22:51:30 GMT
 - request:
     method: put
     uri: http://www.example.com:8080/v1/AUTH_test/ERA/config
@@ -211,13 +193,13 @@ http_interactions:
           port: 9999
     headers:
       X-Auth-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       X-Storage-Token:
-      - AUTH_tked30d71e7fa84aada36e6848291cfb09
+      - AUTH_tkb95013a506e048d184148129ea587463
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 2.6.10
+      - OpenStack Ruby API 2.6.8
       Accept:
       - application/json
       Etag:
@@ -234,7 +216,7 @@ http_interactions:
       message: Created
     headers:
       Last-Modified:
-      - Thu, 18 May 2017 19:56:57 GMT
+      - Fri, 26 May 2017 22:51:31 GMT
       Content-Length:
       - '0'
       Etag:
@@ -242,14 +224,14 @@ http_interactions:
       Content-Type:
       - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx881b8136c0bd417e8055a-00591dfc88
+      - txf3a155e36a0149eba58ec-005928b172
       Date:
-      - Thu, 18 May 2017 19:56:57 GMT
+      - Fri, 26 May 2017 22:51:30 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 18 May 2017 19:56:57 GMT
+  recorded_at: Fri, 26 May 2017 22:51:30 GMT
 recorded_with: VCR 3.0.3

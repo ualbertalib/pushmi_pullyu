@@ -173,7 +173,7 @@ class PushmiPullyu::CLI
           aip_filename = PushmiPullyu::AIP.create(item)
 
           # Push bag to swift API
-          @storage.deposit_file(aip_filename)
+          @storage.deposit_file(aip_filename, options[:swift][:container])
           logger.debug("Deposited file into the swift storage #{aip_filename}")
 
           # 7. Log successful preservation event to log files
@@ -215,14 +215,11 @@ class PushmiPullyu::CLI
   end
 
   def setup_swift
-    @storage = PushmiPullyu::SwiftDepositer.new({
-                                                  username: options[:swift][:username],
-                                                  password: options[:swift][:password],
-                                                  tenant: options[:swift][:tenant],
-                                                  endpoint: options[:swift][:endpoint],
-                                                  auth_version: options[:swift][:auth_version]
-                                                },
-                                                options[:swift][:container])
+    @storage = PushmiPullyu::SwiftDepositer.new(username: options[:swift][:username],
+                                                password: options[:swift][:password],
+                                                tenant: options[:swift][:tenant],
+                                                endpoint: options[:swift][:endpoint],
+                                                auth_version: options[:swift][:auth_version])
   end
 
   # On first call of shutdown, this will gracefully close the main run loop
