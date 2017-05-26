@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.example.com:8983/fedora/rest/test/ab/c1/23/wh/abc123whatever
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - www.example.com:8983
+      Authorization:
+      - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"95ae2777eae4deda67da158e3b5bcd918a52d573"'
+      Last-Modified:
+      - Fri, 28 Apr 2017 14:15:26 GMT
+      Link:
+      - <http://www.w3.org/ns/ldp#BasicContainer>;rel="type"
+      - <http://www.w3.org/ns/ldp#Container>;rel="type"
+      - <http://www.w3.org/ns/ldp#Resource>;rel="type"
+      Accept-Patch:
+      - application/sparql-update
+      Accept-Post:
+      - text/turtle,text/rdf+n3,text/n3,application/rdf+xml,application/n-triples,multipart/form-data,application/sparql-update
+      Allow:
+      - MOVE,COPY,DELETE,POST,HEAD,GET,PUT,PATCH,OPTIONS
+      Preference-Applied:
+      - return=representation
+      Vary:
+      - Accept, Range, Accept-Encoding, Accept-Language
+      - Prefer
+      Content-Type:
+      - text/turtle
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "@prefix
+        ns001: <info:fedora/fedora-system:def/model#> .\n@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance>
+        .\n\tns001:downloadFilename \"uuid:846f544d-94db-41b4-9f4a-654e1457ed8c.zip\"^^<http://www.w3.org/2001/XMLSchema#string>\n"
+    http_version: 
+  recorded_at: Tue, 09 May 2017 19:50:49 GMT
+recorded_with: VCR 3.0.3

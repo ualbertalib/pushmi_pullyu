@@ -1,0 +1,76 @@
+@prefix premis: <http://www.loc.gov/premis/rdf/v1#> .
+@prefix nt: <http://www.jcp.org/jcr/nt/1.0> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns004: <http://purl.org/dc/terms/> .
+@prefix ns003: <http://id.loc.gov/vocabulary/relators/> .
+@prefix ns002: <http://terms.library.ualberta.ca/identifiers/> .
+@prefix ns001: <info:fedora/fedora-system:def/model#> .
+@prefix xsi: <http://www.w3.org/2001/XMLSchema-instance> .
+@prefix ns008: <http://vivoweb.org/ontology/core#> .
+@prefix mode: <http://www.modeshape.org/1.0> .
+@prefix ns007: <http://terms.library.ualberta.ca/role/> .
+@prefix ns006: <http://terms.library.ualberta.ca/id/> .
+@prefix ns005: <http://www.w3.org/ns/auth/acl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix ns009: <AASM::Persistence::ActiveFedoraPersistence::> .
+@prefix fedoraconfig: <http://fedora.info/definitions/v4/config#> .
+@prefix mix: <http://www.jcp.org/jcr/mix/1.0> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix image: <http://www.modeshape.org/images/1.0> .
+@prefix sv: <http://www.jcp.org/jcr/sv/1.0> .
+@prefix test: <info:fedora/test/> .
+@prefix ns011: <http://projecthydra.org/ns/auth/acl#> .
+@prefix ns010: <info:fedora/fedora-system:def/relations-external#> .
+@prefix ns015: <http://scholarsphere.psu.edu/ns#> .
+@prefix ns014: <http://terms.library.ualberta.ca/thesis/> .
+@prefix ns013: <http://purl.org/ontology/bibo/> .
+@prefix ns012: <http://terms.library.ualberta.ca/date/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix fedora: <http://fedora.info/definitions/v4/repository#> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix xs: <http://www.w3.org/2001/XMLSchema> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+
+<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328> a ldp:RDFSource , ldp:Container , <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created> , fedora:Container , fedora:Resource , fedora:Resource , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified> , <http://www.jcp.org/jcr/mix/1.0referenceable> ;
+	fedora:lastModifiedBy "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns001:createdDate "2017-05-16T21:26:37.782051115Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	ns001:downloadFilename "whatever.pdf"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns002:hasCollectionId "br86b356q"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns006:doi "doi:10.5072/FK29G5PB8V"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:isVersionOf ""^^<http://www.w3.org/2001/XMLSchema#string> ;
+	fedora:createdBy "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns002:year_created "2017"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	fedora:created "2017-05-16T21:26:56.326Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	fedora:lastModified "2017-05-16T21:28:55.135Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	ns004:subject "Sarcasm"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:modified "2017-05-16T21:26:37.782051115Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	ns015:relativePath ""^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:license "http://creativecommons.org/licenses/by/4.0/"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	fedora:uuid "22d19a70-fa3c-4944-9418-4c59e3893b87"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:rights ""^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns001:hasModel "GenericFile"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns010:isPartOf <http://www.example.com:8983/fedora/rest/dev/x3/46/d4/16/x346d4165> ;
+	ns004:creator "Chris Want"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns003:dpt "dittest@ualberta.ca"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	fedora:primaryType "nt:folder"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	fedora:mixinTypes "fedora:Container"^^<http://www.w3.org/2001/XMLSchema#string> , "fedora:Resource"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:created "2017/01/01"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	<AASM::Persistence::ActiveFedoraPersistence::AASMTermsaasmstate> "available"^^<http://www.w3.org/2001/XMLSchema#token> ;
+	ns002:belongsToCommunity "6682x392q"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:description "Test PDF"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:language "English"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:source ""^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:title "Whatever"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:type "Book Chapter"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns002:hasCollection "Technical Reports"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	ns004:relation ""^^<http://www.w3.org/2001/XMLSchema#string> ;
+	fedora:writable "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+	fedora:hasParent <http://www.example.com:8983/fedora/rest/dev> ;
+	ldp:contains <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content> , <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/characterization> , <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/thumbnail> .
+
+<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/fcr:export?format=jcr/xml> dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .
+
+<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328> fedora:exportsAs <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/fcr:export?format=jcr/xml> .
+
+<http://fedora.info/definitions/v4/repository#jcr/xml> rdfs:label "jcr/xml"^^<http://www.w3.org/2001/XMLSchema#string> .

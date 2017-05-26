@@ -12,6 +12,7 @@ debug: false
 logfile: log/pushmi_pullyu.log
 monitor: false
 piddir: tmp/pids
+workdir: tmp/work
 process_name: pushmi_pullyu
 queue_name: dev:pmpy_queue
 minimum_age: 0
@@ -22,10 +23,10 @@ redis:
   port: 6379
 
 solr:
-  url: http://localhost:8983/solr/hydra-development
+  url: http://localhost:8983/solr/development
 
 fedora:
-  url: http://localhost:8984/rest
+  url: http://localhost:8983/fedora/rest
   user: fedoraAdmin
   password: fedoraAdmin
   base_path: /dev
