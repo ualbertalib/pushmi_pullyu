@@ -7,19 +7,12 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
   let(:basedir) { "#{options[:workdir]}/#{noid}" }
 
   before do
-    allow($stdout).to receive(:puts)
     allow(PushmiPullyu).to receive(:options) {
       { fedora: { url: 'http://www.example.com:8983/fedora/rest',
                   base_path: '/test',
                   user: 'gollum',
                   password: 'iH8zH0bb1tzeZ' } }
     }
-  end
-
-  describe '#pairtree' do
-    it 'is correct' do
-      expect(fedora_fetcher.pairtree).to eq('ab/c1/23/wh/abc123whatever')
-    end
   end
 
   describe '#object_url' do

@@ -61,11 +61,11 @@ class PushmiPullyu::AIP::Downloader
     results = PushmiPullyu::AIP::SolrFetcher.new(@noid).fetch_permission_object_ids
     if results.empty?
       PushmiPullyu.logger.info("#{@noid}: permissions not found")
-      return
-    end
-    results.each do |permission_id|
-      PushmiPullyu.logger.info("#{@noid}: permission object #{permission_id} found")
-      download_permission(permission_id)
+    else
+      results.each do |permission_id|
+        PushmiPullyu.logger.info("#{@noid}: permission object #{permission_id} found")
+        download_permission(permission_id)
+      end
     end
   end
 
@@ -145,22 +145,22 @@ class PushmiPullyu::AIP::Downloader
     @aip_paths ||= OpenStruct.new(
       main_object: OpenStruct.new(
         remote: nil, # Base path
-        local: "#{@aip_dirs.metadata}/object_metadata.n3",
+        local: "#{aip_dirs.metadata}/object_metadata.n3",
         optional: false
       ),
       fixity: OpenStruct.new(
         remote: '/content/fcr:fixity',
-        local: "#{@aip_dirs.logs}/content_fixity_report.n3",
+        local: "#{aip_dirs.logs}/content_fixity_report.n3",
         optional: false
       ),
       content_datastream_metadata: OpenStruct.new(
         remote: '/content/fcr:metadata',
-        local: "#{@aip_dirs.metadata}/content_fcr_metadata.n3",
+        local: "#{aip_dirs.metadata}/content_fcr_metadata.n3",
         optional: false
       ),
       versions: OpenStruct.new(
         remote: '/content/fcr:versions',
-        local: "#{@aip_dirs.metadata}/content_versions.n3",
+        local: "#{aip_dirs.metadata}/content_versions.n3",
         optional: false
       ),
       content: OpenStruct.new(
@@ -172,22 +172,22 @@ class PushmiPullyu::AIP::Downloader
       # Optional downloads
       thumbnail: OpenStruct.new(
         remote: '/thumbnail',
-        local: "#{@aip_dirs.thumbnails}/thumbnail",
+        local: "#{aip_dirs.thumbnails}/thumbnail",
         optional: true
       ),
       characterization: OpenStruct.new(
         remote: '/characterization',
-        local: "#{@aip_dirs.logs}/content_characterization.n3",
+        local: "#{aip_dirs.logs}/content_characterization.n3",
         optional: true
       ),
       fedora3foxml: OpenStruct.new(
         remote: '/fedora3foxml',
-        local: "#{@aip_dirs.metadata}/fedora3foxml.xml",
+        local: "#{aip_dirs.metadata}/fedora3foxml.xml",
         optional: true
       ),
       fedora3foxml_metadata: OpenStruct.new(
         remote: '/fedora3foxml/fcr:metadata',
-        local: "#{@aip_dirs.metadata}/fedora3foxml.n3",
+        local: "#{aip_dirs.metadata}/fedora3foxml.n3",
         optional: true
       )
     ).freeze

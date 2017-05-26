@@ -23,11 +23,6 @@ class PushmiPullyu::AIP::Creator
     @aip_filename
   end
 
-  def destroy
-    destroy_aip_directory
-    destroy_aip_file
-  end
-
   private
 
   def workdir
@@ -42,11 +37,6 @@ class PushmiPullyu::AIP::Creator
     return unless File.exist?(@aip_directory)
     PushmiPullyu.logger.info("#{@noid}: Nuking directories ...")
     FileUtils.rm_rf(@aip_directory)
-  end
-
-  def download_aip
-    # Note: returns directory name for AIP
-    PushmiPullyu::AIP::Downloader.new(@noid).run
   end
 
   def bag_aip

@@ -34,10 +34,8 @@ class PushmiPullyu::AIP::SolrFetcher
     url += url_extra if url_extra
     uri = URI(url)
 
-    request = Net::HTTP::Get.new(uri)
-
     response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(request)
+      http.request(Net::HTTP::Get.new(uri))
     end
 
     return response.body if response.is_a?(Net::HTTPSuccess)

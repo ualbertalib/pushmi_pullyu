@@ -10,18 +10,10 @@ class PushmiPullyu::AIP::FedoraFetcher
     @noid = noid
   end
 
-  def base_path
-    PushmiPullyu.options[:fedora][:base_path]
-  end
-
   def object_url(url_extra = nil)
     url = "#{PushmiPullyu.options[:fedora][:url]}#{base_path}/#{pairtree}"
     url += url_extra if url_extra
     url
-  end
-
-  def pairtree
-    "#{@noid[0..1]}/#{@noid[2..3]}/#{@noid[4..5]}/#{@noid[6..7]}/#{@noid}"
   end
 
   def download_object(download_path: nil, url_extra: nil,
@@ -59,6 +51,16 @@ class PushmiPullyu::AIP::FedoraFetcher
     end
 
     raise FedoraFetchError
+  end
+
+  private
+
+  def pairtree
+    "#{@noid[0..1]}/#{@noid[2..3]}/#{@noid[4..5]}/#{@noid[6..7]}/#{@noid}"
+  end
+
+  def base_path
+    PushmiPullyu.options[:fedora][:base_path]
   end
 
 end
