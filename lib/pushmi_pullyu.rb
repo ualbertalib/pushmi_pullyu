@@ -15,20 +15,16 @@ require 'active_support/core_ext'
 
 # PushmiPullyu main module
 module PushmiPullyu
-  LOGFILE = 'log/pushmi_pullyu.log'.freeze
-  PIDDIR  = 'tmp/pids'.freeze
-  WORKDIR = 'tmp/work'.freeze
-  PROCESS_NAME = 'pushmi_pullyu'.freeze
 
   DEFAULTS = {
     daemonize: false,
     debug: false,
-    logfile: LOGFILE,
+    logfile: 'log/pushmi_pullyu.log',
     minimum_age: 0,
     monitor: false,
-    piddir: PIDDIR,
-    workdir: WORKDIR,
-    process_name: PROCESS_NAME,
+    piddir: 'tmp/pids',
+    workdir: 'tmp/work',
+    process_name: 'pushmi_pullyu',
     queue_name: 'dev:pmpy_queue',
     redis: {
       host: 'localhost',
