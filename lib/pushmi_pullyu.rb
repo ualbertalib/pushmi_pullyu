@@ -15,7 +15,6 @@ require 'active_support/core_ext'
 
 # PushmiPullyu main module
 module PushmiPullyu
-
   DEFAULTS = {
     daemonize: false,
     debug: false,
