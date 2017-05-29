@@ -12,7 +12,6 @@ class PushmiPullyu::AIP::Downloader
 
   def initialize(noid)
     @noid = noid
-    @fedora_fetcher = PushmiPullyu::AIP::FedoraFetcher.new(@noid)
   end
 
   def run
@@ -22,11 +21,11 @@ class PushmiPullyu::AIP::Downloader
     [:main_object, :fixity, :content_datastream_metadata, :versions, :thumbnail,
      :characterization, :fedora3foxml, :fedora3foxml_metadata].each do |item|
       path_spec = aip_paths[item]
-      download_and_log(path_spec)
+      download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(@noid))
     end
 
     # Need content filename from metadata
-    download_and_log(aip_paths.content, local_path: content_filename)
+    download_and_log(aip_paths.content, PushmiPullyu::AIP::FedoraFetcher.new(@noid), local_path: content_filename)
 
     download_permissions
 
@@ -36,24 +35,19 @@ class PushmiPullyu::AIP::Downloader
 
   private
 
-  def download_and_log(path_spec, local_path: nil, fedora_fetcher: nil)
-    # Fetcher is either for current object, or for a permission object
-    fedora_fetcher ||= @fedora_fetcher
-
+  def download_and_log(path_spec, fedora_fetcher, local_path: nil)
     # Sometimes we don't know filename in advance, so we use local_path ...
     output_file = full_local_path(local_path || path_spec.local)
-    url = fedora_fetcher.object_url(path_spec.remote)
 
-    log_fetching(path_spec, url, local_path: output_file)
+    log_fetching(fedora_fetcher.object_url(path_spec.remote), output_file)
 
     is_rdf = (output_file !~ /\.n3$/)
 
-    success = fedora_fetcher.download_object(download_path: output_file,
-                                             url_extra: path_spec.remote,
-                                             optional: path_spec.optional,
-                                             is_rdf: is_rdf)
-
-    log_saved(path_spec, success, local_path: output_file)
+    is_success = fedora_fetcher.download_object(download_path: output_file,
+                                                url_extra: path_spec.remote,
+                                                optional: path_spec.optional,
+                                                is_rdf: is_rdf)
+    log_saved(is_success, output_file)
   end
 
   def download_permissions
@@ -70,33 +64,26 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def download_permission(permission_id)
-    permission_fetcher =
-      PushmiPullyu::AIP::FedoraFetcher.new(permission_id)
-
-    filename = permission_filename(permission_id)
-
     path_spec = OpenStruct.new(
       remote: nil,
-      local: filename,
+      local: permission_filename(permission_id),
       optional: false
     )
-    download_and_log(path_spec, fedora_fetcher: permission_fetcher)
+    download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(permission_id))
   end
 
   ### Logging
 
-  def log_fetching(path_spec, url, local_path: nil)
-    local_path ||= path_spec.local
-    message = "#{@noid}: #{local_path} -- fetching from #{url} ..."
+  def log_fetching(url, output_file)
+    message = "#{@noid}: #{output_file} -- fetching from #{url} ..."
     PushmiPullyu::Logging.log_aip_activity(@noid, message)
   end
 
-  def log_saved(path_spec, success = true, local_path: nil)
-    local_path ||= path_spec.local
-    message = if success
-                "#{@noid}: #{local_path} -- saved"
+  def log_saved(is_success, output_file)
+    message = if is_success
+                "#{@noid}: #{output_file} -- saved"
               else
-                "#{@noid}: #{local_path} -- not_found"
+                "#{@noid}: #{output_file} -- not_found"
               end
     PushmiPullyu::Logging.log_aip_activity(@noid, message)
   end
