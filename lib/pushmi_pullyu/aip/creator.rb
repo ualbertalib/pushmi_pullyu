@@ -12,7 +12,6 @@ class PushmiPullyu::AIP::Creator
     @noid = noid
     @aip_directory = PushmiPullyu::AIP.aip_directory(noid)
     @aip_filename = PushmiPullyu::AIP.aip_filename(noid)
-    PushmiPullyu::AIP.validate(noid)
   end
 
   def run(should_clean_work_directories: true)
