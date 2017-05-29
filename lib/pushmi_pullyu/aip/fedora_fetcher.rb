@@ -16,19 +16,18 @@ class PushmiPullyu::AIP::FedoraFetcher
     url
   end
 
+  # Return true on success, raise an error otherwise
+  # (or use 'optional' to return false on 404)
   def download_object(download_path: nil, url_extra: nil,
-                      optional: false, rdf: false)
-    # Return true on success, raise an error otherwise
-    # (or use 'optional' to return false on 404)
+                      optional: false, is_rdf: false)
 
-    url = object_url(url_extra)
-    uri = URI(url)
+    uri = URI(object_url(url_extra))
 
     request = Net::HTTP::Get.new(uri)
     request.basic_auth(PushmiPullyu.options[:fedora][:user],
                        PushmiPullyu.options[:fedora][:password])
 
-    request['Accept'] = RDF_FORMAT if rdf
+    request['Accept'] = RDF_FORMAT if is_rdf
 
     response = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(request)
@@ -43,14 +42,12 @@ class PushmiPullyu::AIP::FedoraFetcher
         PushmiPullyu.logger.debug(response.body)
       end
       return true
-    end
-
-    if response.is_a?(Net::HTTPNotFound)
+    elsif response.is_a?(Net::HTTPNotFound)
       raise FedoraFetchError unless optional
       return false
+    else
+      raise FedoraFetchError
     end
-
-    raise FedoraFetchError
   end
 
   private

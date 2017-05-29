@@ -46,12 +46,13 @@ class PushmiPullyu::AIP::Downloader
 
     log_fetching(path_spec, url, local_path: output_file)
 
-    rdf = (output_file =~ /\.n3$/)
+    is_rdf = (output_file !~ /\.n3$/)
 
     success = fedora_fetcher.download_object(download_path: output_file,
                                              url_extra: path_spec.remote,
                                              optional: path_spec.optional,
-                                             rdf: rdf)
+                                             is_rdf: is_rdf)
+
     log_saved(path_spec, success, local_path: output_file)
   end
 
