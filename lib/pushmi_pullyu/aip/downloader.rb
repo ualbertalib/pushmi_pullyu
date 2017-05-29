@@ -76,7 +76,7 @@ class PushmiPullyu::AIP::Downloader
 
   def log_fetching(url, output_file)
     message = "#{@noid}: #{output_file} -- fetching from #{url} ..."
-    PushmiPullyu::Logging.log_aip_activity(@noid, message)
+    PushmiPullyu::Logging.log_aip_activity(aip_directory, message)
   end
 
   def log_saved(is_success, output_file)
@@ -85,7 +85,7 @@ class PushmiPullyu::AIP::Downloader
               else
                 "#{@noid}: #{output_file} -- not_found"
               end
-    PushmiPullyu::Logging.log_aip_activity(@noid, message)
+    PushmiPullyu::Logging.log_aip_activity(aip_directory, message)
   end
 
   ### Directories
@@ -109,21 +109,17 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def clean_directories
-    return unless File.exist?(base_path)
+    return unless File.exist?(aip_directory)
     PushmiPullyu.logger.debug("#{@noid}: Nuking directories ...")
-    FileUtils.rm_rf(base_path)
+    FileUtils.rm_rf(aip_directory)
   end
 
-  def base_path
+  def aip_directory
     PushmiPullyu::AIP.aip_directory(@noid)
   end
 
-  def data_path
-    "#{base_path}/data"
-  end
-
   def full_local_path(path)
-    "#{data_path}/#{path}"
+    "#{aip_directory}/data/#{path}"
   end
 
   ### Files

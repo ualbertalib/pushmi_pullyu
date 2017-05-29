@@ -23,8 +23,8 @@ module PushmiPullyu::Logging
     @logger ||= initialize_logger
   end
 
-  def self.log_aip_activity(noid, message)
-    log_file = "#{PushmiPullyu.options[:workdir]}/#{noid}/data/logs/aipcreation.log"
+  def self.log_aip_activity(aip_directory, message)
+    log_file = "#{aip_directory}/data/logs/aipcreation.log"
     aip_logger = Logger.new(File.expand_path(log_file))
     aip_logger.level = logger.level
 
