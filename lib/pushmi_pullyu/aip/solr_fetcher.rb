@@ -10,7 +10,7 @@ class PushmiPullyu::AIP::SolrFetcher
   end
 
   def fetch_permission_object_ids
-    hash = JSON.parse(run_query_json(@noid))
+    hash = JSON.parse(run_query_json)
 
     return [] if hash['response']['docs'].empty?
 
@@ -20,9 +20,9 @@ class PushmiPullyu::AIP::SolrFetcher
   private
 
   # Return fetched results, else raise an error
-  def run_query_json(noid)
+  def run_query_json
     response = Net::HTTP.get_response(
-      URI("#{PushmiPullyu.options[:solr][:url]}/select?q=accessTo_ssim:#{noid}&fl=id&wt=json")
+      URI("#{PushmiPullyu.options[:solr][:url]}/select?q=accessTo_ssim:#{@noid}&fl=id&wt=json")
     )
 
     return response.body if response.is_a?(Net::HTTPSuccess)
