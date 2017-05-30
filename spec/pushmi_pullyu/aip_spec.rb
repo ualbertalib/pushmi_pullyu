@@ -1,40 +1,80 @@
 require 'spec_helper'
 
-# Please note that much of the nitty-gritty is tested in the specs for creator and downloader
-
 RSpec.describe PushmiPullyu::AIP do
-  let(:workdir) { 'tmp/aip_spec' }
   let(:noid) { '9p2909328' }
-  let(:mock_download_data) { "spec/fixtures/aip_download/#{noid}" }
-  let(:aip_file) { "#{workdir}/#{noid}.tar" }
+  let(:workdir) { 'tmp/aip_spec' }
   let(:aip_folder) { "#{workdir}/#{noid}" }
+  let(:aip_file) { "#{aip_folder}.tar" }
 
   before do
     allow(PushmiPullyu).to receive(:options) { { workdir: workdir } }
-    FileUtils.mkdir_p(workdir)
-    FileUtils.cp_r(mock_download_data, workdir)
-  end
-
-  after do
-    FileUtils.rm_rf(workdir)
-    FileUtils.rm_rf(aip_file)
   end
 
   describe '.create' do
-    it 'creates the aip, removes work directory by default' do
-      # Mocked download data should exist
-      expect(File.exist?(aip_folder)).to eq(true)
-
-      # Should not exist yet
-      expect(File.exist?(aip_file)).to eq(false)
+    it 'calls aip creator class and returns the tar filename' do
+      creator = instance_double(PushmiPullyu::AIP::Creator)
+      allow(PushmiPullyu::AIP::Creator).to receive(:new).and_return(creator)
+      allow(creator).to receive(:run)
 
       filename = PushmiPullyu::AIP.create(noid)
 
-      # Work directory is not removed
-      expect(File.exist?(aip_folder)).to eq(true)
-      # AIP exists
-      expect(File.exist?(aip_file)).to eq(true)
+      expect(creator).to have_received(:run).once
       expect(filename).to eq(File.expand_path(aip_file))
+    end
+  end
+
+  describe '.download' do
+    it 'calls aip downloader class and returns the aip directory' do
+      downloader = instance_double(PushmiPullyu::AIP::Downloader)
+      allow(PushmiPullyu::AIP::Downloader).to receive(:new).and_return(downloader)
+      allow(downloader).to receive(:run)
+
+      aip_directory = PushmiPullyu::AIP.download(noid)
+
+      expect(downloader).to have_received(:run).once
+      expect(aip_directory).to eq(File.expand_path(aip_folder))
+    end
+  end
+
+  describe '.destroy' do
+    it 'calls rm on AIP directory and AIP file' do
+      # create the work folder/aip tar file
+      FileUtils.mkdir_p(aip_folder)
+      FileUtils.touch(aip_file)
+
+      PushmiPullyu::AIP.destroy(noid)
+
+      # Work directory has been removed
+      expect(File.exist?(aip_folder)).to eq(false)
+      # AIP tar file has been removed
+      expect(File.exist?(aip_file)).to eq(false)
+    end
+  end
+
+  describe '.aip_filename' do
+    it 'returns the AIP filename' do
+      expect(PushmiPullyu::AIP.aip_filename(noid)).to eq(File.expand_path(aip_file))
+    end
+  end
+
+  describe '.aip_directory' do
+    it 'returns the AIP directory' do
+      expect(PushmiPullyu::AIP.aip_directory(noid)).to eq(File.expand_path(aip_folder))
+    end
+  end
+
+  describe '.sanitize_noid' do
+    it 'returns the noid santiized' do
+      expect(PushmiPullyu::AIP.sanitize_noid(noid)).to eq(noid)
+      expect(PushmiPullyu::AIP.sanitize_noid('abc$%&123')).to eq('abc___123')
+      expect(PushmiPullyu::AIP.sanitize_noid('')).to eq('')
+    end
+  end
+
+  describe '.validate_noid' do
+    it 'validates the noid' do
+      expect(PushmiPullyu::AIP.validate_noid(noid)).to eq(nil)
+      expect { PushmiPullyu::AIP.validate_noid('') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
     end
   end
 end
