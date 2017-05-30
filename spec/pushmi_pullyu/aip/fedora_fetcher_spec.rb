@@ -32,8 +32,9 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
     it 'gets an object with a correct noid and creates the file' do
       VCR.use_cassette('fedora_fetcher_200') do
         expect(fedora_fetcher.download_object(download_path)).to eq(true)
-        expect(File.exist?(download_path)).to eq(true)
       end
+
+      expect(File.exist?(download_path)).to eq(true)
     end
 
     it 'raises an error on an object with a bad noid' do

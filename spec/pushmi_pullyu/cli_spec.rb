@@ -143,6 +143,11 @@ RSpec.describe PushmiPullyu::CLI do
         cli.parse(['-q', 'test:pmpy:queue'])
         expect(PushmiPullyu.options[:queue_name]).to eq 'test:pmpy:queue'
       end
+
+      it 'sets workdir' do
+        cli.parse(['-W', '/path/to/workdir'])
+        expect(PushmiPullyu.options[:workdir]).to eq '/path/to/workdir'
+      end
     end
 
     describe 'with commands' do
