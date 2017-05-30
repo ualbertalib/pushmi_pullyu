@@ -1,7 +1,6 @@
 require 'fileutils'
 
 module PushmiPullyu::AIP
-
   class NoidInvalid < StandardError; end
 
   def self.create(noid)

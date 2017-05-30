@@ -8,14 +8,13 @@ class PushmiPullyu::AIP::Downloader
 
   class NoContentFilename < StandardError; end
 
-  FILENAME_PREDICATE = 'info:fedora/fedora-system:def/model#downloadFilename'.freeze
-
   def initialize(noid)
     @noid = noid
   end
 
   def run
     make_directories
+
     PushmiPullyu.logger.info("#{@noid}: Retreiving data from Fedora ...")
 
     [:main_object, :fixity, :content_datastream_metadata, :versions, :thumbnail,
@@ -25,16 +24,20 @@ class PushmiPullyu::AIP::Downloader
     end
 
     # Need content filename from metadata
-    download_and_log(aip_paths.content, PushmiPullyu::AIP::FedoraFetcher.new(@noid), local_path: content_filename)
+    path_spec = OpenStruct.new(
+      remote: '/content',
+      local: content_filename, # Filename derived from metadata
+      optional: false
+    )
+    download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(@noid))
 
     download_permissions
   end
 
   private
 
-  def download_and_log(path_spec, fedora_fetcher, local_path: nil)
-    # Sometimes we don't know filename in advance, so we use local_path ...
-    output_file = full_local_path(local_path || path_spec.local)
+  def download_and_log(path_spec, fedora_fetcher)
+    output_file = path_spec.local
 
     log_fetching(fedora_fetcher.object_url(path_spec.remote), output_file)
 
@@ -89,10 +92,10 @@ class PushmiPullyu::AIP::Downloader
 
   def aip_dirs
     @aip_dirs ||= OpenStruct.new(
-      objects: 'objects',
-      metadata: 'objects/metadata',
-      logs: 'logs',
-      thumbnails: 'thumbnails'
+      objects: "#{aip_directory}/data/objects",
+      metadata: "#{aip_directory}/data/objects/metadata",
+      logs: "#{aip_directory}/data/logs",
+      thumbnails: "#{aip_directory}/data/thumbnails"
     )
   end
 
@@ -100,7 +103,7 @@ class PushmiPullyu::AIP::Downloader
     clean_directories
     PushmiPullyu.logger.debug("#{@noid}: Creating directories ...")
     aip_dirs.to_h.values.each do |path|
-      FileUtils.mkdir_p(full_local_path(path))
+      FileUtils.mkdir_p(path)
     end
     PushmiPullyu.logger.debug("#{@noid}: Creating directories done")
   end
@@ -113,10 +116,6 @@ class PushmiPullyu::AIP::Downloader
 
   def aip_directory
     PushmiPullyu::AIP.aip_directory(@noid)
-  end
-
-  def full_local_path(path)
-    "#{aip_directory}/data/#{path}"
   end
 
   ### Files
@@ -141,11 +140,6 @@ class PushmiPullyu::AIP::Downloader
       versions: OpenStruct.new(
         remote: '/content/fcr:versions',
         local: "#{aip_dirs.metadata}/content_versions.n3",
-        optional: false
-      ),
-      content: OpenStruct.new(
-        remote: '/content',
-        local: nil, # Filename derived from metadata
         optional: false
       ),
 
@@ -174,18 +168,16 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def content_filename
-    return @content_filename unless @content_filename.nil?
+    filename_predicate = RDF::URI('info:fedora/fedora-system:def/model#downloadFilename')
 
     # Extract filename from main object metadata
-    graph = RDF::Graph.load(full_local_path(aip_paths.main_object.local))
-    graph.each_statement do |statement|
-      if statement.predicate == FILENAME_PREDICATE
-        @content_filename = "#{aip_dirs.objects}/#{statement.object}"
-        break
-      end
+    graph = RDF::Graph.load(aip_paths.main_object.local)
+
+    graph.query(predicate: filename_predicate) do |results|
+      return "#{aip_dirs.objects}/#{results.object}"
     end
-    raise NoContentFilename unless @content_filename
-    @content_filename
+
+    raise NoContentFilename
   end
 
 end
