@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'ostruct'
+require 'rdf'
 require 'rdf/n3'
 
 # Download all of the metadata/datastreams and associated data
@@ -26,7 +27,7 @@ class PushmiPullyu::AIP::Downloader
     # Need content filename from metadata
     path_spec = OpenStruct.new(
       remote: '/content',
-      local: content_filename, # Filename derived from metadata
+      local: content_filename, # lookup filename derived from metadata
       optional: false
     )
     download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(@noid))
@@ -167,10 +168,10 @@ class PushmiPullyu::AIP::Downloader
     ).freeze
   end
 
+  # Extract filename from main object metadata
   def content_filename
     filename_predicate = RDF::URI('info:fedora/fedora-system:def/model#downloadFilename')
 
-    # Extract filename from main object metadata
     graph = RDF::Graph.load(aip_paths.main_object.local)
 
     graph.query(predicate: filename_predicate) do |results|
