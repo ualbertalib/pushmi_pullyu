@@ -22,6 +22,8 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
 
   describe '#download_object' do
     it 'gets an object with a correct noid' do
+      allow(PushmiPullyu.logger).to receive(:debug)
+
       VCR.use_cassette('fedora_fetcher_200') do
         expect(fedora_fetcher.download_object).to eq(true)
       end

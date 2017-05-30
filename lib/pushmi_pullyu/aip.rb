@@ -5,12 +5,11 @@ module PushmiPullyu::AIP
   class WorkdirInvalid < StandardError; end
   class NoidInvalid < StandardError; end
 
-  def self.create(noid, should_clean_work_directories: true)
+  def self.create(noid)
     # Note: returns the filename of the created AIP tarball
     validate(noid)
-    PushmiPullyu::AIP::Creator
-      .new(noid)
-      .run(should_clean_work_directories: should_clean_work_directories)
+    PushmiPullyu::AIP::Creator.new(noid).run
+    aip_filename(noid)
   end
 
   def self.download(noid)

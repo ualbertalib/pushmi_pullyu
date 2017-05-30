@@ -4,22 +4,13 @@ require 'spec_helper'
 
 RSpec.describe PushmiPullyu::AIP do
   let(:workdir) { 'tmp/aip_spec' }
-  let(:options) do
-    { workdir: workdir,
-      fedora: { url: 'http://www.example.com:8983/fedora/rest',
-                base_path: '/dev',
-                user: 'fedoraAdmin',
-                password: 'fedoraAdmin' },
-      solr: { url: 'http://www.example.com:8983/solr/development' } }
-  end
   let(:noid) { '9p2909328' }
   let(:mock_download_data) { "spec/fixtures/aip_download/#{noid}" }
   let(:aip_file) { "#{workdir}/#{noid}.tar" }
+  let(:aip_folder) { "#{workdir}/#{noid}" }
 
   before do
-    allow(PushmiPullyu.logger).to receive(:info)
-    allow(PushmiPullyu.logger).to receive(:debug)
-    allow(PushmiPullyu).to receive(:options) { options }
+    allow(PushmiPullyu).to receive(:options) { { workdir: workdir } }
     FileUtils.mkdir_p(workdir)
     FileUtils.cp_r(mock_download_data, workdir)
   end
@@ -29,41 +20,21 @@ RSpec.describe PushmiPullyu::AIP do
     FileUtils.rm_rf(aip_file)
   end
 
-  describe '#create' do
+  describe '.create' do
     it 'creates the aip, removes work directory by default' do
-      VCR.use_cassette('aip_downloader_run') do
-        # Mocked download data should exist
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
+      # Mocked download data should exist
+      expect(File.exist?(aip_folder)).to eq(true)
 
-        # Should not exist yet
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(false)
+      # Should not exist yet
+      expect(File.exist?(aip_file)).to eq(false)
 
-        filename = PushmiPullyu::AIP.create(noid)
+      filename = PushmiPullyu::AIP.create(noid)
 
-        # Work directory is removed
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(false)
-        # AIP exists
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(true)
-        expect(filename).to eq(File.expand_path('tmp/aip_spec/9p2909328.tar'))
-      end
-    end
-
-    it 'creates the AIP, can keep the AIP directory' do
-      VCR.use_cassette('aip_downloader_run') do
-        # Mocked download data should exist
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
-
-        # Should not exist yet
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(false)
-
-        PushmiPullyu::AIP.download(noid)
-        PushmiPullyu::AIP.create(noid, should_clean_work_directories: false)
-
-        # Work directory is NOT removed
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
-        # AIP exists
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(true)
-      end
+      # Work directory is not removed
+      expect(File.exist?(aip_folder)).to eq(true)
+      # AIP exists
+      expect(File.exist?(aip_file)).to eq(true)
+      expect(filename).to eq(File.expand_path(aip_file))
     end
   end
 end
