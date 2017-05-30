@@ -29,10 +29,13 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
 
       sample_file = 'spec/fixtures/config_with_envs.yml'
 
-      # Deposits file twice, expects it only adds it once
+      # Deposits file twice, check that it only gets added once to the container
       expect do
-        swift_depositer.deposit_file(sample_file, 'ERA')
-        swift_depositer.deposit_file(sample_file, 'ERA')
+        first_deposit = swift_depositer.deposit_file(sample_file, 'ERA')
+        second_deposit = swift_depositer.deposit_file(sample_file, 'ERA')
+
+        expect(first_deposit.name).to eq(second_deposit.name)
+        expect(first_deposit.container.name).to eq(second_deposit.container.name)
       end.to change { swift_depositer.swift_connection.container('ERA').count.to_i }.by(1)
     end
   end

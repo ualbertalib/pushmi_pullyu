@@ -11,6 +11,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       solr: { url: 'http://www.example.com:8983/solr/development' } }
   end
   let(:noid) { '9p2909328' }
+  let(:aip_folder) { "#{workdir}/#{noid}" }
   let(:downloader) { PushmiPullyu::AIP::Downloader.new(noid) }
 
   before do
@@ -28,12 +29,12 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
     it 'creates the expected structure' do
       VCR.use_cassette('aip_downloader_run') do
         # Should not exist yet
-        expect(File.exist?('tmp/downloader_spec/9p2909328')).to eq(false)
+        expect(File.exist?(aip_folder)).to eq(false)
 
         downloader.run
 
         # Now it exists
-        expect(File.exist?('tmp/downloader_spec/9p2909328')).to eq(true)
+        expect(File.exist?(aip_folder)).to eq(true)
 
         # 5 directories exist?
         ['tmp/downloader_spec/9p2909328/data',
