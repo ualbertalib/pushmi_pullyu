@@ -28,9 +28,6 @@ class PushmiPullyu::AIP::Downloader
     download_and_log(aip_paths.content, PushmiPullyu::AIP::FedoraFetcher.new(@noid), local_path: content_filename)
 
     download_permissions
-
-    # Return directory name
-    PushmiPullyu::AIP.aip_directory(@noid)
   end
 
   private
@@ -43,7 +40,7 @@ class PushmiPullyu::AIP::Downloader
 
     is_rdf = (output_file !~ /\.n3$/)
 
-    is_success = fedora_fetcher.download_object(download_path: output_file,
+    is_success = fedora_fetcher.download_object(output_file,
                                                 url_extra: path_spec.remote,
                                                 optional: path_spec.optional,
                                                 is_rdf: is_rdf)
@@ -66,7 +63,7 @@ class PushmiPullyu::AIP::Downloader
   def download_permission(permission_id)
     path_spec = OpenStruct.new(
       remote: nil,
-      local: permission_filename(permission_id),
+      local: "#{aip_dirs.metadata}/permission_#{permission_id}.n3",
       optional: false
     )
     download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(permission_id))
@@ -189,10 +186,6 @@ class PushmiPullyu::AIP::Downloader
     end
     raise NoContentFilename unless @content_filename
     @content_filename
-  end
-
-  def permission_filename(permission_id)
-    "#{aip_dirs.metadata}/permission_#{permission_id}.n3"
   end
 
 end
