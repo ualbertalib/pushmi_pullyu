@@ -48,6 +48,9 @@ RSpec.describe PushmiPullyu::AIP do
       expect(File.exist?(aip_folder)).to eq(false)
       # AIP tar file has been removed
       expect(File.exist?(aip_file)).to eq(false)
+
+      # cleanup workdir
+      FileUtils.rm_rf(workdir)
     end
   end
 
@@ -63,17 +66,9 @@ RSpec.describe PushmiPullyu::AIP do
     end
   end
 
-  describe '.sanitize_noid' do
-    it 'returns the noid santiized' do
-      expect(PushmiPullyu::AIP.sanitize_noid(noid)).to eq(noid)
-      expect(PushmiPullyu::AIP.sanitize_noid('abc$%&123')).to eq('abc___123')
-      expect(PushmiPullyu::AIP.sanitize_noid('')).to eq('')
-    end
-  end
-
   describe '.validate_noid' do
     it 'validates the noid' do
-      expect(PushmiPullyu::AIP.validate_noid(noid)).to eq(nil)
+      expect { PushmiPullyu::AIP.validate_noid(noid) }.not_to raise_error
       expect { PushmiPullyu::AIP.validate_noid('') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
     end
   end
