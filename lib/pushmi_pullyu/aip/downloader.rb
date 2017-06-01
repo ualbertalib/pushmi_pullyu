@@ -9,8 +9,9 @@ class PushmiPullyu::AIP::Downloader
 
   class NoContentFilename < StandardError; end
 
-  def initialize(noid)
+  def initialize(noid, aip_directory)
     @noid = noid
+    @aip_directory = aip_directory
   end
 
   def run
@@ -77,26 +78,22 @@ class PushmiPullyu::AIP::Downloader
 
   def log_fetching(url, output_file)
     message = "#{@noid}: #{output_file} -- fetching from #{url} ..."
-    PushmiPullyu::Logging.log_aip_activity(aip_directory, message)
+    PushmiPullyu::Logging.log_aip_activity(@aip_directory, message)
   end
 
   def log_saved(is_success, output_file)
-    message = if is_success
-                "#{@noid}: #{output_file} -- saved"
-              else
-                "#{@noid}: #{output_file} -- not_found"
-              end
-    PushmiPullyu::Logging.log_aip_activity(aip_directory, message)
+    message = "#{@noid}: #{output_file} -- #{is_success ? 'saved' : 'not_found'}"
+    PushmiPullyu::Logging.log_aip_activity(@aip_directory, message)
   end
 
   ### Directories
 
   def aip_dirs
     @aip_dirs ||= OpenStruct.new(
-      objects: "#{aip_directory}/data/objects",
-      metadata: "#{aip_directory}/data/objects/metadata",
-      logs: "#{aip_directory}/data/logs",
-      thumbnails: "#{aip_directory}/data/thumbnails"
+      objects: "#{@aip_directory}/data/objects",
+      metadata: "#{@aip_directory}/data/objects/metadata",
+      logs: "#{@aip_directory}/data/logs",
+      thumbnails: "#{@aip_directory}/data/thumbnails"
     )
   end
 
@@ -110,13 +107,9 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def clean_directories
-    return unless File.exist?(aip_directory)
+    return unless File.exist?(@aip_directory)
     PushmiPullyu.logger.debug("#{@noid}: Nuking directories ...")
-    FileUtils.rm_rf(aip_directory)
-  end
-
-  def aip_directory
-    PushmiPullyu::AIP.aip_directory(@noid)
+    FileUtils.rm_rf(@aip_directory)
   end
 
   ### Files

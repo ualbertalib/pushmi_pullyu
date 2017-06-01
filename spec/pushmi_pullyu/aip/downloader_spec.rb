@@ -12,7 +12,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   end
   let(:noid) { '9p2909328' }
   let(:aip_folder) { "#{workdir}/#{noid}" }
-  let(:downloader) { PushmiPullyu::AIP::Downloader.new(noid) }
+  let(:downloader) { PushmiPullyu::AIP::Downloader.new(noid, aip_folder) }
 
   before do
     allow(PushmiPullyu.logger).to receive(:info)

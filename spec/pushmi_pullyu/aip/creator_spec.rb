@@ -5,7 +5,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
   let(:noid) { '9p2909328' }
   let(:aip_file) { "#{aip_folder}.tar" }
   let(:aip_folder) { "#{workdir}/#{noid}" }
-  let(:creator) { PushmiPullyu::AIP::Creator.new(noid) }
+  let(:creator) { PushmiPullyu::AIP::Creator.new(noid, aip_folder, aip_file) }
 
   before do
     allow(PushmiPullyu).to receive(:options) { { workdir: workdir } }

@@ -8,10 +8,10 @@ class PushmiPullyu::AIP::Creator
 
   # Assumption: the AIP has already been downloaded
 
-  def initialize(noid)
+  def initialize(noid, aip_directory, aip_filename)
     @noid = noid
-    @aip_directory = PushmiPullyu::AIP.aip_directory(noid)
-    @aip_filename = PushmiPullyu::AIP.aip_filename(noid)
+    @aip_directory = aip_directory
+    @aip_filename = aip_filename
   end
 
   def run
@@ -28,13 +28,17 @@ class PushmiPullyu::AIP::Creator
   end
 
   def tar_bag
-    Dir.chdir(workdir) do
-      Minitar.pack(@noid, File.open(@aip_filename, 'wb'))
-    end
-  end
+    # We want to change the directory to the work directory path so we get the tar file to be exactly
+    # the contents of the noid directory and not the entire work directory structure. For example the noid.tar
+    # contains just the noid directory instead of having the noid.tar contain the tmp directory
+    # which contains the workdir directory and then finally the noid directory
 
-  def workdir
-    File.expand_path(PushmiPullyu.options[:workdir])
+    # Before we change directorys, we need to calculate the absolute filepath of our aip filename
+    tar_aip_filename = File.expand_path(@aip_filename)
+
+    Dir.chdir(PushmiPullyu.options[:workdir]) do
+      Minitar.pack(@noid, File.open(tar_aip_filename, 'wb'))
+    end
   end
 
 end

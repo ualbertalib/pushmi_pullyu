@@ -3,34 +3,20 @@ require 'fileutils'
 module PushmiPullyu::AIP
   class NoidInvalid < StandardError; end
 
-  def self.create(noid)
-    validate_noid(noid)
-    PushmiPullyu::AIP::Creator.new(noid).run
-    aip_filename(noid)
-  end
-
-  def self.download(noid)
-    validate_noid(noid)
-    PushmiPullyu::AIP::Downloader.new(noid).run
-    aip_directory(noid)
-  end
-
-  def self.aip_directory(noid)
-    File.expand_path("#{PushmiPullyu.options[:workdir]}/#{noid}")
-  end
-
-  def self.aip_filename(noid)
-    File.expand_path("#{PushmiPullyu.options[:workdir]}/#{noid}.tar")
-  end
-
-  def self.destroy(noid)
-    validate_noid(noid)
-    [aip_directory(noid), aip_filename(noid)].each do |path|
-      FileUtils.rm_rf(path) if File.exist?(path)
-    end
-  end
-
-  def self.validate_noid(noid)
+  def create(noid)
     raise NoidInvalid if noid.to_s.empty?
+
+    aip_directory = "#{PushmiPullyu.options[:workdir]}/#{noid}"
+    aip_filename = "#{aip_directory}.tar"
+
+    PushmiPullyu::AIP::Downloader.new(noid, aip_directory).run
+    PushmiPullyu::AIP::Creator.new(noid, aip_directory, aip_filename).run
+
+    yield aip_filename
+
+    FileUtils.rm_rf(aip_filename) if File.exist?(aip_filename)
+    FileUtils.rm_rf(aip_directory) if File.exist?(aip_directory)
   end
+
+  module_function :create
 end
