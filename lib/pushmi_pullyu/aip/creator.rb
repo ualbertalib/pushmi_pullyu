@@ -1,64 +1,43 @@
-require 'archive/tar/minitar'
+require 'minitar'
 require 'bagit'
-require 'pushmi_pullyu/aip'
+require 'fileutils'
 
 class PushmiPullyu::AIP::Creator
 
+  class BagInvalid < StandardError; end
+
   # Assumption: the AIP has already been downloaded
 
-  def initialize(noid)
+  def initialize(noid, aip_directory, aip_filename)
     @noid = noid
-    @aip_directory = PushmiPullyu::AIP.aip_directory(noid)
-    @aip_filename = PushmiPullyu::AIP.aip_filename(noid)
-    PushmiPullyu::AIP.validate(noid)
+    @aip_directory = aip_directory
+    @aip_filename = aip_filename
   end
 
-  def run(should_clean_work_directories: true)
+  def run
     bag_aip
     tar_bag
-    destroy_aip_directory if should_clean_work_directories
-    # Return the filename of the created file
-    @aip_filename
-  end
-
-  def destroy
-    destroy_aip_directory
-    destroy_aip_file
   end
 
   private
 
-  def workdir
-    File.expand_path(PushmiPullyu.options[:workdir])
-  end
-
-  def destroy_aip_file
-    FileUtils.rm(@aip_filename) if File.exist?(@aip_filename)
-  end
-
-  def destroy_aip_directory
-    return unless File.exist?(@aip_directory)
-    PushmiPullyu.logger.info("#{@noid}: Nuking directories ...")
-    FileUtils.rm_rf(@aip_directory)
-  end
-
-  def download_aip
-    # Note: returns directory name for AIP
-    PushmiPullyu::AIP::Downloader.new(@noid).run
-  end
-
   def bag_aip
     bag = BagIt::Bag.new(@aip_directory)
     bag.manifest!
-    raise PushmiPullyu::AIP::BagInvalid unless bag.valid?
+    raise BagInvalid unless bag.valid?
   end
 
   def tar_bag
-    destroy_aip_file
-    Dir.chdir(workdir) do
-      File.open(@aip_filename, 'wb') do |tar|
-        Archive::Tar::Minitar.pack(@noid, tar)
-      end
+    # We want to change the directory to the work directory path so we get the tar file to be exactly
+    # the contents of the noid directory and not the entire work directory structure. For example the noid.tar
+    # contains just the noid directory instead of having the noid.tar contain the tmp directory
+    # which contains the workdir directory and then finally the noid directory
+
+    # Before we change directorys, we need to calculate the absolute filepath of our aip filename
+    tar_aip_filename = File.expand_path(@aip_filename)
+
+    Dir.chdir(PushmiPullyu.options[:workdir]) do
+      Minitar.pack(@noid, File.open(tar_aip_filename, 'wb'))
     end
   end
 

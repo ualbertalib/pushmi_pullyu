@@ -1,0 +1,620 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.example.com:8080/auth/v1.0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-User:
+      - test:tester
+      X-Auth-Key:
+      - testing
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Storage-Url:
+      - http://www.example.com:8080/v1/AUTH_test
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Content-Length:
+      - '0'
+      X-Trans-Id:
+      - tx791935ef40e24d7892cd2-005928afea
+      Date:
+      - Fri, 26 May 2017 22:44:58 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:44:58 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      X-Timestamp:
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '0'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Trans-Id:
+      - tx8b7bdbfb622f4d1697bad-005928afea
+      Date:
+      - Fri, 26 May 2017 22:44:59 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:44:59 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      X-Timestamp:
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '0'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Trans-Id:
+      - tx660c107d9beb49dfbe30d-005928afeb
+      Date:
+      - Fri, 26 May 2017 22:44:59 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:44:59 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      X-Timestamp:
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '0'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Trans-Id:
+      - txb15cc51f914b4320878b6-005928afeb
+      Date:
+      - Fri, 26 May 2017 22:44:59 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:44:59 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config_with_envs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Length:
+      - '0'
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - tx7b791edfd30a4f6aab33f-005928afeb
+      Date:
+      - Fri, 26 May 2017 22:44:59 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:44:59 GMT
+- request:
+    method: put
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config_with_envs
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Length:
+      - '0'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Last-Modified:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Content-Length:
+      - '0'
+      Etag:
+      - d41d8cd98f00b204e9800998ecf8427e
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - tx8834a25be409483f85af0-005928afed
+      Date:
+      - Fri, 26 May 2017 22:45:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:01 GMT
+- request:
+    method: put
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config_with_envs
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        # File is for testing out if ERB can be used within config.yml
+
+        debug: true
+        queue_name: <%= 'erb_' %>test:pmpy_queue
+
+        redis:
+          <% ENV['REDIS_HOST'] = '192.168.77.11' %>
+          host: <%= ENV['REDIS_HOST'] || 'localhost' %>
+          port: 9999
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Etag:
+      - 810e19de00148bee0004c5b626ed4b51
+      Content-Type:
+      - application/x-tar
+      Transfer-Encoding:
+      - chunked
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Last-Modified:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Content-Length:
+      - '0'
+      Etag:
+      - 810e19de00148bee0004c5b626ed4b51
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - tx68d2bef1757d4b8a916ae-005928afed
+      Date:
+      - Fri, 26 May 2017 22:45:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:01 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '1'
+      Accept-Ranges:
+      - bytes
+      X-Timestamp:
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '230'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Trans-Id:
+      - txbede74e77f7c4d15b49ac-005928afed
+      Date:
+      - Fri, 26 May 2017 22:45:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:01 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config_with_envs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '230'
+      Accept-Ranges:
+      - bytes
+      Last-Modified:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Etag:
+      - 810e19de00148bee0004c5b626ed4b51
+      X-Timestamp:
+      - '1495838701.42682'
+      Content-Type:
+      - application/x-tar
+      X-Trans-Id:
+      - txbaee1fd7461c45c4b81b1-005928afed
+      Date:
+      - Fri, 26 May 2017 22:45:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:01 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config_with_envs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '230'
+      Accept-Ranges:
+      - bytes
+      Last-Modified:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Etag:
+      - 810e19de00148bee0004c5b626ed4b51
+      X-Timestamp:
+      - '1495838701.42682'
+      Content-Type:
+      - application/x-tar
+      X-Trans-Id:
+      - tx8542502e83ec4836a1016-005928afee
+      Date:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:02 GMT
+- request:
+    method: put
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA/config_with_envs
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        # File is for testing out if ERB can be used within config.yml
+
+        debug: true
+        queue_name: <%= 'erb_' %>test:pmpy_queue
+
+        redis:
+          <% ENV['REDIS_HOST'] = '192.168.77.11' %>
+          host: <%= ENV['REDIS_HOST'] || 'localhost' %>
+          port: 9999
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Etag:
+      - 810e19de00148bee0004c5b626ed4b51
+      Content-Type:
+      - application/x-tar
+      Transfer-Encoding:
+      - chunked
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Last-Modified:
+      - Fri, 26 May 2017 22:45:03 GMT
+      Content-Length:
+      - '0'
+      Etag:
+      - 810e19de00148bee0004c5b626ed4b51
+      Content-Type:
+      - text/html; charset=UTF-8
+      X-Trans-Id:
+      - tx3ddc381bbcb1495f81124-005928afee
+      Date:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:02 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '1'
+      Accept-Ranges:
+      - bytes
+      X-Timestamp:
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '230'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Trans-Id:
+      - tx6bf13536329447ec9ae5a-005928afee
+      Date:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:02 GMT
+- request:
+    method: head
+    uri: http://www.example.com:8080/v1/AUTH_test/ERA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Auth-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      X-Storage-Token:
+      - AUTH_tkb95013a506e048d184148129ea587463
+      Connection:
+      - Keep-Alive
+      User-Agent:
+      - OpenStack Ruby API 2.6.8
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Length:
+      - '0'
+      X-Container-Object-Count:
+      - '1'
+      Accept-Ranges:
+      - bytes
+      X-Timestamp:
+      - '1495836578.02094'
+      X-Container-Bytes-Used:
+      - '230'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Trans-Id:
+      - tx0fe2adeb142b4cbabee67-005928afee
+      Date:
+      - Fri, 26 May 2017 22:45:02 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 26 May 2017 22:45:02 GMT
+recorded_with: VCR 3.0.3

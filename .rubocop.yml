@@ -10,17 +10,16 @@ AllCops:
   Exclude:
     - 'tmp/**/*'
     - 'vendor/**/*'
-    - 'Dangerfile'
   ExtraDetails: true
   TargetRubyVersion: 2.3
 
 # readability is Actually Good
-Style/EmptyLinesAroundClassBody:
+Layout/EmptyLinesAroundClassBody:
   EnforcedStyle: empty_lines_except_namespace
 
-# indentation is an endangered resource
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: normal
 
 # A calculated magnitude based on number of assignments,
 # branches, and conditions.
@@ -53,29 +52,32 @@ Metrics/ModuleLength:
 Metrics/PerceivedComplexity:
   Enabled: false
 
-# Style/ClassAndModuleChildren:
-#   EnforcedStyle: compact
+# indentation is an endangered resource
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
 
 Style/Documentation:
   Enabled: false
+
+Style/FileName:
+  Exclude:
+    - Dangerfile
+    - Rakefile
+    - Gemfile
 
 # Checks if there is a magic comment to enforce string literals
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Style/IndentationConsistency:
-  Enabled: true
-  EnforcedStyle: normal
-
 # Perfer to use // but %r can be better in certain scenarios
 Style/RegexpLiteral:
   Enabled: false
 
-# Use %w or %W for arrays of words.
-Style/WordArray:
+Style/SymbolArray:
   Enabled: false
 
-Style/SymbolArray:
+# Use %w or %W for arrays of words.
+Style/WordArray:
   Enabled: false
 
 RSpec/ExampleLength:

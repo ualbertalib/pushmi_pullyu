@@ -1,18 +1,13 @@
-require 'pushmi_pullyu'
-require 'pushmi_pullyu/aip'
 require 'net/http'
-require 'fileutils'
 
 class PushmiPullyu::AIP::FedoraFetcher
+
+  class FedoraFetchError < StandardError; end
 
   RDF_FORMAT = 'text/rdf+n3'.freeze
 
   def initialize(noid)
     @noid = noid
-  end
-
-  def base_path
-    PushmiPullyu.options[:fedora][:base_path]
   end
 
   def object_url(url_extra = nil)
@@ -21,45 +16,44 @@ class PushmiPullyu::AIP::FedoraFetcher
     url
   end
 
-  def pairtree
-    "#{@noid[0..1]}/#{@noid[2..3]}/#{@noid[4..5]}/#{@noid[6..7]}/#{@noid}"
-  end
+  # Return true on success, raise an error otherwise
+  # (or use 'optional' to return false on 404)
+  def download_object(download_path, url_extra: nil,
+                      optional: false, is_rdf: false)
 
-  def download_object(download_path: nil, url_extra: nil,
-                      optional: false, rdf: false)
-    # Return true on success, raise an error otherwise
-    # (or use 'optional' to return false on 404)
-
-    url = object_url(url_extra)
-    uri = URI(url)
+    uri = URI(object_url(url_extra))
 
     request = Net::HTTP::Get.new(uri)
     request.basic_auth(PushmiPullyu.options[:fedora][:user],
                        PushmiPullyu.options[:fedora][:password])
 
-    request['Accept'] = RDF_FORMAT if rdf
+    request['Accept'] = RDF_FORMAT if is_rdf
 
     response = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(request)
     end
 
     if response.is_a?(Net::HTTPSuccess)
-      if download_path
-        file = File.open(download_path, 'wb')
-        file.write(response.body)
-        file.close
-      else
-        PushmiPullyu.logger.debug(response.body)
-      end
+      file = File.open(download_path, 'wb')
+      file.write(response.body)
+      file.close
       return true
-    end
-
-    if response.is_a?(Net::HTTPNotFound)
-      raise PushmiPullyu::AIP::FedoraFetchError unless optional
+    elsif response.is_a?(Net::HTTPNotFound)
+      raise FedoraFetchError unless optional
       return false
+    else
+      raise FedoraFetchError
     end
+  end
 
-    raise PushmiPullyu::AIP::FedoraFetchError
+  private
+
+  def pairtree
+    "#{@noid[0..1]}/#{@noid[2..3]}/#{@noid[4..5]}/#{@noid[6..7]}/#{@noid}"
+  end
+
+  def base_path
+    PushmiPullyu.options[:fedora][:base_path]
   end
 
 end

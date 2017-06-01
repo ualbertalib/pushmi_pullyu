@@ -28,8 +28,8 @@ RSpec.describe PushmiPullyu::Logging do
     expect(PushmiPullyu::Logging.logger).to have_received(:debug).with(an_instance_of(String)).once
   end
 
-  describe '#reopen' do
-    let!(:tmp_dir) { 'tmp/test_dir' }
+  describe '.reopen' do
+    let(:tmp_dir) { 'tmp/test_dir' }
     let(:logfile) { "#{tmp_dir}/pushmi_pullyu.log" }
     let(:logger) { PushmiPullyu::Logging.initialize_logger(logfile) }
 
@@ -54,6 +54,29 @@ RSpec.describe PushmiPullyu::Logging do
       expect(File.read(logfile)).not_to include('Line 1')
       expect(File.read(logfile)).not_to include('Line 2')
       expect(File.read(logfile)).to include('Line 3')
+    end
+  end
+
+  describe '.log_aip_activity' do
+    let(:tmp_aip_dir) { 'tmp/test_aip_dir' }
+    let(:tmp_log_aip_dir) { "#{tmp_aip_dir}/data/logs/" }
+
+    before do
+      FileUtils.mkdir_p(tmp_log_aip_dir)
+    end
+
+    after do
+      FileUtils.rm_rf(tmp_aip_dir)
+    end
+
+    it 'logs aip activity to both aip log and application log' do
+      allow(PushmiPullyu::Logging.logger).to receive(:info)
+
+      PushmiPullyu::Logging.log_aip_activity(tmp_aip_dir, 'This is a test message')
+
+      expect(File.exist?("#{tmp_log_aip_dir}/aipcreation.log")).to eq(true)
+      expect(File.read("#{tmp_log_aip_dir}/aipcreation.log")).to include('This is a test message')
+      expect(PushmiPullyu::Logging.logger).to have_received(:info).with('This is a test message').once
     end
   end
 

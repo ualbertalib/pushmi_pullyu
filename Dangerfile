@@ -2,7 +2,7 @@
 has_app_changes = !git.modified_files.grep(/lib/).empty?
 has_spec_changes = !git.modified_files.grep(/spec/).empty?
 
-if  git.lines_of_code > 50 && has_app_changes && !has_spec_changes
+if git.lines_of_code > 50 && has_app_changes && !has_spec_changes
   warn('There are code changes, but no corresponding tests. '\
          'Please include tests if this PR introduces any modifications in '\
          'behavior.',

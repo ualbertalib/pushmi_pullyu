@@ -1,69 +1,47 @@
 require 'spec_helper'
 
-# Please note that much of the nitty-gritty is tested in the specs for creator and downloader
-
 RSpec.describe PushmiPullyu::AIP do
-  let(:workdir) { 'tmp/aip_spec' }
-  let(:options) do
-    { workdir: workdir,
-      fedora: { url: 'http://www.example.com:8983/fedora/rest',
-                base_path: '/dev',
-                user: 'fedoraAdmin',
-                password: 'fedoraAdmin' },
-      solr: { url: 'http://www.example.com:8983/solr/development' } }
-  end
   let(:noid) { '9p2909328' }
-  let(:mock_download_data) { "spec/fixtures/aip_download/#{noid}" }
-  let(:aip_file) { "#{workdir}/#{noid}.tar" }
+  let(:workdir) { 'tmp/aip_spec' }
+  let(:aip_folder) { "#{workdir}/#{noid}" }
+  let(:aip_file) { "#{aip_folder}.tar" }
 
   before do
-    allow(PushmiPullyu.logger).to receive(:info)
-    allow(PushmiPullyu.logger).to receive(:debug)
-    allow(PushmiPullyu).to receive(:options) { options }
-    FileUtils.mkdir_p(workdir)
-    FileUtils.cp_r(mock_download_data, workdir)
+    allow(PushmiPullyu).to receive(:options) { { workdir: workdir } }
   end
 
-  after do
-    FileUtils.rm_rf(workdir)
-    FileUtils.rm_rf(aip_file)
-  end
-
-  describe '#create' do
-    it 'creates the aip, removes work directory by default' do
-      VCR.use_cassette('aip_downloader_run') do
-        # Mocked download data should exist
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
-
-        # Should not exist yet
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(false)
-
-        filename = PushmiPullyu::AIP.create(noid)
-
-        # Work directory is removed
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(false)
-        # AIP exists
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(true)
-        expect(filename).to eq(File.expand_path('tmp/aip_spec/9p2909328.tar'))
-      end
+  describe '.create' do
+    it 'validates the noid and raises exception if not valid' do
+      expect { PushmiPullyu::AIP.create('') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
     end
 
-    it 'creates the AIP, can keep the AIP directory' do
-      VCR.use_cassette('aip_downloader_run') do
-        # Mocked download data should exist
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
+    it 'calls aip downloader and creator class and cleans up aip folder and file' do
+      # create the work folder/aip tar file
+      FileUtils.mkdir_p(aip_folder)
+      FileUtils.touch(aip_file)
 
-        # Should not exist yet
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(false)
+      # stub out creator/downloader classes
+      creator = instance_double(PushmiPullyu::AIP::Creator)
+      allow(PushmiPullyu::AIP::Creator).to receive(:new).and_return(creator)
+      allow(creator).to receive(:run)
 
-        PushmiPullyu::AIP.download(noid)
-        PushmiPullyu::AIP.create(noid, should_clean_work_directories: false)
+      downloader = instance_double(PushmiPullyu::AIP::Downloader)
+      allow(PushmiPullyu::AIP::Downloader).to receive(:new).and_return(downloader)
+      allow(downloader).to receive(:run)
 
-        # Work directory is NOT removed
-        expect(File.exist?('tmp/aip_spec/9p2909328')).to eq(true)
-        # AIP exists
-        expect(File.exist?('tmp/aip_spec/9p2909328.tar')).to eq(true)
+      PushmiPullyu::AIP.create(noid) do |filename|
+        expect(filename).to eq(aip_file)
       end
+
+      expect(creator).to have_received(:run).once
+      expect(downloader).to have_received(:run).once
+
+      # Work directory has been removed
+      expect(File.exist?(aip_folder)).to eq(false)
+      # AIP tar file has been removed
+      expect(File.exist?(aip_file)).to eq(false)
+      # cleanup workdir
+      FileUtils.rm_rf(workdir)
     end
   end
 end

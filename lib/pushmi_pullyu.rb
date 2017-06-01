@@ -1,33 +1,29 @@
 require 'pushmi_pullyu/logging'
 
+require 'pushmi_pullyu/aip'
 require 'pushmi_pullyu/aip/creator'
 require 'pushmi_pullyu/aip/downloader'
 require 'pushmi_pullyu/aip/solr_fetcher'
 require 'pushmi_pullyu/aip/fedora_fetcher'
-require 'pushmi_pullyu/aip'
 require 'pushmi_pullyu/cli'
 require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/swift_depositer'
 require 'pushmi_pullyu/version'
+
 require 'active_support'
 require 'active_support/core_ext'
 
 # PushmiPullyu main module
 module PushmiPullyu
-  LOGFILE = 'log/pushmi_pullyu.log'.freeze
-  PIDDIR  = 'tmp/pids'.freeze
-  WORKDIR = 'tmp/work'.freeze
-  PROCESS_NAME = 'pushmi_pullyu'.freeze
-
   DEFAULTS = {
     daemonize: false,
     debug: false,
-    logfile: LOGFILE,
+    logfile: 'log/pushmi_pullyu.log',
     minimum_age: 0,
     monitor: false,
-    piddir: PIDDIR,
-    workdir: WORKDIR,
-    process_name: PROCESS_NAME,
+    piddir: 'tmp/pids',
+    workdir: 'tmp/work',
+    process_name: 'pushmi_pullyu',
     queue_name: 'dev:pmpy_queue',
     redis: {
       host: 'localhost',
