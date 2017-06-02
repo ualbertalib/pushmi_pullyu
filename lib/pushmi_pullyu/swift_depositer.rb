@@ -19,7 +19,7 @@ class PushmiPullyu::SwiftDepositer
   def deposit_file(file_name, swift_container)
     file_base_name = File.basename(file_name, '.*')
 
-    hash = Digest::MD5.file(file_name).hexdigest
+    checksum = Digest::MD5.file(file_name).hexdigest
 
     era_container = swift_connection.container(swift_container)
 
@@ -35,8 +35,6 @@ class PushmiPullyu::SwiftDepositer
       project: 'ERA',
       project_id: file_base_name,
       promise: 'bronze',
-      retention: nil,
-      depositor: nil,
       aip_version: '1.0'
     }
 
@@ -44,7 +42,7 @@ class PushmiPullyu::SwiftDepositer
     metadata.transform_keys! { |key| "X-Object-Meta-#{key}" }
 
     deposited_file.write(File.open(file_name),
-                         { 'etag' => hash,
+                         { 'etag' => checksum,
                            'content-type' => 'application/x-tar' }.merge(metadata))
 
     deposited_file
