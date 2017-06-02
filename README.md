@@ -11,7 +11,7 @@
 
 PushmiPullyu is a Ruby application, running behind the firewall that protects our Swift environment.
 
-It's primary job is to manage the flow of content from Fedora into Swift for preservation.
+Its primary job is to manage the flow of content from Fedora into Swift for preservation.
 
 ![System Infrastructure Diagram](docs/images/system-infrastructure-diagram.png)
 
