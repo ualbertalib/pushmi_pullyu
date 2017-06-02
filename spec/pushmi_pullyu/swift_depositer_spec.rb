@@ -18,6 +18,10 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
         expect(deposited_file).to be_an_instance_of(OpenStack::Swift::StorageObject)
         expect(deposited_file.name).to eql 'config'
         expect(deposited_file.container.name).to eql 'ERA'
+        expect(deposited_file.metadata['project']).to eql 'ERA'
+        expect(deposited_file.metadata['project-id']).to eql 'config'
+        expect(deposited_file.metadata['aip-version']).to eql '1.0'
+        expect(deposited_file.metadata['promise']).to eql 'bronze'
       end
     end
 
