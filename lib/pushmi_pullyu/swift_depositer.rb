@@ -28,7 +28,24 @@ class PushmiPullyu::SwiftDepositer
                      else
                        era_container.create_object(file_base_name)
                      end
-    deposited_file.write(File.open(file_name), 'etag' => hash, 'content-type' => 'application/x-tar')
+
+    # Add swift metadata with in accordance to AIP spec:
+    # https://docs.google.com/document/d/154BqhDPAdGW-I9enrqLpBYbhkF9exX9lV3kMaijuwPg/edit#
+    metadata = {
+      project: 'ERA',
+      project_id: file_base_name,
+      promise: 'bronze',
+      retention: nil,
+      depositor: nil,
+      aip_version: '1.0'
+    }
+
+    # ruby-openstack wants all keys of the metadata to be named like "X-Object-Meta-{{Key}}", so update them
+    metadata.transform_keys! { |key| "X-Object-Meta-#{key}" }
+
+    deposited_file.write(File.open(file_name),
+                         { 'etag' => hash,
+                           'content-type' => 'application/x-tar' }.merge(metadata))
 
     deposited_file
   end
