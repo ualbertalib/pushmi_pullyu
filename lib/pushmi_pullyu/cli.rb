@@ -103,8 +103,8 @@ class PushmiPullyu::CLI
         opts[:config_file] = config_file
       end
 
-      o.on('-L', '--logfile PATH', 'Path to writable logfile') do |logfile|
-        opts[:logfile] = logfile
+      o.on('-L', '--logdir PATH', 'Path of directory to store logfiles') do |logdir|
+        opts[:logdir] = logdir
       end
 
       o.on('-D', '--piddir PATH', 'Path to piddir') do |piddir|
@@ -156,7 +156,7 @@ class PushmiPullyu::CLI
 
   def rotate_logs
     PushmiPullyu::Logging.reopen
-    Daemonize.redirect_io(options[:logfile]) if options[:daemonize]
+    Daemonize.redirect_io(PushmiPullyu.application_log_file) if options[:daemonize]
     PushmiPullyu.reset_logger = false
   end
 
@@ -170,10 +170,10 @@ class PushmiPullyu::CLI
         begin
           # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
           PushmiPullyu::AIP.create(item) do |aip_filename|
-            # Push bag to swift API
-            @storage.deposit_file(aip_filename, options[:swift][:container])
-            logger.debug("Deposited file into the swift storage #{aip_filename}")
-            # 7. Log successful preservation event to log files
+            # Push tarred AIP to swift API
+            deposited_file = @storage.deposit_file(aip_filename, options[:swift][:container])
+            # Log successful preservation event to the log files
+            PushmiPullyu::Logging.log_preservation_event(deposited_file)
           end
         rescue => e
           Rollbar.error(e)
@@ -188,7 +188,7 @@ class PushmiPullyu::CLI
 
   def setup_log
     if options[:daemonize]
-      PushmiPullyu::Logging.initialize_logger(options[:logfile])
+      PushmiPullyu::Logging.initialize_logger(PushmiPullyu.application_log_file)
     else
       logger.formatter = PushmiPullyu::Logging::SimpleFormatter.new
     end
@@ -236,14 +236,14 @@ class PushmiPullyu::CLI
     pwd = Dir.pwd # Current directory is changed during daemonization, so store it
 
     opts = {
-      ARGV:       @parsed_opts,
-      dir:        options[:piddir],
-      dir_mode:   :normal,
-      monitor:    options[:monitor],
+      ARGV: @parsed_opts,
+      dir: options[:piddir],
+      dir_mode: :normal,
+      monitor: options[:monitor],
       log_output: true,
-      log_dir: File.join(pwd, File.dirname(options[:logfile])),
-      logfilename: File.basename(options[:logfile]),
-      output_logfilename: File.basename(options[:logfile])
+      log_dir: File.expand_path(options[:logdir]),
+      logfilename: File.basename(PushmiPullyu.application_log_file),
+      output_logfilename: File.basename(PushmiPullyu.application_log_file)
     }
 
     Daemons.run_proc(options[:process_name], opts) do |*_argv|
