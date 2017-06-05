@@ -9,7 +9,7 @@
 # even put in dynamic logic, like consuming ENV Variables.
 
 debug: false
-logfile: log/pushmi_pullyu.log
+logdir: log
 monitor: false
 piddir: tmp/pids
 workdir: tmp/work

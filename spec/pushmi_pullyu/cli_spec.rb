@@ -114,9 +114,10 @@ RSpec.describe PushmiPullyu::CLI do
         expect(PushmiPullyu.options[:rollbar_token]).to eq 'asdfjkl11234eieio'
       end
 
-      it 'sets logfile' do
-        cli.parse(['-L', 'tmp/log/pmpy.log'])
-        expect(PushmiPullyu.options[:logfile]).to eq 'tmp/log/pmpy.log'
+      it 'sets logdir' do
+        cli.parse(['-L', 'tmp/log'])
+        expect(PushmiPullyu.options[:logdir]).to eq 'tmp/log'
+        expect(PushmiPullyu.application_log_file).to eq 'tmp/log/pushmi_pullyu.log'
       end
 
       it 'sets piddir' do
@@ -192,7 +193,8 @@ RSpec.describe PushmiPullyu::CLI do
         cli.parse(['-C', 'spec/fixtures/config.yml'])
 
         expect(PushmiPullyu.options[:config_file]).to eq 'spec/fixtures/config.yml'
-        expect(PushmiPullyu.options[:logfile]).to eq 'tmp/pushmi_pullyu.log'
+        expect(PushmiPullyu.options[:logdir]).to eq 'tmp/log'
+        expect(PushmiPullyu.application_log_file).to eq 'tmp/log/test_pushmi_pullyu.log'
         expect(PushmiPullyu.options[:piddir]).to eq 'tmp'
         expect(PushmiPullyu.options[:process_name]).to eq 'test_pushmi_pullyu'
         expect(PushmiPullyu.options[:minimum_age]).to be 10
@@ -205,14 +207,15 @@ RSpec.describe PushmiPullyu::CLI do
       it 'still allows command line arguments to take precedence' do
         cli.parse(['start',
                    '-C', 'spec/fixtures/config.yml',
-                   '--logfile', 'path/to/random/logfile.log',
+                   '--logdir', 'path/to/random',
                    '--minimum-age', '5',
                    '--piddir', 'path/to/piddir'])
 
         expect(PushmiPullyu.options[:daemonize]).to be_truthy
         expect(PushmiPullyu.options[:config_file]).to eq 'spec/fixtures/config.yml'
         expect(PushmiPullyu.options[:debug]).to be_truthy
-        expect(PushmiPullyu.options[:logfile]).to eq 'path/to/random/logfile.log'
+        expect(PushmiPullyu.options[:logdir]).to eq 'path/to/random'
+        expect(PushmiPullyu.application_log_file).to eq 'path/to/random/test_pushmi_pullyu.log'
         expect(PushmiPullyu.options[:piddir]).to eq 'path/to/piddir'
         expect(PushmiPullyu.options[:process_name]).to eq 'test_pushmi_pullyu'
         expect(PushmiPullyu.options[:minimum_age]).to be 5.0

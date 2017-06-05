@@ -18,7 +18,7 @@ module PushmiPullyu
   DEFAULTS = {
     daemonize: false,
     debug: false,
-    logfile: 'log/pushmi_pullyu.log',
+    logdir: 'log',
     minimum_age: 0,
     monitor: false,
     piddir: 'tmp/pids',
@@ -59,6 +59,10 @@ module PushmiPullyu
 
   def self.override_options(opts)
     @options = opts
+  end
+
+  def self.application_log_file
+    "#{options[:logdir]}/#{options[:process_name]}.log"
   end
 
   def self.logger

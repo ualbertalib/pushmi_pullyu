@@ -1,7 +1,7 @@
 # Dummy sample file for testing parsing of configuration file into PushmiPullyu
 
 debug: true
-logfile: tmp/pushmi_pullyu.log
+logdir: tmp/log
 piddir: tmp
 process_name: test_pushmi_pullyu
 minimum_age: 10

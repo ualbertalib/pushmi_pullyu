@@ -35,6 +35,23 @@ module PushmiPullyu::Logging
     aip_logger.close
   end
 
+  def self.log_preservation_event(deposited_file)
+    @preservation_logger ||= Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
+
+    message = "#{deposited_file.name} was successfully deposited into Swift Storage! \n"\
+    "Here are the details of this preservation event: \n"\
+    "\t NOID: '#{deposited_file.name}' \n"\
+    "\t Timestamp of Completion: '#{deposited_file.last_modified}' \n"\
+    "\t AIP Checksum: '#{deposited_file.etag}' \n"\
+    "\t Metadata: #{deposited_file.metadata} \n"
+
+    # Log to both the application log, and the preservation log file
+    logger.info(message)
+    @preservation_logger.info(message)
+
+    @preservation_logger.close
+  end
+
   def self.logger=(log)
     @logger = log
   end

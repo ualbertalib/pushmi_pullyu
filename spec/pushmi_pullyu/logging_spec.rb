@@ -80,6 +80,37 @@ RSpec.describe PushmiPullyu::Logging do
     end
   end
 
+  describe '.log_preservation_event' do
+    let(:tmp_log_dir) { 'tmp/logs' }
+
+    it 'logs preservation event to both preservation log and application log' do
+      FileUtils.mkdir_p(tmp_log_dir)
+      allow(PushmiPullyu::Logging.logger).to receive(:info)
+      allow(PushmiPullyu).to receive(:options) { { logdir: tmp_log_dir } }
+
+      # just need to replicate OpenStack::Swift::StorageObject API methods that we will be using for the logger
+      deposited_file = OpenStruct.new(
+        name: '9p2909328',
+        last_modified: 'Fri, 02 Jun 2017 18:29:07 GMT',
+        etag: '0f32868de20f3b1d4685bfa497a2c243',
+        metadata: { 'project-id' => '9p2909328',
+                    'aip-version' => '1.0',
+                    'promise' => 'bronze',
+                    'project' => 'ERA' }
+      )
+
+      PushmiPullyu::Logging.log_preservation_event(deposited_file)
+
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to eq(true)
+      expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once
+      expect(
+        File.read("#{tmp_log_dir}/preservation_events.log")
+      ).to include("#{deposited_file.name} was successfully deposited into Swift Storage")
+
+      FileUtils.rm_rf(tmp_log_dir)
+    end
+  end
+
   context 'when included in classes' do
     let(:dummy_class) { LoggerTest.new }
 
