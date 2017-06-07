@@ -49,9 +49,6 @@ class PushmiPullyu::CLI
     setup_log
     print_banner
 
-    setup_queue
-    setup_swift
-
     run_tick_loop
   end
 
@@ -160,28 +157,31 @@ class PushmiPullyu::CLI
     PushmiPullyu.reset_logger = false
   end
 
+  def run_preservation_cycle
+    item = queue.wait_next_item
+
+    # add additional information about the error context to errors that occur while processing this item.
+    Rollbar.scoped(noid: item) do
+      begin
+        # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
+        PushmiPullyu::AIP.create(item) do |aip_filename|
+          # Push tarred AIP to swift API
+          deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
+          # Log successful preservation event to the log files
+          PushmiPullyu::Logging.log_preservation_event(deposited_file)
+        end
+      rescue => e
+        Rollbar.error(e)
+        logger.error(e)
+        # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
+        # move on to the next item.
+      end
+    end
+  end
+
   def run_tick_loop
     while PushmiPullyu.server_running?
-      # Preservation (TODO):
-      item = @queue.wait_next_item
-
-      # add additional information about the error context to errors that occur while processing this item.
-      Rollbar.scoped(noid: item) do
-        begin
-          # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
-          PushmiPullyu::AIP.create(item) do |aip_filename|
-            # Push tarred AIP to swift API
-            deposited_file = @storage.deposit_file(aip_filename, options[:swift][:container])
-            # Log successful preservation event to the log files
-            PushmiPullyu::Logging.log_preservation_event(deposited_file)
-          end
-        rescue => e
-          Rollbar.error(e)
-          # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
-          # move on to the next item.
-        end
-      end
-
+      run_preservation_cycle
       rotate_logs if PushmiPullyu.reset_logger?
     end
   end
@@ -201,17 +201,17 @@ class PushmiPullyu::CLI
     Signal.trap('HUP') { PushmiPullyu.reset_logger = true }
   end
 
-  def setup_queue
-    @queue = PushmiPullyu::PreservationQueue.new(connection: {
-                                                   host: options[:redis][:host],
-                                                   port: options[:redis][:port]
-                                                 },
-                                                 queue_name: options[:queue_name],
-                                                 age_at_least: options[:minimum_age])
+  def queue
+    @queue ||= PushmiPullyu::PreservationQueue.new(connection: {
+                                                     host: options[:redis][:host],
+                                                     port: options[:redis][:port]
+                                                   },
+                                                   queue_name: options[:queue_name],
+                                                   age_at_least: options[:minimum_age])
   end
 
-  def setup_swift
-    @storage = PushmiPullyu::SwiftDepositer.new(username: options[:swift][:username],
+  def swift
+    @swift ||= PushmiPullyu::SwiftDepositer.new(username: options[:swift][:username],
                                                 password: options[:swift][:password],
                                                 tenant: options[:swift][:tenant],
                                                 endpoint: options[:swift][:endpoint],

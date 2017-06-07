@@ -4,15 +4,18 @@ require 'timecop'
 RSpec.describe PushmiPullyu::PreservationQueue do
   describe 'a queue with 3 items in it' do
     let(:queue) { PushmiPullyu::PreservationQueue.new(poll_interval: 0, queue_name: 'test:pmpy_queue') }
+    let!(:redis) { Redis.new }
 
     before do
       PushmiPullyu.server_running = true
-      direct_redis = Redis.new
-      direct_redis.del  'test:pmpy_queue'
-      direct_redis.zadd 'test:pmpy_queue', 1, 'noid1'
-      direct_redis.zadd 'test:pmpy_queue', 3, 'noid3'
-      direct_redis.zadd 'test:pmpy_queue', 4, 'noid2'
-      direct_redis.zadd 'test:pmpy_queue', 10, 'noid1'
+      redis.zadd 'test:pmpy_queue', 1, 'noid1'
+      redis.zadd 'test:pmpy_queue', 3, 'noid3'
+      redis.zadd 'test:pmpy_queue', 4, 'noid2'
+      redis.zadd 'test:pmpy_queue', 10, 'noid1'
+    end
+
+    after do
+      redis.del 'test:pmpy_queue'
     end
 
     it 'retrieves 3 items in priority order' do
@@ -26,15 +29,17 @@ RSpec.describe PushmiPullyu::PreservationQueue do
     let(:queue) do
       PushmiPullyu::PreservationQueue.new(poll_interval: 0, queue_name: 'test:pmpy_queue', age_at_least: 15.minutes)
     end
+    let!(:redis) { Redis.new }
 
     before do
-      direct_redis = Redis.new
-      direct_redis.del 'test:pmpy_queue'
-
-      direct_redis.zadd 'test:pmpy_queue', Time.now.to_f, 'noid1'
+      redis.zadd 'test:pmpy_queue', Time.now.to_f, 'noid1'
     end
 
-    after { Timecop.return }
+    after do
+      Timecop.return
+      redis.del 'test:pmpy_queue'
+    end
+
 
     it 'does not retrieve too young items' do
       now = Time.now

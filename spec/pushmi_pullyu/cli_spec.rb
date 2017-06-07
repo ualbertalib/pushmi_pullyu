@@ -44,8 +44,6 @@ RSpec.describe PushmiPullyu::CLI do
       allow(cli).to receive(:setup_signal_traps)
       allow(cli).to receive(:setup_log)
       allow(cli).to receive(:print_banner)
-      allow(cli).to receive(:setup_queue)
-      allow(cli).to receive(:setup_swift)
       allow(cli).to receive(:run_tick_loop)
 
       cli.start_server
@@ -53,13 +51,15 @@ RSpec.describe PushmiPullyu::CLI do
       expect(cli).to have_received(:setup_signal_traps).once
       expect(cli).to have_received(:setup_log).once
       expect(cli).to have_received(:print_banner).once
-      expect(cli).to have_received(:setup_queue).once
-      expect(cli).to have_received(:setup_swift).once
       expect(cli).to have_received(:run_tick_loop).once
     end
   end
 
   describe 'shutdown handling' do
+    after do
+      PushmiPullyu.server_running = true
+    end
+
     it 'prints a message the first time and exits on second time' do
       allow(cli).to receive(:exit!)
       allow($stderr).to receive(:puts)
@@ -193,14 +193,13 @@ RSpec.describe PushmiPullyu::CLI do
         cli.parse(['-C', 'spec/fixtures/config.yml'])
 
         expect(PushmiPullyu.options[:config_file]).to eq 'spec/fixtures/config.yml'
-        expect(PushmiPullyu.options[:logdir]).to eq 'tmp/log'
-        expect(PushmiPullyu.application_log_file).to eq 'tmp/log/test_pushmi_pullyu.log'
-        expect(PushmiPullyu.options[:piddir]).to eq 'tmp'
+        expect(PushmiPullyu.options[:logdir]).to eq 'tmp/spec/log'
+        expect(PushmiPullyu.application_log_file).to eq 'tmp/spec/log/test_pushmi_pullyu.log'
+        expect(PushmiPullyu.options[:piddir]).to eq 'tmp/spec/pids'
         expect(PushmiPullyu.options[:process_name]).to eq 'test_pushmi_pullyu'
-        expect(PushmiPullyu.options[:minimum_age]).to be 10
+        expect(PushmiPullyu.options[:minimum_age]).to be 1
         expect(PushmiPullyu.options[:queue_name]).to eq 'test:pmpy_queue'
-        expect(PushmiPullyu.options[:redis][:host]).to eq 'localhost'
-        expect(PushmiPullyu.options[:redis][:port]).to be 9999
+        expect(PushmiPullyu.options[:swift][:endpoint]).to eq 'http://example.com:8080'
         expect(PushmiPullyu.options[:rollbar_token]).to eq 'abc123xyz'
       end
 
