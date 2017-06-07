@@ -7,7 +7,6 @@ RSpec.describe 'Acceptance test', type: :feature do
   let(:aip_file) { "#{aip_folder}.tar" }
   let(:log_folder) { "#{workdir}/log" }
 
-
   let!(:opts) { PushmiPullyu.options.dup }
   let!(:redis) { Redis.new }
 
@@ -43,7 +42,6 @@ RSpec.describe 'Acceptance test', type: :feature do
 
     # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
     VCR.use_cassette('aip_download_and_swift_upload') do
-
       PushmiPullyu::AIP.create(item) do |aip_filename|
         expect(aip_file).to eq(aip_filename)
         # aip file and folder should have been created by the creator
@@ -64,7 +62,6 @@ RSpec.describe 'Acceptance test', type: :feature do
         # Log successful preservation event to the log files
         PushmiPullyu::Logging.log_preservation_event(deposited_file)
       end
-
     end
 
     expect(File.exist?("#{log_folder}/preservation_events.log")).to eq(true)

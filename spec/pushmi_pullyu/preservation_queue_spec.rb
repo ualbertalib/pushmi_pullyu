@@ -40,7 +40,6 @@ RSpec.describe PushmiPullyu::PreservationQueue do
       redis.del 'test:pmpy_queue'
     end
 
-
     it 'does not retrieve too young items' do
       now = Time.now
       Timecop.freeze(now)
