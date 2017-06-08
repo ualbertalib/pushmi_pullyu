@@ -13,6 +13,7 @@ RSpec.describe PushmiPullyu::AIP do
   describe '.create' do
     it 'validates the noid and raises exception if not valid' do
       expect { PushmiPullyu::AIP.create('') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
+      expect { PushmiPullyu::AIP.create('9p29/9328') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
     end
 
     it 'calls aip downloader and creator class and cleans up aip folder and file' do

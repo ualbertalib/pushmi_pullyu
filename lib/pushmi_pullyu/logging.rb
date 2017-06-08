@@ -36,7 +36,7 @@ module PushmiPullyu::Logging
   end
 
   def self.log_preservation_event(deposited_file)
-    @preservation_logger ||= Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
+    preservation_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
 
     message = "#{deposited_file.name} was successfully deposited into Swift Storage! \n"\
     "Here are the details of this preservation event: \n"\
@@ -47,9 +47,9 @@ module PushmiPullyu::Logging
 
     # Log to both the application log, and the preservation log file
     logger.info(message)
-    @preservation_logger.info(message)
+    preservation_logger.info(message)
 
-    @preservation_logger.close
+    preservation_logger.close
   end
 
   def self.logger=(log)

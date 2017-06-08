@@ -1,13 +1,20 @@
 # Dummy sample file for testing parsing of configuration file into PushmiPullyu
 
 debug: true
-logdir: tmp/log
-piddir: tmp
+logdir: tmp/spec/log
+monitor: false
+piddir: tmp/spec/pids
+workdir: tmp/spec/work
 process_name: test_pushmi_pullyu
-minimum_age: 10
+minimum_age: 1
 queue_name: test:pmpy_queue
 rollbar_token: 'abc123xyz'
 
-redis:
-  host: localhost
-  port: 9999
+solr:
+  url: http://www.example.com:8983/solr/development
+
+fedora:
+  url: http://www.example.com:8983/fedora/rest
+
+swift:
+  endpoint: http://example.com:8080

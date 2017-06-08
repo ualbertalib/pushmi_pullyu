@@ -4,7 +4,7 @@ module PushmiPullyu::AIP
   class NoidInvalid < StandardError; end
 
   def create(noid)
-    raise NoidInvalid if noid.to_s.empty?
+    raise NoidInvalid if noid.blank? || noid.include?('/')
 
     aip_directory = "#{PushmiPullyu.options[:workdir]}/#{noid}"
     aip_filename = "#{aip_directory}.tar"

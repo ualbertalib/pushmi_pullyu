@@ -44,7 +44,7 @@ module PushmiPullyu
       tenant: 'tester',
       username: 'test:tester',
       password: 'testing',
-      endpoint: 'http://127.0.0.1:8080',
+      endpoint: 'http://localhost:8080',
       container: 'ERA'
     }
   }.freeze
@@ -54,7 +54,7 @@ module PushmiPullyu
   end
 
   def self.options=(opts)
-    options.merge!(opts)
+    options.deep_merge!(opts)
   end
 
   def self.override_options(opts)

@@ -105,7 +105,7 @@ RSpec.describe PushmiPullyu::Logging do
       expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once
       expect(
         File.read("#{tmp_log_dir}/preservation_events.log")
-      ).to include("#{deposited_file.name} was successfully deposited into Swift Storage")
+      ).to include("#{deposited_file.name} was successfully deposited into Swift Storage!")
 
       FileUtils.rm_rf(tmp_log_dir)
     end
