@@ -62,11 +62,11 @@ Specific options:
   -a, --minimum-age AGE            Minimum amount of time an item must spend in the queue, in seconds.
   -d, --debug                      Enable debug logging
   -r, --rollbar-token TOKEN        Enable error reporting to Rollbar
-  -C, --config PATH                path to YAML config file
-  -L, --logfile PATH               Path to writable logfile
-  -D, --piddir PATH                Path to piddir
-  -W, --workdir PATH               Path where downloads, etc. are done
-  -N, --process_name NAME          Name of the process
+  -C, --config PATH                Path for YAML config file
+  -L, --logdir PATH                Path for directory to store log files
+  -D, --piddir PATH                Path for directory to store pid files
+  -W, --workdir PATH               Path for directory where AIP creation work takes place in
+  -N, --process_name NAME          Name of the application process
   -m, --monitor                    Start monitor process for a deamon
   -q, --queue NAME                 Name of the queue to read from
 
