@@ -96,23 +96,23 @@ class PushmiPullyu::CLI
         opts[:rollbar_token] = token if token.present?
       end
 
-      o.on '-C', '--config PATH', 'path to YAML config file' do |config_file|
+      o.on '-C', '--config PATH', 'Path for YAML config file' do |config_file|
         opts[:config_file] = config_file
       end
 
-      o.on('-L', '--logdir PATH', 'Path of directory to store logfiles') do |logdir|
+      o.on('-L', '--logdir PATH', 'Path for directory to store log files') do |logdir|
         opts[:logdir] = logdir
       end
 
-      o.on('-D', '--piddir PATH', 'Path to piddir') do |piddir|
+      o.on('-D', '--piddir PATH', 'Path for directory to store pid files') do |piddir|
         opts[:piddir] = piddir
       end
 
-      o.on('-W', '--workdir PATH', 'Path where downloads, etc. are done ') do |workdir|
+      o.on('-W', '--workdir PATH', 'Path for directory where AIP creation work takes place in') do |workdir|
         opts[:workdir] = workdir
       end
 
-      o.on('-N', '--process_name NAME', 'Name of the process') do |process_name|
+      o.on('-N', '--process_name NAME', 'Name of the application process') do |process_name|
         opts[:process_name] = process_name
       end
 

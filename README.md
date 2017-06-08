@@ -9,21 +9,21 @@
 [![Build Status](https://travis-ci.org/ualbertalib/pushmi_pullyu.svg?branch=master)](https://travis-ci.org/ualbertalib/pushmi_pullyu)
 [![Coverage Status](https://coveralls.io/repos/github/ualbertalib/pushmi_pullyu/badge.svg?branch=master)](https://coveralls.io/github/ualbertalib/pushmi_pullyu?branch=master)
 
-PushmiPullyu will be a Ruby application, running behind the firewall that protects our Swift environment.
+PushmiPullyu is a Ruby application, running behind the firewall that protects our Swift environment.
 
-It's primary job will be to manage the flow of content from Fedora into Swift for preservation.
+Its primary job is to manage the flow of content from Fedora into Swift for preservation.
 
 ![System Infrastructure Diagram](docs/images/system-infrastructure-diagram.png)
 
 ## Workflow
 
-1.  Any save (Creation/Update) on a GenericFile in ERA will trigger an after save callback which will push the GF information (most likely it's primary ID) into a Queue
-2. The queue (will most likely be using Redis) needs to be unique, aka a set (which only allows one GF to be included in the queue at a single time), and ordered by priority from First In, First out (FIFO).
-3. PushmiPullyu app will then monitor this queue. After a certain window of wait period has passed since an element has been on the queue, PushmiPullyu will then retrieve the elements off the queue and begin to process the preservation event
-4. The GenericFile information and data required for preservation are retrieved from Fedora using multiple REST calls
-5. An AIP is created with the GenericFile's information and is bagged.
-6. The AIP is uploaded and pushed to Swift via a REST call
-7. On a successful Swift upload, a log entry is added for this preservation event
+1.  Any save (create or update) on a GenericFile in ERA will trigger an after save callback that will push the GenericFile unique identifier (NOID) into a Queue.
+2. The queue (Redis) is setup to be a unique set (which only allows one GenericFile NOID to be included in the queue at a single time), and ordered by priority from First In, First out (FIFO).
+3. PushmiPullyu will then monitor the queue. After a certain wait period has passed since an element has been on the queue, PushmiPullyu will then retrieve the elements off the queue and begin to process the preservation event.
+4. All the GenericFile information and data required for preservation are retrieved from Fedora and Solr using multiple REST calls.
+5. An Archival Information Package (AIP) is created from the GenericFile's information. It is then bagged and tarred.
+6. The AIP tar is then uploaded to Swift via a REST call.
+7. On a successful Swift upload, a entry is added for this preservation event to the preservation event logs.
 
 
 ## Requirements
@@ -61,10 +61,12 @@ Usage: pushmi_pullyu [options] [start|stop|restart|run]
 Specific options:
   -a, --minimum-age AGE            Minimum amount of time an item must spend in the queue, in seconds.
   -d, --debug                      Enable debug logging
-  -C, --config PATH                path to YAML config file
-  -L, --logfile PATH               Path to writable logfile
-  -D, --piddir PATH                Path to piddir
-  -N, --process_name NAME          Name of the process
+  -r, --rollbar-token TOKEN        Enable error reporting to Rollbar
+  -C, --config PATH                Path for YAML config file
+  -L, --logdir PATH                Path for directory to store log files
+  -D, --piddir PATH                Path for directory to store pid files
+  -W, --workdir PATH               Path for directory where AIP creation work takes place in
+  -N, --process_name NAME          Name of the application process
   -m, --monitor                    Start monitor process for a deamon
   -q, --queue NAME                 Name of the queue to read from
 
@@ -78,7 +80,7 @@ Common options:
 You can also provide a configuration file which PushmiPullyu will use with the -C (or --config) flag:
 
 ```bash
-  pushmi_pullyu start -C /path/to/config
+  pushmi_pullyu start -C /path/to/config.yml
 ```
 
 By default, if no configuration file is specified, PushmiPullyu will look for a configuration file at config/pushmi_pullyu.yml.
