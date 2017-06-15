@@ -1,3 +1,8 @@
+# require 'pushmi_pullyu/version' must be first as it declares the PushmiPullyu module.
+# (This fixes a weird NameError bug when using the nested compact syntax for
+# defining modules/classes like `module PushmiPullyu::Logging`)
+require 'pushmi_pullyu/version'
+
 require 'pushmi_pullyu/logging'
 
 require 'pushmi_pullyu/aip'
@@ -8,7 +13,6 @@ require 'pushmi_pullyu/aip/fedora_fetcher'
 require 'pushmi_pullyu/cli'
 require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/swift_depositer'
-require 'pushmi_pullyu/version'
 
 require 'active_support'
 require 'active_support/core_ext'
