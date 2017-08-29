@@ -21,13 +21,15 @@ class PushmiPullyu::PreservationQueue
 
   class ConnectionError < StandardError; end
 
-  def initialize(connection: {}, pool_opts: { size: 1, timeout: 5 }, poll_interval: 10, age_at_least: 0,
+  def initialize(redis_url: 'redis://localhost:6379',
+                 pool_opts: { size: 1, timeout: 5 },
+                 poll_interval: 10,
+                 age_at_least: 0,
                  queue_name: 'dev:pmpy_queue')
     # we use a connection pool even though we're not (currently) threading
     # as it transparently provides for repairing connections if they are closed after long periods of inactivity
     @redis = ConnectionPool.new(pool_opts) do
-      connection.reverse_merge!(host: 'localhost', port: 6379)
-      Redis.new(connection)
+      Redis.new(url: redis_url)
     end
 
     raise ConnectionError unless connected?

@@ -202,10 +202,7 @@ class PushmiPullyu::CLI
   end
 
   def queue
-    @queue ||= PushmiPullyu::PreservationQueue.new(connection: {
-                                                     host: options[:redis][:host],
-                                                     port: options[:redis][:port]
-                                                   },
+    @queue ||= PushmiPullyu::PreservationQueue.new(redis_url: options[:redis][:url],
                                                    queue_name: options[:queue_name],
                                                    age_at_least: options[:minimum_age])
   end

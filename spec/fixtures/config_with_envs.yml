@@ -4,6 +4,5 @@ debug: true
 queue_name: <%= 'erb_' %>test:pmpy_queue
 
 redis:
-  <% ENV['REDIS_HOST'] = '192.168.77.11' %>
-  host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-  port: 9999
+  <% REDIS_URL = 'redis://192.168.77.11:9999' %>
+  url: <%= REDIS_URL || 'redis://localhost:9999' %>
