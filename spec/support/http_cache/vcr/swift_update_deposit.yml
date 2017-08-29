@@ -39,7 +39,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:44:58 GMT
 - request:
     method: head
@@ -86,7 +86,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:44:59 GMT
 - request:
     method: head
@@ -133,7 +133,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:44:59 GMT
 - request:
     method: head
@@ -180,7 +180,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:44:59 GMT
 - request:
     method: head
@@ -219,7 +219,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:44:59 GMT
 - request:
     method: put
@@ -264,7 +264,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:01 GMT
 - request:
     method: put
@@ -278,9 +278,8 @@ http_interactions:
         queue_name: <%= 'erb_' %>test:pmpy_queue
 
         redis:
-          <% ENV['REDIS_HOST'] = '192.168.77.11' %>
-          host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-          port: 9999
+          <% ENV['REDIS_URL'] = '192.168.77.11:9999' %>
+          url: <%= ENV['REDIS_URL'] || 'localhost:9999' %>
     headers:
       X-Auth-Token:
       - AUTH_tkb95013a506e048d184148129ea587463
@@ -322,7 +321,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:01 GMT
 - request:
     method: head
@@ -369,7 +368,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:01 GMT
 - request:
     method: head
@@ -416,7 +415,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:01 GMT
 - request:
     method: head
@@ -463,7 +462,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:02 GMT
 - request:
     method: put
@@ -477,9 +476,8 @@ http_interactions:
         queue_name: <%= 'erb_' %>test:pmpy_queue
 
         redis:
-          <% ENV['REDIS_HOST'] = '192.168.77.11' %>
-          host: <%= ENV['REDIS_HOST'] || 'localhost' %>
-          port: 9999
+          <% ENV['REDIS_URL'] = '192.168.77.11:9999' %>
+          url: <%= ENV['REDIS_URL'] || 'localhost:9999' %>
     headers:
       X-Auth-Token:
       - AUTH_tkb95013a506e048d184148129ea587463
@@ -521,7 +519,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:02 GMT
 - request:
     method: head
@@ -568,7 +566,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:02 GMT
 - request:
     method: head
@@ -615,6 +613,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Fri, 26 May 2017 22:45:02 GMT
 recorded_with: VCR 3.0.3

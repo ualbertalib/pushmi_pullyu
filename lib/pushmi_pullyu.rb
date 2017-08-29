@@ -30,8 +30,7 @@ module PushmiPullyu
     process_name: 'pushmi_pullyu',
     queue_name: 'dev:pmpy_queue',
     redis: {
-      host: 'localhost',
-      port: 6379
+      url: 'redis://localhost:6379'
     },
     # TODO: rest of these are examples for solr/fedora/swift... feel free to fill them in correctly
     solr: {

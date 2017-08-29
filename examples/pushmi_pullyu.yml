@@ -19,8 +19,7 @@ minimum_age: 0
 rollbar_token: 'abc123xyz'
 
 redis:
-  host: localhost
-  port: 6379
+  url: redis://localhost:6379
 
 solr:
   url: http://localhost:8983/solr/development

@@ -228,8 +228,7 @@ RSpec.describe PushmiPullyu::CLI do
         expect(PushmiPullyu.options[:config_file]).to eq 'spec/fixtures/config_with_envs.yml'
         expect(PushmiPullyu.options[:debug]).to be_truthy
         expect(PushmiPullyu.options[:queue_name]).to eq 'erb_test:pmpy_queue'
-        expect(PushmiPullyu.options[:redis][:host]).to eq '192.168.77.11'
-        expect(PushmiPullyu.options[:redis][:port]).to be 9999
+        expect(PushmiPullyu.options[:redis][:url]).to eq 'redis://192.168.77.11:9999'
       end
     end
 
