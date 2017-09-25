@@ -30,10 +30,12 @@ fedora:
   password: fedoraAdmin
   base_path: /dev
 
+#parameters project_name and project_domain_name are required only for keystone v3 authentication
 swift:
-  auth_version: v1.0
   tenant: tester
   username: test:tester
   password: testing
-  endpoint: http://localhost:8080
+  auth_url: http://localhost:8080/auth/v1.0
+  project_name: demo
+  project_domain_name: default
   container: ERA
