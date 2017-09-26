@@ -170,7 +170,7 @@ class PushmiPullyu::CLI
           # Log successful preservation event to the log files
           PushmiPullyu::Logging.log_preservation_event(deposited_file)
         end
-      rescue => e
+      rescue StandardError => e
         Rollbar.error(e)
         logger.error(e)
         # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and

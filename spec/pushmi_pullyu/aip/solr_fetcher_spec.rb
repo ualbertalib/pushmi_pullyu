@@ -6,9 +6,9 @@ RSpec.describe PushmiPullyu::AIP::SolrFetcher do
   let(:solr_fetcher_404) { PushmiPullyu::AIP::SolrFetcher.new('ohnoimbad') }
 
   before do
-    allow(PushmiPullyu).to receive(:options) {
-      { solr: { url: 'http://www.example.com:8983/solr/development' } }
-    }
+    allow(PushmiPullyu).to receive(:options).and_return(
+      solr: { url: 'http://www.example.com:8983/solr/development' }
+    )
   end
 
   describe '#fetch_permission_object_ids' do

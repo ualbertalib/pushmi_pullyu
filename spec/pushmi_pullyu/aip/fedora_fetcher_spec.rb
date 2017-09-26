@@ -9,12 +9,12 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
 
   before do
     FileUtils.mkdir_p(workdir)
-    allow(PushmiPullyu).to receive(:options) {
-      { fedora: { url: 'http://www.example.com:8983/fedora/rest',
-                  base_path: '/test',
-                  user: 'gollum',
-                  password: 'iH8zH0bb1tzeZ' } }
-    }
+    allow(PushmiPullyu).to receive(:options).and_return(
+      fedora: { url: 'http://www.example.com:8983/fedora/rest',
+                base_path: '/test',
+                user: 'gollum',
+                password: 'iH8zH0bb1tzeZ' }
+    )
   end
 
   after do
