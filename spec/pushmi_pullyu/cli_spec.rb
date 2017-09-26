@@ -199,7 +199,7 @@ RSpec.describe PushmiPullyu::CLI do
         expect(PushmiPullyu.options[:process_name]).to eq 'test_pushmi_pullyu'
         expect(PushmiPullyu.options[:minimum_age]).to be 1
         expect(PushmiPullyu.options[:queue_name]).to eq 'test:pmpy_queue'
-        expect(PushmiPullyu.options[:swift][:endpoint]).to eq 'http://example.com:8080'
+        expect(PushmiPullyu.options[:swift][:auth_url]).to eq 'http://example.com:8080/auth/v1.0'
         expect(PushmiPullyu.options[:rollbar_token]).to eq 'abc123xyz'
       end
 

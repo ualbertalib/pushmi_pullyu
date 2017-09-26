@@ -17,4 +17,4 @@ fedora:
   url: http://www.example.com:8983/fedora/rest
 
 swift:
-  endpoint: http://example.com:8080
+  auth_url: http://example.com:8080/auth/v1.0

@@ -100,7 +100,7 @@ class PushmiPullyu::AIP::Downloader
   def make_directories
     clean_directories
     PushmiPullyu.logger.debug("#{@noid}: Creating directories ...")
-    aip_dirs.to_h.values.each do |path|
+    aip_dirs.to_h.each_value do |path|
       FileUtils.mkdir_p(path)
     end
     PushmiPullyu.logger.debug("#{@noid}: Creating directories done")

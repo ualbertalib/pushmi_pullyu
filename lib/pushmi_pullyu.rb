@@ -43,11 +43,12 @@ module PushmiPullyu
       base_path: '/dev'
     },
     swift: {
-      auth_version: 'v1.0',
       tenant: 'tester',
       username: 'test:tester',
       password: 'testing',
-      endpoint: 'http://localhost:8080',
+      auth_url: 'http://localhost:8080/auth/v1.0',
+      project_name: 'demo',
+      project_domain_name: 'default',
       container: 'ERA'
     }
   }.freeze

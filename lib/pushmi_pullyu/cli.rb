@@ -170,12 +170,14 @@ class PushmiPullyu::CLI
           # Log successful preservation event to the log files
           PushmiPullyu::Logging.log_preservation_event(deposited_file)
         end
+      # rubocop:disable RescueWithoutErrorClass
       rescue => e
         Rollbar.error(e)
         logger.error(e)
         # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
         # move on to the next item.
       end
+      # rubocop:enaable RescueWithoutErrorClass
     end
   end
 
@@ -211,8 +213,9 @@ class PushmiPullyu::CLI
     @swift ||= PushmiPullyu::SwiftDepositer.new(username: options[:swift][:username],
                                                 password: options[:swift][:password],
                                                 tenant: options[:swift][:tenant],
-                                                endpoint: options[:swift][:endpoint],
-                                                auth_version: options[:swift][:auth_version])
+                                                project_name: options[:project_name],
+                                                project_domain_name: options[:project_domain_name],
+                                                auth_url: options[:swift][:auth_url])
   end
 
   # On first call of shutdown, this will gracefully close the main run loop
