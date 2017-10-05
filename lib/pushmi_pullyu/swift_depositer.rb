@@ -44,8 +44,9 @@ class PushmiPullyu::SwiftDepositer
       deposited_file = era_container.object(file_base_name)
       deposited_file.write(File.open(file_name), headers)
     else
-      deposited_file = era_container.create_object(file_base_name, headers, File.open(file_name))
+      deposited_file = era_container.create_object(file_base_name)
     end
+    deposited_file.write(File.open(file_name), headers)
 
     deposited_file
   end
