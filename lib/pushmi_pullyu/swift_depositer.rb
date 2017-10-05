@@ -40,11 +40,11 @@ class PushmiPullyu::SwiftDepositer
     headers = { 'etag' => checksum,
                 'content-type' => 'application/x-tar' }.merge(metadata)
 
-    if era_container.object_exists?(file_base_name)
-      deposited_file = era_container.object(file_base_name)
-    else
-      deposited_file = era_container.create_object(file_base_name)
-    end
+    deposited_file = if era_container.object_exists?(file_base_name)
+                       era_container.object(file_base_name)
+                     else
+                       era_container.create_object(file_base_name)
+                     end
     deposited_file.write(File.open(file_name), headers)
 
     deposited_file
