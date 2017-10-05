@@ -42,7 +42,6 @@ class PushmiPullyu::SwiftDepositer
 
     if era_container.object_exists?(file_base_name)
       deposited_file = era_container.object(file_base_name)
-      deposited_file.write(File.open(file_name), headers)
     else
       deposited_file = era_container.create_object(file_base_name)
     end
