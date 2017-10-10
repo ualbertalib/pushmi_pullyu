@@ -37,15 +37,17 @@ class PushmiPullyu::SwiftDepositer
     # ruby-openstack wants all keys of the metadata to be named like "X-Object-Meta-{{Key}}", so update them
     metadata.transform_keys! { |key| "X-Object-Meta-#{key}" }
 
-    headers = { 'etag' => checksum,
-                'content-type' => 'application/x-tar' }.merge(metadata)
-
-    deposited_file = if era_container.object_exists?(file_base_name)
-                       era_container.object(file_base_name)
-                     else
-                       era_container.create_object(file_base_name)
-                     end
-    deposited_file.write(File.open(file_name), headers)
+    if era_container.object_exists?(file_base_name)
+      headers = { 'etag' => checksum,
+                  'content-type' => 'application/x-tar' }.merge(metadata)
+      deposited_file = era_container.object(file_base_name)
+      deposited_file.write(File.open(file_name), headers)
+    else
+      headers = { etag: checksum,
+                  content_type:  'application/x-tar',
+                  metadata: metadata }
+      deposited_file = era_container.create_object(file_base_name, headers, File.open(file_name))
+    end
 
     deposited_file
   end
