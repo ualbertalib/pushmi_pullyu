@@ -37,7 +37,9 @@ class PushmiPullyu::SwiftDepositer
     # ruby-openstack wants all keys of the metadata to be named like "X-Object-Meta-{{Key}}", so update them
     metadata.transform_keys! { |key| "X-Object-Meta-#{key}" }
 
+    # headers hash need to be different for write vs create_object methods
     if era_container.object_exists?(file_base_name)
+      # write method expects all key/value pairs to be strings
       headers = { 'etag' => checksum,
                   'content-type' => 'application/x-tar' }.merge(metadata)
       deposited_file = era_container.object(file_base_name)
