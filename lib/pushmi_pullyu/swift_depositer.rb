@@ -40,11 +40,13 @@ class PushmiPullyu::SwiftDepositer
     # headers hash need to be different for write vs create_object methods
     if era_container.object_exists?(file_base_name)
       # write method expects all key/value pairs to be strings
+      # headers has flat structure of key->value string paris
       headers = { 'etag' => checksum,
                   'content-type' => 'application/x-tar' }.merge(metadata)
       deposited_file = era_container.object(file_base_name)
       deposited_file.write(File.open(file_name), headers)
     else
+      # symbols are used as keys, structure is not flat, one element metadata: is a hash itself
       headers = { etag: checksum,
                   content_type:  'application/x-tar',
                   metadata: metadata }
