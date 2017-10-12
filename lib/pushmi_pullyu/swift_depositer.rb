@@ -41,7 +41,8 @@ class PushmiPullyu::SwiftDepositer
     # details see: https://github.com/ualbertalib/pushmi_pullyu/issues/105
     if era_container.object_exists?(file_base_name)
       # temporary solution until fixed in upstream:
-      # for update: construct hash for key/value pairs as strings, and metadata as additional key/value string pairs in the hash
+      # for update: construct hash for key/value pairs as strings, 
+      # and metadata as additional key/value string pairs in the hash
       headers = { 'etag' => checksum,
                   'content-type' => 'application/x-tar' }.merge(metadata)
       deposited_file = era_container.object(file_base_name)
