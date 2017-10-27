@@ -58,6 +58,7 @@ class PushmiPullyu::CLI
     Rollbar.configure do |config|
       config.enabled = false unless options[:rollbar_token].present?
       config.access_token = options[:rollbar_token]
+      config.endpoint = options[:rollbar_endpoint]
     end
   end
 
