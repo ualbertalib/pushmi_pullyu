@@ -17,6 +17,8 @@ process_name: pushmi_pullyu
 queue_name: dev:pmpy_queue
 minimum_age: 0
 rollbar_token: 'abc123xyz'
+rollbar_proxy_host: 'your_proxy_host_url'
+rollbar_proxy_port: '80'
 
 redis:
   url: redis://localhost:6379
