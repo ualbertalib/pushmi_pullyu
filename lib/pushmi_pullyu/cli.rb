@@ -229,7 +229,7 @@ class PushmiPullyu::CLI
       exit!(1)
     else
       # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
-      $stderr.puts 'Exiting...  Interrupt again to force quit.'
+      warn 'Exiting...  Interrupt again to force quit.'
       PushmiPullyu.server_running = false
     end
   end
