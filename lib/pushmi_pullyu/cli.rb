@@ -62,7 +62,6 @@ class PushmiPullyu::CLI
         host: options[:rollbar_proxy_host],
         port: options[:rollbar_proxy_port]
       }
-
     end
   end
 
