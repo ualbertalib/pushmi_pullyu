@@ -50,6 +50,8 @@ module PushmiPullyu
       project_name: 'demo',
       project_domain_name: 'default',
       container: 'ERA'
+    },
+    rollbar: {
     }
   }.freeze
 
