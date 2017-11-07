@@ -56,8 +56,15 @@ class PushmiPullyu::CLI
 
   def configure_rollbar
     Rollbar.configure do |config|
-      config.enabled = false unless options[:rollbar_token].present?
-      config.access_token = options[:rollbar_token]
+      config.enabled = false unless options[:rollbar][:token].present?
+      config.access_token = options[:rollbar][:token]
+      if options[:rollbar][:proxy_host].present?
+        config.proxy = {}
+        config.proxy[:host] = options[:rollbar][:proxy_host]
+        config.proxy[:port] = options[:rollbar][:proxy_port] if options[:rollbar][:proxy_port].present?
+        config.proxy[:user] = options[:rollbar][:proxy_user] if options[:rollbar][:proxy_user].present?
+        config.proxy[:password] = options[:rollbar][:proxy_password] if options[:rollbar][:proxy_password].present?
+      end
     end
   end
 
@@ -93,7 +100,10 @@ class PushmiPullyu::CLI
       end
 
       o.on('-r', '--rollbar-token TOKEN', 'Enable error reporting to Rollbar') do |token|
-        opts[:rollbar_token] = token if token.present?
+        if token.present?
+          opts[:rollbar] = {}
+          opts[:rollbar][:token] = token
+        end
       end
 
       o.on '-C', '--config PATH', 'Path for YAML config file' do |config_file|
@@ -225,7 +235,7 @@ class PushmiPullyu::CLI
       exit!(1)
     else
       # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
-      $stderr.puts 'Exiting...  Interrupt again to force quit.'
+      warn 'Exiting...  Interrupt again to force quit.'
       PushmiPullyu.server_running = false
     end
   end

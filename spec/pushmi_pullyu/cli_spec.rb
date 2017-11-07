@@ -30,11 +30,23 @@ RSpec.describe PushmiPullyu::CLI do
 
     context 'Rollbar' do
       it 'sets up Rollbar' do
-        PushmiPullyu.options[:rollbar_token] = 'xyzzy'
+        PushmiPullyu.options[:rollbar][:token] = 'xyzzy'
 
         cli.run
 
         expect(Rollbar.configuration.access_token).to eq 'xyzzy'
+      end
+      it 'sets up Proxy for Rollbar' do
+        PushmiPullyu.options[:rollbar][:proxy_host] = 'your_proxy_host_url'
+        PushmiPullyu.options[:rollbar][:proxy_port] = '80'
+        PushmiPullyu.options[:rollbar][:proxy_user] = 'dummy_admin'
+        PushmiPullyu.options[:rollbar][:proxy_password] = 'securepassword'
+        cli.run
+
+        expect(Rollbar.configuration.proxy[:host]).to eq 'your_proxy_host_url'
+        expect(Rollbar.configuration.proxy[:port]).to eq '80'
+        expect(Rollbar.configuration.proxy[:user]).to eq 'dummy_admin'
+        expect(Rollbar.configuration.proxy[:password]).to eq 'securepassword'
       end
     end
   end
@@ -62,16 +74,15 @@ RSpec.describe PushmiPullyu::CLI do
 
     it 'prints a message the first time and exits on second time' do
       allow(cli).to receive(:exit!)
-      allow($stderr).to receive(:puts)
+      allow(cli).to receive(:warn)
 
       expect { cli.send(:shutdown) }.to change { PushmiPullyu.server_running? }.from(true).to(false)
-
       expect(cli).not_to have_received(:exit!)
-      expect($stderr).to have_received(:puts).with('Exiting...  Interrupt again to force quit.').once
+      expect(cli).to have_received(:warn).with('Exiting...  Interrupt again to force quit.').once
 
       cli.send(:shutdown)
 
-      expect($stderr).to have_received(:puts).with('Exiting...  Interrupt again to force quit.').once
+      expect(cli).to have_received(:warn).with('Exiting...  Interrupt again to force quit.').once
       expect(cli).to have_received(:exit!)
     end
   end
@@ -111,7 +122,7 @@ RSpec.describe PushmiPullyu::CLI do
 
       it 'sets up Rollbar integration' do
         cli.parse(['-r', 'asdfjkl11234eieio'])
-        expect(PushmiPullyu.options[:rollbar_token]).to eq 'asdfjkl11234eieio'
+        expect(PushmiPullyu.options[:rollbar][:token]).to eq 'asdfjkl11234eieio'
       end
 
       it 'sets logdir' do
@@ -200,7 +211,7 @@ RSpec.describe PushmiPullyu::CLI do
         expect(PushmiPullyu.options[:minimum_age]).to be 1
         expect(PushmiPullyu.options[:queue_name]).to eq 'test:pmpy_queue'
         expect(PushmiPullyu.options[:swift][:auth_url]).to eq 'http://example.com:8080/auth/v1.0'
-        expect(PushmiPullyu.options[:rollbar_token]).to eq 'abc123xyz'
+        expect(PushmiPullyu.options[:rollbar][:token]).to eq 'abc123xyz'
       end
 
       it 'still allows command line arguments to take precedence' do

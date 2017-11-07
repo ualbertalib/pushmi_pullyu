@@ -16,7 +16,6 @@ workdir: tmp/work
 process_name: pushmi_pullyu
 queue_name: dev:pmpy_queue
 minimum_age: 0
-rollbar_token: 'abc123xyz'
 
 redis:
   url: redis://localhost:6379
@@ -39,3 +38,8 @@ swift:
   project_name: demo
   project_domain_name: default
   container: ERA
+
+rollbar:
+  token: 'abc123xyz'
+  proxy_host: 'your_proxy_host_url'
+  proxy_port: '80'

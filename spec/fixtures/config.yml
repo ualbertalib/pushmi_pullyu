@@ -8,7 +8,10 @@ workdir: tmp/spec/work
 process_name: test_pushmi_pullyu
 minimum_age: 1
 queue_name: test:pmpy_queue
-rollbar_token: 'abc123xyz'
+rollbar:
+  token: 'abc123xyz'
+  proxy_host: 'your_proxy_url'
+  proxy_port: '80'
 
 solr:
   url: http://www.example.com:8983/solr/development
