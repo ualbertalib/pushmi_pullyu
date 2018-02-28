@@ -1,0 +1,24 @@
+#Docker Compose for a production version of Pushmi-Pullyu
+version: '3'
+
+services:
+
+  hydranorth:
+    image: "ualibraries/hydra_north:deb"
+    environment:
+      - LOCAL_SRC_PATH=$HOME/dev/HydraNorth
+      - EZID_PASSWORD=changeme
+    volumes:
+      # di_docker_hydranorth expects codebase in `app` within the container
+      - ${LOCAL_SRC_PATH}:/app
+
+  swift:
+    image: "ualibraries/swift_dev"
+    environment:
+      - LOCAL_SWIFT_STORAGE=$HOME/.swift
+
+  pushmi-pullyu:
+    image: "ualibraries/pushmi_pullyu:production"
+    depends_on:
+      - swift
+      - hydranorth

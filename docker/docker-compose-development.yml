@@ -1,0 +1,40 @@
+# Docker Compose for a development version of Pushmi-Pullyu
+#
+version: '3'
+
+services:
+  hydranorth:
+    image: "ualibraries/hydra_north:deb"
+    environment:
+      - LOCAL_SRC_PATH=$HOME/dev/HydraNorth
+      - EZID_PASSWORD=changeme
+    volumes:
+      # di_docker_hydranorth expects codebase in `app` within the container
+      - ${LOCAL_SRC_PATH}:/app
+    ports:
+      - "3000:3000"
+      - "8983:8983"
+
+  swift:
+    image: "ualibraries/swift_dev"
+    environment:
+      - LOCAL_SWIFT_STORAGE=$HOME/.swift
+    ports:
+      - "8080:8080"
+
+  pushmi-pullyu:
+    image: "ualibraries/pushmi_pullyu"
+    environment:
+      - REDIS_HOST=hydranorth
+      - REDIS_URL=redis://hydranorth:6379
+      - SOLR_HOST=hydranorth
+      - FEDORA_HOST=hydranorth
+      - FEDORA_USER=fedoraAdmin
+      - FEDORA_PASS=fedoraAdmin
+      - SWIFT_ENDPOINT=http://swift:8080
+    depends_on:
+      - swift
+      - hydranorth
+    stdin_open: true # help debug: keep STDIN open even if not attached
+    tty: true # help debug: Allocate a pseudo-TTY
+

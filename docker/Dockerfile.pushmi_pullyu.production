@@ -1,0 +1,8 @@
+# Create production pushmi_pullyu container using Gem and dependancies from rubygem.org 
+FROM ruby:2.3.4
+
+# Grab gem from https://rubygems.org/gems/pushmi_pullyu 
+RUN gem install pushmi_pullyu
+
+#by default, execute Pushmi-Pullyu - `pushmi_pullyu start`
+CMD ["pushmi_pullyu", "start"]

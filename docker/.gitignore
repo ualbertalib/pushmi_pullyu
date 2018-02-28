@@ -1,0 +1,5 @@
+.env
+.env-hydranorth
+.env-pushmi_pullyu
+.DS_Store
+*.bak
