@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'minitar', '~> 0.6'
   spec.add_runtime_dependency 'openstack', '~> 3.3', '>= 3.3.10'
   spec.add_runtime_dependency 'rdf', '>= 1.99', '< 4.0'
-  spec.add_runtime_dependency 'rdf-n3', '~> 1.99'
+  spec.add_runtime_dependency 'rdf-n3', '>= 1.99', '< 4.0'
   spec.add_runtime_dependency 'redis', '~> 3.3'
   spec.add_runtime_dependency 'rollbar', '~> 2.14'
 
@@ -38,9 +38,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry', '~> 0.10', '>= 0.10.4'
   spec.add_development_dependency 'rake', '~> 12.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.45'
+  spec.add_development_dependency 'rubocop', '~> 0.51'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.10'
   spec.add_development_dependency 'timecop', '~> 0.8'
-  spec.add_development_dependency 'vcr', '~> 3.0'
+  spec.add_development_dependency 'vcr', '~> 4.0'
   spec.add_development_dependency 'webmock', '~> 2.1'
 end
