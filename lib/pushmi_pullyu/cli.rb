@@ -41,6 +41,7 @@ class PushmiPullyu::CLI
       Rollbar.error(e)
       raise e
     end
+    # rubocop:enable Lint/RescueException
   end
 
   def start_server
@@ -73,12 +74,11 @@ class PushmiPullyu::CLI
   end
 
   def parse_config(config_file)
-    opts = {}
     if File.exist?(config_file)
-      opts = YAML.safe_load(ERB.new(IO.read(config_file)).result).deep_symbolize_keys || opts
+      YAML.safe_load(ERB.new(IO.read(config_file)).result).deep_symbolize_keys || {}
+    else
+      {}
     end
-
-    opts
   end
 
   # Parse the options.
@@ -180,14 +180,14 @@ class PushmiPullyu::CLI
           # Log successful preservation event to the log files
           PushmiPullyu::Logging.log_preservation_event(deposited_file)
         end
-      # rubocop:disable RescueWithoutErrorClass
-      rescue => e
+      # rubocop:disable Lint/RescueException
+      rescue Exception => e
         Rollbar.error(e)
         logger.error(e)
         # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
         # move on to the next item.
       end
-      # rubocop:enaable RescueWithoutErrorClass
+      # rubocop:enable Lint/RescueException
     end
   end
 

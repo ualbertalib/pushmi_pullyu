@@ -136,7 +136,6 @@ class PushmiPullyu::AIP::Downloader
         local: "#{aip_dirs.metadata}/content_versions.n3",
         optional: false
       ),
-
       # Optional downloads
       thumbnail: OpenStruct.new(
         remote: '/thumbnail',
