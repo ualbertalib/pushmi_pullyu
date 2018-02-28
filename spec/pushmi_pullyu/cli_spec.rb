@@ -17,7 +17,7 @@ RSpec.describe PushmiPullyu::CLI do
       expect(cli).not_to have_received(:start_server_as_daemon)
     end
 
-    context 'should run as daemon' do
+    context 'when running as a daemon' do
       it 'starts working loop as daemon' do
         PushmiPullyu.options[:daemonize] = true
 
@@ -28,7 +28,7 @@ RSpec.describe PushmiPullyu::CLI do
       end
     end
 
-    context 'Rollbar' do
+    context 'with Rollbar' do
       it 'sets up Rollbar' do
         PushmiPullyu.options[:rollbar][:token] = 'xyzzy'
 
@@ -76,7 +76,7 @@ RSpec.describe PushmiPullyu::CLI do
       allow(cli).to receive(:exit!)
       allow(cli).to receive(:warn)
 
-      expect { cli.send(:shutdown) }.to change { PushmiPullyu.server_running? }.from(true).to(false)
+      expect { cli.send(:shutdown) }.to change(PushmiPullyu, :server_running?).from(true).to(false)
       expect(cli).not_to have_received(:exit!)
       expect(cli).to have_received(:warn).with('Exiting...  Interrupt again to force quit.').once
 
