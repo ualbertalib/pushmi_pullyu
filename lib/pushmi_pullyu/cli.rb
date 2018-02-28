@@ -180,14 +180,14 @@ class PushmiPullyu::CLI
           # Log successful preservation event to the log files
           PushmiPullyu::Logging.log_preservation_event(deposited_file)
         end
-      # rubocop:disable Style/RescueStandardError
-      rescue => e
+      # rubocop:disable Lint/RescueException
+      rescue Exception => e
         Rollbar.error(e)
         logger.error(e)
         # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
         # move on to the next item.
       end
-      # rubocop:enable Style/RescueStandardError
+      # rubocop:enable Lint/RescueException
     end
   end
 
