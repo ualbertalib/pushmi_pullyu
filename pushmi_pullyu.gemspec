@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
   spec.add_runtime_dependency 'minitar', '~> 0.6'
   spec.add_runtime_dependency 'openstack', '~> 3.3', '>= 3.3.10'
-  spec.add_runtime_dependency 'rdf', '~> 1.99'
+  spec.add_runtime_dependency 'rdf', '>= 1.99', '< 4.0'
   spec.add_runtime_dependency 'rdf-n3', '>= 1.99', '< 4.0'
   spec.add_runtime_dependency 'redis', '~> 3.3'
   spec.add_runtime_dependency 'rollbar', '~> 2.14'
