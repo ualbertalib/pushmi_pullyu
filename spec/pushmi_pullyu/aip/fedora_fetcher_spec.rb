@@ -10,7 +10,7 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
   before do
     FileUtils.mkdir_p(workdir)
     allow(PushmiPullyu).to receive(:options).and_return(
-      fedora: { url: 'http://www.example.com:8983/fedora/rest',
+      fedora: { url: 'http://www.example.com:8080/fcrepo/rest',
                 base_path: '/test',
                 user: 'gollum',
                 password: 'iH8zH0bb1tzeZ' }
@@ -24,7 +24,7 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
   describe '#object_url' do
     it 'sets the object URL correctly' do
       expect(fedora_fetcher.object_url)
-        .to eq('http://www.example.com:8983/fedora/rest/test/ab/c1/23/wh/abc123whatever')
+        .to eq('http://www.example.com:8080/fcrepo/rest/test/ab/c1/23/wh/abc123whatever')
     end
   end
 

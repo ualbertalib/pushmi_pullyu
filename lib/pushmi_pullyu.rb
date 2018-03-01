@@ -37,7 +37,7 @@ module PushmiPullyu
       url: 'http://localhost:8983/solr/development'
     },
     fedora: {
-      url: 'http://localhost:8983/fedora/rest',
+      url: 'http://localhost:8080/fcrepo/rest',
       user: 'fedoraAdmin',
       password: 'fedoraAdmin',
       base_path: '/dev'

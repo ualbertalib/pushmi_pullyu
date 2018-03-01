@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/test/oh/no/im/ba/ohnoimbad
+    uri: http://www.example.com:8080/fcrepo/rest/test/oh/no/im/ba/ohnoimbad
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:

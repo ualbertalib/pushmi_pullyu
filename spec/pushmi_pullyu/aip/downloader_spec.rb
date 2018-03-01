@@ -4,11 +4,11 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   let(:workdir) { 'tmp/downloader_spec' }
   let(:options) do
     { workdir: workdir,
-      fedora: { url: 'http://www.example.com:8983/fedora/rest',
-                base_path: '/dev',
+      fedora: { url: 'http://www.example.com:8080/fcrepo/rest',
+                base_path: '/test',
                 user: 'fedoraAdmin',
                 password: 'fedoraAdmin' },
-      solr: { url: 'http://www.example.com:8983/solr/development' } }
+      solr: { url: 'http://www.example.com:8983/solr/test' } }
   end
   let(:noid) { '9p2909328' }
   let(:aip_folder) { "#{workdir}/#{noid}" }
