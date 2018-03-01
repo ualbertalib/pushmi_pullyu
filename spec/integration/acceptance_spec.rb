@@ -26,7 +26,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     FileUtils.rm_rf(workdir)
   end
 
-  # this is basically testing exacty what the `PushmiPullyu::CLI#run_preservation_cycle` method does
+  # this is basically testing exactly what the `PushmiPullyu::CLI#run_preservation_cycle` method does
   it 'successfully gets NOID off queue, fetches data from fedora/solr, creates AIP and uploads to Swift' do
     cli = PushmiPullyu::CLI.instance
     cli.parse(['-C', 'spec/fixtures/config.yml', '-W', workdir])

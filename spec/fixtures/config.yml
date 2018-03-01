@@ -14,10 +14,11 @@ rollbar:
   proxy_port: '80'
 
 solr:
-  url: http://www.example.com:8983/solr/development
+  url: http://www.example.com:8983/solr/test
 
 fedora:
-  url: http://www.example.com:8983/fedora/rest
+  url: http://www.example.com:8080/fcrepo/rest
+  base_path: '/test'
 
 swift:
   auth_url: http://example.com:8080/auth/v1.0

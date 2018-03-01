@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328
     body:
       encoding: US-ASCII
       string: ''
@@ -14,7 +14,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -66,7 +66,7 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328>
         a ldp:RDFSource , ldp:Container , <http://www.jcp.org/jcr/nt/1.0folder> ,
         <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
         , <http://www.jcp.org/jcr/mix/1.0created> , fedora:Container , fedora:Resource
@@ -88,7 +88,7 @@ http_interactions:
         ;\n\tfedora:uuid \"22d19a70-fa3c-4944-9418-4c59e3893b87\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tns004:rights \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\tns001:hasModel
         \"GenericFile\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\tns010:isPartOf
-        <http://www.example.com:8983/fedora/rest/dev/x3/46/d4/16/x346d4165> ;\n\tns004:creator
+        <http://www.example.com:8080/fcrepo/rest/test/x3/46/d4/16/x346d4165> ;\n\tns004:creator
         \"Chris Want\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\tns003:dpt \"dittest@ualberta.ca\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:primaryType \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:mixinTypes \"fedora:Container\"^^<http://www.w3.org/2001/XMLSchema#string>
@@ -102,20 +102,20 @@ http_interactions:
         \"Book Chapter\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\tns002:hasCollection
         \"Technical Reports\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\tns004:relation
         \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\tfedora:writable \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean>
-        ;\n\tfedora:hasParent <http://www.example.com:8983/fedora/rest/dev> ;\n\tldp:contains
-        <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>
-        , <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/characterization>
-        , <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/thumbnail>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/fcr:export?format=jcr/xml>
-        dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328>
-        fedora:exportsAs <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/fcr:export?format=jcr/xml>
+        ;\n\tfedora:hasParent <http://www.example.com:8080/fcrepo/rest/test> ;\n\tldp:contains
+        <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>
+        , <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/characterization>
+        , <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/thumbnail>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/fcr:export?format=jcr/xml>
+        dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328>
+        fedora:exportsAs <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/fcr:export?format=jcr/xml>
         .\n\n<http://fedora.info/definitions/v4/repository#jcr/xml> rdfs:label \"jcr/xml\"^^<http://www.w3.org/2001/XMLSchema#string>
         .\n"
     http_version: 
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:fixity
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:fixity
     body:
       encoding: US-ASCII
       string: ''
@@ -127,7 +127,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -160,9 +160,9 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>
-        premis:hasFixity <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content#fixity/1494971234758>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content#fixity/1494971234758>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>
+        premis:hasFixity <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content#fixity/1494971234758>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content#fixity/1494971234758>
         a premis:Fixity ;\n\tfedora:status \"SUCCESS\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tpremis:hasMessageDigest <urn:sha1:5eb6d58841f4196cc682ef1af3054dddacb6d40c>
         ;\n\tpremis:hasSize \"7162\"^^<http://www.w3.org/2001/XMLSchema#long> ;\n\tpremis:hasContentLocation
@@ -174,7 +174,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:metadata
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -186,7 +186,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -199,7 +199,7 @@ http_interactions:
       Last-Modified:
       - Tue, 16 May 2017 21:26:56 GMT
       Link:
-      - <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>;
+      - <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>;
         rel="describes"
       - <http://www.w3.org/ns/ldp#RDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -237,7 +237,7 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:metadata>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:metadata>
         a ldp:RDFSource , <http://www.jcp.org/jcr/nt/1.0file> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
         , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
         , fedora:NonRdfSourceDescription , fedora:Resource , <http://www.jcp.org/jcr/mix/1.0versionable>
@@ -252,9 +252,9 @@ http_interactions:
         , \"fedora:Resource\"^^<http://www.w3.org/2001/XMLSchema#string> , \"mix:versionable\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:lastModified \"2017-05-16T21:26:56.715Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>
         ;\n\tfedora:writable \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean>
-        ;\n\t<http://www.iana.org/assignments/relation/describes> <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>
-        ;\n\tfedora:hasParent <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>
+        ;\n\t<http://www.iana.org/assignments/relation/describes> <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>
+        ;\n\tfedora:hasParent <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>
         a <http://www.jcp.org/jcr/nt/1.0resource> , <http://www.jcp.org/jcr/nt/1.0base>
         , <http://www.jcp.org/jcr/mix/1.0mimeType> , <http://www.jcp.org/jcr/mix/1.0lastModified>
         , fedora:Binary , fedora:Resource , <http://www.jcp.org/jcr/mix/1.0created>
@@ -269,17 +269,17 @@ http_interactions:
         ;\n\tfedora:mixinTypes \"fedora:Binary\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:lastModified \"2017-05-16T21:26:56.51Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>
         ;\n\tpremis:hasOriginalName \"whatever.pdf\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://www.iana.org/assignments/relation/describedby> <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:metadata>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:metadata>
-        fedora:hasVersions <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:versions>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>
-        fedora:hasFixityService <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:fixity>
+        ;\n\t<http://www.iana.org/assignments/relation/describedby> <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:metadata>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:metadata>
+        fedora:hasVersions <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:versions>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>
+        fedora:hasFixityService <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:fixity>
         .\n"
     http_version: 
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:versions
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:versions
     body:
       encoding: US-ASCII
       string: ''
@@ -291,7 +291,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -324,9 +324,9 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content>
-        fedora:hasVersion <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:versions/87a0a8c317f1e7accc3315-77e1-4ac7-9298-a2c4f99531dd/fcr:metadata>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:versions/87a0a8c317f1e7accc3315-77e1-4ac7-9298-a2c4f99531dd/fcr:metadata>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content>
+        fedora:hasVersion <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:versions/87a0a8c317f1e7accc3315-77e1-4ac7-9298-a2c4f99531dd/fcr:metadata>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:versions/87a0a8c317f1e7accc3315-77e1-4ac7-9298-a2c4f99531dd/fcr:metadata>
         fedora:hasVersionLabel \"version1\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:created \"2017-05-16T21:26:57.041Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>
         .\n"
@@ -334,7 +334,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/thumbnail
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/thumbnail
     body:
       encoding: US-ASCII
       string: ''
@@ -346,7 +346,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -366,7 +366,7 @@ http_interactions:
       - attachment; filename=""; creation-date="Tue, 16 May 2017 21:27:40 GMT"; modification-date="Tue,
         16 May 2017 21:36:28 GMT"; size=3346
       Link:
-      - <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/thumbnail/fcr:metadata>;
+      - <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/thumbnail/fcr:metadata>;
         rel="describedby"
       - <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -460,7 +460,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/characterization
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/characterization
     body:
       encoding: US-ASCII
       string: ''
@@ -472,7 +472,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -492,7 +492,7 @@ http_interactions:
       - attachment; filename=""; creation-date="Tue, 16 May 2017 21:27:35 GMT"; modification-date="Tue,
         16 May 2017 21:36:26 GMT"; size=3916
       Link:
-      - <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/characterization/fcr:metadata>;
+      - <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/characterization/fcr:metadata>;
         rel="describedby"
       - <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -569,7 +569,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/fedora3foxml
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/fedora3foxml
     body:
       encoding: US-ASCII
       string: ''
@@ -581,7 +581,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -599,7 +599,7 @@ http_interactions:
       encoding: UTF-8
       string: "<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html;
         charset=ISO-8859-1\"/>\n<title>Error 404 Not Found</title>\n</head>\n<body><h2>HTTP
-        ERROR 404</h2>\n<p>Problem accessing /fedora/rest/dev/9p/29/09/32/9p2909328/fedora3foxml.
+        ERROR 404</h2>\n<p>Problem accessing /fedora/rest/test/9p/29/09/32/9p2909328/fedora3foxml.
         Reason:\n<pre>    Not Found</pre></p><hr /><i><small>Powered by Jetty://</small></i><br/>
         \                                               \n<br/>                                                \n<br/>
         \                                               \n<br/>                                                \n<br/>
@@ -615,7 +615,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/fedora3foxml/fcr:metadata
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/fedora3foxml/fcr:metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -627,7 +627,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -645,7 +645,7 @@ http_interactions:
       encoding: UTF-8
       string: "<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html;
         charset=ISO-8859-1\"/>\n<title>Error 404 Not Found</title>\n</head>\n<body><h2>HTTP
-        ERROR 404</h2>\n<p>Problem accessing /fedora/rest/dev/9p/29/09/32/9p2909328/fedora3foxml/fcr:metadata.
+        ERROR 404</h2>\n<p>Problem accessing /fedora/rest/test/9p/29/09/32/9p2909328/fedora3foxml/fcr:metadata.
         Reason:\n<pre>    Not Found</pre></p><hr /><i><small>Powered by Jetty://</small></i><br/>
         \                                               \n<br/>                                                \n<br/>
         \                                               \n<br/>                                                \n<br/>
@@ -661,7 +661,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content
+    uri: http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content
     body:
       encoding: US-ASCII
       string: ''
@@ -673,7 +673,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -693,7 +693,7 @@ http_interactions:
       - attachment; filename="whatever.pdf"; creation-date="Tue, 16 May 2017 21:26:56
         GMT"; modification-date="Tue, 16 May 2017 21:26:56 GMT"; size=7162
       Link:
-      - <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content/fcr:metadata>;
+      - <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content/fcr:metadata>;
         rel="describedby"
       - <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -872,7 +872,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/solr/development/select?fl=id&q=accessTo_ssim:9p2909328&wt=json
+    uri: http://www.example.com:8983/solr/test/select?fl=id&q=accessTo_ssim:9p2909328&wt=json
     body:
       encoding: US-ASCII
       string: ''
@@ -907,7 +907,7 @@ http_interactions:
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd
+    uri: http://www.example.com:8080/fcrepo/rest/test/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd
     body:
       encoding: US-ASCII
       string: ''
@@ -919,7 +919,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -971,12 +971,12 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd>
         a ldp:RDFSource , ldp:Container , <http://www.jcp.org/jcr/nt/1.0folder> ,
         <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
         , <http://www.jcp.org/jcr/mix/1.0created> , fedora:Container , fedora:Resource
         , fedora:Resource , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
-        , <http://www.jcp.org/jcr/mix/1.0referenceable> ;\n\tns005:accessTo <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> ;\n\tns005:accessTo <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328>
         ;\n\tfedora:lastModifiedBy \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:uuid \"5500b30e-8181-49b7-8322-6d71545942cf\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:createdBy \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
@@ -988,16 +988,16 @@ http_interactions:
         ;\n\tns005:mode ns005:Write ;\n\tns001:hasModel \"Hydra::AccessControls::Permission\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tns005:agent <http://projecthydra.org/ns/auth/person#dittest@ualberta.ca>
         ;\n\tfedora:writable \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean>
-        ;\n\tfedora:hasParent <http://www.example.com:8983/fedora/rest/dev> ;\n\tfedora:exportsAs
-        <http://www.example.com:8983/fedora/rest/dev/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd/fcr:export?format=jcr/xml>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd/fcr:export?format=jcr/xml>
+        ;\n\tfedora:hasParent <http://www.example.com:8080/fcrepo/rest/test> ;\n\tfedora:exportsAs
+        <http://www.example.com:8080/fcrepo/rest/test/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd/fcr:export?format=jcr/xml>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/ff/d4/06/38/ffd40638-290a-41f7-bcb2-4e0e54fc3ffd/fcr:export?format=jcr/xml>
         dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .\n\n<http://fedora.info/definitions/v4/repository#jcr/xml>
         rdfs:label \"jcr/xml\"^^<http://www.w3.org/2001/XMLSchema#string> .\n"
     http_version: 
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075
+    uri: http://www.example.com:8080/fcrepo/rest/test/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075
     body:
       encoding: US-ASCII
       string: ''
@@ -1009,7 +1009,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -1061,12 +1061,12 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075>
         a ldp:RDFSource , ldp:Container , <http://www.jcp.org/jcr/nt/1.0folder> ,
         <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
         , <http://www.jcp.org/jcr/mix/1.0created> , fedora:Container , fedora:Resource
         , fedora:Resource , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
-        , <http://www.jcp.org/jcr/mix/1.0referenceable> ;\n\tns005:accessTo <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> ;\n\tns005:accessTo <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328>
         ;\n\tfedora:lastModifiedBy \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:uuid \"73139ad6-d9d3-4e09-bc6a-639577686454\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:createdBy \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
@@ -1078,15 +1078,15 @@ http_interactions:
         ;\n\tns005:mode ns005:Read ;\n\tns001:hasModel \"Hydra::AccessControls::Permission\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tns005:agent <http://projecthydra.org/ns/auth/group#public> ;\n\tfedora:writable
         \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ;\n\tfedora:hasParent
-        <http://www.example.com:8983/fedora/rest/dev> ;\n\tfedora:exportsAs <http://www.example.com:8983/fedora/rest/dev/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075/fcr:export?format=jcr/xml>
-        .\n\n<http://www.example.com:8983/fedora/rest/dev/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075/fcr:export?format=jcr/xml>
+        <http://www.example.com:8080/fcrepo/rest/test> ;\n\tfedora:exportsAs <http://www.example.com:8080/fcrepo/rest/test/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075/fcr:export?format=jcr/xml>
+        .\n\n<http://www.example.com:8080/fcrepo/rest/test/ef/43/19/c0/ef4319c0-2f7a-44c0-b1b5-cd650aa4a075/fcr:export?format=jcr/xml>
         dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .\n\n<http://fedora.info/definitions/v4/repository#jcr/xml>
         rdfs:label \"jcr/xml\"^^<http://www.w3.org/2001/XMLSchema#string> .\n"
     http_version: 
   recorded_at: Tue, 16 May 2017 21:47:14 GMT
 - request:
     method: get
-    uri: http://www.example.com:8983/fedora/rest/dev/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e
+    uri: http://www.example.com:8080/fcrepo/rest/test/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e
     body:
       encoding: US-ASCII
       string: ''
@@ -1098,7 +1098,7 @@ http_interactions:
       User-Agent:
       - Ruby
       Host:
-      - www.example.com:8983
+      - www.example.com:8080
       Authorization:
       - Basic ZmVkb3JhQWRtaW46ZmVkb3JhQWRtaW4=
   response:
@@ -1150,12 +1150,12 @@ http_interactions:
         .\n@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix fedora:
         <http://fedora.info/definitions/v4/repository#> .\n@prefix ldp: <http://www.w3.org/ns/ldp#>
         .\n@prefix xs: <http://www.w3.org/2001/XMLSchema> .\n@prefix dc: <http://purl.org/dc/elements/1.1/>
-        .\n\n\n<http://www.example.com:8983/fedora/rest/dev/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e>
+        .\n\n\n<http://www.example.com:8080/fcrepo/rest/test/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e>
         a ldp:RDFSource , ldp:Container , <http://www.jcp.org/jcr/nt/1.0folder> ,
         <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
         , <http://www.jcp.org/jcr/mix/1.0created> , fedora:Container , fedora:Resource
         , fedora:Resource , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
-        , <http://www.jcp.org/jcr/mix/1.0referenceable> ;\n\tns005:accessTo <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> ;\n\tns005:accessTo <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328>
         ;\n\tfedora:lastModifiedBy \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:uuid \"d0bfd66b-64ae-4c73-9b8d-eaef81fe1394\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tfedora:createdBy \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
@@ -1167,9 +1167,9 @@ http_interactions:
         ns005:Read ;\n\tns001:hasModel \"Hydra::AccessControls::Permission\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\tns005:agent <http://projecthydra.org/ns/auth/group#university_of_alberta>
         ;\n\tfedora:writable \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean>
-        ;\n\tfedora:hasParent <http://www.example.com:8983/fedora/rest/dev> .\n\n<http://www.example.com:8983/fedora/rest/dev/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e/fcr:export?format=jcr/xml>
-        dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .\n\n<http://www.example.com:8983/fedora/rest/dev/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e>
-        fedora:exportsAs <http://www.example.com:8983/fedora/rest/dev/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e/fcr:export?format=jcr/xml>
+        ;\n\tfedora:hasParent <http://www.example.com:8080/fcrepo/rest/test> .\n\n<http://www.example.com:8080/fcrepo/rest/test/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e/fcr:export?format=jcr/xml>
+        dc:format <http://fedora.info/definitions/v4/repository#jcr/xml> .\n\n<http://www.example.com:8080/fcrepo/rest/test/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e>
+        fedora:exportsAs <http://www.example.com:8080/fcrepo/rest/test/e1/91/02/93/e1910293-34b3-42bb-9179-f67f37eb145e/fcr:export?format=jcr/xml>
         .\n\n<http://fedora.info/definitions/v4/repository#jcr/xml> rdfs:label \"jcr/xml\"^^<http://www.w3.org/2001/XMLSchema#string>
         .\n"
     http_version: 

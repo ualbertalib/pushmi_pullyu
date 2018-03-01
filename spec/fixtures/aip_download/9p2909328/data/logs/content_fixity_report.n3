@@ -32,9 +32,9 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 
-<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content> premis:hasFixity <http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content#fixity/1494971234758> .
+<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content> premis:hasFixity <http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content#fixity/1494971234758> .
 
-<http://www.example.com:8983/fedora/rest/dev/9p/29/09/32/9p2909328/content#fixity/1494971234758> a premis:Fixity ;
+<http://www.example.com:8080/fcrepo/rest/test/9p/29/09/32/9p2909328/content#fixity/1494971234758> a premis:Fixity ;
 	fedora:status "SUCCESS"^^<http://www.w3.org/2001/XMLSchema#string> ;
 	premis:hasMessageDigest <urn:sha1:5eb6d58841f4196cc682ef1af3054dddacb6d40c> ;
 	premis:hasSize "7162"^^<http://www.w3.org/2001/XMLSchema#long> ;

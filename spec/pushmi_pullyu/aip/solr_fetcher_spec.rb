@@ -7,7 +7,7 @@ RSpec.describe PushmiPullyu::AIP::SolrFetcher do
 
   before do
     allow(PushmiPullyu).to receive(:options).and_return(
-      solr: { url: 'http://www.example.com:8983/solr/development' }
+      solr: { url: 'http://www.example.com:8983/solr/test' }
     )
   end
 

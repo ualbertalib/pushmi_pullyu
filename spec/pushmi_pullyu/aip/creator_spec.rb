@@ -62,7 +62,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
       expected_file_sums =
         ['e22815d17cdf02a044c25ba120360b43e4af8d28 data/thumbnails/thumbnail',
          '570b43680370ae15f458ce45192986c2f24970d9 data/objects/metadata/content_versions.n3',
-         '9ac0e4d00d3f2613983a456fad0e53506aefe4ee data/logs/content_fixity_report.n3',
+         'c3769541388b1cd557185e43bb20ddf662e63546 data/logs/content_fixity_report.n3',
          "#{sha1} data/logs/aipcreation.log",
          '7c01bc0cd2fe9741ab76f2a171f1383704b60816 data/logs/content_characterization.n3',
 

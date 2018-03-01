@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.example.com:8983/solr/development/select?fl=id&q=accessTo_ssim:ohnoimbad&wt=json
+    uri: http://www.example.com:8983/solr/test/select?fl=id&q=accessTo_ssim:ohnoimbad&wt=json
     body:
       encoding: US-ASCII
       string: ''
