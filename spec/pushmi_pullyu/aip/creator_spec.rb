@@ -80,9 +80,6 @@ RSpec.describe PushmiPullyu::AIP::Creator do
          '50b065c7cf19ed3e282a2a98b70f6e9429cc56ea data/objects/metadata/content_fcr_metadata.n3',
          '5eb6d58841f4196cc682ef1af3054dddacb6d40c data/objects/whatever.pdf'].sort
 
-      puts lines
-      puts ''
-      puts expected_file_sums
       expect(lines).to eq(expected_file_sums)
     end
   end
