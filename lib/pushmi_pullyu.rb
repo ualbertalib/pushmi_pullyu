@@ -10,6 +10,8 @@ require 'pushmi_pullyu/aip/creator'
 require 'pushmi_pullyu/aip/downloader'
 require 'pushmi_pullyu/aip/solr_fetcher'
 require 'pushmi_pullyu/aip/fedora_fetcher'
+require 'active_record'
+require 'pushmi_pullyu/aip/user'
 require 'pushmi_pullyu/cli'
 require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/swift_depositer'
@@ -52,6 +54,11 @@ module PushmiPullyu
       container: 'ERA'
     },
     rollbar: {
+    },
+    database: {
+      encoding: 'utf8',
+      pool: ENV["RAILS_MAX_THREADS"] || 5,
+      url: ENV['PUSHMI_PULLYU_DATABASE_URL'] || ENV['DATABASE_URL'] || ENV['JUPITER_DATABASE_URL']
     }
   }.freeze
 

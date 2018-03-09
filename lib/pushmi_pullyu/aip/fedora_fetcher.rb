@@ -19,7 +19,8 @@ class PushmiPullyu::AIP::FedoraFetcher
   # Return true on success, raise an error otherwise
   # (or use 'optional' to return false on 404)
   def download_object(download_path, url_extra: nil,
-                      optional: false, is_rdf: false)
+                      optional: false, is_rdf: false,
+                      should_add_user_email: false)
 
     uri = URI(object_url(url_extra))
 
@@ -34,8 +35,13 @@ class PushmiPullyu::AIP::FedoraFetcher
     end
 
     if response.is_a?(Net::HTTPSuccess)
+      body = if should_add_user_email
+               add_user_email(response.body)
+             else
+               response.body
+             end
       file = File.open(download_path, 'wb')
-      file.write(response.body)
+      file.write(body)
       file.close
       return true
     elsif response.is_a?(Net::HTTPNotFound)
@@ -56,4 +62,35 @@ class PushmiPullyu::AIP::FedoraFetcher
     PushmiPullyu.options[:fedora][:base_path]
   end
 
+  def add_user_email(body)
+    ensure_database_connection
+    owner_predicate = RDF::URI('http://purl.org/ontology/bibo/owner')
+    is_modified = false
+    prefixes = nil
+    # Read once to load prefixes (the @things at the top of an n3 file)
+    RDF::N3::Reader.new(input=body) do |reader|
+      reader.each_statement {|_statement|}
+      prefixes = reader.prefixes
+    end
+    new_body = RDF::N3::Writer.buffer(prefixes: prefixes) do |writer|
+      RDF::N3::Reader.new(input=body) do |reader|
+        reader.each_statement do |statement|
+          if statement.predicate == owner_predicate
+            user = PushmiPullyu::AIP::User.find(statement.object)
+            writer << [ statement.subject, statement.predicate, user.email]
+            is_modified = true
+          else
+            writer << statement
+          end
+        end
+      end
+    end
+    return body unless is_modified
+    new_body
+  end
+
+  def ensure_database_connection
+    return if ActiveRecord::Base.connected?
+    ActiveRecord::Base.establish_connection(PushmiPullyu.options[:database][:url])
+  end
 end

@@ -21,12 +21,14 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.3.1'
 
+  spec.add_runtime_dependency 'activerecord', '~> 5.1.5'
   spec.add_runtime_dependency 'activesupport', '~> 5.0'
   spec.add_runtime_dependency 'bagit', '~> 0.4'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
   spec.add_runtime_dependency 'minitar', '~> 0.6'
   spec.add_runtime_dependency 'openstack', '~> 3.3', '>= 3.3.10'
+  spec.add_runtime_dependency 'pg', '~> 1.0.0'
   spec.add_runtime_dependency 'rdf', '>= 1.99', '< 4.0'
   spec.add_runtime_dependency 'rdf-n3', '>= 1.99', '< 4.0'
   spec.add_runtime_dependency 'redis', '>= 3.3', '< 5.0'

@@ -75,34 +75,14 @@ class PushmiPullyu::AIP::Downloader
     log_fetching(fedora_fetcher.object_url(path_spec.remote), output_file)
 
     is_rdf = (output_file =~ /\.n3$/)
+    should_add_user_email = path_spec.to_h.fetch(:should_add_user_email, false)
 
     is_success = fedora_fetcher.download_object(output_file,
                                                 url_extra: path_spec.remote,
                                                 optional: path_spec.optional,
-                                                is_rdf: is_rdf)
+                                                is_rdf: is_rdf,
+                                                should_add_user_email: should_add_user_email)
     log_saved(is_success, output_file)
-  end
-
-  def download_permissions
-    PushmiPullyu.logger.info("#{@noid}: looking up permissions from Solr ...")
-    results = PushmiPullyu::AIP::SolrFetcher.new(@noid).fetch_permission_object_ids
-    if results.empty?
-      PushmiPullyu.logger.info("#{@noid}: permissions not found")
-    else
-      results.each do |permission_id|
-        PushmiPullyu.logger.info("#{@noid}: permission object #{permission_id} found")
-        download_permission(permission_id)
-      end
-    end
-  end
-
-  def download_permission(permission_id)
-    path_spec = OpenStruct.new(
-      remote: nil,
-      local: "#{aip_dirs.metadata}/permission_#{permission_id}.n3",
-      optional: false
-    )
-    download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(permission_id))
   end
 
   ### Logging
@@ -169,6 +149,7 @@ class PushmiPullyu::AIP::Downloader
       main_object: OpenStruct.new(
         remote: nil, # Base path
         local: "#{aip_dirs.metadata}/object_metadata.n3",
+        should_add_user_email: true,
         optional: false
       ),
       fixity: OpenStruct.new(
