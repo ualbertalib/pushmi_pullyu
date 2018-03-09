@@ -68,16 +68,16 @@ class PushmiPullyu::AIP::FedoraFetcher
     is_modified = false
     prefixes = nil
     # Read once to load prefixes (the @things at the top of an n3 file)
-    RDF::N3::Reader.new(input=body) do |reader|
-      reader.each_statement {|_statement|}
+    RDF::N3::Reader.new(input = body) do |reader|
+      reader.each_statement { |_statement| }
       prefixes = reader.prefixes
     end
     new_body = RDF::N3::Writer.buffer(prefixes: prefixes) do |writer|
-      RDF::N3::Reader.new(input=body) do |reader|
+      RDF::N3::Reader.new(input = body) do |reader|
         reader.each_statement do |statement|
           if statement.predicate == owner_predicate
             user = PushmiPullyu::AIP::User.find(statement.object)
-            writer << [ statement.subject, statement.predicate, user.email]
+            writer << [statement.subject, statement.predicate, user.email]
             is_modified = true
           else
             writer << statement
@@ -93,4 +93,5 @@ class PushmiPullyu::AIP::FedoraFetcher
     return if ActiveRecord::Base.connected?
     ActiveRecord::Base.establish_connection(PushmiPullyu.options[:database][:url])
   end
+
 end
