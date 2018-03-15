@@ -31,15 +31,21 @@ class PushmiPullyu::AIP::Downloader
     PushmiPullyu.logger.info("#{@noid}: Retreiving data from Fedora ...")
 
     # Main object metadata
-    path_spec = object_aip_paths[:main_object]
-    download_and_log(path_spec, PushmiPullyu::AIP::FedoraFetcher.new(@noid))
+    object_downloader = PushmiPullyu::AIP::FedoraFetcher.new(@noid)
+    download_and_log(object_aip_paths[:main_object], object_downloader)
+
+    # Construct the file ordering file
+    list_source_uri = object_downloader.object_url + object_aip_paths.list_source.remote
+    PushmiPullyu::AIP::FileListCreator.new(list_source_uri,
+                                           object_aip_paths.file_ordering.local,
+                                           member_file_set_uuids).run
 
     member_file_set_uuids.each do |file_set_uuid|
       make_file_set_directories(file_set_uuid)
 
       # FileSet metadata
-      path_spec = file_set_aip_paths(file_set_uuid)[:main_object]
       file_set_downloader = PushmiPullyu::AIP::FedoraFetcher.new(file_set_uuid)
+      path_spec = file_set_aip_paths(file_set_uuid)[:main_object]
       download_and_log(path_spec, file_set_downloader)
 
       # Find the original file by looping through the files in the file_set
@@ -152,15 +158,13 @@ class PushmiPullyu::AIP::Downloader
         should_add_user_email: true,
         optional: false
       ),
-      fixity: OpenStruct.new(
-        remote: '/fcr:fixity',
-        local: "#{aip_dirs.logs}/content_fixity_report.n3",
-        optional: false
+      list_source: OpenStruct.new(
+        # This is downloaded, but not saved
+        remote: '/list_source'
       ),
-      content_datastream_metadata: OpenStruct.new(
-        remote: '/content/fcr:metadata',
-        local: "#{aip_dirs.metadata}/content_fcr_metadata.n3",
-        optional: false
+      # This is constructed, not downloaded
+      file_ordering: OpenStruct.new(
+        local: "#{aip_dirs.metadata}/file_order.xml"
       )
     ).freeze
   end
@@ -193,16 +197,18 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def member_file_set_uuids
+    @member_file_set_uuids ||= []
+    return @member_file_set_uuids unless @member_file_set_uuids.empty?
+
     member_file_set_predicate = RDF::URI(PREDICATE_URIS[:member_file_sets])
 
     graph = RDF::Graph.load(object_aip_paths.main_object.local)
 
-    member_file_sets = []
     graph.query(predicate: member_file_set_predicate) do |results|
       # Get uuid from end of fedora path
-      member_file_sets << results.object.to_s.split('/').last
+      @member_file_set_uuids << results.object.to_s.split('/').last
     end
-    return member_file_sets if member_file_sets.present?
+    return @member_file_set_uuids unless @member_file_set_uuids.empty?
 
     raise NoFileSets
   end
