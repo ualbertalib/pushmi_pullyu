@@ -110,7 +110,7 @@ class PushmiPullyu::AIP::Downloader
       objects: "#{@aip_directory}/objects",
       metadata: "#{@aip_directory}/objects/metadata",
       files: "#{@aip_directory}/objects/files",
-      file_metadata: "#{@aip_directory}/objects/metadata/files_metadata",
+      files_metadata: "#{@aip_directory}/objects/metadata/files_metadata",
       logs: "#{@aip_directory}/logs",
       file_logs: "#{@aip_directory}/logs/files_logs"
     )
@@ -119,7 +119,7 @@ class PushmiPullyu::AIP::Downloader
   def file_set_dirs(file_set_uuid)
     @file_set_dirs ||= {}
     @file_set_dirs[file_set_uuid] ||= OpenStruct.new(
-      metadata: "#{aip_dirs.file_metadata}/#{file_set_uuid}",
+      metadata: "#{aip_dirs.files_metadata}/#{file_set_uuid}",
       files: "#{aip_dirs.files}/#{file_set_uuid}",
       logs: "#{aip_dirs.file_logs}/#{file_set_uuid}"
     )
@@ -164,7 +164,7 @@ class PushmiPullyu::AIP::Downloader
       ),
       # This is constructed, not downloaded
       file_ordering: OpenStruct.new(
-        local: "#{aip_dirs.metadata}/file_order.xml"
+        local: "#{aip_dirs.files_metadata}/file_order.xml"
       )
     ).freeze
   end

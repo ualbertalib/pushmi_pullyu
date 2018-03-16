@@ -76,7 +76,7 @@ class PushmiPullyu::AIP::FedoraFetcher
       RDF::N3::Reader.new(input = body) do |reader|
         reader.each_statement do |statement|
           if statement.predicate == owner_predicate
-            user = PushmiPullyu::AIP::User.find(statement.object)
+            user = PushmiPullyu::AIP::User.find(statement.object.to_i)
             writer << [statement.subject, statement.predicate, user.email]
             is_modified = true
           else
@@ -91,7 +91,22 @@ class PushmiPullyu::AIP::FedoraFetcher
 
   def ensure_database_connection
     return if ActiveRecord::Base.connected?
-    ActiveRecord::Base.establish_connection(PushmiPullyu.options[:database][:url])
+    ActiveRecord::Base.establish_connection(database_configuration)
+  end
+
+  def database_configuration
+    # Config either from URL, or with more granular options (the later taking precedence)
+    config = {}
+    uri = URI.parse(PushmiPullyu.options[:database][:url])
+    config[:adapter] = PushmiPullyu.options[:database][:adaptor] || uri.scheme
+    config[:host] = PushmiPullyu.options[:database][:host] || uri.host
+    config[:database] = PushmiPullyu.options[:database][:database] || uri.path.split('/')[1].to_s
+    config[:username] = PushmiPullyu.options[:database][:username] || uri.user
+    config[:password] = PushmiPullyu.options[:database][:password] || uri.password
+    params = CGI.parse(uri.query || '')
+    config[:encoding] = PushmiPullyu.options[:database][:encoding] || params['encoding'].to_a.first
+    config[:pool] = PushmiPullyu.options[:database][:pool] || params['pool'].to_a.first
+    config
   end
 
 end
