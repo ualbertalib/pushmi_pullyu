@@ -46,23 +46,24 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       # Now it exists
       expect(File.exist?(aip_folder)).to eq(true)
 
-      # 15 folders exist
+      # 16 folders exist
       folders =
-        ["tmp/downloader_spec/#{noid}/logs",
-         "tmp/downloader_spec/#{noid}/logs/files_logs",
-         "tmp/downloader_spec/#{noid}/logs/files_logs/#{file_set_uuids[0]}",
-         "tmp/downloader_spec/#{noid}/logs/files_logs/#{file_set_uuids[1]}",
-         "tmp/downloader_spec/#{noid}/logs/files_logs/#{file_set_uuids[2]}",
-         "tmp/downloader_spec/#{noid}/objects",
-         "tmp/downloader_spec/#{noid}/objects/metadata",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[0]}",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[1]}",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[2]}",
-         "tmp/downloader_spec/#{noid}/objects/files",
-         "tmp/downloader_spec/#{noid}/objects/files/#{file_set_uuids[0]}",
-         "tmp/downloader_spec/#{noid}/objects/files/#{file_set_uuids[1]}",
-         "tmp/downloader_spec/#{noid}/objects/files/#{file_set_uuids[2]}"]
+        ["tmp/downloader_spec/#{noid}/data",
+         "tmp/downloader_spec/#{noid}/data/logs",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[0]}",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[1]}",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[2]}",
+         "tmp/downloader_spec/#{noid}/data/objects",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[2]}",
+         "tmp/downloader_spec/#{noid}/data/objects/files",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[0]}",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[1]}",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[2]}"]
 
       folders.each do |dir|
         expect(File.exist?(dir)).to eq(true)
@@ -70,26 +71,29 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
 
       # 15 files exist
       files =
-        ["tmp/downloader_spec/#{noid}/logs/aipcreation.log",
-         "tmp/downloader_spec/#{noid}/logs/files_logs/#{file_set_uuids[0]}/content_fixity_report.n3",
-         "tmp/downloader_spec/#{noid}/logs/files_logs/#{file_set_uuids[1]}/content_fixity_report.n3",
-         "tmp/downloader_spec/#{noid}/logs/files_logs/#{file_set_uuids[2]}/content_fixity_report.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/object_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/file_order.xml",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[0]}/file_set_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[0]}/original_file_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[1]}/file_set_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[1]}/original_file_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[2]}/file_set_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/metadata/files_metadata/#{file_set_uuids[2]}/original_file_metadata.n3",
-         "tmp/downloader_spec/#{noid}/objects/files/#{file_set_uuids[0]}/theses.jpg",
-         "tmp/downloader_spec/#{noid}/objects/files/#{file_set_uuids[1]}/image-sample.jpeg",
-         "tmp/downloader_spec/#{noid}/objects/files/#{file_set_uuids[2]}/era-logo.png"]
+        ["tmp/downloader_spec/#{noid}/data/logs/aipcreation.log",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[0]}/content_fixity_report.n3",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[1]}/content_fixity_report.n3",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[2]}/content_fixity_report.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/object_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/file_order.xml",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/file_set_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/"\
+         'original_file_metadata.n3',
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/file_set_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/"\
+         'original_file_metadata.n3',
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[2]}/file_set_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[2]}/"\
+         'original_file_metadata.n3',
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[0]}/theses.jpg",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[1]}/image-sample.jpeg",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[2]}/era-logo.png"]
       files.each do |file|
         expect(File.exist?(file)).to eq(true)
       end
 
-      # 30 files and directories total were created
+      # 31 files and directories total were created
       expect(Dir["tmp/downloader_spec/#{noid}/**/*"].sort).to eq((folders + files).sort)
     end
   end

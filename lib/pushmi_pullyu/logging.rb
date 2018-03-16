@@ -24,7 +24,7 @@ module PushmiPullyu::Logging
   end
 
   def self.log_aip_activity(aip_directory, message)
-    log_file = "#{aip_directory}/logs/aipcreation.log"
+    log_file = "#{aip_directory}/data/logs/aipcreation.log"
     aip_logger = Logger.new(log_file)
     aip_logger.level = logger.level
 

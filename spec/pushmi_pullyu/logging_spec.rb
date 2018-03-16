@@ -59,7 +59,7 @@ RSpec.describe PushmiPullyu::Logging do
 
   describe '.log_aip_activity' do
     let(:tmp_aip_dir) { 'tmp/test_aip_dir' }
-    let(:tmp_log_aip_dir) { "#{tmp_aip_dir}/logs/" }
+    let(:tmp_log_aip_dir) { "#{tmp_aip_dir}/data/logs/" }
 
     before do
       FileUtils.mkdir_p(tmp_log_aip_dir)

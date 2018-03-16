@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'Acceptance test', type: :feature do
   let(:workdir) { 'tmp/spec' }
-  let(:noid) { '9p2909328' }
+  let(:noid) { '6841cece-41f1-4edf-ab9a-59459a127c77' }
   let(:aip_folder) { "#{workdir}/#{noid}" }
   let(:aip_file) { "#{aip_folder}.tar" }
   let(:log_folder) { "#{workdir}/log" }

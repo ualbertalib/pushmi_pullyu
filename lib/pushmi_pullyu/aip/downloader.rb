@@ -107,12 +107,12 @@ class PushmiPullyu::AIP::Downloader
 
   def aip_dirs
     @aip_dirs ||= OpenStruct.new(
-      objects: "#{@aip_directory}/objects",
-      metadata: "#{@aip_directory}/objects/metadata",
-      files: "#{@aip_directory}/objects/files",
-      files_metadata: "#{@aip_directory}/objects/metadata/files_metadata",
-      logs: "#{@aip_directory}/logs",
-      file_logs: "#{@aip_directory}/logs/files_logs"
+      objects: "#{@aip_directory}/data/objects",
+      metadata: "#{@aip_directory}/data/objects/metadata",
+      files: "#{@aip_directory}/data/objects/files",
+      files_metadata: "#{@aip_directory}/data/objects/metadata/files_metadata",
+      logs: "#{@aip_directory}/data/logs",
+      file_logs: "#{@aip_directory}/data/logs/files_logs"
     )
   end
 
