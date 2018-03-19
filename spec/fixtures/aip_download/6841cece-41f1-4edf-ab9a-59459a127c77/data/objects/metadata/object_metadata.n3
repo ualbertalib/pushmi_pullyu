@@ -15,9 +15,9 @@
 
 <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> a ns002:Thesis,
      ldp:Container,
+     ns005:Object,
      fedora:Container,
      fedora:Resource,
-     ns005:Object,
      ldp:RDFSource;
    ns003:title "An über-thesis about the effects of Samuel Smith’s Imperial IPA on dogs";
    fedora:created "2018-03-09T18:53:29.983Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
@@ -27,8 +27,8 @@
    fedora:lastModifiedBy "bypassAdmin";
    fedora:writable true;
    ns013:institution "http://id.loc.gov/authorities/names/n79058482";
-   ns005:hasMember <http://localhost:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e>,
-     <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead>,
+   ns005:hasMember <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead>,
+     <http://localhost:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e>,
      <http://localhost:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606>;
    ns005:memberOf <http://localhost:8080/fcrepo/rest/dev/94/4b/07/fe/944b07fe-f0c5-497e-87de-24735fd4810e>,
      <http://localhost:8080/fcrepo/rest/dev/f2/66/7e/8a/f2667e8a-cfaa-4002-9246-35105f6325d4>;
@@ -39,8 +39,8 @@
    ns003:abstract "In corrupti laboriosam delectus quisquam dolores possimus eveniet rerum dolores soluta vero et minima illo velit quam tenetur harum ut";
    ns003:accessRights "http://terms.library.ualberta.ca/public";
    ns003:alternative "A full, holistic, dog-tastic approach";
-   ns003:isVersionOf "The original laserdisc series from Orange-on-a-Blue-Background studios",
-     "The CDROM titled 'Dogs!'";
+   ns003:isVersionOf "The CDROM titled 'Dogs!'",
+     "The original laserdisc series from Orange-on-a-Blue-Background studios";
    ns003:language "http://id.loc.gov/vocabulary/iso639-2/eng";
    ns002:degree "Master's of Marketing";
    ns002:owner "admin@ualberta.ca";
@@ -63,7 +63,7 @@
    ebucore:dateIngested "2018-03-09T18:53:29.839Z";
    ns014:first <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360>;
    ns014:last <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900>;
-   ldp:contains <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source>,
-     <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/members>,
-     <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/member_of_collections>;
+   ldp:contains <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/members>,
+     <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/member_of_collections>,
+     <http://localhost:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source>;
    ns001:hasModel "IRThesis" .

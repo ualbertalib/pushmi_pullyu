@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'timecop'
 
 RSpec.describe PushmiPullyu::AIP::Creator do
   let(:workdir) { 'tmp/creator_spec' }
@@ -62,26 +63,26 @@ RSpec.describe PushmiPullyu::AIP::Creator do
       sha1 = Digest::SHA1.file("#{aip_folder}/data/logs/aipcreation.log").hexdigest
 
       expected_file_sums =
-        ['6151ae34af3ae5db247763c1746aa2a6e117512f '\
+        ['c4cf94314f09bbbb13e0b7d01023b77cb3c533d9 '\
          'data/logs/files_logs/01bb1b09-974d-478b-8826-2c606a447606/content_fixity_report.n3',
-         'd5eeb1260efc5e32ba646b2d772222ba781ff857 '\
+         '3231d2c4345426655bdae4b9060ca3d8e422004c '\
          'data/logs/files_logs/837977d6-de61-49ea-a912-a65af5c9005e/content_fixity_report.n3',
-         '57a71d6e98782e4261f4b2f8ea9ec0c7912dc375 '\
+         'c2e0cfbab6558fca5364978e9f5af098746b881f '\
          'data/logs/files_logs/856444b6-8dd5-4dfa-857d-435e354a2ead/content_fixity_report.n3',
          "#{sha1} data/logs/aipcreation.log",
-         '93dc881a2a527c8aafe889e4151acddef16965b1 '\
+         '7f3c5240d3d0556cc1924485fa26ae1604928a85 '\
          'data/objects/metadata/object_metadata.n3',
          '027e59b14f9df9cb973729d36b4f12047deb0871 '\
          'data/objects/metadata/files_metadata/file_order.xml',
-         '5331e9613da278de976eae5d4d7b04a5fc39fef1 '\
+         '74831fe0bd79203ad1629d9d2519fa6ba29f2af0 '\
          'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/file_set_metadata.n3',
          '4f2444b9702452b1a708b08d3c9c3fcbf33a4a9d '\
          'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/original_file_metadata.n3',
-         '8bf3277de4af342c0e7a4f5b137d0475be120687 '\
+         'ecf73887041a59600cf10cb13ca690d009ce0769 '\
          'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/file_set_metadata.n3',
          '38c903d92b50cacc783db042049f7e6854b28661 '\
          'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/original_file_metadata.n3',
-         '4abb0c67c2bb476d70141ce3b3e51b7e35d9bbb2 '\
+         'a7bf7de0a05231b00630f8cf16a4d941a95c7828 '\
          'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/file_set_metadata.n3',
          'bd1fd87d3f4117107083d988a6e80c6e6b7ed667 '\
          'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/original_file_metadata.n3',
@@ -92,6 +93,8 @@ RSpec.describe PushmiPullyu::AIP::Creator do
          '49b1dc60dc20a270cf59ee04a564393bba2bf6c8 '\
          'data/objects/files/856444b6-8dd5-4dfa-857d-435e354a2ead/era-logo.png'].sort
 
+      puts(lines)
+      puts(expected_file_sums)
       expect(lines).to eq(expected_file_sums)
     end
 

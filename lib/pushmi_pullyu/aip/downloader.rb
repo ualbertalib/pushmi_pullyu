@@ -175,6 +175,7 @@ class PushmiPullyu::AIP::Downloader
       main_object: OpenStruct.new(
         remote: nil, # Base file_set path
         local: "#{file_set_dirs(file_set_uuid).metadata}/file_set_metadata.n3",
+        should_add_user_email: true,
         optional: false
       )
     ).freeze

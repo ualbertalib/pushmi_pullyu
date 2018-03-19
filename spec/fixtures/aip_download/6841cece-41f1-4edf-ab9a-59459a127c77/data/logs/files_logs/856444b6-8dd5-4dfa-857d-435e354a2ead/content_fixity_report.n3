@@ -32,11 +32,11 @@
 @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
-        premis:hasFixity  <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521489529166> .
-
-<http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521489529166>
+<http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521494755228>
         a                        premis:EventOutcomeDetail , premis:Fixity ;
         premis:hasEventOutcome   "SUCCESS"^^<http://www.w3.org/2001/XMLSchema#string> ;
         premis:hasMessageDigest  <urn:sha1:49b1dc60dc20a270cf59ee04a564393bba2bf6c8> ;
         premis:hasSize           "5612"^^<http://www.w3.org/2001/XMLSchema#long> .
+
+<http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
+        premis:hasFixity  <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521494755228> .
