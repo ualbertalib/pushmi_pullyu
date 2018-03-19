@@ -59,7 +59,8 @@ module PushmiPullyu
     database: {
       encoding: 'utf8',
       pool: ENV['RAILS_MAX_THREADS'] || 5,
-      url: ENV['PUSHMI_PULLYU_DATABASE_URL'] || ENV['DATABASE_URL'] || ENV['JUPITER_DATABASE_URL']
+      url: ENV['PUSHMI_PULLYU_DATABASE_URL'] || ENV['DATABASE_URL'] || ENV['JUPITER_DATABASE_URL'],
+      database: 'jupiter_development'
     }
   }.freeze
 
