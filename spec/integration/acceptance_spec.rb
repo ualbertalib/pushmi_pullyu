@@ -18,6 +18,8 @@ RSpec.describe 'Acceptance test', type: :feature do
     FileUtils.mkdir_p(log_folder)
 
     allow(PushmiPullyu::Logging.logger).to receive(:info)
+    allow(PushmiPullyu::AIP::User)
+      .to receive(:find).with(2705).and_return(OpenStruct.new(email: 'admin@example.com'))
   end
 
   after do
