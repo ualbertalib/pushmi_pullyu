@@ -23,6 +23,7 @@ require 'active_support/core_ext'
 # PushmiPullyu main module
 module PushmiPullyu
   DEFAULTS = {
+    aip_version: 'lightaip-2.0',
     daemonize: false,
     debug: false,
     logdir: 'log',

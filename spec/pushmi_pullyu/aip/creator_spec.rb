@@ -8,7 +8,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
   let(:creator) { PushmiPullyu::AIP::Creator.new(noid, aip_folder, aip_file) }
 
   before do
-    allow(PushmiPullyu).to receive(:options) { { workdir: workdir } }
+    allow(PushmiPullyu).to receive(:options) { { workdir: workdir, aip_version: 'lightaip-2.0' } }
     FileUtils.mkdir_p(workdir)
     FileUtils.cp_r("spec/fixtures/aip_download/#{noid}", workdir)
   end

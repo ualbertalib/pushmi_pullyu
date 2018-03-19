@@ -8,6 +8,7 @@
 # PushmiPullyu will run this file through ERB when reading it so you can
 # even put in dynamic logic, like consuming ENV Variables.
 
+aip_version: 'lightaip-2.0'
 debug: false
 logdir: log
 monitor: false

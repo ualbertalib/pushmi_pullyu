@@ -1,5 +1,6 @@
 # Dummy sample file for testing parsing of configuration file into PushmiPullyu
 
+aip_version: 'lightaip-2.0'
 debug: true
 logdir: tmp/spec/log
 monitor: false
