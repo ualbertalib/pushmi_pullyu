@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe PushmiPullyu::AIP::Creator do
   let(:workdir) { 'tmp/creator_spec' }
-  let(:noid) { '9p2909328' }
+  let(:noid) { '6841cece-41f1-4edf-ab9a-59459a127c77' }
   let(:aip_file) { "#{aip_folder}.tar" }
   let(:aip_folder) { "#{workdir}/#{noid}" }
   let(:creator) { PushmiPullyu::AIP::Creator.new(noid, aip_folder, aip_file) }
@@ -44,43 +44,79 @@ RSpec.describe PushmiPullyu::AIP::Creator do
       expect(File.exist?("#{aip_folder}/bagit.txt")).to eq(true)
       expect(File.exist?("#{aip_folder}/bag-info.txt")).to eq(true)
 
-      # The downloaded AIP should have 5 directories and 11 files including the log,
-      # bagging should add the above 6 files, so 22 total files/directories
+      # The downloaded AIP should have 16 directories and 15 files including the log
+      # (see the downloader_spec for more elaboration about this),
+      # bagging should add the above 6 files, so 37 total files/directories
       # (see also file count test in creator spec)
-      expect(Dir["#{aip_folder}/**/*"].length).to eq(22)
+      expect(Dir["#{aip_folder}/**/*"].length).to eq(37)
     end
 
-    it 'the created manifest is correct' do
+    it 'creates a correct manifest' do
       creator.run
 
       lines = File.readlines("#{aip_folder}/manifest-sha1.txt").map(&:strip).sort
-      expect(lines.length).to eq(11)
+      # 15 files in the bag
+      expect(lines.length).to eq(15)
 
       # We can't know the sha1 of the aipcreation.log in advance (timestamps are recorded)
       sha1 = Digest::SHA1.file("#{aip_folder}/data/logs/aipcreation.log").hexdigest
 
       expected_file_sums =
-        ['e22815d17cdf02a044c25ba120360b43e4af8d28 data/thumbnails/thumbnail',
-         '570b43680370ae15f458ce45192986c2f24970d9 data/objects/metadata/content_versions.n3',
-         'c3769541388b1cd557185e43bb20ddf662e63546 data/logs/content_fixity_report.n3',
+        ['6151ae34af3ae5db247763c1746aa2a6e117512f '\
+         'data/logs/files_logs/01bb1b09-974d-478b-8826-2c606a447606/content_fixity_report.n3',
+         'd5eeb1260efc5e32ba646b2d772222ba781ff857 '\
+         'data/logs/files_logs/837977d6-de61-49ea-a912-a65af5c9005e/content_fixity_report.n3',
+         '57a71d6e98782e4261f4b2f8ea9ec0c7912dc375 '\
+         'data/logs/files_logs/856444b6-8dd5-4dfa-857d-435e354a2ead/content_fixity_report.n3',
          "#{sha1} data/logs/aipcreation.log",
-         '7c01bc0cd2fe9741ab76f2a171f1383704b60816 data/logs/content_characterization.n3',
-
-         '5d88a0382091a3fb4fd974590b1819ec53d2f9ad '\
-         'data/objects/metadata/permission_e1910293-34b3-42bb-9179-f67f37eb145e.n3',
-
-         'fc41debcd250c808f7c90a7e7eac6eb53198e160 data/objects/metadata/object_metadata.n3',
-
-         '422c4247a3460cfe10e082efe53d63a349a76439 '\
-         'data/objects/metadata/permission_ffd40638-290a-41f7-bcb2-4e0e54fc3ffd.n3',
-
-         'cd5825971cf2bc737b21c2e30b1d01d3ecebcfa7 '\
-         'data/objects/metadata/permission_ef4319c0-2f7a-44c0-b1b5-cd650aa4a075.n3',
-
-         '50b065c7cf19ed3e282a2a98b70f6e9429cc56ea data/objects/metadata/content_fcr_metadata.n3',
-         '5eb6d58841f4196cc682ef1af3054dddacb6d40c data/objects/whatever.pdf'].sort
+         '93dc881a2a527c8aafe889e4151acddef16965b1 '\
+         'data/objects/metadata/object_metadata.n3',
+         '027e59b14f9df9cb973729d36b4f12047deb0871 '\
+         'data/objects/metadata/files_metadata/file_order.xml',
+         '5331e9613da278de976eae5d4d7b04a5fc39fef1 '\
+         'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/file_set_metadata.n3',
+         '4f2444b9702452b1a708b08d3c9c3fcbf33a4a9d '\
+         'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/original_file_metadata.n3',
+         '8bf3277de4af342c0e7a4f5b137d0475be120687 '\
+         'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/file_set_metadata.n3',
+         '38c903d92b50cacc783db042049f7e6854b28661 '\
+         'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/original_file_metadata.n3',
+         '4abb0c67c2bb476d70141ce3b3e51b7e35d9bbb2 '\
+         'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/file_set_metadata.n3',
+         'bd1fd87d3f4117107083d988a6e80c6e6b7ed667 '\
+         'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/original_file_metadata.n3',
+         '9ea739a91eff6ba99e0227e3a909436d1dfd7ca7 '\
+         'data/objects/files/01bb1b09-974d-478b-8826-2c606a447606/theses.jpg',
+         'e559f7cea3fc307524bccdedb6d012a30b4e6c86 '\
+         'data/objects/files/837977d6-de61-49ea-a912-a65af5c9005e/image-sample.jpeg',
+         '49b1dc60dc20a270cf59ee04a564393bba2bf6c8 '\
+         'data/objects/files/856444b6-8dd5-4dfa-857d-435e354a2ead/era-logo.png'].sort
 
       expect(lines).to eq(expected_file_sums)
+    end
+
+    it 'creates the correct bag metadata' do
+      now = Time.now
+      Timecop.freeze(now)
+
+      creator.run
+
+      lines = File.readlines("#{aip_folder}/bag-info.txt").map(&:strip).sort
+
+      expect(lines.length).to eq(4)
+
+      lines.each do |line|
+        (key, value) = line.split(': ')
+        if key == 'AIP-Version'
+          expect(value).to eq('lightaip-2.0')
+        elsif key == 'Bagging-Date'
+          expect(value).to eq(now.strftime('%F'))
+        else
+          # Don't care about the values for these ones
+          expect(['Bag-Software-Agent', 'Payload-Oxum'].include?(key)).to eq(true)
+        end
+      end
+      Timecop.return
     end
   end
 end
