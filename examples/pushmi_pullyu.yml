@@ -21,9 +21,6 @@ minimum_age: 0
 redis:
   url: redis://localhost:6379
 
-solr:
-  url: http://localhost:8983/solr/development
-
 fedora:
   url: http://localhost:8080/fcrepo/rest
   user: fedoraAdmin

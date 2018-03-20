@@ -8,7 +8,6 @@ require 'pushmi_pullyu/logging'
 require 'pushmi_pullyu/aip'
 require 'pushmi_pullyu/aip/creator'
 require 'pushmi_pullyu/aip/downloader'
-require 'pushmi_pullyu/aip/solr_fetcher'
 require 'pushmi_pullyu/aip/fedora_fetcher'
 require 'pushmi_pullyu/aip/file_list_creator'
 require 'pushmi_pullyu/aip/owner_email_editor'
@@ -36,10 +35,6 @@ module PushmiPullyu
     queue_name: 'dev:pmpy_queue',
     redis: {
       url: 'redis://localhost:6379'
-    },
-    # TODO: rest of these are examples for solr/fedora/swift... feel free to fill them in correctly
-    solr: {
-      url: 'http://localhost:8983/solr/development'
     },
     fedora: {
       url: 'http://localhost:8080/fcrepo/rest',

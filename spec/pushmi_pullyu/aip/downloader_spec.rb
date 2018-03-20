@@ -8,7 +8,6 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
                 base_path: '/dev',
                 user: 'fedoraAdmin',
                 password: 'fedoraAdmin' },
-      solr: { url: 'http://www.example.com:8983/solr/dev' },
       # This next one isn't really used, see mock of PushmiPullyu::AIP::User.find below
       database: { url: 'postgresql://jupiter:mysecretpassword@127.0.0.1/jupiter_test?pool=5' } }
   end

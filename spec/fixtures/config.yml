@@ -14,9 +14,6 @@ rollbar:
   proxy_host: 'your_proxy_url'
   proxy_port: '80'
 
-solr:
-  url: http://www.example.com:8983/solr/dev
-
 fedora:
   url: http://www.example.com:8080/fcrepo/rest
   base_path: '/dev'
