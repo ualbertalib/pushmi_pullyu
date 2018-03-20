@@ -2,7 +2,10 @@ require 'net/http'
 
 class PushmiPullyu::AIP::FedoraFetcher
 
+  OWNER_PREDICATE = RDF::URI('http://purl.org/ontology/bibo/owner').freeze
+
   class FedoraFetchError < StandardError; end
+  class NoOwnerPredicate < StandardError; end
 
   RDF_FORMAT = 'text/rdf+n3'.freeze
 
@@ -64,7 +67,7 @@ class PushmiPullyu::AIP::FedoraFetcher
 
   def add_user_email(body)
     ensure_database_connection
-    owner_predicate = RDF::URI('http://purl.org/ontology/bibo/owner')
+
     is_modified = false
     prefixes = nil
     # Read once to load prefixes (the @things at the top of an n3 file)
@@ -75,7 +78,7 @@ class PushmiPullyu::AIP::FedoraFetcher
     new_body = RDF::N3::Writer.buffer(prefixes: prefixes) do |writer|
       RDF::N3::Reader.new(input = body) do |reader|
         reader.each_statement do |statement|
-          if statement.predicate == owner_predicate
+          if statement.predicate == OWNER_PREDICATE
             user = PushmiPullyu::AIP::User.find(statement.object.to_i)
             writer << [statement.subject, statement.predicate, user.email]
             is_modified = true
@@ -85,8 +88,8 @@ class PushmiPullyu::AIP::FedoraFetcher
         end
       end
     end
-    return body unless is_modified
-    new_body
+    return new_body if is_modified
+    raise NoOwnerPredicate
   end
 
   def ensure_database_connection
