@@ -93,8 +93,6 @@ RSpec.describe PushmiPullyu::AIP::Creator do
          '49b1dc60dc20a270cf59ee04a564393bba2bf6c8 '\
          'data/objects/files/856444b6-8dd5-4dfa-857d-435e354a2ead/era-logo.png'].sort
 
-      puts(lines)
-      puts(expected_file_sums)
       expect(lines).to eq(expected_file_sums)
     end
 
