@@ -36,9 +36,7 @@ class PushmiPullyu::AIP::Downloader
 
     # Construct the file ordering file
     list_source_uri = object_downloader.object_url + object_aip_paths.list_source.remote
-    PushmiPullyu::AIP::FileListCreator.new(list_source_uri,
-                                           object_aip_paths.file_ordering.local,
-                                           member_file_set_uuids).run
+    create_and_log_file_order_list(list_source_uri)
 
     member_file_set_uuids.each do |file_set_uuid|
       make_file_set_directories(file_set_uuid)
@@ -89,6 +87,15 @@ class PushmiPullyu::AIP::Downloader
                                                 is_rdf: is_rdf,
                                                 should_add_user_email: should_add_user_email)
     log_saved(is_success, output_file)
+  end
+
+  def create_and_log_file_order_list(url)
+    output_file = object_aip_paths.file_ordering.local
+    PushmiPullyu::Logging.log_aip_activity(@aip_directory,
+                                           "#{@noid}: #{output_file} -- creating from #{url} ...")
+    PushmiPullyu::AIP::FileListCreator.new(url, output_file, member_file_set_uuids).run
+    PushmiPullyu::Logging.log_aip_activity(@aip_directory,
+                                           "#{@noid}: #{output_file} -- created")
   end
 
   ### Logging
