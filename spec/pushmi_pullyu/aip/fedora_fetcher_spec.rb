@@ -80,7 +80,7 @@ RSpec.describe PushmiPullyu::AIP::FedoraFetcher do
       # cassette fedora_fetcher_200 has no owner predicate
       VCR.use_cassette('fedora_fetcher_200') do
         expect { fedora_fetcher.download_object(download_path, should_add_user_email: true) }
-          .to raise_error(PushmiPullyu::AIP::FedoraFetcher::NoOwnerPredicate)
+          .to raise_error(PushmiPullyu::AIP::OwnerEmailEditor::NoOwnerPredicate)
       end
     end
 
