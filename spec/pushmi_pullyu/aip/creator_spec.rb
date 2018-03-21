@@ -70,21 +70,21 @@ RSpec.describe PushmiPullyu::AIP::Creator do
          'c2e0cfbab6558fca5364978e9f5af098746b881f '\
          'data/logs/files_logs/856444b6-8dd5-4dfa-857d-435e354a2ead/content_fixity_report.n3',
          "#{sha1} data/logs/aipcreation.log",
-         '7f3c5240d3d0556cc1924485fa26ae1604928a85 '\
+         'c989727f21d6b62f17836007a8d1c59bcedb9b7a '\
          'data/objects/metadata/object_metadata.n3',
          '027e59b14f9df9cb973729d36b4f12047deb0871 '\
          'data/objects/metadata/files_metadata/file_order.xml',
-         '74831fe0bd79203ad1629d9d2519fa6ba29f2af0 '\
+         '0b9d190afaab8577424789cecd74b824cd2ae81d '\
          'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/file_set_metadata.n3',
-         '4f2444b9702452b1a708b08d3c9c3fcbf33a4a9d '\
+         '94866e6490673a524888dee6acf5b85c81458a03 '\
          'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/original_file_metadata.n3',
-         'ecf73887041a59600cf10cb13ca690d009ce0769 '\
+         '442a1f64a3bd05884020a9b70fbd17752ed13e12 '\
          'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/file_set_metadata.n3',
-         '38c903d92b50cacc783db042049f7e6854b28661 '\
+         '254587e16e46846e5428ba989526bc1c08ecdb47 '\
          'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/original_file_metadata.n3',
-         'a7bf7de0a05231b00630f8cf16a4d941a95c7828 '\
+         '7083d7bca4650aec59920e5e8b90a85667ecc5d6 '\
          'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/file_set_metadata.n3',
-         'bd1fd87d3f4117107083d988a6e80c6e6b7ed667 '\
+         '30604fd556c96aac01abddf1e8b4e0369fc90ba5 '\
          'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/original_file_metadata.n3',
          '9ea739a91eff6ba99e0227e3a909436d1dfd7ca7 '\
          'data/objects/files/01bb1b09-974d-478b-8826-2c606a447606/theses.jpg',

@@ -5,7 +5,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   let(:options) do
     { workdir: workdir,
       fedora: { url: 'http://www.example.com:8080/fcrepo/rest',
-                base_path: '/dev',
+                base_path: '/test',
                 user: 'fedoraAdmin',
                 password: 'fedoraAdmin' },
       # This next one isn't really used, see mock of PushmiPullyu::AIP::User.find below

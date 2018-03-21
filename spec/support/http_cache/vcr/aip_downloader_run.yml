@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77
+    uri: http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77
     body:
       encoding: US-ASCII
       string: ''
@@ -84,17 +84,17 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77>
+        <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77>
                 a                             ldp:RDFSource , fedora:Resource , fedora:Container , ldp:Container , ns005:Object , ns002:Thesis ;
                 fedora:created                "2018-03-09T18:53:29.983Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy              "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/dev> ;
+                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/test> ;
                 fedora:lastModified           "2018-03-09T18:53:38.862Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable               "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
                 ns013:institution             "http://id.loc.gov/authorities/names/n79058482"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ns005:hasMember               <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e> , <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606> , <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead> ;
-                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/dev/94/4b/07/fe/944b07fe-f0c5-497e-87de-24735fd4810e> , <http://www.example.com:8080/fcrepo/rest/dev/f2/66/7e/8a/f2667e8a-cfaa-4002-9246-35105f6325d4> ;
+                ns005:hasMember               <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e> , <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606> , <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead> ;
+                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/test/94/4b/07/fe/944b07fe-f0c5-497e-87de-24735fd4810e> , <http://www.example.com:8080/fcrepo/rest/test/f2/66/7e/8a/f2667e8a-cfaa-4002-9246-35105f6325d4> ;
                 ns012:doi                     "doi:bogus-2018-03-09T18:53:23.145Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 dc:rights                     "Share my stuff with everybody"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 dc:subject                    "Dog"^^<http://www.w3.org/2001/XMLSchema#string> , "Mondo"^^<http://www.w3.org/2001/XMLSchema#string> ;
@@ -119,15 +119,15 @@ http_interactions:
                 ns010:supervisorList          "[\"Pepe C. Cola (Marketing)\",\"I. Ron Stomach (Department of Everything)\"]"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns010:thesisLevel             "Master's"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:dateIngested          "2018-03-09T18:53:29.839Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ns014:first                   <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> ;
-                ns014:last                    <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> ;
-                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/members> , <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source> , <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/member_of_collections> ;
+                ns014:first                   <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> ;
+                ns014:last                    <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> ;
+                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/members> , <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source> , <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/member_of_collections> ;
                 ns001:hasModel                "IRThesis"^^<http://www.w3.org/2001/XMLSchema#string> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source
+    uri: http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source
     body:
       encoding: US-ASCII
       string: ''
@@ -206,39 +206,39 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100>
-                ns014:next      <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> ;
-                ns014:prev      <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> ;
-                ns008:proxyFor  <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e> ;
-                ns008:proxyIn   <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> .
+        <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100>
+                ns014:next      <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> ;
+                ns014:prev      <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> ;
+                ns008:proxyFor  <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e> ;
+                ns008:proxyIn   <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source>
+        <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source>
                 a                      fedora:Container , ldp:Container , ldp:RDFSource , fedora:Resource ;
                 fedora:created         "2018-03-09T18:53:38.77Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy       "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasParent       <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
+                fedora:hasParent       <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
                 fedora:lastModified    "2018-03-09T18:53:38.77Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy  "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable        "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
-                ns003:hasPart          <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> , <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> , <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100> ;
-                ns014:first            <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> ;
-                ns014:last             <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> ;
+                ns003:hasPart          <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> , <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> , <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100> ;
+                ns014:first            <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360> ;
+                ns014:last             <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900> ;
                 ns001:hasModel         "ActiveFedora::Aggregation::ListSource"^^<http://www.w3.org/2001/XMLSchema#string> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360>
-                ns014:next      <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100> ;
-                ns008:proxyFor  <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606> ;
-                ns008:proxyIn   <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> .
+        <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103614401360>
+                ns014:next      <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100> ;
+                ns008:proxyFor  <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606> ;
+                ns008:proxyIn   <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900>
-                ns014:prev      <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100> ;
-                ns008:proxyFor  <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead> ;
-                ns008:proxyIn   <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> .
+        <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103617587900>
+                ns014:prev      <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77/list_source#g47103606134100> ;
+                ns008:proxyFor  <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead> ;
+                ns008:proxyIn   <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606
+    uri: http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606
     body:
       encoding: US-ASCII
       string: ''
@@ -320,29 +320,29 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606>
+        <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606>
                 a                             ldp:Container , fedora:Resource , ns007:FileSet , ldp:RDFSource , fedora:Container , ns005:Object ;
                 fedora:created                "2018-03-09T18:53:30.313Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy              "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/dev> ;
+                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/test> ;
                 fedora:lastModified           "2018-03-09T18:53:30.663Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable               "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
-                ns005:hasFile                 <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c> ;
-                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
+                ns005:hasFile                 <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c> ;
+                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
                 ns003:accessRights            "http://terms.library.ualberta.ca/public"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns003:title                   "theses.jpg"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns002:owner                   2705 ;
                 ns010:recordCreatedInJupiter  "2018-03-09T18:53:30.296Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns010:sitemapLink             "<rs:ln href=\"/items/6841cece-41f1-4edf-ab9a-59459a127c77/view/01bb1b09-974d-478b-8826-2c606a447606/theses.jpg\" rel=\"content\" hash=\"sha1:9ea739a91eff6ba99e0227e3a909436d1dfd7ca7\" length=\"53678\" type=\"image/jpeg\"/>"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:dateIngested          "2018-03-09T18:53:30.296Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files> , <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/member_of_collections> ;
+                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files> , <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/member_of_collections> ;
                 ns001:hasModel                "IRFileSet"^^<http://www.w3.org/2001/XMLSchema#string> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:metadata
+    uri: http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -367,7 +367,7 @@ http_interactions:
       Last-Modified:
       - Fri, 09 Mar 2018 18:53:32 GMT
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c>;
+      - <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c>;
         rel="describes"
       - <http://www.w3.org/ns/ldp#RDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -423,12 +423,12 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c>
+        <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c>
                 a                        ldp:NonRDFSource , fedora:Binary , ns005:File , ns011:OriginalFile , fedora:Resource ;
                 fedora:created           "2018-03-09T18:53:30.447Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:fixity> ;
-                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files> ;
+                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:fixity> ;
+                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files> ;
                 fedora:lastModified      "2018-03-09T18:53:32.99Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
@@ -441,7 +441,7 @@ http_interactions:
                 ebucore:hasMimeType      "image/jpeg"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:height           "335"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:width            "504"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:metadata> ;
+                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:metadata> ;
                 premis:hasCreatingApplicationVersion
                         "1.2.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 premis:hasFormatName     "JPEG File Interchange Format"^^<http://www.w3.org/2001/XMLSchema#string> ;
@@ -454,7 +454,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c
+    uri: http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c
     body:
       encoding: US-ASCII
       string: ''
@@ -486,7 +486,7 @@ http_interactions:
       - attachment; filename="theses.jpg"; creation-date="Fri, 09 Mar 2018 18:53:30
         GMT"; modification-date="Fri, 09 Mar 2018 18:53:32 GMT"; size=53678
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:metadata>;
+      - <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:metadata>;
         rel="describedby"
       - <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -1700,7 +1700,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:fixity
+    uri: http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c/fcr:fixity
     body:
       encoding: US-ASCII
       string: ''
@@ -1763,19 +1763,19 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c#fixity/1521214508827>
+        <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c#fixity/1521214508827>
                 a                        premis:EventOutcomeDetail , premis:Fixity ;
                 premis:hasEventOutcome   "SUCCESS"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 premis:hasMessageDigest  <urn:sha1:9ea739a91eff6ba99e0227e3a909436d1dfd7ca7> ;
                 premis:hasSize           "53678"^^<http://www.w3.org/2001/XMLSchema#long> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c>
-                premis:hasFixity  <http://www.example.com:8080/fcrepo/rest/dev/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c#fixity/1521214508827> .
+        <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c>
+                premis:hasFixity  <http://www.example.com:8080/fcrepo/rest/test/01/bb/1b/09/01bb1b09-974d-478b-8826-2c606a447606/files/8b26afd3-0f72-4241-87d4-830f0bbdf58c#fixity/1521214508827> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e
+    uri: http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e
     body:
       encoding: US-ASCII
       string: ''
@@ -1857,29 +1857,29 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e>
+        <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e>
                 a                             fedora:Container , ldp:RDFSource , ns005:Object , fedora:Resource , ns007:FileSet , ldp:Container ;
                 fedora:created                "2018-03-09T18:53:33.018Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy              "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/dev> ;
+                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/test> ;
                 fedora:lastModified           "2018-03-09T18:53:33.375Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable               "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
-                ns005:hasFile                 <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8> ;
-                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
+                ns005:hasFile                 <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8> ;
+                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
                 ns003:accessRights            "http://terms.library.ualberta.ca/public"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns003:title                   "image-sample.jpeg"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns002:owner                   2705 ;
                 ns010:recordCreatedInJupiter  "2018-03-09T18:53:32.996Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns010:sitemapLink             "<rs:ln href=\"/items/6841cece-41f1-4edf-ab9a-59459a127c77/view/837977d6-de61-49ea-a912-a65af5c9005e/image-sample.jpeg\" rel=\"content\" hash=\"sha1:e559f7cea3fc307524bccdedb6d012a30b4e6c86\" length=\"12401\" type=\"image/jpeg\"/>"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:dateIngested          "2018-03-09T18:53:32.996Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/member_of_collections> , <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files> ;
+                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/member_of_collections> , <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files> ;
                 ns001:hasModel                "IRFileSet"^^<http://www.w3.org/2001/XMLSchema#string> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata
+    uri: http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -1904,7 +1904,7 @@ http_interactions:
       Last-Modified:
       - Fri, 09 Mar 2018 18:53:35 GMT
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>;
+      - <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>;
         rel="describes"
       - <http://www.w3.org/ns/ldp#RDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -1960,12 +1960,12 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>
+        <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>
                 a                        ldp:NonRDFSource , ns005:File , fedora:Binary , ns011:OriginalFile , fedora:Resource ;
                 fedora:created           "2018-03-09T18:53:33.16Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:fixity> ;
-                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files> ;
+                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:fixity> ;
+                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files> ;
                 fedora:lastModified      "2018-03-09T18:53:35.73Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
@@ -1978,7 +1978,7 @@ http_interactions:
                 ebucore:hasMimeType      "image/jpeg"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:height           "183"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:width            "276"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata> ;
+                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata> ;
                 premis:hasCreatingApplicationVersion
                         "1.2.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 premis:hasFormatName     "JPEG File Interchange Format"^^<http://www.w3.org/2001/XMLSchema#string> ;
@@ -1991,7 +1991,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8
+    uri: http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8
     body:
       encoding: US-ASCII
       string: ''
@@ -2023,7 +2023,7 @@ http_interactions:
       - attachment; filename="image-sample.jpeg"; creation-date="Fri, 09 Mar 2018
         18:53:33 GMT"; modification-date="Fri, 09 Mar 2018 18:53:35 GMT"; size=12401
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata>;
+      - <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata>;
         rel="describedby"
       - <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -2320,7 +2320,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:fixity
+    uri: http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:fixity
     body:
       encoding: US-ASCII
       string: ''
@@ -2383,10 +2383,10 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>
-                premis:hasFixity  <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8#fixity/1521214508979> .
+        <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>
+                premis:hasFixity  <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8#fixity/1521214508979> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8#fixity/1521214508979>
+        <http://www.example.com:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8#fixity/1521214508979>
                 a                        premis:EventOutcomeDetail , premis:Fixity ;
                 premis:hasEventOutcome   "SUCCESS"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 premis:hasMessageDigest  <urn:sha1:e559f7cea3fc307524bccdedb6d012a30b4e6c86> ;
@@ -2395,7 +2395,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:08 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead
+    uri: http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead
     body:
       encoding: US-ASCII
       string: ''
@@ -2477,29 +2477,29 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead>
+        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead>
                 a                             ldp:RDFSource , fedora:Resource , ns007:FileSet , fedora:Container , ldp:Container , ns005:Object ;
                 fedora:created                "2018-03-09T18:53:35.759Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy              "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/dev> ;
+                fedora:hasParent              <http://www.example.com:8080/fcrepo/rest/test> ;
                 fedora:lastModified           "2018-03-09T18:53:39.162Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable               "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
-                ns005:hasFile                 <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da> , <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb> ;
-                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/dev/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
+                ns005:hasFile                 <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da> , <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb> ;
+                ns005:memberOf                <http://www.example.com:8080/fcrepo/rest/test/68/41/ce/ce/6841cece-41f1-4edf-ab9a-59459a127c77> ;
                 ns003:accessRights            "http://terms.library.ualberta.ca/public"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns003:title                   "era-logo.png"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns002:owner                   2705 ;
                 ns010:recordCreatedInJupiter  "2018-03-09T18:53:35.736Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ns010:sitemapLink             "<rs:ln href=\"/items/6841cece-41f1-4edf-ab9a-59459a127c77/view/856444b6-8dd5-4dfa-857d-435e354a2ead/era-logo.png\" rel=\"content\" hash=\"sha1:49b1dc60dc20a270cf59ee04a564393bba2bf6c8\" length=\"5612\" type=\"image/png\"/>"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:dateIngested          "2018-03-09T18:53:35.736Z"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/member_of_collections> , <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
+                ldp:contains                  <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/member_of_collections> , <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
                 ns001:hasModel                "IRFileSet"^^<http://www.w3.org/2001/XMLSchema#string> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:09 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb/fcr:metadata
+    uri: http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb/fcr:metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -2524,7 +2524,7 @@ http_interactions:
       Last-Modified:
       - Fri, 09 Mar 2018 18:53:39 GMT
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb>;
+      - <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb>;
         rel="describes"
       - <http://www.w3.org/ns/ldp#RDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -2580,25 +2580,25 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb>
+        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb>
                 a                        ns005:File , fedora:Binary , ldp:NonRDFSource , ns011:ThumbnailImage , fedora:Resource ;
                 fedora:created           "2018-03-09T18:53:39.163Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb/fcr:fixity> ;
-                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
+                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb/fcr:fixity> ;
+                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
                 fedora:lastModified      "2018-03-09T18:53:39.189Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
                 ebucore:filename         ""^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:hasMimeType      "image/jpeg"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb/fcr:metadata> ;
+                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/e1bc671b-b3ce-4f9f-9596-df3cad1d84bb/fcr:metadata> ;
                 premis:hasMessageDigest  <urn:sha1:43cb4e2a1ff2cd53dde7a3e7ea98840ccbf14f30> ;
                 premis:hasSize           "6602"^^<http://www.w3.org/2001/XMLSchema#long> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:09 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata
+    uri: http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata
     body:
       encoding: US-ASCII
       string: ''
@@ -2623,7 +2623,7 @@ http_interactions:
       Last-Modified:
       - Fri, 09 Mar 2018 18:53:38 GMT
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>;
+      - <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>;
         rel="describes"
       - <http://www.w3.org/ns/ldp#RDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -2679,12 +2679,12 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
+        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
                 a                        ns011:OriginalFile , ns005:File , ldp:NonRDFSource , fedora:Binary , fedora:Resource ;
                 fedora:created           "2018-03-09T18:53:35.896Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity> ;
-                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
+                fedora:hasFixityService  <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity> ;
+                fedora:hasParent         <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
                 fedora:lastModified      "2018-03-09T18:53:38.335Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
                 fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
@@ -2694,7 +2694,7 @@ http_interactions:
                 ebucore:hasMimeType      "image/png"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:height           "114"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 ebucore:width            "208"^^<http://www.w3.org/2001/XMLSchema#string> ;
-                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata> ;
+                ns014:describedby        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata> ;
                 premis:hasCreatingApplicationVersion
                         "1.2.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 premis:hasFormatName     "Portable Network Graphics"^^<http://www.w3.org/2001/XMLSchema#string> ;
@@ -2707,7 +2707,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:09 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da
+    uri: http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da
     body:
       encoding: US-ASCII
       string: ''
@@ -2739,7 +2739,7 @@ http_interactions:
       - attachment; filename="era-logo.png"; creation-date="Fri, 09 Mar 2018 18:53:35
         GMT"; modification-date="Fri, 09 Mar 2018 18:53:38 GMT"; size=5612
       Link:
-      - <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata>;
+      - <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata>;
         rel="describedby"
       - <http://www.w3.org/ns/ldp#NonRDFSource>;rel="type"
       - <http://www.w3.org/ns/ldp#Resource>;rel="type"
@@ -2885,7 +2885,7 @@ http_interactions:
   recorded_at: Fri, 16 Mar 2018 15:35:09 GMT
 - request:
     method: get
-    uri: http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity
+    uri: http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity
     body:
       encoding: US-ASCII
       string: ''
@@ -2948,14 +2948,14 @@ http_interactions:
         @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
         @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521214509169>
+        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521214509169>
                 a                        premis:EventOutcomeDetail , premis:Fixity ;
                 premis:hasEventOutcome   "SUCCESS"^^<http://www.w3.org/2001/XMLSchema#string> ;
                 premis:hasMessageDigest  <urn:sha1:49b1dc60dc20a270cf59ee04a564393bba2bf6c8> ;
                 premis:hasSize           "5612"^^<http://www.w3.org/2001/XMLSchema#long> .
 
-        <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
-                premis:hasFixity  <http://www.example.com:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521214509169> .
+        <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
+                premis:hasFixity  <http://www.example.com:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da#fixity/1521214509169> .
     http_version: 
   recorded_at: Fri, 16 Mar 2018 15:35:09 GMT
 recorded_with: VCR 4.0.0

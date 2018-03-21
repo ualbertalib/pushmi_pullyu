@@ -32,12 +32,12 @@
 @prefix xs:    <http://www.w3.org/2001/XMLSchema> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
+<http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
         a                        ns011:OriginalFile , fedora:Resource , fedora:Binary , ldp:NonRDFSource , ns005:File ;
         fedora:created           "2018-03-09T18:53:35.896Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
         fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
-        fedora:hasFixityService  <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity> ;
-        fedora:hasParent         <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
+        fedora:hasFixityService  <http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity> ;
+        fedora:hasParent         <http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
         fedora:lastModified      "2018-03-09T18:53:38.335Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
         fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
         fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
@@ -47,7 +47,7 @@
         ebucore:hasMimeType      "image/png"^^<http://www.w3.org/2001/XMLSchema#string> ;
         ebucore:height           "114"^^<http://www.w3.org/2001/XMLSchema#string> ;
         ebucore:width            "208"^^<http://www.w3.org/2001/XMLSchema#string> ;
-        ns014:describedby        <http://localhost:8080/fcrepo/rest/dev/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata> ;
+        ns014:describedby        <http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata> ;
         premis:hasCreatingApplicationVersion
                 "1.2.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
         premis:hasFormatName     "Portable Network Graphics"^^<http://www.w3.org/2001/XMLSchema#string> ;

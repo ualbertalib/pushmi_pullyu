@@ -11,7 +11,7 @@ RSpec.describe PushmiPullyu::AIP::OwnerEmailEditor do
     FileUtils.mkdir_p(workdir)
     allow(PushmiPullyu).to receive(:options).and_return(
       fedora: { url: 'http://www.example.com:8080/fcrepo/rest',
-                base_path: '/dev',
+                base_path: '/test',
                 user: 'gollum',
                 password: 'iH8zH0bb1tzeZ' },
       # This next one isn't really used, see mock of PushmiPullyu::AIP::User.find below

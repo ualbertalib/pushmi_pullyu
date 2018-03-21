@@ -16,7 +16,7 @@ rollbar:
 
 fedora:
   url: http://www.example.com:8080/fcrepo/rest
-  base_path: '/dev'
+  base_path: '/test'
 
 swift:
   auth_url: http://example.com:8080/auth/v1.0
