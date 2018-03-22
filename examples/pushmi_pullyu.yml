@@ -28,7 +28,7 @@ fedora:
   base_path: /dev
 
 database:
-  encoding: utf8,
+  encoding: utf8
   url: postgresql://jupiter:mysecretpassword@127.0.0.1
   database: jupiter_development
   pool: 5
