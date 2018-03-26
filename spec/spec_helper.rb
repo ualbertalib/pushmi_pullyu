@@ -44,15 +44,4 @@ RSpec.configure do |config|
   # in via --seed to reproduce
   config.order = :random
   Kernel.srand config.seed
-
-  # Prevent vcr from returning text body as a base64 (e.g., when an umlaut is used)
-  VCR.configure do |c|
-    c.before_record do |i|
-      i.response.body.force_encoding('UTF-8')
-    end
-    c.preserve_exact_body_bytes do |http_message|
-      http_message.body.encoding.name == 'ASCII-8BIT' ||
-        !http_message.body.valid_encoding?
-    end
-  end
 end
