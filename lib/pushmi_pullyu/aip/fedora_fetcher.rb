@@ -19,7 +19,8 @@ class PushmiPullyu::AIP::FedoraFetcher
   # Return true on success, raise an error otherwise
   # (or use 'optional' to return false on 404)
   def download_object(download_path, url_extra: nil,
-                      optional: false, is_rdf: false)
+                      optional: false, is_rdf: false,
+                      should_add_user_email: false)
 
     uri = URI(object_url(url_extra))
 
@@ -34,8 +35,13 @@ class PushmiPullyu::AIP::FedoraFetcher
     end
 
     if response.is_a?(Net::HTTPSuccess)
+      body = if should_add_user_email
+               PushmiPullyu::AIP::OwnerEmailEditor.new(response.body).run
+             else
+               response.body
+             end
       file = File.open(download_path, 'wb')
-      file.write(response.body)
+      file.write(body)
       file.close
       return true
     elsif response.is_a?(Net::HTTPNotFound)

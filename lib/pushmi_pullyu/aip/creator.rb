@@ -22,9 +22,13 @@ class PushmiPullyu::AIP::Creator
   private
 
   def bag_aip
-    bag = BagIt::Bag.new(@aip_directory)
+    bag = BagIt::Bag.new(@aip_directory, bag_metadata)
     bag.manifest!
     raise BagInvalid unless bag.valid?
+  end
+
+  def bag_metadata
+    { 'AIP-Version' => PushmiPullyu.options[:aip_version] }
   end
 
   def tar_bag

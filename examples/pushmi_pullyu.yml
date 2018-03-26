@@ -8,6 +8,7 @@
 # PushmiPullyu will run this file through ERB when reading it so you can
 # even put in dynamic logic, like consuming ENV Variables.
 
+aip_version: 'lightaip-2.0'
 debug: false
 logdir: log
 monitor: false
@@ -20,14 +21,17 @@ minimum_age: 0
 redis:
   url: redis://localhost:6379
 
-solr:
-  url: http://localhost:8983/solr/development
-
 fedora:
   url: http://localhost:8080/fcrepo/rest
   user: fedoraAdmin
   password: fedoraAdmin
   base_path: /dev
+
+database:
+  encoding: utf8
+  url: postgresql://jupiter:mysecretpassword@127.0.0.1
+  database: jupiter_development
+  pool: 5
 
 #parameters project_name and project_domain_name are required only for keystone v3 authentication
 swift:

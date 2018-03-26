@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'Acceptance test', type: :feature do
   let(:workdir) { 'tmp/spec' }
-  let(:noid) { '9p2909328' }
+  let(:noid) { '6841cece-41f1-4edf-ab9a-59459a127c77' }
   let(:aip_folder) { "#{workdir}/#{noid}" }
   let(:aip_file) { "#{aip_folder}.tar" }
   let(:log_folder) { "#{workdir}/log" }
@@ -18,6 +18,8 @@ RSpec.describe 'Acceptance test', type: :feature do
     FileUtils.mkdir_p(log_folder)
 
     allow(PushmiPullyu::Logging.logger).to receive(:info)
+    allow(PushmiPullyu::AIP::User)
+      .to receive(:find).with(2705).and_return(OpenStruct.new(email: 'admin@example.com'))
   end
 
   after do
@@ -27,7 +29,7 @@ RSpec.describe 'Acceptance test', type: :feature do
   end
 
   # this is basically testing exactly what the `PushmiPullyu::CLI#run_preservation_cycle` method does
-  it 'successfully gets NOID off queue, fetches data from fedora/solr, creates AIP and uploads to Swift' do
+  it 'successfully gets NOID off queue, fetches data from fedora/database, creates AIP and uploads to Swift' do
     cli = PushmiPullyu::CLI.instance
     cli.parse(['-C', 'spec/fixtures/config.yml', '-W', workdir])
 

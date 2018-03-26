@@ -1,0 +1,58 @@
+@prefix premis: <http://www.loc.gov/premis/rdf/v1#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns004: <http://fake.figurethisout.todo#> .
+@prefix ns003: <http://purl.org/dc/terms/> .
+@prefix ns002: <http://purl.org/ontology/bibo/> .
+@prefix xsi:   <http://www.w3.org/2001/XMLSchema-instance> .
+@prefix ns001: <info:fedora/fedora-system:def/model#> .
+@prefix ns008: <http://www.openarchives.org/ore/terms/> .
+@prefix ns007: <http://projecthydra.org/works/models#> .
+@prefix ns006: <http://terms.library.ualberta.ca/identifiers/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
+@prefix ns005: <http://pcdm.org/models#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix ns009: <http://projecthydra.org/ns/auth/acl#> .
+@prefix fedoraconfig: <http://fedora.info/definitions/v4/config#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix test:  <info:fedora/test/> .
+@prefix ns011: <http://pcdm.org/use#> .
+@prefix ns010: <http://terms.library.ualberta.ca/> .
+@prefix ns015: <http://www.w3.org/2003/12/exif/ns#> .
+@prefix ns014: <http://www.iana.org/assignments/relation/> .
+@prefix ns013: <http://ontoware.org/swrc/ontology#> .
+@prefix ns012: <http://prismstandard.org/namespaces/basic/3.0/> .
+@prefix ns019: <http://projecthydra.org/ns/mix/> .
+@prefix ns018: <http://sweet.jpl.nasa.gov/2.2/reprDataFormat.owl#> .
+@prefix ns017: <http://projecthydra.org/ns/fits/> .
+@prefix ns016: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+@prefix fedora: <http://fedora.info/definitions/v4/repository#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ebucore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#> .
+@prefix ldp:   <http://www.w3.org/ns/ldp#> .
+@prefix xs:    <http://www.w3.org/2001/XMLSchema> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da>
+        a                        ns011:OriginalFile , fedora:Resource , fedora:Binary , ldp:NonRDFSource , ns005:File ;
+        fedora:created           "2018-03-09T18:53:35.896Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        fedora:hasFixityService  <http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:fixity> ;
+        fedora:hasParent         <http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files> ;
+        fedora:lastModified      "2018-03-09T18:53:38.335Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+        ns019:compressionScheme  "Deflate/Inflate"^^<http://www.w3.org/2001/XMLSchema#string> , "Deflate"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:fileSize         "5612"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:filename         "era-logo.png"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:hasMimeType      "image/png"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:height           "114"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:width            "208"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns014:describedby        <http://localhost:8080/fcrepo/rest/test/85/64/44/b6/856444b6-8dd5-4dfa-857d-435e354a2ead/files/04bb7928-cc5d-4338-8062-3209274b29da/fcr:metadata> ;
+        premis:hasCreatingApplicationVersion
+                "1.2.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        premis:hasFormatName     "Portable Network Graphics"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        premis:hasMessageDigest  <urn:sha1:49b1dc60dc20a270cf59ee04a564393bba2bf6c8> ;
+        premis:hasSize           "5612"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        ns016:hashValue          "d409b41db16cfaf9f315ac20532eac07"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns015:exifVersion        "10.00"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns015:orientation        "normal*"^^<http://www.w3.org/2001/XMLSchema#string> .

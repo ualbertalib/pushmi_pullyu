@@ -8,9 +8,15 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
                 base_path: '/test',
                 user: 'fedoraAdmin',
                 password: 'fedoraAdmin' },
-      solr: { url: 'http://www.example.com:8983/solr/test' } }
+      # This next one isn't really used, see mock of PushmiPullyu::AIP::User.find below
+      database: { url: 'postgresql://jupiter:mysecretpassword@127.0.0.1/jupiter_test?pool=5' } }
   end
-  let(:noid) { '9p2909328' }
+  let(:noid) { '6841cece-41f1-4edf-ab9a-59459a127c77' }
+  let(:file_set_uuids) do
+    ['01bb1b09-974d-478b-8826-2c606a447606',
+     '837977d6-de61-49ea-a912-a65af5c9005e',
+     '856444b6-8dd5-4dfa-857d-435e354a2ead']
+  end
   let(:aip_folder) { "#{workdir}/#{noid}" }
   let(:downloader) { PushmiPullyu::AIP::Downloader.new(noid, aip_folder) }
 
@@ -19,6 +25,8 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
     allow(PushmiPullyu.logger).to receive(:debug)
     allow(PushmiPullyu).to receive(:options) { options }
     FileUtils.mkdir_p(workdir)
+    allow(PushmiPullyu::AIP::User)
+      .to receive(:find).with(2705).and_return(OpenStruct.new(email: 'admin@example.com'))
   end
 
   after do
@@ -37,41 +45,55 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       # Now it exists
       expect(File.exist?(aip_folder)).to eq(true)
 
-      # 5 directories exist?
-      ['tmp/downloader_spec/9p2909328/data',
-       'tmp/downloader_spec/9p2909328/data/objects',
-       'tmp/downloader_spec/9p2909328/data/objects/metadata',
-       'tmp/downloader_spec/9p2909328/data/logs',
-       'tmp/downloader_spec/9p2909328/data/thumbnails'].each do |dir|
+      # 16 folders exist
+      folders =
+        ["tmp/downloader_spec/#{noid}/data",
+         "tmp/downloader_spec/#{noid}/data/logs",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[0]}",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[1]}",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[2]}",
+         "tmp/downloader_spec/#{noid}/data/objects",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[2]}",
+         "tmp/downloader_spec/#{noid}/data/objects/files",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[0]}",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[1]}",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[2]}"]
+
+      folders.each do |dir|
         expect(File.exist?(dir)).to eq(true)
       end
 
-      # 11 files exist?
-      ['tmp/downloader_spec/9p2909328/data/objects/whatever.pdf',
-       'tmp/downloader_spec/9p2909328/data/objects/metadata/content_versions.n3',
-       'tmp/downloader_spec/9p2909328/data/logs/aipcreation.log',
-       'tmp/downloader_spec/9p2909328/data/logs/content_fixity_report.n3',
-       'tmp/downloader_spec/9p2909328/data/logs/content_characterization.n3',
-       'tmp/downloader_spec/9p2909328/data/objects/metadata/object_metadata.n3',
-
-       'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
-       'permission_e1910293-34b3-42bb-9179-f67f37eb145e.n3',
-
-       'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
-       'permission_ffd40638-290a-41f7-bcb2-4e0e54fc3ffd.n3',
-
-       'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
-       'permission_ef4319c0-2f7a-44c0-b1b5-cd650aa4a075.n3',
-
-       'tmp/downloader_spec/9p2909328/data/objects/metadata/'\
-       'content_fcr_metadata.n3',
-
-       'tmp/downloader_spec/9p2909328/data/thumbnails/thumbnail'].each do |file|
+      # 15 files exist
+      files =
+        ["tmp/downloader_spec/#{noid}/data/logs/aipcreation.log",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[0]}/content_fixity_report.n3",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[1]}/content_fixity_report.n3",
+         "tmp/downloader_spec/#{noid}/data/logs/files_logs/#{file_set_uuids[2]}/content_fixity_report.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/object_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/file_order.xml",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/file_set_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/"\
+         'original_file_metadata.n3',
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/file_set_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/"\
+         'original_file_metadata.n3',
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[2]}/file_set_metadata.n3",
+         "tmp/downloader_spec/#{noid}/data/objects/metadata/files_metadata/#{file_set_uuids[2]}/"\
+         'original_file_metadata.n3',
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[0]}/theses.jpg",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[1]}/image-sample.jpeg",
+         "tmp/downloader_spec/#{noid}/data/objects/files/#{file_set_uuids[2]}/era-logo.png"]
+      files.each do |file|
         expect(File.exist?(file)).to eq(true)
       end
 
-      # 16 files and directories total were created
-      expect(Dir['tmp/downloader_spec/9p2909328/**/*'].length).to eq(16)
+      # 31 files and directories total were created
+      expect(Dir["tmp/downloader_spec/#{noid}/**/*"].sort).to eq((folders + files).sort)
     end
   end
 end

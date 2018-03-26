@@ -1,0 +1,61 @@
+@prefix premis: <http://www.loc.gov/premis/rdf/v1#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ns004: <http://fake.figurethisout.todo#> .
+@prefix ns003: <http://purl.org/dc/terms/> .
+@prefix ns002: <http://purl.org/ontology/bibo/> .
+@prefix xsi:   <http://www.w3.org/2001/XMLSchema-instance> .
+@prefix ns001: <info:fedora/fedora-system:def/model#> .
+@prefix ns008: <http://www.openarchives.org/ore/terms/> .
+@prefix ns007: <http://projecthydra.org/works/models#> .
+@prefix ns006: <http://terms.library.ualberta.ca/identifiers/> .
+@prefix xmlns: <http://www.w3.org/2000/xmlns/> .
+@prefix ns005: <http://pcdm.org/models#> .
+@prefix xml:   <http://www.w3.org/XML/1998/namespace> .
+@prefix ns009: <http://projecthydra.org/ns/auth/acl#> .
+@prefix fedoraconfig: <http://fedora.info/definitions/v4/config#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix test:  <info:fedora/test/> .
+@prefix ns011: <http://pcdm.org/use#> .
+@prefix ns010: <http://terms.library.ualberta.ca/> .
+@prefix ns015: <http://www.w3.org/2003/12/exif/ns#> .
+@prefix ns014: <http://www.iana.org/assignments/relation/> .
+@prefix ns013: <http://ontoware.org/swrc/ontology#> .
+@prefix ns012: <http://prismstandard.org/namespaces/basic/3.0/> .
+@prefix ns019: <http://projecthydra.org/ns/mix/> .
+@prefix ns018: <http://sweet.jpl.nasa.gov/2.2/reprDataFormat.owl#> .
+@prefix ns017: <http://projecthydra.org/ns/fits/> .
+@prefix ns016: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+@prefix fedora: <http://fedora.info/definitions/v4/repository#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ebucore: <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#> .
+@prefix ldp:   <http://www.w3.org/ns/ldp#> .
+@prefix xs:    <http://www.w3.org/2001/XMLSchema> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://localhost:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8>
+        a                        fedora:Binary , fedora:Resource , ldp:NonRDFSource , ns011:OriginalFile , ns005:File ;
+        fedora:created           "2018-03-09T18:53:33.16Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        fedora:createdBy         "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        fedora:hasFixityService  <http://localhost:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:fixity> ;
+        fedora:hasParent         <http://localhost:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files> ;
+        fedora:lastModified      "2018-03-09T18:53:35.73Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        fedora:lastModifiedBy    "bypassAdmin"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        fedora:writable          "true"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+        ns017:valid              "true"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns017:wellFormed         "true"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns019:compressionScheme  "JPEG"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns018:byteOrder          "big endian"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:fileSize         "12401"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:filename         "image-sample.jpeg"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:hasMimeType      "image/jpeg"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:height           "183"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ebucore:width            "276"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns014:describedby        <http://localhost:8080/fcrepo/rest/test/83/79/77/d6/837977d6-de61-49ea-a912-a65af5c9005e/files/956ee84b-ef1a-4e1e-955e-0707e34df4b8/fcr:metadata> ;
+        premis:hasCreatingApplicationVersion
+                "1.2.0"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        premis:hasFormatName     "JPEG File Interchange Format"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        premis:hasMessageDigest  <urn:sha1:e559f7cea3fc307524bccdedb6d012a30b4e6c86> ;
+        premis:hasSize           "12401"^^<http://www.w3.org/2001/XMLSchema#long> ;
+        ns016:hashValue          "71179c73ffd133cf0f25e3f7b3572ef7"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns015:colorSpace         "YCbCr"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        ns015:exifVersion        "10.00"^^<http://www.w3.org/2001/XMLSchema#string> .
