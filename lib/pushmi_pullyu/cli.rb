@@ -174,11 +174,11 @@ class PushmiPullyu::CLI
     Rollbar.scoped(noid: item) do
       begin
         # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
-        PushmiPullyu::AIP.create(item) do |aip_filename|
+        PushmiPullyu::AIP.create(item) do |aip_filename, aip_directory|
           # Push tarred AIP to swift API
           deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
           # Log successful preservation event to the log files
-          PushmiPullyu::Logging.log_preservation_event(deposited_file)
+          PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
         end
       # rubocop:disable Lint/RescueException
       rescue Exception => e
