@@ -76,7 +76,13 @@ RSpec.describe 'Acceptance test', type: :feature do
       \tAIP Checksum: '2752dc32b7a56b42aee3dd4d235a24a2'
       \tMetadata: {"project-id"=>"#{noid}", "aip-version"=>"1.0", "promise"=>"bronze", "project"=>"ERA"}
       \tFile Details:
-      \t\t\{"fileset_uuid": "837977d6-de61-49ea-a912-a65af5c9005e",
+      \t\t{"fileset_uuid": "01bb1b09-974d-478b-8826-2c606a447606",
+      \t\t"details": {
+      \t\t\t"file_name": "theses.jpg",
+      \t\t\t"file_type": "jpg",
+      \t\t\t"file_size": 53678
+      \t\t}}
+      \t\t{"fileset_uuid": "837977d6-de61-49ea-a912-a65af5c9005e",
       \t\t"details": {
       \t\t\t"file_name": "image-sample.jpeg",
       \t\t\t"file_type": "jpeg",
@@ -87,12 +93,6 @@ RSpec.describe 'Acceptance test', type: :feature do
       \t\t\t"file_name": "era-logo.png",
       \t\t\t"file_type": "png",
       \t\t\t"file_size": 5612
-      \t\t}}
-      \t\t{"fileset_uuid": "01bb1b09-974d-478b-8826-2c606a447606",
-      \t\t"details": {
-      \t\t\t"file_name": "theses.jpg",
-      \t\t\t"file_type": "jpg",
-      \t\t\t"file_size": 53678
       \t\t}}
 HEREDOC
 
