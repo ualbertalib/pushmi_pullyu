@@ -82,6 +82,7 @@ RSpec.describe PushmiPullyu::Logging do
 
   describe '.log_preservation_event' do
     let(:tmp_log_dir) { 'tmp/logs' }
+    let(:tmp_aip_dir) { 'tmp/test_aip_dir' }
 
     it 'logs preservation event to both preservation log and application log' do
       FileUtils.mkdir_p(tmp_log_dir)
@@ -99,7 +100,7 @@ RSpec.describe PushmiPullyu::Logging do
                     'project' => 'ERA' }
       )
 
-      PushmiPullyu::Logging.log_preservation_event(deposited_file)
+      PushmiPullyu::Logging.log_preservation_event(deposited_file, tmp_aip_dir)
 
       expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to eq(true)
       expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once

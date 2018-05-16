@@ -62,14 +62,55 @@ RSpec.describe 'Acceptance test', type: :feature do
         expect(deposited_file.metadata['promise']).to eql 'bronze'
 
         # Log successful preservation event to the log files
-        PushmiPullyu::Logging.log_preservation_event(deposited_file)
+        PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_folder)
       end
     end
 
     expect(File.exist?("#{log_folder}/preservation_events.log")).to eq(true)
-    expect(
-      File.read("#{log_folder}/preservation_events.log")
-    ).to include("#{noid} was successfully deposited into Swift Storage!")
+
+    log_details = <<~HEREDOC
+      #{noid} was successfully deposited into Swift Storage!
+      Here are the details of this preservation event:
+      \tNOID: '#{noid}'
+      \tTimestamp of Completion: 'Wed, 07 Jun 2017 20:55:45 GMT'
+      \tAIP Checksum: '2752dc32b7a56b42aee3dd4d235a24a2'
+      \tMetadata: {"project-id"=>"#{noid}", "aip-version"=>"1.0", "promise"=>"bronze", "project"=>"ERA"}
+      \tFile Details:
+    HEREDOC
+
+    file_details_one = <<~HEREDOC
+      \t\t{"fileset_uuid": "01bb1b09-974d-478b-8826-2c606a447606",
+      \t\t"details": {
+      \t\t\t"file_name": "theses.jpg",
+      \t\t\t"file_type": "jpg",
+      \t\t\t"file_size": 53678
+      \t\t}}
+    HEREDOC
+
+    file_details_two = <<~HEREDOC
+      \t\t{"fileset_uuid": "837977d6-de61-49ea-a912-a65af5c9005e",
+      \t\t"details": {
+      \t\t\t"file_name": "image-sample.jpeg",
+      \t\t\t"file_type": "jpeg",
+      \t\t\t"file_size": 12401
+      \t\t}}
+    HEREDOC
+
+    file_details_three = <<~HEREDOC
+      \t\t{"fileset_uuid": "856444b6-8dd5-4dfa-857d-435e354a2ead",
+      \t\t"details": {
+      \t\t\t"file_name": "era-logo.png",
+      \t\t\t"file_type": "png",
+      \t\t\t"file_size": 5612
+      \t\t}}
+    HEREDOC
+
+    log_file = File.read("#{log_folder}/preservation_events.log")
+
+    expect(log_file).to include(log_details)
+    expect(log_file).to include(file_details_one)
+    expect(log_file).to include(file_details_two)
+    expect(log_file).to include(file_details_three)
 
     # aip file and folder should have been cleaned up
     expect(File.exist?(aip_folder)).to eq(false)

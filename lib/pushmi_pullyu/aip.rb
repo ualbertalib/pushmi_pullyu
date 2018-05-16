@@ -12,7 +12,7 @@ module PushmiPullyu::AIP
     PushmiPullyu::AIP::Downloader.new(noid, aip_directory).run
     PushmiPullyu::AIP::Creator.new(noid, aip_directory, aip_filename).run
 
-    yield aip_filename
+    yield aip_filename, aip_directory
 
     FileUtils.rm_rf(aip_filename) if File.exist?(aip_filename)
     FileUtils.rm_rf(aip_directory) if File.exist?(aip_directory)
