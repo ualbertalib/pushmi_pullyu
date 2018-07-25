@@ -2,6 +2,7 @@ require 'fileutils'
 
 module PushmiPullyu::AIP
   class NoidInvalid < StandardError; end
+  module_function
 
   def create(noid)
     raise NoidInvalid if noid.blank? || noid.include?('/')
@@ -17,6 +18,4 @@ module PushmiPullyu::AIP
     FileUtils.rm_rf(aip_filename) if File.exist?(aip_filename)
     FileUtils.rm_rf(aip_directory) if File.exist?(aip_directory)
   end
-
-  module_function :create
 end
