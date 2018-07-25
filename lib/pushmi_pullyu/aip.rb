@@ -17,5 +17,7 @@ module PushmiPullyu::AIP
     FileUtils.rm_rf(aip_filename) if File.exist?(aip_filename)
     FileUtils.rm_rf(aip_directory) if File.exist?(aip_directory)
   end
+
+  # rubocop:disable Style/AccessModifierDeclarations
   module_function :create
 end
