@@ -1,5 +1,6 @@
 require 'rdf'
 require 'rdf/n3'
+require 'rest-client'
 
 class PushmiPullyu::AIP::FileListCreator
 
@@ -20,6 +21,9 @@ class PushmiPullyu::AIP::FileListCreator
 
   def initialize(list_source_uri, output_xml_file, file_set_uuids)
     @uri = RDF::URI(list_source_uri)
+    @auth_uri = RDF::URI(list_source_uri)
+    @auth_uri.user = PushmiPullyu.options[:fedora][:user]
+    @auth_uri.password = PushmiPullyu.options[:fedora][:password]
     @output_file = output_xml_file
 
     # These are the known fileset uuids, used for validation
@@ -36,8 +40,7 @@ class PushmiPullyu::AIP::FileListCreator
   def extract_list_source_uuids
     # Note: raises IOError if can't find
     #       raises RDF::ReaderError if can't parse
-    @graph = RDF::Graph.load(@uri, validate: true)
-
+    @graph = RDF::Graph.load(@auth_uri, validate: true)
     @list_source_uuids = []
 
     # Fetch first FileSet in list source
