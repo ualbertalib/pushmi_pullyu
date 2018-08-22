@@ -262,9 +262,11 @@ class PushmiPullyu::CLI
       start_server
     end
   end
+
   def setup_db_connection
     ActiveRecord::Base.establish_connection(database_configuration)
   end
+
   def database_configuration
     # Config either from URL, or with more granular options (the later taking precedence)
     config = {}
