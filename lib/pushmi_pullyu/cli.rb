@@ -268,17 +268,7 @@ class PushmiPullyu::CLI
   end
 
   def database_configuration
-    # Config either from URL, or with more granular options (the later taking precedence)
-    config = {}
-    uri = URI.parse(PushmiPullyu.options[:database][:url])
-    config[:adapter] = PushmiPullyu.options[:database][:adaptor] || uri.scheme
-    config[:host] = PushmiPullyu.options[:database][:host] || uri.host
-    config[:database] = PushmiPullyu.options[:database][:database] || uri.path.split('/')[1].to_s
-    config[:username] = PushmiPullyu.options[:database][:username] || uri.user
-    config[:password] = PushmiPullyu.options[:database][:password] || uri.password
-    params = CGI.parse(uri.query || '')
-    config[:encoding] = PushmiPullyu.options[:database][:encoding] || params['encoding'].to_a.first
-    config[:pool] = PushmiPullyu.options[:database][:pool] || params['pool'].to_a.first
-    config
+    PushmiPullyu.options[:database][:url]
   end
+
 end

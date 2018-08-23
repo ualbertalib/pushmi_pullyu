@@ -34,4 +34,5 @@ class PushmiPullyu::AIP::OwnerEmailEditor
     return new_body if is_modified
     raise NoOwnerPredicate
   end
+
 end
