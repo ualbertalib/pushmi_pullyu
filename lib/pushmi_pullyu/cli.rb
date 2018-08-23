@@ -48,6 +48,7 @@ class PushmiPullyu::CLI
     setup_signal_traps
 
     setup_log
+    setup_db_connection
     print_banner
 
     run_tick_loop
@@ -261,6 +262,14 @@ class PushmiPullyu::CLI
       Dir.chdir(pwd)
       start_server
     end
+  end
+
+  def setup_db_connection
+    ActiveRecord::Base.establish_connection(database_configuration)
+  end
+
+  def database_configuration
+    PushmiPullyu.options[:database][:url]
   end
 
 end
