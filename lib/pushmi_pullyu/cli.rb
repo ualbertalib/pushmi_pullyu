@@ -169,6 +169,7 @@ class PushmiPullyu::CLI
 
   def run_preservation_cycle
     item = queue.wait_next_item
+    return unless item.present?
 
     # add additional information about the error context to errors that occur while processing this item.
     Rollbar.scoped(noid: item) do
