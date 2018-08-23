@@ -35,3 +35,4 @@ class PushmiPullyu::AIP::OwnerEmailEditor
     raise NoOwnerPredicate
   end
 end
+
