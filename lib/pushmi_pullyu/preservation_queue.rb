@@ -63,6 +63,7 @@ class PushmiPullyu::PreservationQueue
     while PushmiPullyu.continue_polling?
       element = next_item
       return element if element.present?
+
       sleep @poll_interval
     end
   end

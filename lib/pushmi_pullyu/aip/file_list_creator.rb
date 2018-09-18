@@ -53,6 +53,7 @@ class PushmiPullyu::AIP::FileListCreator
       break if next_proxy.nil?
 
       raise NextPreviousProxyMismatch if this_proxy != find_prev_proxy(next_proxy)
+
       this_proxy = next_proxy
     end
 
@@ -76,6 +77,7 @@ class PushmiPullyu::AIP::FileListCreator
       first_uri = statement.object
       # Validate that the first proxy doesn't have a previous one
       raise FirstProxyHasPrev, @uri.to_s if find_prev_proxy(first_uri)
+
       return first_uri
     end
     raise NoFirstProxyFound, @uri.to_s
@@ -86,6 +88,7 @@ class PushmiPullyu::AIP::FileListCreator
       last_uri = statement.object
       # Validate that the last proxy doesn't have a next one
       raise LastProxyHasNext, @uri.to_s if find_next_proxy(last_uri)
+
       return last_uri
     end
     raise LastProxyFound, @uri.to_s

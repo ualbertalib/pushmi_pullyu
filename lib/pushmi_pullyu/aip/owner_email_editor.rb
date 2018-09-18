@@ -11,6 +11,7 @@ class PushmiPullyu::AIP::OwnerEmailEditor
   end
 
   def run
+    setup_db_connection
     is_modified = false
     prefixes = nil
     # Read once to load prefixes (the @things at the top of an n3 file)
@@ -32,7 +33,18 @@ class PushmiPullyu::AIP::OwnerEmailEditor
       end
     end
     return new_body if is_modified
+
     raise NoOwnerPredicate
+  end
+
+  private
+
+  def setup_db_connection
+    ActiveRecord::Base.establish_connection(database_configuration)
+  end
+
+  def database_configuration
+    PushmiPullyu.options[:database][:url]
   end
 
 end

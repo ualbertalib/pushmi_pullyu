@@ -151,6 +151,7 @@ class PushmiPullyu::AIP::Downloader
 
   def clean_directories
     return unless File.exist?(@aip_directory)
+
     PushmiPullyu.logger.debug("#{@noid}: Nuking directories ...")
     FileUtils.rm_rf(@aip_directory)
   end
