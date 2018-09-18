@@ -46,6 +46,7 @@ class PushmiPullyu::AIP::FedoraFetcher
       return true
     elsif response.is_a?(Net::HTTPNotFound)
       raise FedoraFetchError unless optional
+
       return false
     else
       raise FedoraFetchError
