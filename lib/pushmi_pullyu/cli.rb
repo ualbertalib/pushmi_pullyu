@@ -38,7 +38,7 @@ class PushmiPullyu::CLI
       end
     # rubocop:disable Lint/RescueException
     rescue Exception => e
-      Rollbar.error(e, use_exception_level_filters: true)
+      Rollbar.error(e)
       raise e
     end
     # rubocop:enable Lint/RescueException
@@ -59,6 +59,7 @@ class PushmiPullyu::CLI
     Rollbar.configure do |config|
       config.enabled = false unless options[:rollbar][:token].present?
       config.access_token = options[:rollbar][:token]
+      config.use_exception_level_filters = true
       config.exception_level_filters['IOError'] = 'ignore'
       # add a filter after Rollbar has built the error payload but before it is delivered to the API,
       # in order to strip sensitive information out of certain error messages
