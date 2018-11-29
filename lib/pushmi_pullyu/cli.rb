@@ -59,13 +59,14 @@ class PushmiPullyu::CLI
     Rollbar.configure do |config|
       config.enabled = false unless options[:rollbar][:token].present?
       config.access_token = options[:rollbar][:token]
-
+      config.use_exception_level_filters_default = true
+      config.exception_level_filters['IOError'] = 'ignore'
       # add a filter after Rollbar has built the error payload but before it is delivered to the API,
       # in order to strip sensitive information out of certain error messages
       exception_message_transformer = proc do |payload|
-        clean_message = payload[:exception].message.sub(/http:\/\/.+:.+@(.+)\/fedora\/rest\/prod\/(.*)/,
-                                                        "http://\1/fedora/rest/prod/\2")
-        payload[:exception] = payload[:exception].exception(clean_message)
+        clean_message = payload[:exception][:message].sub(/http:\/\/.+:.+@(.+)\/fedora\/rest\/prod\/(.*)/,
+                                                          "http://\1/fedora/rest/prod/\2")
+        payload[:exception][:message] = clean_message
         payload[:message] = clean_message
       end
 
