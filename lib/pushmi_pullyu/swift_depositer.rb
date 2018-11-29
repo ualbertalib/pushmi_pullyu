@@ -50,7 +50,7 @@ class PushmiPullyu::SwiftDepositer
     else
       # for creating new: construct hash with symbols as keys, add metadata as a hash within the header hash
       headers = { etag: checksum,
-                  content_type:  'application/x-tar',
+                  content_type: 'application/x-tar',
                   metadata: metadata }
       deposited_file = era_container.create_object(file_base_name, headers, File.open(file_name))
     end
