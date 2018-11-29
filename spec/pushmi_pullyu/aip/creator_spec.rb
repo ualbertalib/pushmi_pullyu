@@ -87,7 +87,9 @@ RSpec.describe PushmiPullyu::AIP::Creator do
          '30604fd556c96aac01abddf1e8b4e0369fc90ba5 '\
          'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/original_file_metadata.n3',
          '9ea739a91eff6ba99e0227e3a909436d1dfd7ca7 '\
-         'data/objects/files/01bb1b09-974d-478b-8826-2c606a447606/theses.jpg',
+         'data/objects/files/01bb1b09-974d-478b-8826-2c606a447606/'\
+         'Archive_Tar_Minitar_FileNameTooLongHjMQh5EggUDWgpsfoXfyN'\
+         'GoEbvcUcN34YPpjknJhu4y8bs3qVMvBXA5A2aFBxY6EiIyxRS.jpg',
          'e559f7cea3fc307524bccdedb6d012a30b4e6c86 '\
          'data/objects/files/837977d6-de61-49ea-a912-a65af5c9005e/image-sample.jpeg',
          '49b1dc60dc20a270cf59ee04a564393bba2bf6c8 '\
