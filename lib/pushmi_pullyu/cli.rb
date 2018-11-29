@@ -59,7 +59,7 @@ class PushmiPullyu::CLI
     Rollbar.configure do |config|
       config.enabled = false unless options[:rollbar][:token].present?
       config.access_token = options[:rollbar][:token]
-      config.use_exception_level_filters = true
+      config.use_exception_level_filters_default = true
       config.exception_level_filters['IOError'] = 'ignore'
       # add a filter after Rollbar has built the error payload but before it is delivered to the API,
       # in order to strip sensitive information out of certain error messages
