@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rest-client', '>= 1.8', '< 3.0'
   spec.add_runtime_dependency 'rollbar', '~> 2.18'
 
-  spec.add_development_dependency 'bundler', '~> 1.16'
+  spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'coveralls', '~> 0.8'
   spec.add_development_dependency 'danger', '~> 5.2'
   spec.add_development_dependency 'pry', '~> 0.10', '>= 0.10.4'
