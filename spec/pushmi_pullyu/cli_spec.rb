@@ -36,6 +36,7 @@ RSpec.describe PushmiPullyu::CLI do
 
         expect(Rollbar.configuration.access_token).to eq 'xyzzy'
       end
+
       it 'sets up Proxy for Rollbar' do
         PushmiPullyu.options[:rollbar][:proxy_host] = 'your_proxy_host_url'
         PushmiPullyu.options[:rollbar][:proxy_port] = '80'

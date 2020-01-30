@@ -43,11 +43,11 @@ class PushmiPullyu::AIP::FedoraFetcher
       file = File.open(download_path, 'wb')
       file.write(body)
       file.close
-      return true
+      true
     elsif response.is_a?(Net::HTTPNotFound)
       raise FedoraFetchError unless optional
 
-      return false
+      false
     else
       raise FedoraFetchError
     end
