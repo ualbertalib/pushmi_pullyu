@@ -1,2 +1,2 @@
-class PushmiPullyu::AIP::User < ActiveRecord::Base
-end
+# class PushmiPullyu::AIP::User < ActiveRecord::Base
+# end
