@@ -37,16 +37,16 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"32b8e1e80a8a1bd63f0eda013a4e0fa4"
+      - W/"1b010ba2836c76b8771305d8c0c76309"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=46DgbazVx0acrPfEkvp%2FNFNKpXIJFz2FBIdiNtUeqGfYeNvs8Amtuk%2FVMN%2BnXnSpLk33irISiLgZ1GpZVGtvYP0FIz4MtE4gRMwVNl%2BvdK8cprtVT8oBCGZhMLybJOC2MeKnfWkRFw5q8vBh%2F%2Fc5youhZUVm1zax%2BBEqPSbvYf5towUeoxh6nlVzyUTawYUROB4Efz2WQszn%2F585aKpambd8bBWCbd41zMlu6crjygMj07croyPLvTgYV4XmqHbS3s64H6o%2BiOR4EP9Syj7ipbnc2nSBwIRRvABPRRdCoYhq9vJbQPU%2FRnFHd47sh05w--fzw0FngnpsR1s7le--bocjp7FjEN4dXT4Ua6pClA%3D%3D;
+      - _jupiter_session=49prybBz6nBto4d7%2Bbt3rLZ4kxcD6fCCUqLHDfU%2F3aOBrDS1Iqqp30qHLq%2FGmobXUAJkuBSot4iOCdnpIshzF6vOJallj1zyRdpCRoagd4j5IG1b1U4BBD3ocfM0xu3zF6soHRb0h4IlB6BuIysNJIqkgM5Skf2kzOW%2B%2ByA5Xk%2BUml4GTphNxXlXgcQ4JJ0sflyY6wgyYF6b28%2BWV%2FVsevfnwghjAud4WGGX4hgQJtfig3tJ014daA55vfY6zJYigYD3AR9B5cKAgSUmPvY%2FJMn6oJXvosD%2BmD9wPq96E9zZ340OC5SBMhLNY81eaQ9U--aiUgr%2BZgSdh78YcB--bqDg7qLwrr0NuMOUtb%2FjHQ%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 7125587d-f0f1-4259-b25e-895eceded13b
+      - 4fa0ebd0-c411-4334-b5fd-00cb7b1b598f
       X-Runtime:
-      - '8.142160'
+      - '0.127236'
       Transfer-Encoding:
       - chunked
     body:
@@ -54,8 +54,8 @@ http_interactions:
       string: |2-
 
         <http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520> <http://purl.org/dc/terms/title> "The complete effects of Storm King Stout on dogs";
-          <http://pcdm.org/models#hasMember> "http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba",
-            "http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e";
+          <http://pcdm.org/models#hasMember> "http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e",
+            "http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba";
           <http://prismstandard.org/namespaces/basic/3.0/doi> "doi:bogus-2020-01-30T19:46:46.615Z";
           <http://purl.org/dc/elements/1.1/contributor> "Frank N. Sense , Frank N. Sense , Yule B. Sari , Heather N. Yonn";
           <http://purl.org/dc/elements/1.1/subject> "Dog , Mondo";
@@ -76,7 +76,7 @@ http_interactions:
           <http://terms.library.ualberta.ca/path> "4f806420-c063-4631-8649-e8753cac611b/1170bbd7-b630-477a-a6e5-447f13b9887d , 4f806420-c063-4631-8649-e8753cac611b/8dc3b55b-6362-4c03-ab01-86aa4460ffa3";
           <http://terms.library.ualberta.ca/sortYear> "1991" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets
@@ -118,12 +118,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=TXgPaJyOamXkxBReyqCIDVnkcfwVD4tOpvnc1y9kYZnFkTajVPB6xU1bthgZOKG9%2FxwePSTlJP8IQMsCj%2FvtbZ4A2jJpC1Ur5QRlb7tAT5JBJsaYvFJGw98K%2FkDgtdBPjLPhdj%2BgY72Z37tyrqoLqwF5VAu6MGKDL5Zr5Sm4OzVg6lJqG2v74%2BO4jjiUrvVKRSm671ZJPYO%2FiZ7PO53pxaVffrkx7sI%2Fe5q%2F31o3ggKgRVuoctYxLQeNXoKzoBTKC0Qj67mve%2BWYQ6cRIYRBJtd93yJWBb6%2BqJ2ZS%2FfBGCOtRlGQ%2FEKCmSQW4IYgNm2%2Bg7OEPygSfY6D9Oaq--clwv1p864Ian5QdA--CuMSxT62KAB5go%2Boj1C%2Fog%3D%3D;
+      - _jupiter_session=jPcHe3zNWCAYIzZTU2KaRqPCNDIHgZQWcGUay3fd4t%2F2c8Aa%2Fp1ogLUNXHAMI4cwFxMWxD8AkqK%2FqmIH%2BMVAE1KrPwPFDv4Ev%2FaS0ZYXkabIq7YBnOFfaLce42N5TCDPK1Ypt%2B%2Fg50ebGGFHCgZMaCW%2BxWFq4FJUHA7pw%2Faf5e23mh0hCUibNMMFu7p6Kn6opapcmPGomKzdQUOMiRajrvGq4vQBEo%2FpsJ7XkoKRAoNcgowCl%2FOv65IbrmLz4Kr0Cpu1tV0NEnmRk7Sg7LgcqWSqhSwMtvNBt9olJhFC5mWFzvzGg2wTtA8k20FJhBOV1tKYR52y3Wxel4Zq--gKMsarhLF%2F1KSYEf--mvKfZCnsx9vN1tFnBPxlOQ%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - c6daa094-f43e-4a83-933a-aa885f575623
+      - 2c399018-086b-4494-887c-c470c1018036
       X-Runtime:
-      - '0.008411'
+      - '0.011471'
       Transfer-Encoding:
       - chunked
     body:
@@ -135,7 +135,7 @@ http_interactions:
           <uuid>3cbc75f9-7bad-4d62-962e-911f911bd70e</uuid>
         </file_order>
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/file_paths
@@ -173,23 +173,23 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"4323971e9dc5933abfab7c9687a67bb5"
+      - W/"4fedf51f5cf802b2719a838f8fb183b5"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=niycwld5mGm7I0zaJ7aahWf0Pwx%2BSGmki%2BWlG4Vn4DkHq55Ei%2FO2r6OOYirxxL2M1ZwwnDDq0eYc6p8TbNTKzoQq8pNgNIEaXp3A%2FLpPLbMeefySgSQv2%2BCyDupJGiu5wHrbHkY8sRfpcGQxv4v5u7xWHwM6QEQEl53E%2F57SNIk0yHWvNqFZABp80NKspVLx7qhqLX6nS3FyYtpdVnOhUF3JeWXXkFNgjnYtRJ5umrtcODqWZUbNqduJzm3dUg%2FeKHOOTcJsI3vJbpw18gww24iyNKm4LZWjijtw1u3d42QEgCxFXVSENkfzhJvlYdBlCYnpPijbw1Y8Klr%2B--vfRrkpzehoZo3qgC--2Fh6pqpOpMV4RArSj9T%2Bdw%3D%3D;
+      - _jupiter_session=7i3yEV%2BqNCp2RpJLHXONwgJ3XHhUpwRp%2BVBk95QEg16GxxLeFDSIB%2BahpWHx8qGMdlvsgeTDxhKlEwHogkyMJl3t3gWWp7y9IcywaQq2UDl7J35ViPE2xAbe%2F%2FTsmw1EFvXVlt2doFG77w6cc%2FTgcUcmu%2FW9GT%2FWmnSK6EGUcodsmYcPgRGPP12hlU6SrylzScmnlSAjqNHAVyEg9ZD%2BYfRaop4nnNt6bWYooSgT59txYiEoFXGzrlR7w8GzwlX3maw8T4ctutn9pqsu3eEoI4qM8zFg017S9P3L1CIQrsHkUwjuLAcAbzFeaXRsdyaXSdDESEwpjy4uUIKV--RcppVGkJ0xyuuYv7--sLc075oGLVQ2Az3iOx8v5g%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 8cfac0e7-4dd7-45d1-ac93-7e4dfd4b52b5
+      - d799c080-bd50-4dd2-80a4-23a3ac7b7cce
       X-Runtime:
-      - '0.032168'
+      - '0.015270'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"files":[{"file_name":"theses.jpg","file_path":"/home/orodrigu/Workspace/jupiter/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP","file_uuid":"8cf761ce-5222-405a-aee1-f019f860e4ba"},{"file_name":"image-sample.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/jf/KQ/jfKQSzhKRHrnfYAVY38htiZo","file_uuid":"3cbc75f9-7bad-4d62-962e-911f911bd70e"}]}'
+      string: '{"files":[{"file_name":"theses.jpg","file_path":"/home/orodrigu/Workspace/jupiter/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP","file_uuid":"8cf761ce-5222-405a-aee1-f019f860e4ba","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"image-sample.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/jf/KQ/jfKQSzhKRHrnfYAVY38htiZo","file_uuid":"3cbc75f9-7bad-4d62-962e-911f911bd70e","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba/fixity
@@ -231,12 +231,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=tIaK7rS%2Fjqzub%2FPsrToF%2BOgYA7evzaKYVM56TO%2F%2FCNbVXCkCxmsoTWgXWpY0rJP%2FFckoRGFNmH5FWr06I6z9Nj25w335cw2UKHyODlEJnT%2FPwSanMD3meYV5kOVjhB3ySJt4LoV7Or62mdb3jVF0UtJi4igZIdl5ZX3XOskkzRdaMnBQlajOWyuZap5mJGoxNE4dGEEyauqozpAniwci5Upay5WPY3Ix98xnMUfOu7guwQU7pu22Bo77mPpwRfX6FfwgKnAUNPTpgdsIfhWhmWe8OCJ2IBfoRbUzXjjITXkozXTT%2FwJkyI4YbwLWHMNpYsJyHmpBW2qpyjCAPWZfx2RvtX57Gnftd8gfe9FxaB3fjzGPrbQ3wXsvoJ04HpCKOAlj%2Fn2TzkdNc36WNArrYR%2BXcUA%3D--zpwULEqGOHz5Bwv9--2h%2Bcfr2tSr%2Fht%2FBC6Y6Vrg%3D%3D;
+      - _jupiter_session=1eUR6%2BsBfuCf5ax5Gz8gtVF93tJXcIDu4kawyi3KUFAvcqDYHspnBCzvfuL9q1%2FoJXAoaHy2An7%2BjH6mRowfSHibUpxCsEp7iBE6LpVjDT%2FMWW%2Bzxq%2BGDiPVi9%2FH%2FO3a9ugITa%2FXn5EzZLvEy2VdDTDedAAQkf9cjUh4kTSw3w0ZQDGY8ZCvbfaOf2ozGz6WfE%2BLx72kV%2FzWGUBqJ4E%2FlBSR4YUv1WZ%2BtMrxbafLjsCEi6pZr83LqRWEGduyHqGz%2BdT30WEMp1ZkNSYNJaiDlp0EQ2e8wwvTbXLTVcOgOa2ISQKOq4aX3Ue0cmXgy7BxGZLB9IBdbRotI%2BA%2FV2U06U218LB37K9VwmfLMYVQKxAYRbcV%2BVqlNHgvjH2dMzVZ0HP8%2BdNHYdGSz8laLWVRr6DS65E%3D--swsXiyAdW2ZGTqmy--cdW1RpZ32foQViENa0A%2Faw%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 2922684c-bfa2-4a23-a7d1-9470850321ce
+      - 99998848-9042-49af-8e6b-45c47c3b1e27
       X-Runtime:
-      - '0.034376'
+      - '0.054839'
       Transfer-Encoding:
       - chunked
     body:
@@ -249,7 +249,7 @@ http_interactions:
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigestAlgorithm> "md5";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "51959" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba/original_file
@@ -291,12 +291,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=TyPyCUmJyEfFBgJf%2FjMw5kvcrVThXSM8dbhJEZU4poUI8%2FuH5rEF1K0Q0E83jsAT1RziPtEAJerMOtl3HriAgVmMYGcKodR725b1FX03SNMbUcuvpxVGkOUiC%2BnELaEDeZS1BadVW5Gsvwfk%2F5uhc%2B7jDp7g8iYYHdkqqVQ%2F9sqY4NTci%2BFqIk%2F8m%2FduiUYJ%2FDSlu4rW8ZsLhiynGZX4%2BAvzQ%2F0Hsm459eolYOOLoTlfNRN5pzFwqccsyyoZUd5a0PjTf8jMSIEigGzGLRlEtQCaLe33nkoldlZd7FinhblC%2Frt2g7OBpGqyjZ6EWKS22XPE4pBDjJIRcLwFYJEZH%2BG8M5wcHewuZBBHfYTiAw46%2FPWIiOd7Fy6KaeZkjiWuQTToSRGCyw9CNeewhh9q78VEuE6NNQkd5fxHHXlyB%2Bc%3D--KKtEQtzuKEGr5mUf--UUwD%2FuNAo3JNfIW%2FnbVaNA%3D%3D;
+      - _jupiter_session=%2BERFfzwvgVs16xLKPEIUMSWWf7SIXR84s2Q%2FnADl2%2BTVuAQh0qrONgFMnGPRcCobtc5ypTycmq2ixGK2rgHoad9TsmT63p0ytBbcGYWbbEwWyhG2WfdRzJ3N5GLCU%2Bp4NU1f38dTPqHwmQmXQZPDFJkz28QsZNcXFrYEioJ7sPn8aQ7KzJ83RgyjkduasYmu%2BJGa3Eizm0ie8JnFdYkmxCGZ%2Fu7KDwLDLRwIhTf7WBxNViu1xNoX4vdDZHyKEDPriG6RC%2F5ly5s7gUcM80zSy%2FSvXDcJeASslPNU1nkzo7XzgFcJ4%2F5J%2F3LleTNjHCOShmkZtI73lP8cbXtbuOMLTYh%2B3F92gJc1ZC7eA%2BhuM0KnUwY51AXenWDGKWyXxSmSpBSegEm1jrL68AigkGO4oiiXlj23wSX4M0X7aJYZN1s%3D--0yDgY5TELMHyit41--qQpvGaoeatweWFg5Y%2BLbMg%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 11b2fa06-a083-4f3a-a5f1-e2ae8a321100
+      - f36982ac-7e48-46ef-b31c-95f45c3be060
       X-Runtime:
-      - '0.026061'
+      - '0.039247'
       Transfer-Encoding:
       - chunked
     body:
@@ -308,7 +308,7 @@ http_interactions:
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "pP2y2Xx03crtG2ZLyNOvBQ==";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "51959" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba
@@ -350,12 +350,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=NHCzwQMbdbEJUFuRl440AjeZQNU0WnxqSXdfVGd%2FD5zJaZ%2BIWMez9NM384VuyurtE%2BgURbPl1sLu8yzifAUcqzLDxeCwWE5SJrKdAoSJkjlY56d9ChL0gAsvSmVgmWeX52115XNPESwSqg5Uwn1fetbjL1xuM4cMwfgTpgZpjWYzRSB5nST33fGolImkKUeNlIoWncxSzpgH8lnuHGZ6C9livxIvFnAYA3Zkm7Qo%2FJ0vkt46qDtG9YXCfwXhB7L%2FSedtYoFY9qOo72ulfnRaQzasXSFLyalkU10N%2B7k0sFUEGuzgrq0LvqNiXg9aQDOzAxpO3Kfe95lmUKISqGRKu4DYc54RMSS6XIPQYO7zgBZQyD77lxpnZEgPCTbsZ%2BW9MN52CyC9mS4MCVjY--JinHFFxzec1XZWIB--8zPBDV%2F5nz0jgCB99IwhRw%3D%3D;
+      - _jupiter_session=Fy%2BydLarJNZAj32fXqkhyhzxzNTFA%2BBfExrC%2FdZWJLhSeylv0ZyKFva5FgXH%2BAC%2FBA7MYAQpfBVmGgthDMTzjEOoZhQPfpCY1v8V6CcVgsQIc7LqcRT6eZG46tuuCbUWdlg%2B7A2P%2FhqHmmcX9RA0e6N1kDOQ8aeD3oLam3JNO7tn0fxwdWIZRivgX4gS8C8pcEJXtPqbLSDDmlG32y3jH%2B7h6B%2FnH7bpTlEoP65IEKsbDnOJFcMoxQjjYXyToSglxs4gcTb9i0kuZ5B%2FF8NBUSFJIxNuKB5kGZLR9jUTaedGEobms%2FZh%2FjCqNg%2BexSkBViVSpkhh%2FtdZ2AES9OKyICzr1ei%2BuBzvEZY3nD3n%2Fbo5kou6bpXestFv2ISX%2FIIhVvZvM3Vu3V8UYCi6--IyzNZE7LabuBhn2N--qh5UcNwWbiZjJjueQmVeBw%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - f53f0c55-f70f-4b34-96b8-f606fbfd58b8
+      - bcfc7221-659b-480a-80e1-ff17b45d05cc
       X-Runtime:
-      - '0.033826'
+      - '0.031221'
       Transfer-Encoding:
       - chunked
     body:
@@ -365,7 +365,7 @@ http_interactions:
         <http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "theses.jpg";
           <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e/fixity
@@ -407,12 +407,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=jHqMClLafzJ%2FjSvCIH7r7RfJV8SYumZnUjhrauJ7COENbD3kpBCRX0urkDJKfSLN4I5B8P7X0yta4v63HGcfiIwGQYOF4CxFIs10OUuxDK9kRVshzyI1Umh02vz3LXIY5wCCDE8Oi9VeakC8ycxjo8C3hON5HM9xOIncPS11Xiaxzh3WtOedEW5bZse5kBLTuCmC1CUuVA%2FluFq5SjsPfxVys63%2FXXO%2BNeclmfIg%2FAz4vkMYLdvEB7QAe2tWzs09EVGnIUHixOtpvHku%2BtlZZI4WMDKUb8eYGAgSfI5JgEolRKOGAlizGWOC0bcj3udlTW63iaU0inNlYJA0S8pGwVGhl6fWUnEjuzty5Vbi%2B7vAf33bn6LO1%2FEhC3fTaEtW3xqQglRjKhBOwS3pGm6JaXCqq5g%3D--fxYWBsYUlypt%2BmDW--XaUZLe8domYqdPAquHFzHg%3D%3D;
+      - _jupiter_session=G%2F7pMJkMRINR1jVSfTUUiTYTAo1ERdAuOTfYs59zphBYg%2Bxk6%2BhaITHlkIULu6Vc9tGnAGFUGKU1%2BeBCQgLb1YHU9BfskEmghZa2gF4k06hzX66KRECymKXqBWvhEMVvJMm5C7KIpeibq9z1KJU1g7TVeO8xKjI8nj9GP8gA%2FlKLE3%2F522118kaxP9CBNRyCIAk0pwZuN2mBO61k7ZuvFh9yWziVw8zp6YiI3VLf2L8BADTe3lHjJwp7Na1wNL2cwgHNprBHljX%2Flr7nSeoT4JDiAa3sA9g3vKktSwbP39%2BbOmO0iYCdPo1Gz9SJtkrC3qLD%2FTwYZ08tZHxLCvUHz53gFRecs8BL153hRodk4Pb0hnmWFbEHlL1VbDHNaGgbQgJoJfuqNL%2B1eIuCnvgLm0u12nA%3D--kuOmYGCUtPchXUU5--E7p21K5%2B6UaNZFN%2BRwQfoQ%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 152a1f00-c98b-45fa-beae-03ce94393e5f
+      - 5dc597b7-b87f-4f58-ace8-8ebccc6b0f35
       X-Runtime:
-      - '0.037281'
+      - '0.034250'
       Transfer-Encoding:
       - chunked
     body:
@@ -425,7 +425,7 @@ http_interactions:
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigestAlgorithm> "md5";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "12086" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e/original_file
@@ -467,12 +467,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=1KXbA1XluE8oBz2p5Xq5CNOihm8PWl236bkxAXLE1yx9tZALS10C3FpfVZfI6jBkCyK737NcwLBFUB6xo6C54wJjq5YtzPHV5kPx5FMK7ncdzQ9aSh8YYMuQnizrt%2FbxbSdgK7V6IwdS0uPEr%2FXnRe1SnzaUdREwJ4slmY15G9Eg1N2l%2FlJEniV09o%2Bf0iM%2BbP2W5lIhW1qRA2g1yfmgo0mdnn1Hj4V5pC20aTeDs8asEYHkqJDuTxv3nu4zGtINzfpfjT6MzD6ZhDbJWBmH1HNjEfVl%2BN6Tgd9a%2BPGySto%2FKO6sOhz1TJ%2F8Q7RbfGoO8ASbmDyTpsZTsEBLwEhag28VpEEGnXf2cy2n%2FAqSVZOK9J9Ewtm%2FFDzvvYbzttB0mPpDQppmm29Ps109UjePfqlYol4RBqMrR1TomHDsa1o%3D--CW7vQa0MNajfVjXn--H0ncjVWwhHxbSb7ulon7qg%3D%3D;
+      - _jupiter_session=kbYX95SfypJGHo%2FOr9xVsIwDao1PwX8jc6Rtt3%2F1FW7KIFv99py9so8PKhxYImAgGE7p4UQqiuUVVEAH7xAMqvnhz6PhVEB%2FjVj56El9ek5MVnkcoWvC3xfgVflksPEc0Z9QyRqUp3GSeLRXxLb%2FWbn9pVF9smKu%2FOkqpi6Lky7vA3H2fc8HzM1ZnM8xn72eT5c8vxd7P9wtQkb3G3hPBoEKPtU6QcmdKBijJS1vCK60bUqVemAcUVmMCu7QUF7SKafb4nqD1Kys5kk1iCLiM7LzWAoglqIYgT1cPRdene81Cr08o1ql1My%2BpKS51gnfZq9tUheeioPPt%2BstypWcB0R%2BM4pUivTnKVFlBv%2F0rJKRQf98sbKlFAfTR32HlMft9iQfVjQ%2B%2FZWicLssHtLa3HeVP2StoHxS9v6eNnDOo%2Fk%3D--GtULp9qti76Gf%2Bkd--WVuTi5DuRjAYSRIpTgMYTw%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - dc5d2f4f-450b-4fcc-a212-94e1d0e8882a
+      - d876a4e3-575d-4eea-95f4-cdb04d57e13e
       X-Runtime:
-      - '0.029108'
+      - '0.032491'
       Transfer-Encoding:
       - chunked
     body:
@@ -484,7 +484,7 @@ http_interactions:
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "GxpIjJsC4KnRoBKNjWnkJA==";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "12086" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 - request:
     method: get
     uri: http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e
@@ -526,12 +526,12 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=1tcaxgAk5uPJryMRS9hjJlBFcA84y1uLfxV2cQigWo4cy%2BU9UVQzXucPete4SBsUzV4eekbl5l3cnHQPSFhFQAAAIIqa130nm6iQSkCTtIhdafodsKjQ8yD8zZ5hGOiSaZ2cCR3DOWRT8ScYFVrTFbo1mVJoYG7mCqXVVnKCAEZSS%2FsRI8avlUpll5tN5gk67UcUwMCQBFHAfa78fxhAPty%2Bep5hMfGQZYrqUnJbQgoNbb%2BSJimKGJBddpEAXLKItsSXQX14QQnGBUzE3yiAvFLZev4QajuExzV54hmwtC48nuyfiG5ADTcK9jINeh0WNxTc7KnblbzYHErWwaH5Dtn9noGm1n148Gxdqb964gTRRQ7hbO8aY6r3P79%2Fq15lsGgi3IoAg18q61xJ--ORPtQaJm5hTgHsp%2F--DTxKDKFcuVmzg5OUY4pjvQ%3D%3D;
+      - _jupiter_session=jZW%2BY4ZUMBtxaIvCpep6javU0JxilHoDzzMbTHzKmW61E2DsfhE45%2Bqh6CoJ30fdgFvVl1M7Eo7oVmWDyeuNo0nIptRLku6E6fwp1WLP40U6gzGyMI6j9TxTkGZfhniAsd6%2BITpnAvmyS4z7ay8UcUnf9KFjOc77%2FyZqJn%2BzPJZiqc1z4PO64DNQhSfrLGVOTRd3jO2x8zAV2IkHnKka19c7AFqmQab6yBX9sCIq3WsabaYCYHJt9wEeXPMXwIbBg19dVjXYt%2FaWdhIkGfMYYh8NBeiHDp9Xc4p5f9%2BqAVbLAI2989fyIs7k1CYyuEeawDwGsO7msrlA5IsmVrbnAhBSt3rvSZrJAvDBJWldPNw1LqS95EoZvUGgwTSqK4q4emD13Yg9HWltsGFV--WYqa8Al4Rhhg5b1%2B--aRVlHI2f75ywBCGNVFwrZQ%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 7f471673-dabc-4439-9636-cd810aea5a6a
+      - 82c17bbc-4559-450c-917d-60b26c7f5ab5
       X-Runtime:
-      - '0.022028'
+      - '0.026077'
       Transfer-Encoding:
       - chunked
     body:
@@ -541,5 +541,5 @@ http_interactions:
         <http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "image-sample.jpeg";
           <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg" .
     http_version: 
-  recorded_at: Mon, 10 Feb 2020 22:39:29 GMT
+  recorded_at: Fri, 14 Feb 2020 19:51:00 GMT
 recorded_with: VCR 5.0.0

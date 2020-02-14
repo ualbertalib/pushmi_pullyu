@@ -17,10 +17,10 @@ Its primary job is to manage the flow of content from Jupiter into Swift for pre
 
 ## Workflow
 
-1.  Any save (create or update) on a Item/Thesis in Jupiter will trigger an after save callback that will push the item's unique identifier (UUID or NOID) into a Queue.
+1.  Any save (create or update) on a Item/Thesis in ERA/Jupiter will trigger an after save callback that will push the item's unique identifier (UUID) into a Queue.
 2. The queue (Redis) is setup to be a unique set (which only allows one item's UUID to be included in the queue at a single time), and ordered by priority from First In, First out (FIFO).
 3. PushmiPullyu will then monitor the queue. After a certain wait period has passed since an element has been on the queue, PushmiPullyu will then retrieve the elements off the queue and begin to process the preservation event.
-4. All the GenericFile information and data required for preservation are retrieved from Jupiter using multiple REST calls to Jupiter's AIP API.
+4. All the Item/Thesis information and data required for preservation are retrieved from Jupiter using multiple REST calls to Jupiter's AIP API.
 5. An Archival Information Package (AIP) is created from the item's information. It is then bagged and tarred.
 6. The AIP tar is then uploaded to Swift via a REST call.
 7. On a successful Swift upload, a entry is added for this preservation event to the preservation event logs.

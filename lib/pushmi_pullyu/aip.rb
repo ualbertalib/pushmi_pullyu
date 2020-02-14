@@ -7,7 +7,7 @@ module PushmiPullyu::AIP
 
   def create(entity)
     raise EntityInvalid if entity.nil? ||
-                           UUID.validate(entity[:uuid]).nil? ||
+                           UUID.validate(entity[:uuid]) != true ||
                            entity[:type].blank?
 
     aip_directory = "#{PushmiPullyu.options[:workdir]}/#{entity[:uuid]}"

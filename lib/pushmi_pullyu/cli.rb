@@ -187,10 +187,9 @@ class PushmiPullyu::CLI
       type: entity_json['type'],
       uuid: entity_json['uuid']
     }
-    return unless entity.present?
+    return unless entity[:type].present? && entity[:uuid].present?
 
-    # add additional information about the error context to errors that occur
-    # while processing this item.
+    # add additional information about the error context to errors that occur while processing this item.
     Rollbar.scoped(entity_uuid: entity[:uuid]) do
       begin
         # Download AIP from Jupiter, bag and tar AIP directory and cleanup after

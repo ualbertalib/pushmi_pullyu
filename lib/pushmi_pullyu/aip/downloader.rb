@@ -3,6 +3,7 @@ require 'ostruct'
 require 'rdf'
 require 'rdf/n3'
 require 'net/http'
+require 'digest'
 
 # Download all of the metadata/datastreams and associated data related to an
 # object
@@ -16,10 +17,6 @@ class PushmiPullyu::AIP::Downloader
     type: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
   }.freeze
 
-  # class NoFileSets < StandardError; end
-  # class NoMemberFiles < StandardError; end
-  # class NoContentFilename < StandardError; end
-  # class NoOriginalFile < StandardError; end
   class JupiterDownloadError < StandardError; end
   class JupiterCopyError < StandardError; end
 
@@ -32,21 +29,27 @@ class PushmiPullyu::AIP::Downloader
   def run
     PushmiPullyu.logger.info("#{@entity_identifier}: Retreiving data from Jupiter ...")
     make_directories
-
+    
     # Main object metadata
-    download_and_log(object_aip_paths[:main_object])
-    download_and_log(object_aip_paths[:file_sets])
+    download_and_log(object_aip_paths[:main_object_remote],
+                     object_aip_paths[:main_object_local])
+    download_and_log(object_aip_paths[:file_sets_remote],
+                     object_aip_paths[:file_sets_local])
 
     # Get file paths for processing
-    file_paths = get_file_paths(object_aip_paths[:file_paths][:remote])
+    file_paths = get_file_paths(object_aip_paths[:file_paths_remote])
 
     file_paths[:files].each do |file_path|
       file_uuid = file_path[:file_uuid]
       make_file_set_directories(file_uuid)
       copy_and_log(file_uuid, file_path)
-      download_and_log(file_aip_paths(file_uuid)[:fixity])
-      download_and_log(file_aip_paths(file_uuid)[:original_file])
-      download_and_log(file_aip_paths(file_uuid)[:file_set])
+      file_aip_path = file_aip_paths(file_uuid)
+      download_and_log(file_aip_path[:fixity_remote],
+                       file_aip_path[:fixity_local])
+      download_and_log(file_aip_path[:original_file_remote],
+                       file_aip_path[:original_file_local])
+      download_and_log(file_aip_path[:file_set_remote],
+                       file_aip_path[:file_set_local])
     end
   end
 
@@ -54,16 +57,24 @@ class PushmiPullyu::AIP::Downloader
 
   def copy_and_log(file_uuid, file_path)
     remote = file_path[:file_path]
+    remote_checksum = file_path[:file_checksum]
     files_path = file_set_dirs(file_uuid)[:files]
     output_file = "#{files_path}/#{file_path[:file_name]}"
     log_downloading(remote, output_file)
     FileUtils.copy_file(remote, output_file)
 
-    # TODO: check more than the file being there
-    is_success = File.exist? output_file
+    is_success = File.exist?(output_file) &&
+                 File.size(remote) == File.size(output_file) &&
+                 compare_md5(output_file, remote_checksum)
+
     log_saved(is_success, output_file)
 
     raise JupiterCopyError unless is_success
+  end
+
+  def compare_md5(local, remote_checksum)
+    local_md5 = Digest::MD5.file local
+    local_md5.base64digest == remote_checksum
   end
 
   def authenticate_and_request(url)
@@ -79,23 +90,21 @@ class PushmiPullyu::AIP::Downloader
     end
   end
 
-  def download_and_log(path_spec)
-    output_file = path_spec[:local]
-    remote = path_spec[:remote]
-    log_downloading(remote, output_file)
+  def download_and_log(remote, local)
+
+    log_downloading(remote, local)
 
     response = authenticate_and_request(remote)
 
-    is_success = false
-    if response.is_a?(Net::HTTPSuccess)
-      file = File.open(output_file, 'wb')
-      file.write(response.body)
-      file.close
-      # Response was a success and the file was saved to output_file
-      is_success = File.exist? output_file
+    is_success = if response.is_a?(Net::HTTPSuccess)
+      File.open(local, 'wb') do |file|      
+        file.write(response.body)
+      end
+      # Response was a success and the file was saved to local
+      File.exist? local
     end
 
-    log_saved(is_success, output_file)
+    log_saved(is_success, local)
     raise JupiterDownloadError unless is_success
   end
 
@@ -171,19 +180,13 @@ class PushmiPullyu::AIP::Downloader
 
   def object_aip_paths
     @object_aip_paths ||= {
-      main_object: {
-        # Base path
-        remote: object_uri,
-        local: "#{aip_dirs[:metadata]}/object_metadata.n3"
-      },
-      file_paths: {
-        # This is downloaded for processing but not saved
-        remote: "#{object_uri}/file_paths"
-      },
-      file_sets: {
-        remote: "#{object_uri}/filesets",
-        local: "#{aip_dirs[:files_metadata]}/file_order.xml"
-      }
+      # Base path
+      main_object_remote: object_uri,
+      main_object_local: "#{aip_dirs[:metadata]}/object_metadata.n3",
+      file_sets_remote: "#{object_uri}/filesets",
+      file_sets_local: "#{aip_dirs[:files_metadata]}/file_order.xml",
+      # This is downloaded for processing but not saved
+      file_paths_remote: "#{object_uri}/file_paths"
     }.freeze
   end
 
@@ -191,22 +194,12 @@ class PushmiPullyu::AIP::Downloader
     file_set_paths = file_set_dirs(file_set_uuid)
     @file_aip_paths ||= {}
     @file_aip_paths[file_set_uuid] ||= {
-      file: {
-        remote: '',
-        local: ''
-      },
-      fixity: {
-        remote: "#{object_uri}/filesets/#{file_set_uuid}/fixity",
-        local: "#{file_set_paths[:logs]}/content_fixity_report.n3"
-      },
-      file_set: {
-        remote: "#{object_uri}/filesets/#{file_set_uuid}",
-        local: "#{file_set_paths[:metadata]}/file_set_metadata.n3"
-      },
-      original_file: {
-        remote: "#{object_uri}/filesets/#{file_set_uuid}/original_file",
-        local: "#{file_set_paths[:metadata]}/original_file_metadata.n3"
-      }
+      fixity_remote: "#{object_uri}/filesets/#{file_set_uuid}/fixity",
+      fixity_local: "#{file_set_paths[:logs]}/content_fixity_report.n3",
+      file_set_remote: "#{object_uri}/filesets/#{file_set_uuid}",
+      file_set_local: "#{file_set_paths[:metadata]}/file_set_metadata.n3",
+      original_file_remote: "#{object_uri}/filesets/#{file_set_uuid}/original_file",
+      original_file_local: "#{file_set_paths[:metadata]}/original_file_metadata.n3"
     }.freeze
   end
 
