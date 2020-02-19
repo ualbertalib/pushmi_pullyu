@@ -64,6 +64,12 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       'original_file_metadata.n3'
     ]
   end
+  let(:aip_downloader_run_arguments) do
+    {
+      file_path_1: './spec/fixtures/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP',
+      file_path_2: './spec/fixtures/storage/jf/KQ/jfKQSzhKRHrnfYAVY38htiZo'
+    }
+  end
 
   before do
     allow(PushmiPullyu.logger).to receive(:info)
@@ -78,7 +84,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
 
   describe '#run' do
     it 'copies the correct files' do
-      VCR.use_cassette('aip_downloader_run') do
+      VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
       folders_content = Dir["tmp/downloader_spec/#{uuid}/data/objects/files/*/*"].sort
@@ -86,7 +92,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
     end
 
     it 'downloads the correct files' do
-      VCR.use_cassette('aip_downloader_run') do
+      VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
 
@@ -107,7 +113,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       # Should not exist yet
       expect(File.exist?(aip_folder)).to eq(false)
 
-      VCR.use_cassette('aip_downloader_run') do
+      VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
 
