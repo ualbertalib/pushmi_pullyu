@@ -5,8 +5,7 @@ require 'rdf/n3'
 require 'net/http'
 require 'digest'
 
-# Download all of the metadata/datastreams and associated data related to an
-# object
+# Download all of the metadata/datastreams and associated data related to an object
 class PushmiPullyu::AIP::Downloader
 
   PREDICATE_URIS = {
@@ -29,7 +28,7 @@ class PushmiPullyu::AIP::Downloader
   def run
     PushmiPullyu.logger.info("#{@entity_identifier}: Retreiving data from Jupiter ...")
     make_directories
-    
+
     # Main object metadata
     download_and_log(object_aip_paths[:main_object_remote],
                      object_aip_paths[:main_object_local])
@@ -80,9 +79,8 @@ class PushmiPullyu::AIP::Downloader
   def authenticate_and_request(url)
     uri = URI(url)
     request = Net::HTTP::Get.new(uri)
-    # TODO: This basic_auth call is just a placeholder to be replaced when a
-    # proper authentication mechanism is setup on jupiter
-    # https://github.com/ualbertalib/jupiter/pull/1370#issuecomment-561799351
+    # TODO: This basic_auth call is just a placeholder to be replaced when a proper authentication mechanism is setup on
+    # jupiter https://github.com/ualbertalib/jupiter/pull/1370#issuecomment-561799351
     request.basic_auth('admin', 'admin@ualberta.ca')
 
     Net::HTTP.start(uri.hostname, uri.port) do |http|
@@ -91,18 +89,17 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def download_and_log(remote, local)
-
     log_downloading(remote, local)
 
     response = authenticate_and_request(remote)
 
     is_success = if response.is_a?(Net::HTTPSuccess)
-      File.open(local, 'wb') do |file|      
-        file.write(response.body)
-      end
-      # Response was a success and the file was saved to local
-      File.exist? local
-    end
+                   File.open(local, 'wb') do |file|
+                     file.write(response.body)
+                   end
+                   # Response was a success and the file was saved to local
+                   File.exist? local
+                 end
 
     log_saved(is_success, local)
     raise JupiterDownloadError unless is_success
