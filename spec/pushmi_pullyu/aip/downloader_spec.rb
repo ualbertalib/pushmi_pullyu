@@ -4,7 +4,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   let(:workdir) { 'tmp/downloader_spec' }
   let(:options) do
     {
-      workdir: workdir,            
+      workdir: workdir,
       jupiter: {
         aip_api_url: 'http://localhost:3000/aip/v1'
       }
