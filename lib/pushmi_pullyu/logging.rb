@@ -48,7 +48,7 @@ module PushmiPullyu::Logging
 
       message = "#{deposited_file.name} was successfully deposited into Swift Storage!\n"\
       "Here are the details of this preservation event:\n"\
-      "\tNOID: '#{deposited_file.name}'\n"\
+      "\tUUID: '#{deposited_file.name}'\n"\
       "\tTimestamp of Completion: '#{deposited_file.last_modified}'\n"\
       "\tAIP Checksum: '#{deposited_file.etag}'\n"\
       "\tMetadata: #{deposited_file.metadata}\n"\

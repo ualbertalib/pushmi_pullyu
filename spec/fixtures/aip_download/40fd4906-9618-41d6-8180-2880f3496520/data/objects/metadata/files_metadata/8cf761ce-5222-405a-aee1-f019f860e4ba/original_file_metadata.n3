@@ -1,0 +1,5 @@
+
+<http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/8cf761ce-5222-405a-aee1-f019f860e4ba/original_file> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "theses.jpg";
+  <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg";
+  <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "pP2y2Xx03crtG2ZLyNOvBQ==";
+  <http://www.loc.gov/premis/rdf/v1#hasSize> "51959" .

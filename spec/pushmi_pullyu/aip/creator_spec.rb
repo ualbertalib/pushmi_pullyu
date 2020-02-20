@@ -3,7 +3,7 @@ require 'timecop'
 
 RSpec.describe PushmiPullyu::AIP::Creator do
   let(:workdir) { 'tmp/creator_spec' }
-  let(:noid) { '6841cece-41f1-4edf-ab9a-59459a127c77' }
+  let(:noid) { '40fd4906-9618-41d6-8180-2880f3496520' }
   let(:aip_file) { "#{aip_folder}.tar" }
   let(:aip_folder) { "#{workdir}/#{noid}" }
   let(:creator) { PushmiPullyu::AIP::Creator.new(noid, aip_folder, aip_file) }
@@ -45,55 +45,43 @@ RSpec.describe PushmiPullyu::AIP::Creator do
       expect(File.exist?("#{aip_folder}/bagit.txt")).to eq(true)
       expect(File.exist?("#{aip_folder}/bag-info.txt")).to eq(true)
 
-      # The downloaded AIP should have 16 directories and 15 files including the log
+      # The downloaded AIP should have 16 directories and 11 files including the log
       # (see the downloader_spec for more elaboration about this),
-      # bagging should add the above 6 files, so 37 total files/directories
+      # bagging should add the above 6 files, so 30 total files/directories
       # (see also file count test in creator spec)
-      expect(Dir["#{aip_folder}/**/*"].length).to eq(37)
+      expect(Dir["#{aip_folder}/**/*"].length).to eq(30)
     end
 
     it 'creates a correct manifest' do
       creator.run
 
       lines = File.readlines("#{aip_folder}/manifest-sha1.txt").map(&:strip).sort
-      # 15 files in the bag
-      expect(lines.length).to eq(15)
+      # 11 files in the bag
+      expect(lines.length).to eq(11)
 
       # We can't know the sha1 of the aipcreation.log in advance (timestamps are recorded)
       sha1 = Digest::SHA1.file("#{aip_folder}/data/logs/aipcreation.log").hexdigest
 
-      expected_file_sums =
-        ['c4cf94314f09bbbb13e0b7d01023b77cb3c533d9 '\
-         'data/logs/files_logs/01bb1b09-974d-478b-8826-2c606a447606/content_fixity_report.n3',
-         '3231d2c4345426655bdae4b9060ca3d8e422004c '\
-         'data/logs/files_logs/837977d6-de61-49ea-a912-a65af5c9005e/content_fixity_report.n3',
-         'c2e0cfbab6558fca5364978e9f5af098746b881f '\
-         'data/logs/files_logs/856444b6-8dd5-4dfa-857d-435e354a2ead/content_fixity_report.n3',
-         "#{sha1} data/logs/aipcreation.log",
-         'c989727f21d6b62f17836007a8d1c59bcedb9b7a '\
-         'data/objects/metadata/object_metadata.n3',
-         '027e59b14f9df9cb973729d36b4f12047deb0871 '\
-         'data/objects/metadata/files_metadata/file_order.xml',
-         '0b9d190afaab8577424789cecd74b824cd2ae81d '\
-         'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/file_set_metadata.n3',
-         '94866e6490673a524888dee6acf5b85c81458a03 '\
-         'data/objects/metadata/files_metadata/01bb1b09-974d-478b-8826-2c606a447606/original_file_metadata.n3',
-         '442a1f64a3bd05884020a9b70fbd17752ed13e12 '\
-         'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/file_set_metadata.n3',
-         '254587e16e46846e5428ba989526bc1c08ecdb47 '\
-         'data/objects/metadata/files_metadata/837977d6-de61-49ea-a912-a65af5c9005e/original_file_metadata.n3',
-         '7083d7bca4650aec59920e5e8b90a85667ecc5d6 '\
-         'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/file_set_metadata.n3',
-         '30604fd556c96aac01abddf1e8b4e0369fc90ba5 '\
-         'data/objects/metadata/files_metadata/856444b6-8dd5-4dfa-857d-435e354a2ead/original_file_metadata.n3',
-         '9ea739a91eff6ba99e0227e3a909436d1dfd7ca7 '\
-         'data/objects/files/01bb1b09-974d-478b-8826-2c606a447606/'\
-         'Archive_Tar_Minitar_FileNameTooLongHjMQh5EggUDWgpsfoXfyN'\
-         'GoEbvcUcN34YPpjknJhu4y8bs3qVMvBXA5A2aFBxY6EiIyxRS.jpg',
-         'e559f7cea3fc307524bccdedb6d012a30b4e6c86 '\
-         'data/objects/files/837977d6-de61-49ea-a912-a65af5c9005e/image-sample.jpeg',
-         '49b1dc60dc20a270cf59ee04a564393bba2bf6c8 '\
-         'data/objects/files/856444b6-8dd5-4dfa-857d-435e354a2ead/era-logo.png'].sort
+      expected_file_sums = [
+        '6c94fddb53b4175b7ca79b7e99f336b9a80d10bc' \
+        ' data/objects/files/3cbc75f9-7bad-4d62-962e-911f911bd70e/image-sample.jpeg',
+        '3a3c5fedb33fdd688d0db48c2cb64866736738de data/objects/files/8cf761ce-5222-405a-aee1-f019f860e4ba/theses.jpg',
+        'ca3673d63ea097461b567a6de4f7c67dd84df21f data/objects/metadata/files_metadata/file_order.xml',
+        '99a3c2f0ad344ec0784738d4530b08eba9a9c6d2' \
+        ' data/objects/metadata/files_metadata/3cbc75f9-7bad-4d62-962e-911f911bd70e/file_set_metadata.n3',
+        'e30725f6fc8d4b736f061ff4bf501d320bb014d2' \
+        ' data/objects/metadata/files_metadata/3cbc75f9-7bad-4d62-962e-911f911bd70e/original_file_metadata.n3',
+        'cd54ae5cf0b425948a42f57e25a02ada6ceb806f' \
+        ' data/objects/metadata/files_metadata/8cf761ce-5222-405a-aee1-f019f860e4ba/file_set_metadata.n3',
+        'dacfb2493cc43d6171f9e6b40620dfff4c86149d' \
+        ' data/objects/metadata/files_metadata/8cf761ce-5222-405a-aee1-f019f860e4ba/original_file_metadata.n3',
+        '872c4fcae8a0f594765a20d61c99f1739dc0b549 data/objects/metadata/object_metadata.n3',
+        "#{sha1} data/logs/aipcreation.log",
+        '9004c767715910ba533fa2cb2ff5941244b5b284' \
+        ' data/logs/files_logs/3cbc75f9-7bad-4d62-962e-911f911bd70e/content_fixity_report.n3',
+        '7755131588e2f1b1a6420df72c27d8d26fe39c31' \
+        ' data/logs/files_logs/8cf761ce-5222-405a-aee1-f019f860e4ba/content_fixity_report.n3'
+      ].sort
 
       expect(lines).to eq(expected_file_sums)
     end

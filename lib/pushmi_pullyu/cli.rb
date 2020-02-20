@@ -197,6 +197,7 @@ class PushmiPullyu::CLI
         PushmiPullyu::AIP.create(entity) do |aip_filename, aip_directory|
           # Push tarred AIP to swift API
           deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
+
           # Log successful preservation event to the log files
           PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
         end
