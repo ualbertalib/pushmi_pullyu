@@ -52,7 +52,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     expect(File.exist?(aip_file)).to eq(false)
     expect(File.exist?("#{log_folder}/preservation_events.log")).to eq(false)
 
-    # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
+    # Download data from Jupiter, bag and tar AIP directory and cleanup after block code
     VCR.use_cassette('aip_download_and_swift_upload', erb:
     {
       file_path_1: './spec/fixtures/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP',

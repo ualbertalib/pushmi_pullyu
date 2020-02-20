@@ -7,8 +7,6 @@ require 'pushmi_pullyu/logging'
 require 'pushmi_pullyu/aip'
 require 'pushmi_pullyu/aip/creator'
 require 'pushmi_pullyu/aip/downloader'
-require 'pushmi_pullyu/aip/fedora_fetcher'
-require 'pushmi_pullyu/aip/owner_email_editor'
 require 'pushmi_pullyu/cli'
 require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/swift_depositer'
@@ -30,12 +28,6 @@ module PushmiPullyu
     queue_name: 'dev:pmpy_queue',
     redis: {
       url: 'redis://localhost:6379'
-    },
-    fedora: {
-      url: 'http://localhost:8080/fcrepo/rest',
-      user: 'fedoraAdmin',
-      password: 'fedoraAdmin',
-      base_path: '/dev'
     },
     swift: {
       tenant: 'tester',

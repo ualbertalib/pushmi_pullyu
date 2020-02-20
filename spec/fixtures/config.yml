@@ -14,9 +14,5 @@ rollbar:
   proxy_host: 'your_proxy_url'
   proxy_port: '80'
 
-fedora:
-  url: http://www.example.com:8080/fcrepo/rest
-  base_path: '/test'
-
 swift:
   auth_url: http://127.0.0.1:8080/auth/v1.0
