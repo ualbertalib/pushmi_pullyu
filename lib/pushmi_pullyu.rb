@@ -1,22 +1,15 @@
-# require 'pushmi_pullyu/version' must be first as it declares the PushmiPullyu module.
-# (This fixes a weird NameError bug when using the nested compact syntax for
-# defining modules/classes like `module PushmiPullyu::Logging`)
+# require 'pushmi_pullyu/version' must be first as it declares the PushmiPullyu
+# module. (This fixes a weird NameError bug when using the nested compact syntax
+# for defining modules/classes like `module PushmiPullyu::Logging`)
+
 require 'pushmi_pullyu/version'
-
 require 'pushmi_pullyu/logging'
-
 require 'pushmi_pullyu/aip'
 require 'pushmi_pullyu/aip/creator'
 require 'pushmi_pullyu/aip/downloader'
-require 'pushmi_pullyu/aip/fedora_fetcher'
-require 'pushmi_pullyu/aip/file_list_creator'
-require 'pushmi_pullyu/aip/owner_email_editor'
-require 'active_record'
-require 'pushmi_pullyu/aip/user'
 require 'pushmi_pullyu/cli'
 require 'pushmi_pullyu/preservation_queue'
 require 'pushmi_pullyu/swift_depositer'
-
 require 'active_support'
 require 'active_support/core_ext'
 
@@ -36,12 +29,6 @@ module PushmiPullyu
     redis: {
       url: 'redis://localhost:6379'
     },
-    fedora: {
-      url: 'http://localhost:8080/fcrepo/rest',
-      user: 'fedoraAdmin',
-      password: 'fedoraAdmin',
-      base_path: '/dev'
-    },
     swift: {
       tenant: 'tester',
       username: 'test:tester',
@@ -58,6 +45,9 @@ module PushmiPullyu
       pool: ENV['RAILS_MAX_THREADS'] || 5,
       url: ENV['DATABASE_URL'] || ENV['JUPITER_DATABASE_URL'] || 'postgresql://jupiter:mysecretpassword@127.0.0.1',
       database: 'jupiter_development'
+    },
+    jupiter: {
+      aip_api_url: 'http://localhost:3000/aip/v1'
     }
   }.freeze
 
