@@ -6,16 +6,19 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
     {
       workdir: workdir,
       jupiter: {
-        aip_api_url: 'http://localhost:3000/aip/v1'
+        user: 'ditech@ualberta.ca',
+        password: 'correct horse battery staple',
+        jupiter_url: 'http://localhost:3000/',
+        aip_api_path: 'aip/v1'
       }
     }
   end
-  let(:uuid) { '40fd4906-9618-41d6-8180-2880f3496520' }
+  let(:uuid) { '68df35e1-5f8f-40a4-bc98-bbd74019ea2f' }
   let(:type) { 'items' }
   let(:entity_definition) { { uuid: uuid, type: type } }
   let(:file_set_uuids) do
-    ['8cf761ce-5222-405a-aee1-f019f860e4ba',
-     '3cbc75f9-7bad-4d62-962e-911f911bd70e']
+    ['d56f21a2-cb55-4bdd-8f3d-874b44e1c144',
+     '42ee7a98-a26c-49a7-806a-751e2e4aebee']
   end
   let(:aip_folder) { "#{workdir}/#{uuid}" }
   let(:downloader) { PushmiPullyu::AIP::Downloader.new(entity_definition, aip_folder) }

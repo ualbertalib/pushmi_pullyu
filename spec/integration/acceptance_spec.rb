@@ -3,7 +3,7 @@ require 'json'
 
 RSpec.describe 'Acceptance test', type: :feature do
   let(:workdir) { 'tmp/spec' }
-  let(:uuid) { '40fd4906-9618-41d6-8180-2880f3496520' }
+  let(:uuid) { '68df35e1-5f8f-40a4-bc98-bbd74019ea2f' }
   let(:type) { 'items' }
   let(:json_redis_input) do
     {
@@ -85,14 +85,14 @@ RSpec.describe 'Acceptance test', type: :feature do
       #{uuid} was successfully deposited into Swift Storage!
       Here are the details of this preservation event:
       \tUUID: '#{uuid}'
-      \tTimestamp of Completion: 'Thu, 20 Feb 2020 20:23:00 GMT'
-      \tAIP Checksum: '7ad57970a87a66efad09aae29965c96a'
+      \tTimestamp of Completion: 'Mon, 09 Mar 2020 20:36:57 GMT'
+      \tAIP Checksum: '1d530697e8e39b9a1342a347ba898c10'
       \tMetadata: {"project-id"=>"#{uuid}", "aip-version"=>"1.0", "promise"=>"bronze", "project"=>"ERA"}
       \tFile Details:
     HEREDOC
 
     file_details_one = <<~HEREDOC
-      \t\t{"fileset_uuid": "3cbc75f9-7bad-4d62-962e-911f911bd70e",
+      \t\t{"fileset_uuid": "d56f21a2-cb55-4bdd-8f3d-874b44e1c144",
       \t\t"details": {
       \t\t\t"file_name": "image-sample.jpeg",
       \t\t\t"file_type": "jpeg",
@@ -101,7 +101,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     HEREDOC
 
     file_details_two = <<~HEREDOC
-      \t\t{"fileset_uuid": "8cf761ce-5222-405a-aee1-f019f860e4ba",
+      \t\t{"fileset_uuid": "42ee7a98-a26c-49a7-806a-751e2e4aebee",
       \t\t"details": {
       \t\t\t"file_name": "theses.jpg",
       \t\t\t"file_type": "jpg",

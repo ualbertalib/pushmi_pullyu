@@ -4,6 +4,8 @@ require 'rdf'
 require 'rdf/n3'
 require 'net/http'
 require 'digest'
+require 'faraday'
+require 'faraday-cookie_jar'
 
 # Download all of the metadata/datastreams and associated data related to an object
 class PushmiPullyu::AIP::Downloader
@@ -18,6 +20,7 @@ class PushmiPullyu::AIP::Downloader
 
   class JupiterDownloadError < StandardError; end
   class JupiterCopyError < StandardError; end
+  class JupiterAuthenticationError < StandardError; end
 
   def initialize(entity, aip_directory)
     @entity = entity
@@ -27,6 +30,8 @@ class PushmiPullyu::AIP::Downloader
 
   def run
     PushmiPullyu.logger.info("#{@entity_identifier}: Retreiving data from Jupiter ...")
+    # binding.pry
+    authenticate_http_calls
     make_directories
 
     # Main object metadata
@@ -76,24 +81,30 @@ class PushmiPullyu::AIP::Downloader
     local_md5.base64digest == remote_checksum
   end
 
-  def authenticate_and_request(url)
-    uri = URI(url)
-    request = Net::HTTP::Get.new(uri)
-    # TODO: This basic_auth call is just a placeholder to be replaced when a proper authentication mechanism is setup on
-    # jupiter https://github.com/ualbertalib/jupiter/pull/1370#issuecomment-561799351
-    request.basic_auth('admin', 'admin@ualberta.ca')
-
-    Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(request)
+  def authenticate_http_calls
+    @connection = Faraday.new(
+      url: PushmiPullyu.options[:jupiter][:jupiter_url]
+    ) do |builder|
+      builder.use :cookie_jar
+      builder.adapter Faraday.default_adapter
     end
+
+    response = @connection.post('auth/system') do |request|
+      # Jupiter uses email as username
+      request.params['email'] = PushmiPullyu.options[:jupiter][:user]
+      request.params['password'] = PushmiPullyu.options[:jupiter][:password]
+    end
+
+    # TODO: Find better way to check if session was set
+    raise JupiterAuthenticationError unless response.headers['set-cookie']
   end
 
   def download_and_log(remote, local)
     log_downloading(remote, local)
 
-    response = authenticate_and_request(remote)
+    response = @connection.get(remote)
 
-    is_success = if response.is_a?(Net::HTTPSuccess)
+    is_success = if response.success?
                    File.open(local, 'wb') do |file|
                      file.write(response.body)
                    end
@@ -106,12 +117,13 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def get_file_paths(url)
-    response = authenticate_and_request(url)
+    response = @connection.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def object_uri
-    aip_api_url = PushmiPullyu.options[:jupiter][:aip_api_url]
+    aip_api_url = PushmiPullyu.options[:jupiter][:jupiter_url] +
+                  PushmiPullyu.options[:jupiter][:aip_api_path]
     @object_uri ||= "#{aip_api_url}/#{@entity[:type]}/#{@entity[:uuid]}"
   end
 

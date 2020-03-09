@@ -47,7 +47,10 @@ module PushmiPullyu
       database: 'jupiter_development'
     },
     jupiter: {
-      aip_api_url: 'http://localhost:3000/aip/v1'
+      user: ENV['JUPITER_USER'],
+      pasword: ENV['JUPITER_PASSWORD'],
+      jupiter_url: ENV['JUPITER_URL'] || 'http://localhost:3000/',
+      aip_api_path: ENV['JUPITER_AIP_API_PATH'] || 'aip/v1'
     }
   }.freeze
 
