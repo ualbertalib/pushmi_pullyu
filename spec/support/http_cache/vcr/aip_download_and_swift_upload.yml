@@ -237,7 +237,7 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"files":[{"file_name":"theses.jpg","file_path":"/home/orodrigu/Workspace/jupiter/storage/bb/44/bb44hon2p25zcwuj8e9bcl7fury4","file_uuid":"42ee7a98-a26c-49a7-806a-751e2e4aebee","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"image-sample.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/sd/5j/sd5jumcwa1zxf77c3msfrab900hc","file_uuid":"d56f21a2-cb55-4bdd-8f3d-874b44e1c144","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
+      string: '{"files":[{"file_name":"theses.jpg","file_path":"<%= file_path_1 %>","file_uuid":"42ee7a98-a26c-49a7-806a-751e2e4aebee","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"image-sample.jpeg","file_path":"<%= file_path_2 %>","file_uuid":"d56f21a2-cb55-4bdd-8f3d-874b44e1c144","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
     http_version: null
   recorded_at: Mon, 09 Mar 2020 20:36:56 GMT
 - request:
