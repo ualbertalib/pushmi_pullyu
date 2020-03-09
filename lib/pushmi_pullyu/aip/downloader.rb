@@ -30,7 +30,7 @@ class PushmiPullyu::AIP::Downloader
 
   def run
     PushmiPullyu.logger.info("#{@entity_identifier}: Retreiving data from Jupiter ...")
-    # binding.pry
+
     authenticate_http_calls
     make_directories
 
