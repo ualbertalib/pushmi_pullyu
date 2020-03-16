@@ -25,8 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'bagit', '~> 0.4'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
-  spec.add_runtime_dependency 'faraday', '~> 0.9.0'
-  spec.add_runtime_dependency 'faraday-cookie_jar', '~> 0.0.6'
   spec.add_runtime_dependency 'minitar', '~> 0.7'
   spec.add_runtime_dependency 'openstack', '~> 3.3', '>= 3.3.10'
   spec.add_runtime_dependency 'pg', '>= 1.0', '< 1.2'

@@ -2,19 +2,19 @@
 http_interactions:
 - request:
     method: post
-    uri: http://localhost:3000/auth/system?email=ditech@ualberta.ca&password=correct%20horse%20battery%20staple
+    uri: http://localhost:3000/auth/system
     body:
-      encoding: UTF-8
-      string: ''
+      encoding: US-ASCII
+      string: email=ditech%40ualberta.ca&api_key=3eeb395e-63b7-11ea-bc55-0242ac130003
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Content-Length:
-      - '0'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
   response:
     status:
       code: 200
@@ -43,34 +43,35 @@ http_interactions:
         www.google-analytics.com www.googletagmanager.com; style-src ''unsafe-inline''
         ''self'' https:; connect-src ''self'' https: http://localhost:3035 ws://localhost:3035'
       Set-Cookie:
-      - _jupiter_session=Q%2Fw8yLy4YI42eHL3KkTW%2F8qc2rQnix1nRKRxomEifpSv4SoXw%2FHZFdOwDigQuCDW635nayiynWyUBXjP2cM1nJJqUYIbYJnpfzjKHNejz3Q2%2BwNMqa1oXknCgm%2FxKKb8y69uTIGCKCB115Ucw2DcNQyPEU07KRBSZ1ORBDSJ3XDqqHp0xQljbb2q66vmueEPgZQs9P4m5ME%3D--MNZwNqJXUNx1jJLh--8HaZB%2B%2B2sU9AkXxehml4rg%3D%3D;
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 14e93b52-cc4b-45d2-8501-ebd0ec6c2dc6
+      - dd3932f9-8231-4865-9695-3279500c775d
       X-Runtime:
-      - '0.219188'
+      - '0.331139'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=Q%2Fw8yLy4YI42eHL3KkTW%2F8qc2rQnix1nRKRxomEifpSv4SoXw%2FHZFdOwDigQuCDW635nayiynWyUBXjP2cM1nJJqUYIbYJnpfzjKHNejz3Q2%2BwNMqa1oXknCgm%2FxKKb8y69uTIGCKCB115Ucw2DcNQyPEU07KRBSZ1ORBDSJ3XDqqHp0xQljbb2q66vmueEPgZQs9P4m5ME%3D--MNZwNqJXUNx1jJLh--8HaZB%2B%2B2sU9AkXxehml4rg%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -91,61 +92,62 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"ff3e1758aa99df41baf0c94517a0a906"
+      - W/"313216e3861c1e2131c9b66cdfd313e1"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=DuHhypHWChiEwF4%2Beq7HC1CWNgeEbUbLg2mD%2BDYP16ygkm7WV3Vxd3iuPAlefxUIRkY2s8T2KIivPBD0MDqRzfVP3tg00U1p1IbgG6uapgfLqVUNh7vbhYXW19nPaMp3Qvod3k0%2B%2FZG9ZDmP9bZsxWSq61u%2BStZzq%2BJbkkCRJbXk9YPjFsB1YKUZb5tjArJovYNode%2F3VJF1WQHuNkE96MbmKNvTdG51phJefp%2BNmSW3mQZa0ZRdILnmZeYPrZBUAhOnxnj9w2iXqko9xC0p1JvKcZRympSAT9t3NFShL6%2BBpDNijV4Hw6B%2BYH%2Bs5IVeajKx%2F3ms3FLap1n%2BU13EmA%3D%3D--C2ZbAcyDzDdISUSy--S2rfFSuXNWMrfe4wsZNlTQ%3D%3D;
+      - _jupiter_session=7SQ%2BVSGlI0Yag4xI%2FbvaAXVymt6QlAhcTWYLxjXeSKktnIN23vgV77GgiDPNvVZeEoKjCFVLrZBn%2Fs5pGa%2BQsaZG8fliaBZ5LWH1gmG1Mc9upzkQYNQePUdAM051Pko17Qj0YA1hYk6npOluy%2FTH9KnGBbPHB7PJUTKeFbzNUf%2FdjCMifTPeJ39hymE1sj3jGcJ%2BhYj6Gwc2GGCylx3LLswRc%2BJ4p50xipvBgFKzellV6i13j91wCSQnbkiaQ70%2F7eP65sNWG29wJgPU9x2kZsPSTZFYe1eJ5nF4J%2F08sSJ0qroXQRzMDhQ0Z5NcbsWENLvCEStZjdG53XVk8XwxUA%3D%3D--gmLjsOwIyHJnHGSG--43Dwv288lzuRLyUKmpYZTg%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - a00d80e6-cec6-40f4-9ec8-04f95c7799fa
+      - 5a2cdf24-86fe-4635-9e16-4b96357623ea
       X-Runtime:
-      - '0.036238'
+      - '0.128534'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f> <http://purl.org/dc/terms/title> "The complete effects of Delirium Tremens on dogs";
-          <http://pcdm.org/models#hasMember> "http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee",
-            "http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144";
-          <http://prismstandard.org/namespaces/basic/3.0/doi> "doi:bogus-2020-03-05T20:03:56.736Z";
-          <http://purl.org/dc/elements/1.1/contributor> "Phillip D. Bagg , Phillip D. Bagg , Howard I. No , Earl E. Byrd";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874> <http://purl.org/dc/terms/title> "The complete effects of Double Bastard Ale on dogs";
+          <http://pcdm.org/models#hasMember> "http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909",
+            "http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d";
+          <http://prismstandard.org/namespaces/basic/3.0/doi> "doi:bogus-2020-03-11T19:54:38.753Z";
+          <http://purl.org/dc/elements/1.1/contributor> "Frank N. Sense , Frank N. Sense , Therese R. Green , Sawyer B. Hind";
+          <http://purl.org/dc/elements/1.1/rights> "Share my stuff with everybody";
           <http://purl.org/dc/elements/1.1/subject> "Dog , Mondo";
           <http://purl.org/dc/terms/alternative> "A full, holistic, dog-tastic approach";
-          <http://purl.org/dc/terms/created> "2011-06-02 20:03:56 UTC";
-          <http://purl.org/dc/terms/description> "Tempore inventore quos magni et harum expedita consequatur voluptatum minima et est blanditiis ipsam odio sit nulla dolores similique dolores";
+          <http://purl.org/dc/terms/created> "1988-07-21 19:54:38 UTC";
+          <http://purl.org/dc/terms/description> "Culpa nobis aut sit quia atque iure et ratione cupiditate velit dolorum voluptatem repudiandae omnis suscipit ipsum voluptas vel laborum";
           <http://purl.org/dc/terms/isVersionOf> "The CDROM titled 'Dogs!' , The original laserdisc series from Orange-on-a-Blue-Background studios";
           <http://purl.org/dc/terms/language> "http://id.loc.gov/vocabulary/iso639-2/eng , http://terms.library.ualberta.ca/other";
-          <http://purl.org/dc/terms/license> "http://creativecommons.org/licenses/by/4.0/";
           <http://purl.org/dc/terms/relation> "http://www.example.com/dog";
           <http://purl.org/dc/terms/source> "Chapter 5 of 'Dogs and what they drink'";
           <http://purl.org/dc/terms/spatial> "Vegreville";
           <http://purl.org/dc/terms/temporal> "1980s";
           <http://purl.org/dc/terms/type> "http://purl.org/ontology/bibo/Article";
-          <http://purl.org/ontology/bibo/authorList> "Millie Birman , Millie Birman , Tiger Oriental-Longhair , Oliver Havana-Brown , Poppy Thai";
+          <http://purl.org/ontology/bibo/authorList> "Oliver Colorpoint-Shorthair , Oliver Colorpoint-Shorthair , Poppy Somali , Lucky Korat , Oscar American-Shorthair";
           <http://purl.org/ontology/bibo/owner> "admin@ualberta.ca";
           <http://purl.org/ontology/bibo/status> "http://purl.org/ontology/bibo/status#draft , http://vivoweb.org/ontology/core#submitted";
-          <http://terms.library.ualberta.ca/path> "45243a6b-39c2-405c-b150-6b98336f1dac/d1d1296c-ade3-4d90-b7f3-a8f19115f8c3 , 45243a6b-39c2-405c-b150-6b98336f1dac/994c2cf2-9195-4888-a686-80149b9c0055";
-          <http://terms.library.ualberta.ca/sortYear> "2011" .
+          <http://terms.library.ualberta.ca/path> "540c9fac-d555-4182-8c4e-39a8da9d98c7/7b7c0716-8d49-4b8b-9f50-0b33fc1d8b39 , 540c9fac-d555-4182-8c4e-39a8da9d98c7/18050c1f-b9ae-4b7a-8f31-b693f64eb9a4";
+          <http://terms.library.ualberta.ca/sortYear> "1988" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=DuHhypHWChiEwF4%2Beq7HC1CWNgeEbUbLg2mD%2BDYP16ygkm7WV3Vxd3iuPAlefxUIRkY2s8T2KIivPBD0MDqRzfVP3tg00U1p1IbgG6uapgfLqVUNh7vbhYXW19nPaMp3Qvod3k0%2B%2FZG9ZDmP9bZsxWSq61u%2BStZzq%2BJbkkCRJbXk9YPjFsB1YKUZb5tjArJovYNode%2F3VJF1WQHuNkE96MbmKNvTdG51phJefp%2BNmSW3mQZa0ZRdILnmZeYPrZBUAhOnxnj9w2iXqko9xC0p1JvKcZRympSAT9t3NFShL6%2BBpDNijV4Hw6B%2BYH%2Bs5IVeajKx%2F3ms3FLap1n%2BU13EmA%3D%3D--C2ZbAcyDzDdISUSy--S2rfFSuXNWMrfe4wsZNlTQ%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -166,16 +168,16 @@ http_interactions:
       Content-Type:
       - application/xml; charset=utf-8
       Etag:
-      - W/"9e7709da7dad13a857e03160c3e4dac9"
+      - W/"68aa8a97629e8f7f1f2c7c732cca925b"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=COrpMMtim1K%2BV1X0m6m%2FnpyaBVDki3GYFHsshqlKlJy%2BaIVzOkmj6%2FtcqAMLyIja273vycIrlAz4ti0RB3RQl7Bsh7tbqKKFwjc%2FsT2Y2C7pfHH6m%2B4ppljKfPMuaMOmfrCnpMxo1Vmn9tkNBtlSHRL0tXjxpyaT%2FSxh1PWp3LYuAoscK9bSNLJKgidxNeSfzZ5LRDejxTFewAXnMc1NPSA0p0Fpd4t1o8p%2FX6PxbcVDCogVp23hIo6jeLg78nKY%2Fpv%2Fo%2BleCaL4lQIK7RDI4N6WD8BaGpEo%2Fa0zZTnl8rFb1KqktJ6l3ASKa0dOq5is%2Bl52WD8NqEIU2tO%2BF4j%2F6K%2BgEcqIWvSnDhMkuA%3D%3D--duIw4qR5g48wgr4K--A4sGJSiiI%2FNEsWJz%2FDOMfA%3D%3D;
+      - _jupiter_session=VJJBCW0qW2SpGqQlnMgQSeGdl%2F%2Fgm%2FNOUYy%2BySh9h5xQND5X3IWOkyWZYz%2BX2w%2FNWySCgqy2UpzA0Ui2ynwMDgubJ7ioGQhjTgfvwDjPjwn9YI6dryKQPXob%2FEUVguUobcLF3fkbDHcn1eMrPsPpon3UTKCoVO8lCiqorpKzOT7FMhq6uvo9ivEZqW9GOK1oP0nyRIWPUJe7PNXOJkp2nkS8s5w7Fli7%2BdluoiPdqZjJNy1ID4x4Rx6%2BlGoh27v65ZriKJzMUJ6jmocVS%2FRBHfC1PPN28m6IUktcITKUUR31K3cmLHvokWDvkt5ztRLmsVnGsMPmZa81PSnsRTXGbYHqlGKnn8NcSodCow%3D%3D--vHx0PC1LXWlFJ4xp--u1SjxM8vuRKmlzWGIvvHCw%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 1b3fafd7-7fcc-4d9f-b803-0b8cd911da5c
+      - aff6b546-486e-463e-bbc5-2a3230e70e41
       X-Runtime:
-      - '0.012330'
+      - '0.015560'
       Transfer-Encoding:
       - chunked
     body:
@@ -183,26 +185,27 @@ http_interactions:
       string: |
         <?xml version="1.0"?>
         <file_order>
-          <uuid>42ee7a98-a26c-49a7-806a-751e2e4aebee</uuid>
-          <uuid>d56f21a2-cb55-4bdd-8f3d-874b44e1c144</uuid>
+          <uuid>457e230d-8e34-4016-8987-08c3ab95460d</uuid>
+          <uuid>52e24eae-6d74-4891-b1f0-ab7e57b43909</uuid>
         </file_order>
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/file_paths
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/file_paths
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=COrpMMtim1K%2BV1X0m6m%2FnpyaBVDki3GYFHsshqlKlJy%2BaIVzOkmj6%2FtcqAMLyIja273vycIrlAz4ti0RB3RQl7Bsh7tbqKKFwjc%2FsT2Y2C7pfHH6m%2B4ppljKfPMuaMOmfrCnpMxo1Vmn9tkNBtlSHRL0tXjxpyaT%2FSxh1PWp3LYuAoscK9bSNLJKgidxNeSfzZ5LRDejxTFewAXnMc1NPSA0p0Fpd4t1o8p%2FX6PxbcVDCogVp23hIo6jeLg78nKY%2Fpv%2Fo%2BleCaL4lQIK7RDI4N6WD8BaGpEo%2Fa0zZTnl8rFb1KqktJ6l3ASKa0dOq5is%2Bl52WD8NqEIU2tO%2BF4j%2F6K%2BgEcqIWvSnDhMkuA%3D%3D--duIw4qR5g48wgr4K--A4sGJSiiI%2FNEsWJz%2FDOMfA%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -223,38 +226,39 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"ae267ec6cc9deed9e8e84872f76040c3"
+      - W/"7ea3984e0b0cd24e0c5766593a8aa2a9"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=8FfaQ0JZMjT5J6khr3yuLg2dN0Wwrw5Vtt0xNvrsPey%2F0oMu6h%2BLie9Hxrg%2FXMmK9z5USBcpN9XXNVx055cmJDlK%2BB%2BtmgTkAJ0cG6I8MbsoZJ2hWFgY0KxSsCDtxsMtD0rJiHO%2B0uq3kF9nMhVTVe%2FGDgeTY%2Bmsg03vSxLNMVZLywDK6vlLmGvsh8x7arQ7Xfjqzv%2FTbW%2FOuv7tDdVKbSheiDl2Feqd4zVdR1wugYghgU%2BmyDMTuc2o%2BxfPsPp2DCR39mWmzU7UYilIsInVKHonNVGPbPXym5mS3%2F7L9TDlXxzV39xouipFqNktKOpT6Rhwu1qo4jLfGL%2FFQA4wMHPqT2H4r%2B%2FUm17ns5CfMvM%3D--wXCDPmBbzUE6bgvE--%2BY7ZHbjo9cdEtEUr9nLamQ%3D%3D;
+      - _jupiter_session=E%2BXKeJ6bHBf%2FX%2FoJvjk6qTavKKp6D1E6ESMd9JMcnROeCAlbcmNeRKV5ZgDYkBy50hlHrIh5TRB6j5roGbvB9REAEs3%2FBWOVmdT3wyq15gdpk79dCrb60oA47wju8NxBc5w91Yy3fgPVLqyJa%2BC97faAoOIC%2Fm8CjtpF%2FAR6cLNraZxSh3TM8GhCKgccbjIkokyzUpzOODn0R9FL9IluNAAt1uAgO0pyM4dA9eKzC7odD16e6XGnQErI1uJVYwcg3oJ%2BkuhVtuN4sQg1DmmDawdAv6t5qh%2FdulPFI%2BHm06u9IrNSs%2BOZOUnZJXlyT3%2BQSTCnc45t%2Bg0VF3m8qAUEWV%2FE3ot5%2BXt5A6VyDphIo%2FA%3D--MbGAWvHOd5CujLpT--p2dhb1lO%2FSz8vjffLZl5VA%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 98f711cb-4f30-458e-9358-f173a45c18a5
+      - 10af6f3a-ff70-40fb-88c9-362feb98ca2f
       X-Runtime:
-      - '0.020278'
+      - '0.027413'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"files":[{"file_name":"image-sample.jpeg","file_path":"<%= file_path_1 %>","file_uuid":"42ee7a98-a26c-49a7-806a-751e2e4aebee","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"theses.jpg","file_path":"<%= file_path_2 %>","file_uuid":"d56f21a2-cb55-4bdd-8f3d-874b44e1c144","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
+      string: '{"files":[{"file_name":"theses.jpg","file_path":"/home/orodrigu/Workspace/jupiter/storage/v8/8i/v88i7zi3hdjit0hqx6llk8i35fvr","file_uuid":"457e230d-8e34-4016-8987-08c3ab95460d","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"image-sample.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/uq/46/uq46rgq57a48jwc3u4gle0zqede6","file_uuid":"52e24eae-6d74-4891-b1f0-ab7e57b43909","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee/fixity
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d/fixity
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=8FfaQ0JZMjT5J6khr3yuLg2dN0Wwrw5Vtt0xNvrsPey%2F0oMu6h%2BLie9Hxrg%2FXMmK9z5USBcpN9XXNVx055cmJDlK%2BB%2BtmgTkAJ0cG6I8MbsoZJ2hWFgY0KxSsCDtxsMtD0rJiHO%2B0uq3kF9nMhVTVe%2FGDgeTY%2Bmsg03vSxLNMVZLywDK6vlLmGvsh8x7arQ7Xfjqzv%2FTbW%2FOuv7tDdVKbSheiDl2Feqd4zVdR1wugYghgU%2BmyDMTuc2o%2BxfPsPp2DCR39mWmzU7UYilIsInVKHonNVGPbPXym5mS3%2F7L9TDlXxzV39xouipFqNktKOpT6Rhwu1qo4jLfGL%2FFQA4wMHPqT2H4r%2B%2FUm17ns5CfMvM%3D--wXCDPmBbzUE6bgvE--%2BY7ZHbjo9cdEtEUr9nLamQ%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -275,44 +279,45 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"06fd278d48091feb57df993e6267f324"
+      - W/"2a3b430c61f151be0d4d89696458b19f"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=ISn1adJpooXGh3EBY0ti4x%2Bpys%2FhrK3jnXRmua%2F1skaBPiO0i7ednPCinROO1eiJoz2SNlay0%2FclEOrquHlYgqDW4dPQAImEtemNEAW8%2FGDFG3LxLcn3tTI%2F%2F0LUehhMLmtCUc5m3dBJef9mNmy%2Fm1ZDvwi36KtAIxJvyE6yvzSU%2FFLmt%2BBeD5s4VqTrkttLtJfZtopjyILehhMndANGML2tABti8YfNd5rhcPfMpOkaUhOAZgP5lYbb8JKCe3Utd7rhdTSmi57gNUBbIYBQyP2sRzTj%2FYjckZ8Dlbxp0TTc%2B%2FluzU5xKqqyouUfTiQI2kmW%2B6lMs8t8X1KOh%2FcXS2iLMHy8UKHe7UT3TDTSzmms%2F5qgHxUJScEaIH69e97fH3%2FWVK%2FnCKSgRlmfMcemSjAhbnNnYRzRm5S%2BQ1dApGdUuBN62nCt8w%3D%3D--SpH20nLnqST7ei0R--0z4VscgYSvE7luEADvYzBg%3D%3D;
+      - _jupiter_session=AzWR49YNN7mbJYpEYltsz8rBQxrCjkaH0x0L%2BVqsETGeWnmYUKagbAr9G9AG1BIRDq1MB368t9%2FdlRfMoZP0iesTgusfzptMTMBaJY06TWmY67j3BQREPBmT%2FX1UMVQrQZVEAJcBIEBUjkNAqVCo9pjQpMQrW3DabV%2Fox7ZNECLdPj1H%2BpUNqQp4At1H3uP%2B40G4%2FTEtU5yheqV5fAfZRzKZwVJQqDngbSJnNVaQrMt6gsUPGFrXt3pYEnkU6%2B1EQMQ7qY%2BNBnDBRKWerkHoRxcz6BrLCslPpkAJKWORzxNVn%2FYSmktxvcU%2BxrRe1wDcXQpQIZcCNhKZAiDyln3dqVc%2BWgByYlDoZK1YBHYKQaop0PncBl%2FO%2FbL40XoMFK6%2FVvhdAQUz5hIQXER8doweHZJCB9TvtwQOfKnYsaPnB85Vpx4OzDgYrA%3D%3D--qN3CmnayLFgoDjk2--rTjgKjok9jDhnZtF31EM5A%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 51d3cd8a-250a-4384-b652-feb9c5169daa
+      - 4c2649c4-4dae-4ae8-92a1-647b7998dda2
       X-Runtime:
-      - '0.035200'
+      - '0.025714'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee> <http://www.loc.gov/premis/rdf/v1#hasEventOutcome> "SUCCESS";
-          <http://www.loc.gov/premis/rdf/v1#hasFixity> "http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee/fixity";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d> <http://www.loc.gov/premis/rdf/v1#hasEventOutcome> "SUCCESS";
+          <http://www.loc.gov/premis/rdf/v1#hasFixity> "http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d/fixity";
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "pP2y2Xx03crtG2ZLyNOvBQ==";
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigestAlgorithm> "md5";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "51959" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee/original_file
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d/original_file
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=ISn1adJpooXGh3EBY0ti4x%2Bpys%2FhrK3jnXRmua%2F1skaBPiO0i7ednPCinROO1eiJoz2SNlay0%2FclEOrquHlYgqDW4dPQAImEtemNEAW8%2FGDFG3LxLcn3tTI%2F%2F0LUehhMLmtCUc5m3dBJef9mNmy%2Fm1ZDvwi36KtAIxJvyE6yvzSU%2FFLmt%2BBeD5s4VqTrkttLtJfZtopjyILehhMndANGML2tABti8YfNd5rhcPfMpOkaUhOAZgP5lYbb8JKCe3Utd7rhdTSmi57gNUBbIYBQyP2sRzTj%2FYjckZ8Dlbxp0TTc%2B%2FluzU5xKqqyouUfTiQI2kmW%2B6lMs8t8X1KOh%2FcXS2iLMHy8UKHe7UT3TDTSzmms%2F5qgHxUJScEaIH69e97fH3%2FWVK%2FnCKSgRlmfMcemSjAhbnNnYRzRm5S%2BQ1dApGdUuBN62nCt8w%3D%3D--SpH20nLnqST7ei0R--0z4VscgYSvE7luEADvYzBg%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -333,43 +338,44 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"abc5f0700acc2d878a92e0da80a6aaf4"
+      - W/"d5a8ffc46b0363128ed09d5796324177"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=vyc68KFr0I5iBspjZ12NQkY7bKg1Bf7lQG1moIOkoOTWTuBCrBswF1etk4QMRLCq0C20fVWActBw%2F4uv7CasnuaAfAEkS8Tb3A9UoxKW8CYud68dWu7SNWkOzBLYc8qCNUmRq29bTIPZ%2FrZHe%2BTEXX0iVVKaI4j%2BbMrZZDu%2FnQsgzLVYYqfejzhuC57w2AhB7%2BouyJGzi1KBgGqYTmG7gZflJFZRdRxoANFKTnmVtIAyB3iz2qW%2FNijPs8BLWJwX4DTeWZ1mAmI%2Bzlf7Z9t%2BW2%2BSHD8jNaK6Nefl2LAYn0%2BotZR2I3G8xT%2BFm71kUGl1HLqvd%2BkJkaNOFi746q4PH4FMoOr6qBOBdqBBABpwFyv7hw66mFrRpSSLV%2FBo0LjnVW5dN7hOwufjHXZ8%2B8rfIWlSE7SPmxkUHBFqeDTdd2Z5ImpRGZIolza6bxRvH4Aw--hB6%2FPG7Ucp1qDimg--Ze7SJXif1DjIWLnNCIPT1w%3D%3D;
+      - _jupiter_session=CtpagLzNisMJkPKzMYkHc0hN4QjkvWYbCNE54AyAXK81qfxmEfeQNKo6Jwrya0gJYBRU8ZezZugCndsLUqFM%2Bh8zuX%2FKq1ehhOzWNR4%2B4HxlzQswRQcTmZe707mqG9uUycjstmAjk%2BZ95JGf8TSO2J8YgrPY8LZ5JzAIAccOrsGbakz3iCCIdEB9XQp8bHYaIIjBbDntk4y8jFXY8V%2FaDZYWQ%2B9LDiEPf2GShlX6lw4tbn%2FiiJQ2TS3X72QovViA7U28%2F5PSOeuUJMNVbKGwrdmYw45j%2BYT0FsKnmFiYSXJLyQq4iytKeJh%2B5N9Yjuv5QpYdYQftACizmOuuAeNAn1auyCR40X8AObVIKMp0PHJUQfB9gSXnUlnfr2UCEjK5fA7DNG017aRMGJTZc11dF9NczpNNL%2BvVS4KwF6WTD1v9G11mRXztpOI39TtpxOr0--KVEIS53el60lxImI--uCt1fifa4PDlTJqqRHEHqQ%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - bd17b408-4949-44ce-a0b9-f41347305fad
+      - 22eeab01-bfa9-4080-a99f-8cfb68de9fe8
       X-Runtime:
-      - '0.023194'
+      - '0.033081'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee/original_file> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "theses.jpg";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d/original_file> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "theses.jpg";
           <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg";
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "pP2y2Xx03crtG2ZLyNOvBQ==";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "51959" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=vyc68KFr0I5iBspjZ12NQkY7bKg1Bf7lQG1moIOkoOTWTuBCrBswF1etk4QMRLCq0C20fVWActBw%2F4uv7CasnuaAfAEkS8Tb3A9UoxKW8CYud68dWu7SNWkOzBLYc8qCNUmRq29bTIPZ%2FrZHe%2BTEXX0iVVKaI4j%2BbMrZZDu%2FnQsgzLVYYqfejzhuC57w2AhB7%2BouyJGzi1KBgGqYTmG7gZflJFZRdRxoANFKTnmVtIAyB3iz2qW%2FNijPs8BLWJwX4DTeWZ1mAmI%2Bzlf7Z9t%2BW2%2BSHD8jNaK6Nefl2LAYn0%2BotZR2I3G8xT%2BFm71kUGl1HLqvd%2BkJkaNOFi746q4PH4FMoOr6qBOBdqBBABpwFyv7hw66mFrRpSSLV%2FBo0LjnVW5dN7hOwufjHXZ8%2B8rfIWlSE7SPmxkUHBFqeDTdd2Z5ImpRGZIolza6bxRvH4Aw--hB6%2FPG7Ucp1qDimg--Ze7SJXif1DjIWLnNCIPT1w%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -390,41 +396,42 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"cc1b098357abc49027f83dcfcb8f16f4"
+      - W/"443e37909f970eafa41c50718970c430"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=Td61TdtfTGzGi7gxdk8GdjapnzoyvN%2FTMR3R4gIsptnQQXiIu5xF3n6OX9ciQ53fNQmBTnCVGk1WqjOBW2%2BkDjuOXUj4mRAcT34SIbrPgtlIW3VT31PN5MWe2NzqLcgthZ4shR22qI97960mH7DhrF%2Fw5%2FVtSZirCKP2o4oyVEfgT6zRHY63AN2%2FAGvsKzkRQ48PqiUCsLolK2S5e7xnhSZrzlIEqBrJ%2FYhNtWZ%2Fn%2FjK1UOffr%2Ba89zuY33UhkrSVtxDBNNSwnKgmmSMybSzGZahNn6mj580ke8GnSkGcojhL5xKiaa7ns3g7EQqVuNvu%2F5uiwVFzqJof9WVhiEy0wupXCf30%2B0l6vXD45H8g5mPA5XPN1VPrgiRbvBl9bPcU3laSReV1VM8tHKOtmop6HboMOvkZXY41zJhFTLQvH8%3D--X2SbkPKFRv7rzz%2F0--Ffsyne%2FTI2srlKZMomj%2FUg%3D%3D;
+      - _jupiter_session=klzPo7IBViRTWwjmDartf7vYzi2XpXlssxEJ0Yj9as0k6Yw4nvOfNvMWR%2BhfnhDPbrY8R0MYLkqVj1ZkGHhbHFumRBQ60gX9jSqNbcCiff9Mg0vTslrNQYWTFTHHRDkc0QfpoQMsIjxdP6CnBlZNwGGA45kVH2mWc63JfvigRVC3%2BAAo%2BG7%2BGrjzan9NmnlnDaxsrsYYKCV%2FQ4%2FPaUH1eIPqhkZ%2B6FJ352isfcRZtKY2TQamWXB4BTdNjb9avmkYdlUUKDGWlNl8m8mM9fwVd6TPS3ocUtg3xGzHOqeUX9FIZpTJm%2BN5EBdS9i9y%2BaanJx8pjvPGSBJ1ISodl76gQoKc7A%2FDnjtqcPhJdw75p8c3L5xmN33PmNocGMAu2BgbYKJ7znQ15P%2FLsExe8SOBSzpp5b%2F0vmu9UemtwICaeVc%3D--DJdMkEfRZnEGqOA5--iWXJ5sBRj2bwJsSddh7Jow%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - f16854e7-cd8c-488d-91eb-0236973c259e
+      - 194bbe52-5dbf-40ca-9778-6bf6bd1bc9fe
       X-Runtime:
-      - '0.019661'
+      - '0.033520'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/42ee7a98-a26c-49a7-806a-751e2e4aebee> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "theses.jpg";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/457e230d-8e34-4016-8987-08c3ab95460d> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "theses.jpg";
           <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144/fixity
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909/fixity
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=Td61TdtfTGzGi7gxdk8GdjapnzoyvN%2FTMR3R4gIsptnQQXiIu5xF3n6OX9ciQ53fNQmBTnCVGk1WqjOBW2%2BkDjuOXUj4mRAcT34SIbrPgtlIW3VT31PN5MWe2NzqLcgthZ4shR22qI97960mH7DhrF%2Fw5%2FVtSZirCKP2o4oyVEfgT6zRHY63AN2%2FAGvsKzkRQ48PqiUCsLolK2S5e7xnhSZrzlIEqBrJ%2FYhNtWZ%2Fn%2FjK1UOffr%2Ba89zuY33UhkrSVtxDBNNSwnKgmmSMybSzGZahNn6mj580ke8GnSkGcojhL5xKiaa7ns3g7EQqVuNvu%2F5uiwVFzqJof9WVhiEy0wupXCf30%2B0l6vXD45H8g5mPA5XPN1VPrgiRbvBl9bPcU3laSReV1VM8tHKOtmop6HboMOvkZXY41zJhFTLQvH8%3D--X2SbkPKFRv7rzz%2F0--Ffsyne%2FTI2srlKZMomj%2FUg%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -445,44 +452,45 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"a36a23588d89438756c94c1cc2fdf9db"
+      - W/"b28b140facc8c1d7207771617a6bf163"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=G5%2FRGpwOkf%2BtadZIz%2FmarRC17RS6EvD6buOXuccCkmYXjwKUs1CnM7OUjaDc8OrEj5HO3A2VWMztCsbHDl4oQDlFwUVYs489MNOR1UaZNEKnrfMcn8Ag2%2BSDGv3gwSQ3Q3Dxs0jo3q4QsAdsLbPATY5wYfToIpXWU%2FE%2BYYmDXGzCG3IGdeUygN7PgWt0fgWVdNjWVFAGACTRrpJdN6ddEcDkuEjcHtGt3L8AwPVMvJre6xSD4OdGrIBXkbsjRRt2L7c39rWcYTkTsaxZlFxfcRrI%2BOjFCSc6wLzfyMWixovEXCLqIcnvxOxpPKPeLiOMb5QhwZC%2F4BKxAPWFZU8mFJ0UoC4HtSE5%2Bh%2FvLbT9Z0fQ4h6CsI6FdR5P0rkudAGRlak2%2BiCs0Lh%2Fu0TbfIg%2BLSaGSSRVH1rIjbKRVodmGd1uaQ4useKZFA%3D%3D--WiDB3UuUUaGSRmhM--rNwa%2FCh3SpdEX0jgPHPrSw%3D%3D;
+      - _jupiter_session=qHWSgCE1CzQr%2FtcDROtnE1covBW%2BBwtBuqCG%2FYCm7J7Md04tYiVXtUYI9ORkJ6wZL6pnJpbm3p8BXP71G0QDFBn7k1kN2i4zVx5iJRPuPUgXI5U1L283U3DtcS5NEyqw1zCQezIVrxZexg%2F46U5uTKAjVNB3yzNLz5CNGuWrGzDMR0YShqmnKCxmPDcM2RtqvQsRQhT45dcRVz2AKE2QgGj3KfZO8U38xPRLdtgbhlD4dIGiTU19auy%2F3W9fi8wMMDkHdwEfAKpxVO8E7asDX1A9LFI%2BSxlsAj9uID4yKl%2FWGePGsY88kRyTTs%2FMU%2BzrTFpseKGCpzgQnZdZh8tNlTjvqq923QFBR6wULAJbFVtBvHtBoCvDyzqcli8%2B2WlojuLPYXRp6OZSPkDOuVgpPumkOK2VS9pNLzdHknim2VKi3sMVvMuyqQ%3D%3D--jIrTWBltlwgNLcl5--Omuw2TZIIKhE7ljMM6HgTw%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 7bf6fef9-e2ae-4094-9be1-28c4697131cf
+      - 0ca58802-0035-45f7-8692-7973be55687d
       X-Runtime:
-      - '0.017613'
+      - '0.025008'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144> <http://www.loc.gov/premis/rdf/v1#hasEventOutcome> "SUCCESS";
-          <http://www.loc.gov/premis/rdf/v1#hasFixity> "http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144/fixity";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909> <http://www.loc.gov/premis/rdf/v1#hasEventOutcome> "SUCCESS";
+          <http://www.loc.gov/premis/rdf/v1#hasFixity> "http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909/fixity";
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "GxpIjJsC4KnRoBKNjWnkJA==";
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigestAlgorithm> "md5";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "12086" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144/original_file
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909/original_file
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=G5%2FRGpwOkf%2BtadZIz%2FmarRC17RS6EvD6buOXuccCkmYXjwKUs1CnM7OUjaDc8OrEj5HO3A2VWMztCsbHDl4oQDlFwUVYs489MNOR1UaZNEKnrfMcn8Ag2%2BSDGv3gwSQ3Q3Dxs0jo3q4QsAdsLbPATY5wYfToIpXWU%2FE%2BYYmDXGzCG3IGdeUygN7PgWt0fgWVdNjWVFAGACTRrpJdN6ddEcDkuEjcHtGt3L8AwPVMvJre6xSD4OdGrIBXkbsjRRt2L7c39rWcYTkTsaxZlFxfcRrI%2BOjFCSc6wLzfyMWixovEXCLqIcnvxOxpPKPeLiOMb5QhwZC%2F4BKxAPWFZU8mFJ0UoC4HtSE5%2Bh%2FvLbT9Z0fQ4h6CsI6FdR5P0rkudAGRlak2%2BiCs0Lh%2Fu0TbfIg%2BLSaGSSRVH1rIjbKRVodmGd1uaQ4useKZFA%3D%3D--WiDB3UuUUaGSRmhM--rNwa%2FCh3SpdEX0jgPHPrSw%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -503,43 +511,44 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"fc0a8d5ce598b09ef3a49c15110524e6"
+      - W/"a1cec166fbcf2fc880acfad351db1c5d"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=rlLI0I%2FFaxfWvtujOg8pCpsnf8xh%2F3Ni105decwTpxPRCu0u4qMVGIpKazLdmnhUQY1R7XayK4ortEdCt5O%2FitxVs2b5CJxRSezskLSZhD2SBArQKEswKvl1k77TqRG1Hksdo0guafnSjN29dlcmAl7u29yfzuU4QVIgAzNKRCscowcQ%2F%2BYcYX3tntGAEqrJkV9obwwWFoq3Lr1HQY9FYex1VxBWvGV1qx2Otew1xW86tNvZ%2BokAdrx2JfF%2Bgx5eUVFiRSwUkPuDSDUOWoSFGHl0p3dkjlGL5bu1M8d2B9LstaW3QNiobW%2FHmKZPP5Y3k2pKrVrJk1j2ze209OQSH8p9rJpAeHDd%2FEd4Dm4CdXVjR8mAZ5G0lP21FK%2BgEcilkWeI9Af6t6ovF8UXfgt8wFmJiSL5UECpXRfcuXS%2BoEFrq7tl2tufONX9xi9J5I%2F7--RXRRlVUCey5vnDDB--bshFBTOILNj6cnEVPD6vTA%3D%3D;
+      - _jupiter_session=Qf0LmHym4o9V%2FusItDRhqmB69%2FM0b8DktG2ikRMW9VeDDjfp8DkyJN7bwgyyWBBeDP0XMGBN2E21CNit6574ycA%2F%2B8kg3yWr%2BAzc20OpiqpZJ%2FeGYRvAFYKREQmAWC%2BmWn1DM0w9toagQtTKpNI0uyK%2FQES6WZEWNF1qbpkQGwdW5sFtM9Ou9pKU61qMV2xE0UHFZHKaRqA4%2BQdJD3X5baOHV4ARYVUS5aeDe2Ou8Ub8VT%2Fk8b%2Belm5DbbZDot%2FTya9NGOZyrRze7fBRSud05KpbYhbwxw4d7UAINddwFgXo3fs71Xq0E6gNmbPo4Bl%2F2zDe8kSeOfF53ILZSmx08rLWagwKUCzKeyiJHBgid4DT3JoHgg11Nf1L7%2BIj72trPXrf4jeQGGfKnhoQWSPyz15CYpsYBmZ%2BB%2F%2BwW4UeTxukt3QU%2FBudJnJva3oReRIQ--X0YF96Z3WxKQLYq8--tFI4keN9pGe4gXOoQ38TMg%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 37ef12b7-e151-407f-8c54-030f10ef7e70
+      - a25087af-d35a-4ff8-9aca-76958799b12f
       X-Runtime:
-      - '0.025352'
+      - '0.033627'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144/original_file> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "image-sample.jpeg";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909/original_file> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "image-sample.jpeg";
           <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg";
           <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "GxpIjJsC4KnRoBKNjWnkJA==";
           <http://www.loc.gov/premis/rdf/v1#hasSize> "12086" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:57 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144
+    uri: http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909
     body:
       encoding: US-ASCII
       string: ''
     headers:
-      User-Agent:
-      - Faraday v0.9.2
-      Cookie:
-      - _jupiter_session=rlLI0I%2FFaxfWvtujOg8pCpsnf8xh%2F3Ni105decwTpxPRCu0u4qMVGIpKazLdmnhUQY1R7XayK4ortEdCt5O%2FitxVs2b5CJxRSezskLSZhD2SBArQKEswKvl1k77TqRG1Hksdo0guafnSjN29dlcmAl7u29yfzuU4QVIgAzNKRCscowcQ%2F%2BYcYX3tntGAEqrJkV9obwwWFoq3Lr1HQY9FYex1VxBWvGV1qx2Otew1xW86tNvZ%2BokAdrx2JfF%2Bgx5eUVFiRSwUkPuDSDUOWoSFGHl0p3dkjlGL5bu1M8d2B9LstaW3QNiobW%2FHmKZPP5Y3k2pKrVrJk1j2ze209OQSH8p9rJpAeHDd%2FEd4Dm4CdXVjR8mAZ5G0lP21FK%2BgEcilkWeI9Af6t6ovF8UXfgt8wFmJiSL5UECpXRfcuXS%2BoEFrq7tl2tufONX9xi9J5I%2F7--RXRRlVUCey5vnDDB--bshFBTOILNj6cnEVPD6vTA%3D%3D
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
       - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=NgNQKZVdmO14oqANAtfwaTSJ1MOUjhpfQ%2BrPdXEg0PFlQQ7nb0Psvvlo7FZcZO2407k4p0zoZ%2B5c6lMxJEQkzq%2BNSNc%2FShB6jxC1GCyADciTxEluUkpKzXTGyEEg69%2BwRO8LkBsp4HIFyVsRYkW8gM4Uq6BpD2PW6qIFbmrwWgVT328mM5%2B6niMI5S3bc2I7zW%2FzHoUkWPw%3D--f%2FZlsn%2BQj%2BjMGug0--6V7InR2vG2ff4yYt446p3A%3D%3D;
+        path=/; HttpOnly
   response:
     status:
       code: 200
@@ -560,24 +569,24 @@ http_interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Etag:
-      - W/"39b6b5be8c80f5423593e15f71fc624b"
+      - W/"fc887128a9f6d7593963493412d8cd77"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Set-Cookie:
-      - _jupiter_session=GLuhZ7qSCSJFfC%2F%2BFjXJZQV47UEeQ34JYHJzKqloIxonxRI2Q2NPRve4jQbiTbUSP%2FkjzbBLiQokesqL498dYkyhGr8GzM97vy1MM7qaOd7SlwZZd5rSflemy%2BVDsBeP%2FqEPMVndYjsKGbUuDvsuwCw12r8JViLNlu3FyXTc4mr07cO1MA9AJUJv8vAHynfihRzDTB%2Be050vRl94cH2LZcDkcYC%2Bo%2F58HR0b3MJE3bSQ3Ts1L31HT%2BdVDwM7Yn%2Fgd5qJR2NdAGDa5TEfjP0J7QszBZiNl3vwZcqCILTPYRVrcQFfrbBxbd3eVXftzogM1TvMHneDlspZfyC29VAUYyB30QuuE2y8rX4RHX0tXBE74Q5pokdwzoXv9VF%2BopM3MrVGJGxbtWSQGGQksGEIRrNdnSashrMbmQKW40iFkrY%3D--%2FsjZ8gUTqFgpzD6E--jY26EoPyVGNpY1iNxWP%2Fcw%3D%3D;
+      - _jupiter_session=S6ShzAzha%2BYyxtz%2F%2BncZnuU6NYGtsGJNA%2BHVyT3VDX10GyRMEEINQhtZTHgkHeLWo%2FwHsR5ktoNOuC6aGPVfEqqxDsPL75%2B96KWj89I22RzSJ15TS%2F6bw0R7ePEhGnsqi%2F6KKZtmS6hXkPlRr%2BX7UV9UQgKl9jHZufDUQmHRU74bycZxxA7INVMwj1BTvUC5Yoy0mE2FE0EPxr%2F6ZSAxDhHVj77Q3O2QV1NIrV0tVwEFwdsK%2Bl%2BiceoTf0cKSCl3wZrdDgcuCdqSE%2BeZ6oEwWzpjxze5t6je0FJcKm7lGCdXHY4%2FQ0CoXFoEKJlrzgFS%2FLoymMR8K0rJNEg8C6VOEz3d6PjO2W17VcjUGxFfoz9Cnbbr%2BH8OrAk2EId1qQ9kKmrVS3mi%2FXqG1zobF2liBJ7Vy%2FWuOwIVhgRvtI2i7To%3D--q%2FFa%2B%2F0fS33PoDXN--p5kdz3vtYszIB0NkMtIV2A%3D%3D;
         path=/; HttpOnly
       X-Request-Id:
-      - 8b9dc9b9-d815-4bf1-8e84-ad3191df7beb
+      - 9970fad2-3fde-4146-a288-f08c36af1632
       X-Runtime:
-      - '0.026156'
+      - '0.029355'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: |2-
 
-        <http://localhost:3000/aip/v1/items/68df35e1-5f8f-40a4-bc98-bbd74019ea2f/filesets/d56f21a2-cb55-4bdd-8f3d-874b44e1c144> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "image-sample.jpeg";
+        <http://localhost:3000/aip/v1/items/f8887612-1b11-49e1-84ea-d65738fb6874/filesets/52e24eae-6d74-4891-b1f0-ab7e57b43909> <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#filename> "image-sample.jpeg";
           <http://www.ebu.ch/metadata/ontologies/ebucore/ebucore#hasMimeType> "image/jpeg" .
     http_version: null
-  recorded_at: Mon, 09 Mar 2020 19:26:03 GMT
+  recorded_at: Fri, 13 Mar 2020 18:44:58 GMT
 recorded_with: VCR 5.1.0

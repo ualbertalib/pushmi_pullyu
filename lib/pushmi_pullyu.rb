@@ -48,7 +48,7 @@ module PushmiPullyu
     },
     jupiter: {
       user: ENV['JUPITER_USER'],
-      pasword: ENV['JUPITER_PASSWORD'],
+      api_key: ENV['JUPITER_API_KEY'],
       jupiter_url: ENV['JUPITER_URL'] || 'http://localhost:3000/',
       aip_api_path: ENV['JUPITER_AIP_API_PATH'] || 'aip/v1'
     }

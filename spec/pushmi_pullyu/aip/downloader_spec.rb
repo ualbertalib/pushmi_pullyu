@@ -7,18 +7,18 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       workdir: workdir,
       jupiter: {
         user: 'ditech@ualberta.ca',
-        password: 'correct horse battery staple',
+        api_key: '3eeb395e-63b7-11ea-bc55-0242ac130003',
         jupiter_url: 'http://localhost:3000/',
         aip_api_path: 'aip/v1'
       }
     }
   end
-  let(:uuid) { '68df35e1-5f8f-40a4-bc98-bbd74019ea2f' }
+  let(:uuid) { 'f8887612-1b11-49e1-84ea-d65738fb6874' }
   let(:type) { 'items' }
   let(:entity_definition) { { uuid: uuid, type: type } }
   let(:file_set_uuids) do
-    ['d56f21a2-cb55-4bdd-8f3d-874b44e1c144',
-     '42ee7a98-a26c-49a7-806a-751e2e4aebee']
+    ['52e24eae-6d74-4891-b1f0-ab7e57b43909',
+     '457e230d-8e34-4016-8987-08c3ab95460d']
   end
   let(:aip_folder) { "#{workdir}/#{uuid}" }
   let(:downloader) { PushmiPullyu::AIP::Downloader.new(entity_definition, aip_folder) }
@@ -41,8 +41,8 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   end
   let(:files_copied) do
     [
-      "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[0]}/theses.jpg",
-      "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[1]}/image-sample.jpeg"
+      "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[0]}/image-sample.jpeg",
+      "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[1]}/theses.jpg"
     ]
   end
   let(:files_downloaded) do
