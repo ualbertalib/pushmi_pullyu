@@ -240,7 +240,7 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"files":[{"file_name":"theses.jpg","file_path":"/home/orodrigu/Workspace/jupiter/storage/v8/8i/v88i7zi3hdjit0hqx6llk8i35fvr","file_uuid":"457e230d-8e34-4016-8987-08c3ab95460d","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"image-sample.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/uq/46/uq46rgq57a48jwc3u4gle0zqede6","file_uuid":"52e24eae-6d74-4891-b1f0-ab7e57b43909","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
+      string: '{"files":[{"file_name":"theses.jpg","file_path":"<%= file_path_1 %>","file_uuid":"457e230d-8e34-4016-8987-08c3ab95460d","file_checksum":"pP2y2Xx03crtG2ZLyNOvBQ=="},{"file_name":"image-sample.jpeg","file_path":"<%= file_path_2 %>","file_uuid":"52e24eae-6d74-4891-b1f0-ab7e57b43909","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="}]}'
     http_version: null
   recorded_at: Mon, 16 Mar 2020 16:33:50 GMT
 - request:
