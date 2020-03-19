@@ -3,6 +3,7 @@ require 'ostruct'
 require 'rdf'
 require 'rdf/n3'
 require 'net/http'
+require 'uri'
 require 'digest'
 
 # Download all of the metadata/datastreams and associated data related to an object
@@ -18,6 +19,7 @@ class PushmiPullyu::AIP::Downloader
 
   class JupiterDownloadError < StandardError; end
   class JupiterCopyError < StandardError; end
+  class JupiterAuthenticationError < StandardError; end
 
   def initialize(entity, aip_directory)
     @entity = entity
@@ -27,6 +29,8 @@ class PushmiPullyu::AIP::Downloader
 
   def run
     PushmiPullyu.logger.info("#{@entity_identifier}: Retreiving data from Jupiter ...")
+
+    authenticate_http_calls
     make_directories
 
     # Main object metadata
@@ -76,23 +80,30 @@ class PushmiPullyu::AIP::Downloader
     local_md5.base64digest == remote_checksum
   end
 
-  def authenticate_and_request(url)
-    uri = URI(url)
-    request = Net::HTTP::Get.new(uri)
-    # TODO: This basic_auth call is just a placeholder to be replaced when a proper authentication mechanism is setup on
-    # jupiter https://github.com/ualbertalib/jupiter/pull/1370#issuecomment-561799351
-    request.basic_auth('admin', 'admin@ualberta.ca')
+  def authenticate_http_calls
+    @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
+    @http = Net::HTTP.new(@uri.host, @uri.port)
+    request = Net::HTTP::Post.new(@uri.request_uri + 'auth/system')
+    request.set_form_data(
+      email: PushmiPullyu.options[:jupiter][:user],
+      api_key: PushmiPullyu.options[:jupiter][:api_key]
+    )
+    response = @http.request(request)
+    # If we cannot find the set-cookie header then the session was not set
+    raise JupiterAuthenticationError if response.response['set-cookie'].nil?
 
-    Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(request)
-    end
+    @cookies = response.response['set-cookie']
   end
 
   def download_and_log(remote, local)
     log_downloading(remote, local)
 
-    response = authenticate_and_request(remote)
+    @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
+    request = Net::HTTP::Get.new(@uri.request_uri + remote)
+    # add previously stored cookies
+    request['Cookie'] = @cookies
 
+    response = @http.request(request)
     is_success = if response.is_a?(Net::HTTPSuccess)
                    File.open(local, 'wb') do |file|
                      file.write(response.body)
@@ -106,12 +117,17 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def get_file_paths(url)
-    response = authenticate_and_request(url)
+    request = Net::HTTP::Get.new(@uri.request_uri + url)
+    # add previously stored cookies
+    request['Cookie'] = @cookies
+
+    response = @http.request(request)
+
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def object_uri
-    aip_api_url = PushmiPullyu.options[:jupiter][:aip_api_url]
+    aip_api_url = PushmiPullyu.options[:jupiter][:aip_api_path]
     @object_uri ||= "#{aip_api_url}/#{@entity[:type]}/#{@entity[:uuid]}"
   end
 
