@@ -4,6 +4,7 @@ require 'optparse'
 require 'rollbar'
 require 'singleton'
 require 'yaml'
+require 'json'
 
 # CLI runner
 class PushmiPullyu::CLI
@@ -64,8 +65,8 @@ class PushmiPullyu::CLI
       # add a filter after Rollbar has built the error payload but before it is delivered to the API,
       # in order to strip sensitive information out of certain error messages
       exception_message_transformer = proc do |payload|
-        clean_message = payload[:exception][:message].sub(/http:\/\/.+:.+@(.+)\/fedora\/rest\/prod\/(.*)/,
-                                                          "http://\1/fedora/rest/prod/\2")
+        clean_message = payload[:exception][:message].sub(/http:\/\/.+:.+@(.+)\/aip\/v1\/(.*)/,
+                                                          "http://\1/aip/v1/\2")
         payload[:exception][:message] = clean_message
         payload[:message] = clean_message
       end
@@ -181,14 +182,19 @@ class PushmiPullyu::CLI
   end
 
   def run_preservation_cycle
-    item = queue.wait_next_item
-    return unless item.present?
+    entity_json = JSON.parse(queue.wait_next_item)
+    entity = {
+      type: entity_json['type'],
+      uuid: entity_json['uuid']
+    }
+    return unless entity[:type].present? && entity[:uuid].present?
 
     # add additional information about the error context to errors that occur while processing this item.
-    Rollbar.scoped(noid: item) do
+    Rollbar.scoped(entity_uuid: entity[:uuid]) do
       begin
-        # Download AIP from Fedora, bag and tar AIP directory and cleanup after block code
-        PushmiPullyu::AIP.create(item) do |aip_filename, aip_directory|
+        # Download AIP from Jupiter, bag and tar AIP directory and cleanup after
+        # block code
+        PushmiPullyu::AIP.create(entity) do |aip_filename, aip_directory|
           # Push tarred AIP to swift API
           deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
           # Log successful preservation event to the log files

@@ -5,10 +5,10 @@ require 'pushmi_pullyu/version'
 Gem::Specification.new do |spec|
   spec.name          = 'pushmi_pullyu'
   spec.version       = PushmiPullyu::VERSION
-  spec.authors       = ['Shane Murnaghan']
-  spec.email         = ['murnagha@ualberta.ca']
+  spec.authors       = ['Shane Murnaghan', 'Omar Rodriguez-Arenas']
+  spec.email         = ['murnagha@ualberta.ca', 'orodrigu@ualberta.ca']
 
-  spec.summary       = 'Ruby application to manage flow of content from Fedora into Swift for preservation'
+  spec.summary       = 'Ruby application to manage flow of content from Jupiter into Swift for preservation'
   spec.homepage      = 'https://github.com/ualbertalib/pushmi_pullyu'
   spec.license       = 'MIT'
 
@@ -21,7 +21,6 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.3.1'
 
-  spec.add_runtime_dependency 'activerecord', '>= 5.1.5', '< 5.3.0'
   spec.add_runtime_dependency 'activesupport', '~> 5.0'
   spec.add_runtime_dependency 'bagit', '~> 0.4'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
@@ -45,6 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.51'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.10'
   spec.add_development_dependency 'timecop', '~> 0.8'
+  spec.add_development_dependency 'uuid', '~> 2.3.9'
   spec.add_development_dependency 'vcr', '~> 5.0'
   spec.add_development_dependency 'webmock', '~> 3.3'
 end
