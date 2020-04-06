@@ -11,7 +11,7 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
   ExtraDetails: true
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
 
 # readability is Actually Good
 Layout/EmptyLinesAroundClassBody:
