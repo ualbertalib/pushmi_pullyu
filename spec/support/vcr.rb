@@ -8,9 +8,7 @@ require 'webmock/rspec'
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/support/http_cache/vcr'
   config.hook_into :webmock
-
-  # Only want VCR to intercept requests to external URLs.
-  config.ignore_localhost = true
+  config.ignore_localhost = false
 
   # Prevent vcr from returning text body as a base64 (e.g., when an umlaut is used)
   config.before_record do |i|

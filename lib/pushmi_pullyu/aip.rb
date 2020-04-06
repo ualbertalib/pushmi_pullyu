@@ -1,17 +1,20 @@
 require 'fileutils'
+require 'uuid'
 
 module PushmiPullyu::AIP
-  class NoidInvalid < StandardError; end
+  class EntityInvalid < StandardError; end
   module_function
 
-  def create(noid)
-    raise NoidInvalid if noid.blank? || noid.include?('/')
+  def create(entity)
+    raise EntityInvalid if entity.nil? ||
+                           UUID.validate(entity[:uuid]) != true ||
+                           entity[:type].blank?
 
-    aip_directory = "#{PushmiPullyu.options[:workdir]}/#{noid}"
+    aip_directory = "#{PushmiPullyu.options[:workdir]}/#{entity[:uuid]}"
     aip_filename = "#{aip_directory}.tar"
 
-    PushmiPullyu::AIP::Downloader.new(noid, aip_directory).run
-    PushmiPullyu::AIP::Creator.new(noid, aip_directory, aip_filename).run
+    PushmiPullyu::AIP::Downloader.new(entity, aip_directory).run
+    PushmiPullyu::AIP::Creator.new(entity[:uuid], aip_directory, aip_filename).run
 
     yield aip_filename, aip_directory
 

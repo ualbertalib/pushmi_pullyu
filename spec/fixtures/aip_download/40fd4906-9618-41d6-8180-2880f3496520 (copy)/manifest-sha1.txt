@@ -1,0 +1,11 @@
+6c94fddb53b4175b7ca79b7e99f336b9a80d10bc data/objects/files/3cbc75f9-7bad-4d62-962e-911f911bd70e/image-sample.jpeg
+3a3c5fedb33fdd688d0db48c2cb64866736738de data/objects/files/8cf761ce-5222-405a-aee1-f019f860e4ba/theses.jpg
+ca3673d63ea097461b567a6de4f7c67dd84df21f data/objects/metadata/files_metadata/file_order.xml
+99a3c2f0ad344ec0784738d4530b08eba9a9c6d2 data/objects/metadata/files_metadata/3cbc75f9-7bad-4d62-962e-911f911bd70e/file_set_metadata.n3
+e30725f6fc8d4b736f061ff4bf501d320bb014d2 data/objects/metadata/files_metadata/3cbc75f9-7bad-4d62-962e-911f911bd70e/original_file_metadata.n3
+cd54ae5cf0b425948a42f57e25a02ada6ceb806f data/objects/metadata/files_metadata/8cf761ce-5222-405a-aee1-f019f860e4ba/file_set_metadata.n3
+dacfb2493cc43d6171f9e6b40620dfff4c86149d data/objects/metadata/files_metadata/8cf761ce-5222-405a-aee1-f019f860e4ba/original_file_metadata.n3
+872c4fcae8a0f594765a20d61c99f1739dc0b549 data/objects/metadata/object_metadata.n3
+d1f129b68fe3445d1acb14337344d5e33d57a2e7 data/logs/aipcreation.log
+9004c767715910ba533fa2cb2ff5941244b5b284 data/logs/files_logs/3cbc75f9-7bad-4d62-962e-911f911bd70e/content_fixity_report.n3
+7755131588e2f1b1a6420df72c27d8d26fe39c31 data/logs/files_logs/8cf761ce-5222-405a-aee1-f019f860e4ba/content_fixity_report.n3

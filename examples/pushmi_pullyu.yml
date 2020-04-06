@@ -21,12 +21,6 @@ minimum_age: 0
 redis:
   url: redis://localhost:6379
 
-fedora:
-  url: http://localhost:8080/fcrepo/rest
-  user: fedoraAdmin
-  password: fedoraAdmin
-  base_path: /dev
-
 database:
   url: postgresql://jupiter:mysecretpassword@127.0.0.1/jupiter_development
 

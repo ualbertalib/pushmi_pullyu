@@ -1,0 +1,4 @@
+AIP-Version: lightaip-2.0
+Bag-Software-Agent: BagIt Ruby Gem (https://github.com/tipr/bagit)
+Bagging-Date: 2020-02-20
+Payload-Oxum: 74857.11
