@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe PushmiPullyu::AIP do
-  let(:noid) { '9p2909328' }
+  let(:uuid) { '46e32482-9bb0-4bcb-aef0-f87f574249c3' }
+  let(:type) { 'items' }
   let(:workdir) { 'tmp/aip_spec' }
-  let(:aip_folder) { "#{workdir}/#{noid}" }
+  let(:aip_folder) { "#{workdir}/#{uuid}" }
   let(:aip_file) { "#{aip_folder}.tar" }
 
   before do
@@ -11,9 +12,18 @@ RSpec.describe PushmiPullyu::AIP do
   end
 
   describe '.create' do
-    it 'validates the noid and raises exception if not valid' do
-      expect { PushmiPullyu::AIP.create('') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
-      expect { PushmiPullyu::AIP.create('9p29/9328') }.to raise_error(PushmiPullyu::AIP::NoidInvalid)
+    it 'validates the uuid and raises exception if not valid' do
+      expect do
+        PushmiPullyu::AIP.create(nil)
+      end.to raise_error(PushmiPullyu::AIP::EntityInvalid)
+
+      expect do
+        PushmiPullyu::AIP.create(uuid: '', type: type)
+      end.to raise_error(PushmiPullyu::AIP::EntityInvalid)
+
+      expect do
+        PushmiPullyu::AIP.create(uuid: uuid, type: '')
+      end.to raise_error(PushmiPullyu::AIP::EntityInvalid)
     end
 
     it 'calls aip downloader and creator class and cleans up aip folder and file' do
@@ -30,7 +40,7 @@ RSpec.describe PushmiPullyu::AIP do
       allow(PushmiPullyu::AIP::Downloader).to receive(:new).and_return(downloader)
       allow(downloader).to receive(:run)
 
-      PushmiPullyu::AIP.create(noid) do |filename|
+      PushmiPullyu::AIP.create(uuid: uuid, type: type) do |filename|
         expect(filename).to eq(aip_file)
       end
 

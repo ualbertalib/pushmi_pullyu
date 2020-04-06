@@ -2,9 +2,11 @@ require 'fileutils'
 require 'ostruct'
 require 'rdf'
 require 'rdf/n3'
+require 'net/http'
+require 'uri'
+require 'digest'
 
-# Download all of the metadata/datastreams and associated data
-# related to an object
+# Download all of the metadata/datastreams and associated data related to an object
 class PushmiPullyu::AIP::Downloader
 
   PREDICATE_URIS = {
@@ -15,248 +17,203 @@ class PushmiPullyu::AIP::Downloader
     type: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
   }.freeze
 
-  class NoFileSets < StandardError; end
-  class NoMemberFiles < StandardError; end
-  class NoContentFilename < StandardError; end
-  class NoOriginalFile < StandardError; end
+  class JupiterDownloadError < StandardError; end
+  class JupiterCopyError < StandardError; end
+  class JupiterAuthenticationError < StandardError; end
 
-  def initialize(noid, aip_directory)
-    @noid = noid
+  def initialize(entity, aip_directory)
+    @entity = entity
+    @entity_identifier = "[#{entity[:type]} - #{entity[:uuid]}]".freeze
     @aip_directory = aip_directory
   end
 
   def run
+    PushmiPullyu.logger.info("#{@entity_identifier}: Retreiving data from Jupiter ...")
+
+    authenticate_http_calls
     make_directories
 
-    PushmiPullyu.logger.info("#{@noid}: Retreiving data from Fedora ...")
-
     # Main object metadata
-    object_downloader = PushmiPullyu::AIP::FedoraFetcher.new(@noid)
-    download_and_log(object_aip_paths[:main_object], object_downloader)
+    download_and_log(object_aip_paths[:main_object_remote],
+                     object_aip_paths[:main_object_local])
+    download_and_log(object_aip_paths[:file_sets_remote],
+                     object_aip_paths[:file_sets_local])
 
-    # Construct the file ordering file
-    list_source_uri = object_downloader.object_url + object_aip_paths.list_source.remote
-    create_and_log_file_order_list(list_source_uri)
+    # Get file paths for processing
+    file_paths = get_file_paths(object_aip_paths[:file_paths_remote])
 
-    member_file_set_uuids.each do |file_set_uuid|
-      make_file_set_directories(file_set_uuid)
-
-      # FileSet metadata
-      file_set_downloader = PushmiPullyu::AIP::FedoraFetcher.new(file_set_uuid)
-      path_spec = file_set_aip_paths(file_set_uuid)[:main_object]
-      download_and_log(path_spec, file_set_downloader)
-
-      # Find the original file by looping through the files in the file_set
-      original_file_remote_base = nil
-      member_files(file_set_uuid).each do |file_path|
-        path_spec = OpenStruct.new(
-          remote: "/files/#{file_path}/fcr:metadata",
-          # Note: local file gets clobbered on each download until it finds the right one
-          local: "#{file_set_dirs(file_set_uuid).metadata}/original_file_metadata.n3",
-          optional: true
-        )
-        download_and_log(path_spec, file_set_downloader)
-        if original_file?(path_spec.local)
-          original_file_remote_base = "/files/#{file_path}"
-          break
-        end
-      end
-
-      raise NoOriginalFile unless original_file_remote_base.present?
-
-      [:content, :fixity].each do |item|
-        path_spec = file_aip_paths(file_set_uuid, original_file_remote_base)[item]
-        download_and_log(path_spec, file_set_downloader)
-      end
+    file_paths[:files].each do |file_path|
+      file_uuid = file_path[:file_uuid]
+      make_file_set_directories(file_uuid)
+      copy_and_log(file_uuid, file_path)
+      file_aip_path = file_aip_paths(file_uuid)
+      download_and_log(file_aip_path[:fixity_remote],
+                       file_aip_path[:fixity_local])
+      download_and_log(file_aip_path[:original_file_remote],
+                       file_aip_path[:original_file_local])
+      download_and_log(file_aip_path[:file_set_remote],
+                       file_aip_path[:file_set_local])
     end
   end
 
   private
 
-  def download_and_log(path_spec, fedora_fetcher)
-    output_file = path_spec.local
+  def copy_and_log(file_uuid, file_path)
+    remote = file_path[:file_path]
+    remote_checksum = file_path[:file_checksum]
+    files_path = file_set_dirs(file_uuid)[:files]
+    output_file = "#{files_path}/#{file_path[:file_name]}"
+    log_downloading(remote, output_file)
+    FileUtils.copy_file(remote, output_file)
 
-    log_fetching(fedora_fetcher.object_url(path_spec.remote), output_file)
+    is_success = File.exist?(output_file) &&
+                 File.size(remote) == File.size(output_file) &&
+                 compare_md5(output_file, remote_checksum)
 
-    is_rdf = (output_file =~ /\.n3$/)
-    should_add_user_email = path_spec.to_h.fetch(:should_add_user_email, false)
-
-    is_success = fedora_fetcher.download_object(output_file,
-                                                url_extra: path_spec.remote,
-                                                optional: path_spec.optional,
-                                                is_rdf: is_rdf,
-                                                should_add_user_email: should_add_user_email)
     log_saved(is_success, output_file)
+
+    raise JupiterCopyError unless is_success
   end
 
-  def create_and_log_file_order_list(url)
-    output_file = object_aip_paths.file_ordering.local
-    PushmiPullyu::Logging.log_aip_activity(@aip_directory,
-                                           "#{@noid}: #{output_file} -- creating from #{url} ...")
-    PushmiPullyu::AIP::FileListCreator.new(url, output_file, member_file_set_uuids).run
-    PushmiPullyu::Logging.log_aip_activity(@aip_directory,
-                                           "#{@noid}: #{output_file} -- created")
+  def compare_md5(local, remote_checksum)
+    local_md5 = Digest::MD5.file local
+    local_md5.base64digest == remote_checksum
+  end
+
+  def authenticate_http_calls
+    @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
+    @http = Net::HTTP.new(@uri.host, @uri.port)
+    request = Net::HTTP::Post.new(@uri.request_uri + 'auth/system')
+    request.set_form_data(
+      email: PushmiPullyu.options[:jupiter][:user],
+      api_key: PushmiPullyu.options[:jupiter][:api_key]
+    )
+    response = @http.request(request)
+    # If we cannot find the set-cookie header then the session was not set
+    raise JupiterAuthenticationError if response.response['set-cookie'].nil?
+
+    @cookies = response.response['set-cookie']
+  end
+
+  def download_and_log(remote, local)
+    log_downloading(remote, local)
+
+    @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
+    request = Net::HTTP::Get.new(@uri.request_uri + remote)
+    # add previously stored cookies
+    request['Cookie'] = @cookies
+
+    response = @http.request(request)
+    is_success = if response.is_a?(Net::HTTPSuccess)
+                   File.open(local, 'wb') do |file|
+                     file.write(response.body)
+                   end
+                   # Response was a success and the file was saved to local
+                   File.exist? local
+                 end
+
+    log_saved(is_success, local)
+    raise JupiterDownloadError unless is_success
+  end
+
+  def get_file_paths(url)
+    request = Net::HTTP::Get.new(@uri.request_uri + url)
+    # add previously stored cookies
+    request['Cookie'] = @cookies
+
+    response = @http.request(request)
+
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
+  def object_uri
+    aip_api_url = PushmiPullyu.options[:jupiter][:aip_api_path]
+    @object_uri ||= "#{aip_api_url}/#{@entity[:type]}/#{@entity[:uuid]}"
   end
 
   ### Logging
 
-  def log_fetching(url, output_file)
-    message = "#{@noid}: #{output_file} -- fetching from #{url} ..."
+  def log_downloading(url, output_file)
+    message = "#{@entity_identifier}: #{output_file} -- Downloading from #{url} ..."
     PushmiPullyu::Logging.log_aip_activity(@aip_directory, message)
   end
 
   def log_saved(is_success, output_file)
-    message = "#{@noid}: #{output_file} -- #{is_success ? 'saved' : 'not_found'}"
+    message = "#{@entity_identifier}: #{output_file} -- #{is_success ? 'Saved' : 'Failed'}"
     PushmiPullyu::Logging.log_aip_activity(@aip_directory, message)
   end
 
   ### Directories
 
   def aip_dirs
-    @aip_dirs ||= OpenStruct.new(
+    @aip_dirs ||= {
       objects: "#{@aip_directory}/data/objects",
       metadata: "#{@aip_directory}/data/objects/metadata",
       files: "#{@aip_directory}/data/objects/files",
       files_metadata: "#{@aip_directory}/data/objects/metadata/files_metadata",
       logs: "#{@aip_directory}/data/logs",
       file_logs: "#{@aip_directory}/data/logs/files_logs"
-    )
+    }
   end
 
   def file_set_dirs(file_set_uuid)
     @file_set_dirs ||= {}
-    @file_set_dirs[file_set_uuid] ||= OpenStruct.new(
-      metadata: "#{aip_dirs.files_metadata}/#{file_set_uuid}",
-      files: "#{aip_dirs.files}/#{file_set_uuid}",
-      logs: "#{aip_dirs.file_logs}/#{file_set_uuid}"
-    )
+    @file_set_dirs[file_set_uuid] ||= {
+      metadata: "#{aip_dirs[:files_metadata]}/#{file_set_uuid}",
+      files: "#{aip_dirs[:files]}/#{file_set_uuid}",
+      logs: "#{aip_dirs[:file_logs]}/#{file_set_uuid}"
+    }
   end
 
   def make_directories
+    PushmiPullyu.logger.debug("#{@entity_identifier}: Creating directories ...")
     clean_directories
-    PushmiPullyu.logger.debug("#{@noid}: Creating directories ...")
-    aip_dirs.to_h.each_value do |path|
+    aip_dirs.each_value do |path|
       FileUtils.mkdir_p(path)
     end
-    PushmiPullyu.logger.debug("#{@noid}: Creating directories done")
+    PushmiPullyu.logger.debug("#{@entity_identifier}: Creating directories done")
   end
 
   def make_file_set_directories(file_set_uuid)
-    PushmiPullyu.logger.debug("#{@noid}: Creating file set #{file_set_uuid} directories ...")
-    file_set_dirs(file_set_uuid).to_h.each_value do |path|
+    PushmiPullyu.logger.debug("#{@entity_identifier}: Creating file set #{file_set_uuid} directories ...")
+    file_set_dirs(file_set_uuid).each_value do |path|
       FileUtils.mkdir_p(path)
     end
-    PushmiPullyu.logger.debug("#{@noid}: Creating file set #{file_set_uuid} directories done")
+    PushmiPullyu.logger.debug("#{@entity_identifier}: Creating file set #{file_set_uuid} directories done")
   end
 
   def clean_directories
     return unless File.exist?(@aip_directory)
 
-    PushmiPullyu.logger.debug("#{@noid}: Nuking directories ...")
+    PushmiPullyu.logger.debug("#{@entity_identifier}: Nuking directories ...")
     FileUtils.rm_rf(@aip_directory)
   end
 
   ### Files
 
   def object_aip_paths
-    @object_aip_paths ||= OpenStruct.new(
-      main_object: OpenStruct.new(
-        remote: nil, # Base path
-        local: "#{aip_dirs.metadata}/object_metadata.n3",
-        should_add_user_email: true,
-        optional: false
-      ),
-      list_source: OpenStruct.new(
-        # This is downloaded, but not saved
-        remote: '/list_source'
-      ),
-      # This is constructed, not downloaded
-      file_ordering: OpenStruct.new(
-        local: "#{aip_dirs.files_metadata}/file_order.xml"
-      )
-    ).freeze
+    @object_aip_paths ||= {
+      # Base path
+      main_object_remote: object_uri,
+      main_object_local: "#{aip_dirs[:metadata]}/object_metadata.n3",
+      file_sets_remote: "#{object_uri}/filesets",
+      file_sets_local: "#{aip_dirs[:files_metadata]}/file_order.xml",
+      # This is downloaded for processing but not saved
+      file_paths_remote: "#{object_uri}/file_paths"
+    }.freeze
   end
 
-  def file_set_aip_paths(file_set_uuid)
-    @file_set_aip_paths ||= {}
-    @file_set_aip_paths[file_set_uuid] ||= OpenStruct.new(
-      main_object: OpenStruct.new(
-        remote: nil, # Base file_set path
-        local: "#{file_set_dirs(file_set_uuid).metadata}/file_set_metadata.n3",
-        should_add_user_email: true,
-        optional: false
-      )
-    ).freeze
-  end
-
-  def file_aip_paths(file_set_uuid, original_file_remote_base)
+  def file_aip_paths(file_set_uuid)
+    file_set_paths = file_set_dirs(file_set_uuid)
     @file_aip_paths ||= {}
-    @file_aip_paths[file_set_uuid] ||= OpenStruct.new(
-      content: OpenStruct.new(
-        remote: original_file_remote_base,
-        local: file_set_filename(file_set_uuid),
-        optional: false
-      ),
-      fixity: OpenStruct.new(
-        remote: "#{original_file_remote_base}/fcr:fixity",
-        local: "#{file_set_dirs(file_set_uuid)[:logs]}/content_fixity_report.n3",
-        optional: false
-      )
-    ).freeze
-  end
-
-  def member_file_set_uuids
-    @member_file_set_uuids ||= []
-    return @member_file_set_uuids unless @member_file_set_uuids.empty?
-
-    member_file_set_predicate = RDF::URI(PREDICATE_URIS[:member_file_sets])
-
-    graph = RDF::Graph.load(object_aip_paths.main_object.local)
-
-    graph.query(predicate: member_file_set_predicate) do |results|
-      # Get uuid from end of fedora path
-      @member_file_set_uuids << results.object.to_s.split('/').last
-    end
-    return @member_file_set_uuids unless @member_file_set_uuids.empty?
-
-    raise NoFileSets
-  end
-
-  def file_set_filename(file_set_uuid)
-    filename_predicate = RDF::URI(PREDICATE_URIS[:filename])
-
-    graph = RDF::Graph.load(file_set_aip_paths(file_set_uuid).main_object.local)
-
-    graph.query(predicate: filename_predicate) do |results|
-      return "#{file_set_dirs(file_set_uuid).files}/#{results.object}"
-    end
-
-    raise NoContentFilename
-  end
-
-  def member_files(file_set_uuid)
-    member_file_predicate = RDF::URI(PREDICATE_URIS[:member_files])
-
-    graph = RDF::Graph.load(file_set_aip_paths(file_set_uuid).main_object.local)
-
-    member_files = []
-    graph.query(predicate: member_file_predicate) do |results|
-      # Get uuid from end of fedora path
-      member_files << results.object.to_s.split('/').last
-    end
-    return member_files if member_files.present?
-
-    raise NoMemberFiles
-  end
-
-  def original_file?(metadata_filename)
-    type_predicate = RDF::URI(PREDICATE_URIS[:type])
-    original_file_uri = RDF::URI(PREDICATE_URIS[:original_file])
-    graph = RDF::Graph.load(metadata_filename)
-    graph.query(predicate: type_predicate) do |results|
-      return true if results.object == original_file_uri
-    end
-    false
+    @file_aip_paths[file_set_uuid] ||= {
+      fixity_remote: "#{object_uri}/filesets/#{file_set_uuid}/fixity",
+      fixity_local: "#{file_set_paths[:logs]}/content_fixity_report.n3",
+      file_set_remote: "#{object_uri}/filesets/#{file_set_uuid}",
+      file_set_local: "#{file_set_paths[:metadata]}/file_set_metadata.n3",
+      original_file_remote: "#{object_uri}/filesets/#{file_set_uuid}/original_file",
+      original_file_local: "#{file_set_paths[:metadata]}/original_file_metadata.n3"
+    }.freeze
   end
 
 end
