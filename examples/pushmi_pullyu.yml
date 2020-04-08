@@ -38,3 +38,9 @@ rollbar:
   token: 'abc123xyz'
   proxy_host: 'your_proxy_host_url'
   proxy_port: '80'
+
+jupiter:
+  user: jupiter@ualberta.ca
+  api_key: 5042c4ad-6d22-486d-bc63-2b9e5b9a630a
+  jupiter_url: http://localhost:3000/
+  aip_api_path: aip/v1
