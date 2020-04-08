@@ -11,7 +11,7 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
   ExtraDetails: true
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
 
 # readability is Actually Good
 Layout/EmptyLinesAroundClassBody:
@@ -59,6 +59,15 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
 Naming/FileName:
   Exclude:
     - Dangerfile
@@ -88,3 +97,9 @@ RSpec/MultipleExpectations:
 
 RSpec/DescribedClass:
   EnforcedStyle: explicit
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true

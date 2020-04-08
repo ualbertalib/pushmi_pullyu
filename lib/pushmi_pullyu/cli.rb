@@ -191,22 +191,20 @@ class PushmiPullyu::CLI
 
     # add additional information about the error context to errors that occur while processing this item.
     Rollbar.scoped(entity_uuid: entity[:uuid]) do
-      begin
-        # Download AIP from Jupiter, bag and tar AIP directory and cleanup after
-        # block code
-        PushmiPullyu::AIP.create(entity) do |aip_filename, aip_directory|
-          # Push tarred AIP to swift API
-          deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
-          # Log successful preservation event to the log files
-          PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
-        end
-      # rubocop:disable Lint/RescueException
-      rescue Exception => e
-        Rollbar.error(e)
-        logger.error(e)
-        # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
-        # move on to the next item.
+      # Download AIP from Jupiter, bag and tar AIP directory and cleanup after
+      # block code
+      PushmiPullyu::AIP.create(entity) do |aip_filename, aip_directory|
+        # Push tarred AIP to swift API
+        deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
+        # Log successful preservation event to the log files
+        PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
       end
+      # rubocop:disable Lint/RescueException
+    rescue Exception => e
+      Rollbar.error(e)
+      logger.error(e)
+      # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
+      # move on to the next item.
       # rubocop:enable Lint/RescueException
     end
   end
