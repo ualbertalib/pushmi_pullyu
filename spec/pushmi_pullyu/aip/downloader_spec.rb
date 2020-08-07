@@ -108,7 +108,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
-      
+
       # Now it exists
       expect(File.exist?(aip_folder)).to eq(true)
 
