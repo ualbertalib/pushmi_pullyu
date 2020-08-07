@@ -112,7 +112,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     log_file = File.read("#{log_folder}/preservation_events.log")
 
     expect(log_file).to include(log_details)
-    binding.pry
+
     expect(log_file).to include(file_details_one)
     expect(log_file).to include(file_details_two)
 
