@@ -9,9 +9,9 @@ name: Ruby CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/remove_original_file_data ]
   pull_request:
-    branches: [ master ]
+    branches: [ feature/remove_original_file_data ]
 
 jobs:
   test:
@@ -20,6 +20,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Build the docker-compose stack
+      run: docker-compose up -d
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
