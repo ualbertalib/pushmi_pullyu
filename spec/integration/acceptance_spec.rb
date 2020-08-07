@@ -55,8 +55,8 @@ RSpec.describe 'Acceptance test', type: :feature do
     # Download data from Jupiter, bag and tar AIP directory and cleanup after block code
     VCR.use_cassette('aip_download_and_swift_upload', erb:
     {
-      file_path_1: './spec/fixtures/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP',
-      file_path_2: './spec/fixtures/storage/jf/KQ/jfKQSzhKRHrnfYAVY38htiZo'
+      file_path_1: './spec/fixtures/storage/vq/hs/vqhsul2p0c9ayxzspxx19vqo05zc',
+      file_path_2: './spec/fixtures/storage/qb/g4/qbg4mhpud4y7xmgjd4o3la20ggl2'
     }) do
       PushmiPullyu::AIP.create(entity) do |aip_filename|
         expect(aip_file).to eq(aip_filename)
@@ -85,8 +85,8 @@ RSpec.describe 'Acceptance test', type: :feature do
       #{uuid} was successfully deposited into Swift Storage!
       Here are the details of this preservation event:
       \tUUID: '#{uuid}'
-      \tTimestamp of Completion: 'Fri, 07 Aug 2020 17:24:12 GMT'
-      \tAIP Checksum: '17651533f68b55fea03f5f9390211a56'
+      \tTimestamp of Completion: 'Fri, 07 Aug 2020 20:59:14 GMT'
+      \tAIP Checksum: 'e2676cef279c9ad09c2d8369082f92da'
       \tMetadata: {"project-id"=>"#{uuid}", "aip-version"=>"1.0", "promise"=>"bronze", "project"=>"ERA"}
       \tFile Details:
     HEREDOC
@@ -112,7 +112,6 @@ RSpec.describe 'Acceptance test', type: :feature do
     log_file = File.read("#{log_folder}/preservation_events.log")
 
     expect(log_file).to include(log_details)
-
     expect(log_file).to include(file_details_one)
     expect(log_file).to include(file_details_two)
 

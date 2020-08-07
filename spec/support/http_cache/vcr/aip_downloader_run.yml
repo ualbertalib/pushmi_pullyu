@@ -266,7 +266,7 @@ http_interactions:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"files":[{"file_name":"image-sample.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/vq/hs/vqhsul2p0c9ayxzspxx19vqo05zc","file_uuid":"4dfb117e-a1af-4c16-b6c9-9c4e2ee70981","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="},{"file_name":"image-sample2.jpeg","file_path":"/home/orodrigu/Workspace/jupiter/storage/qb/g4/qbg4mhpud4y7xmgjd4o3la20ggl2","file_uuid":"5d043fa7-13b1-4367-a71b-dd13c37950bb","file_checksum":"/KC0nmafh5E2KWQKu7uCgQ=="}]}'
+      string: '{"files":[{"file_name":"image-sample.jpeg","file_path":"<%= file_path_1 %>","file_uuid":"4dfb117e-a1af-4c16-b6c9-9c4e2ee70981","file_checksum":"GxpIjJsC4KnRoBKNjWnkJA=="},{"file_name":"image-sample2.jpeg","file_path":"<%= file_path_2 %>","file_uuid":"5d043fa7-13b1-4367-a71b-dd13c37950bb","file_checksum":"/KC0nmafh5E2KWQKu7uCgQ=="}]}'
     http_version: null
   recorded_at: Fri, 07 Aug 2020 16:57:03 GMT
 - request:

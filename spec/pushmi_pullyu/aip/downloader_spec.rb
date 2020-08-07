@@ -59,8 +59,8 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   end
   let(:aip_downloader_run_arguments) do
     {
-      file_path_1: './spec/fixtures/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP',
-      file_path_2: './spec/fixtures/storage/jf/KQ/jfKQSzhKRHrnfYAVY38htiZo'
+      file_path_1: './spec/fixtures/storage/vq/hs/vqhsul2p0c9ayxzspxx19vqo05zc',
+      file_path_2: './spec/fixtures/storage/qb/g4/qbg4mhpud4y7xmgjd4o3la20ggl2'
     }
   end
 
@@ -108,7 +108,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
-
+      
       # Now it exists
       expect(File.exist?(aip_folder)).to eq(true)
 
