@@ -1,6 +1,4 @@
-# Lightweight docker-compose which only has the datastores, so you can still develop rails locally
-
-# To use, run docker-compose up -d
+# Simple docker-compose that adds redis container for testing
 version: '3.4'
 
 services:
