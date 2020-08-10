@@ -25,9 +25,7 @@ jobs:
       with:
         ruby-version: 2.6.6
     - name: Install dependencies
-      run: |
-        bundle config set without 'production development'
-        bundle install
+      run: bundle install
     - name: Lint with RuboCop
       run: bundle exec rubocop --parallel
     - name: Run tests
