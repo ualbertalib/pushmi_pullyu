@@ -14,12 +14,12 @@ end
 warn('Please add a detailed summary in the description.') if github.pr_body.length < 5
 
 # Let people say that this isn't worth a CHANGELOG entry in the PR if they choose
-declared_trivial = (github.pr_title + github.pr_body).include?("#trivial") || !has_app_changes
+declared_trivial = (github.pr_title + github.pr_body).include?('#trivial') || !has_app_changes
 
-if !git.modified_files.include?("CHANGELOG.md") && !declared_trivial
-  fail("Please include a CHANGELOG entry. \nYou can find it at [CHANGELOG.md](https://github.com/ualbertalib/jupiter/blob/master/CHANGELOG.md).", sticky: false)
+if !git.modified_files.include?('CHANGELOG.md') && !declared_trivial
+  raise("Please include a CHANGELOG entry. \nYou can find it at " \
+    '[CHANGELOG.md](https://github.com/ualbertalib/jupiter/blob/master/CHANGELOG.md).', sticky: false)
 end
-
 
 # Warn when there is a big PR
 warn('This PR is too big! Consider breaking it down into smaller PRs.') if git.lines_of_code > 500
