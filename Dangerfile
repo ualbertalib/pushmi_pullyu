@@ -17,8 +17,9 @@ warn('Please add a detailed summary in the description.') if github.pr_body.leng
 declared_trivial = (github.pr_title + github.pr_body).include?('#trivial') || !has_app_changes
 
 if !git.modified_files.include?('CHANGELOG.md') && !declared_trivial
-  raise("Please include a CHANGELOG entry. \nYou can find it at " \
-    '[CHANGELOG.md](https://github.com/ualbertalib/jupiter/blob/master/CHANGELOG.md).', sticky: false)
+  error_message = "Please include a CHANGELOG entry. \nYou can find it at " \
+                  '[CHANGELOG.md](https://github.com/ualbertalib/pushmi_pullyu/blob/master/CHANGELOG.md).'
+  fail(error_message, sticky: false)
 end
 
 # Warn when there is a big PR
