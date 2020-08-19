@@ -8,4 +8,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
-## [1.0.6] 2018-11-29
+### Removed
+- Data output for original_file information
+
+## [1.0.6] - 2018-11-29
