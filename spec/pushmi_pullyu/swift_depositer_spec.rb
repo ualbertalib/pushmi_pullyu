@@ -9,7 +9,7 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
         swift_depositer = PushmiPullyu::SwiftDepositer.new(username: 'test:tester',
                                                            password: 'testing',
                                                            tenant: 'tester',
-                                                           auth_url: 'http://www.example.com:8080/auth/v1.0')
+                                                           auth_url: 'http://127.0.0.1:8080/auth/v1.0')
 
         deposited_file = swift_depositer.deposit_file(sample_file, 'ERA')
 
@@ -31,7 +31,7 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
         swift_depositer = PushmiPullyu::SwiftDepositer.new(username: 'test:tester',
                                                            password: 'testing',
                                                            tenant: 'tester',
-                                                           auth_url: 'http://www.example.com:8080/auth/v1.0')
+                                                           auth_url: 'http://127.0.0.1:8080/auth/v1.0')
 
         # Deposits file twice, check that it only gets added once to the container
         expect do

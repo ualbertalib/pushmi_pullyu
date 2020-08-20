@@ -13,13 +13,13 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       }
     }
   end
-  let(:uuid) { 'f8887612-1b11-49e1-84ea-d65738fb6874' }
+  let(:uuid) { 'e2ec88e3-3266-4e95-8575-8b04fac2a679' }
   let(:type) { 'items' }
   let(:entity_definition) { { uuid: uuid, type: type } }
   let(:file_set_uuids) do
-    ['52e24eae-6d74-4891-b1f0-ab7e57b43909',
-     '457e230d-8e34-4016-8987-08c3ab95460d']
+    ['4dfb117e-a1af-4c16-b6c9-9c4e2ee70981', '5d043fa7-13b1-4367-a71b-dd13c37950bb']
   end
+
   let(:aip_folder) { "#{workdir}/#{uuid}" }
   let(:downloader) { PushmiPullyu::AIP::Downloader.new(entity_definition, aip_folder) }
   let(:folders) do
@@ -42,7 +42,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   let(:files_copied) do
     [
       "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[0]}/image-sample.jpeg",
-      "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[1]}/theses.jpg"
+      "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[1]}/image-sample2.jpeg"
     ]
   end
   let(:files_downloaded) do
@@ -54,17 +54,13 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       "tmp/downloader_spec/#{uuid}/data/objects/metadata/object_metadata.n3",
       "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/file_order.xml",
       "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/file_set_metadata.n3",
-      "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/"\
-      'original_file_metadata.n3',
-      "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/file_set_metadata.n3",
-      "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/"\
-      'original_file_metadata.n3'
+      "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/file_set_metadata.n3"
     ]
   end
   let(:aip_downloader_run_arguments) do
     {
-      file_path_1: './spec/fixtures/storage/k7/hb/k7hb4VEsfoPXTab1W5iB6yXP',
-      file_path_2: './spec/fixtures/storage/jf/KQ/jfKQSzhKRHrnfYAVY38htiZo'
+      file_path_1: './spec/fixtures/storage/vq/hs/vqhsul2p0c9ayxzspxx19vqo05zc',
+      file_path_2: './spec/fixtures/storage/qb/g4/qbg4mhpud4y7xmgjd4o3la20ggl2'
     }
   end
 
@@ -85,6 +81,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
         downloader.run
       end
       folders_content = Dir["tmp/downloader_spec/#{uuid}/data/objects/files/*/*"].sort
+
       expect(folders_content).to eq(files_copied.sort)
     end
 
@@ -98,9 +95,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
         "tmp/downloader_spec/#{uuid}/data/logs/files_logs/*/content_fixity_report.n3",
         "tmp/downloader_spec/#{uuid}/data/objects/metadata/object_metadata.n3",
         "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/file_order.xml",
-        "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/*/file_set_metadata.n3",
-        "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/*/"\
-        'original_file_metadata.n3',
+        "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/*/file_set_metadata.n3"
       ]
 
       expect(folders_content.sort).to eq(files_downloaded.sort)

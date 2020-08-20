@@ -49,7 +49,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
       # (see the downloader_spec for more elaboration about this),
       # bagging should add the above 6 files, so 30 total files/directories
       # (see also file count test in creator spec)
-      expect(Dir["#{aip_folder}/**/*"].length).to eq(30)
+      expect(Dir["#{aip_folder}/**/*"].length).to eq(28)
     end
 
     it 'creates a correct manifest' do
@@ -57,7 +57,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
 
       lines = File.readlines("#{aip_folder}/manifest-sha1.txt").map(&:strip).sort
       # 11 files in the bag
-      expect(lines.length).to eq(11)
+      expect(lines.length).to eq(9)
 
       # We can't know the sha1 of the aipcreation.log in advance (timestamps are recorded)
       sha1 = Digest::SHA1.file("#{aip_folder}/data/logs/aipcreation.log").hexdigest
@@ -69,12 +69,8 @@ RSpec.describe PushmiPullyu::AIP::Creator do
         'ca3673d63ea097461b567a6de4f7c67dd84df21f data/objects/metadata/files_metadata/file_order.xml',
         '99a3c2f0ad344ec0784738d4530b08eba9a9c6d2' \
         ' data/objects/metadata/files_metadata/3cbc75f9-7bad-4d62-962e-911f911bd70e/file_set_metadata.n3',
-        'e30725f6fc8d4b736f061ff4bf501d320bb014d2' \
-        ' data/objects/metadata/files_metadata/3cbc75f9-7bad-4d62-962e-911f911bd70e/original_file_metadata.n3',
         'cd54ae5cf0b425948a42f57e25a02ada6ceb806f' \
         ' data/objects/metadata/files_metadata/8cf761ce-5222-405a-aee1-f019f860e4ba/file_set_metadata.n3',
-        'dacfb2493cc43d6171f9e6b40620dfff4c86149d' \
-        ' data/objects/metadata/files_metadata/8cf761ce-5222-405a-aee1-f019f860e4ba/original_file_metadata.n3',
         '872c4fcae8a0f594765a20d61c99f1739dc0b549 data/objects/metadata/object_metadata.n3',
         "#{sha1} data/logs/aipcreation.log",
         '9004c767715910ba533fa2cb2ff5941244b5b284' \

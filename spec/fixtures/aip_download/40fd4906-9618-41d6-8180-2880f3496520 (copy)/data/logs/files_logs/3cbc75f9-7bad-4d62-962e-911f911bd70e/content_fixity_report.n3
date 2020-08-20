@@ -1,6 +1,0 @@
-
-<http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e> <http://www.loc.gov/premis/rdf/v1#hasEventOutcome> "SUCCESS";
-  <http://www.loc.gov/premis/rdf/v1#hasFixity> "http://localhost:3000/aip/v1/items/40fd4906-9618-41d6-8180-2880f3496520/filesets/3cbc75f9-7bad-4d62-962e-911f911bd70e/fixity";
-  <http://www.loc.gov/premis/rdf/v1#hasMessageDigest> "GxpIjJsC4KnRoBKNjWnkJA==";
-  <http://www.loc.gov/premis/rdf/v1#hasMessageDigestAlgorithm> "md5";
-  <http://www.loc.gov/premis/rdf/v1#hasSize> "12086" .

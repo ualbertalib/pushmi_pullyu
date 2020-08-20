@@ -13,7 +13,6 @@ class PushmiPullyu::AIP::Downloader
     filename: 'http://purl.org/dc/terms/title',
     member_files: 'http://pcdm.org/models#hasFile',
     member_file_sets: 'http://pcdm.org/models#hasMember',
-    original_file: 'http://pcdm.org/use#OriginalFile',
     type: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
   }.freeze
 
@@ -49,8 +48,6 @@ class PushmiPullyu::AIP::Downloader
       file_aip_path = file_aip_paths(file_uuid)
       download_and_log(file_aip_path[:fixity_remote],
                        file_aip_path[:fixity_local])
-      download_and_log(file_aip_path[:original_file_remote],
-                       file_aip_path[:original_file_local])
       download_and_log(file_aip_path[:file_set_remote],
                        file_aip_path[:file_set_local])
     end
@@ -210,9 +207,7 @@ class PushmiPullyu::AIP::Downloader
       fixity_remote: "#{object_uri}/filesets/#{file_set_uuid}/fixity",
       fixity_local: "#{file_set_paths[:logs]}/content_fixity_report.n3",
       file_set_remote: "#{object_uri}/filesets/#{file_set_uuid}",
-      file_set_local: "#{file_set_paths[:metadata]}/file_set_metadata.n3",
-      original_file_remote: "#{object_uri}/filesets/#{file_set_uuid}/original_file",
-      original_file_local: "#{file_set_paths[:metadata]}/original_file_metadata.n3"
+      file_set_local: "#{file_set_paths[:metadata]}/file_set_metadata.n3"
     }.freeze
   end
 
