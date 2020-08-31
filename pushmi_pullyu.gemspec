@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rdf-n3', '>= 1.99', '< 4.0'
   spec.add_runtime_dependency 'redis', '>= 3.3', '< 5.0'
   spec.add_runtime_dependency 'rest-client', '>= 1.8', '< 3.0'
-  spec.add_runtime_dependency 'rollbar', '~> 2.18'
+  spec.add_runtime_dependency 'rollbar', '>= 2.18', '< 4.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'coveralls', '~> 0.8'
