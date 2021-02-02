@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'redis', '>= 3.3', '< 5.0'
   spec.add_runtime_dependency 'rest-client', '>= 1.8', '< 3.0'
   spec.add_runtime_dependency 'rollbar', '>= 2.18', '< 4.0'
+  spec.add_runtime_dependency 'uuid', '~> 2.3.9'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'coveralls', '~> 0.8'
@@ -44,7 +45,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.51'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.10'
   spec.add_development_dependency 'timecop', '~> 0.8'
-  spec.add_development_dependency 'uuid', '~> 2.3.9'
   spec.add_development_dependency 'vcr', '~> 5.0'
   spec.add_development_dependency 'webmock', '~> 3.3'
 end
