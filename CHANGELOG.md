@@ -8,6 +8,9 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Fix authentication bug when using ssl 
+
+## [2.0.1] - 2021-02-02
 - Fix dependency declaration for UUID gem
 
 ## [2.0.0] - 2020-12-14
