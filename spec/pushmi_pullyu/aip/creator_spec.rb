@@ -94,9 +94,10 @@ RSpec.describe PushmiPullyu::AIP::Creator do
 
       lines.each do |line|
         (key, value) = line.split(': ')
-        if key == 'AIP-Version'
+        case key
+        when 'AIP-Version'
           expect(value).to eq('lightaip-2.0')
-        elsif key == 'Bagging-Date'
+        when 'Bagging-Date'
           expect(value).to eq(now.strftime('%F'))
         else
           # Don't care about the values for these ones
