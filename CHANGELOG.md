@@ -10,6 +10,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 - Fix authentication bug when using ssl 
 - bump rubocop and rubocop-rspec
+- remove pg dependency
 
 ## [2.0.1] - 2021-02-02
 
