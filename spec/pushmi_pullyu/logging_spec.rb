@@ -15,7 +15,7 @@ RSpec.describe PushmiPullyu::Logging do
   end
 
   it 'allows setting of a logger' do
-    new_logger = Logger.new(STDERR)
+    new_logger = Logger.new($stderr)
     PushmiPullyu::Logging.logger = new_logger
     expect(PushmiPullyu::Logging.logger).to eq(new_logger)
   end
@@ -124,7 +124,7 @@ RSpec.describe PushmiPullyu::Logging do
     end
 
     it 'allows custom loggers' do
-      PushmiPullyu::Logging.logger = Logger.new(STDERR)
+      PushmiPullyu::Logging.logger = Logger.new($stderr)
       expect(dummy_class.logger).to be PushmiPullyu::Logging.logger
     end
 

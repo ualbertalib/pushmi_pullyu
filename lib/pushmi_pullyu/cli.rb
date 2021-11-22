@@ -89,7 +89,7 @@ class PushmiPullyu::CLI
 
   def parse_config(config_file)
     if File.exist?(config_file)
-      YAML.safe_load(ERB.new(IO.read(config_file)).result).deep_symbolize_keys || {}
+      YAML.safe_load(ERB.new(File.read(config_file)).result).deep_symbolize_keys || {}
     else
       {}
     end
@@ -249,12 +249,12 @@ class PushmiPullyu::CLI
   # On first call of shutdown, this will gracefully close the main run loop
   # which let's the program exit itself. Calling shutdown again will force shutdown the program
   def shutdown
-    if !PushmiPullyu.server_running?
-      exit!(1)
-    else
+    if PushmiPullyu.server_running?
       # using stderr instead of logger as it uses an underlying mutex which is not allowed inside trap contexts.
       warn 'Exiting...  Interrupt again to force quit.'
       PushmiPullyu.server_running = false
+    else
+      exit!(1)
     end
   end
 

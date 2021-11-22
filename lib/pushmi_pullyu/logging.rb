@@ -21,7 +21,7 @@ module PushmiPullyu::Logging
 
     attr_writer :logger
 
-    def initialize_logger(log_target = STDOUT)
+    def initialize_logger(log_target = $stdout)
       @logger = Logger.new(log_target)
       @logger.level = Logger::INFO
       @logger
@@ -47,11 +47,11 @@ module PushmiPullyu::Logging
       preservation_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
 
       message = "#{deposited_file.name} was successfully deposited into Swift Storage!\n"\
-      "Here are the details of this preservation event:\n"\
-      "\tUUID: '#{deposited_file.name}'\n"\
-      "\tTimestamp of Completion: '#{deposited_file.last_modified}'\n"\
-      "\tAIP Checksum: '#{deposited_file.etag}'\n"\
-      "\tMetadata: #{deposited_file.metadata}\n"\
+                "Here are the details of this preservation event:\n"\
+                "\tUUID: '#{deposited_file.name}'\n"\
+                "\tTimestamp of Completion: '#{deposited_file.last_modified}'\n"\
+                "\tAIP Checksum: '#{deposited_file.etag}'\n"\
+                "\tMetadata: #{deposited_file.metadata}\n"\
 
       file_details = file_log_details(aip_directory)
 
