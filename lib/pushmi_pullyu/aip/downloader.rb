@@ -80,6 +80,7 @@ class PushmiPullyu::AIP::Downloader
   def authenticate_http_calls
     @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
     @http = Net::HTTP.new(@uri.host, @uri.port)
+    @http.use_ssl = true if @uri.instance_of? URI::HTTPS
     request = Net::HTTP::Post.new("#{@uri.request_uri}auth/system")
     request.set_form_data(
       email: PushmiPullyu.options[:jupiter][:user],

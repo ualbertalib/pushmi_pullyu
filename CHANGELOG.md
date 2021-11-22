@@ -8,6 +8,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Fix authentication bug when using ssl 
 - bump rubocop and rubocop-rspec
 
 ## [2.0.1] - 2021-02-02
