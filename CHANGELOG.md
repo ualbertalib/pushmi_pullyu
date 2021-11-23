@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Changed Danger token in Github Actions
+
 ## [2.0.2] - 2021-11-22
 
 - Fix authentication bug when using ssl 
