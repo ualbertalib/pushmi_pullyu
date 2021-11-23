@@ -21,9 +21,6 @@ minimum_age: 0
 redis:
   url: redis://localhost:6379
 
-database:
-  url: postgresql://jupiter:mysecretpassword@127.0.0.1/jupiter_development
-
 #parameters project_name and project_domain_name are required only for keystone v3 authentication
 swift:
   tenant: tester

@@ -9,6 +9,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 ## [Unreleased]
 
 - Changed Danger token in Github Actions
+- remove pg dependency
 
 ## [2.0.2] - 2021-11-22
 
