@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.5'
 
-  spec.add_runtime_dependency 'activesupport', '>= 5', '< 7'
+  spec.add_runtime_dependency 'activesupport', '>= 5', '< 8'
   spec.add_runtime_dependency 'bagit', '~> 0.4'
   spec.add_runtime_dependency 'connection_pool', '~> 2.2'
   spec.add_runtime_dependency 'daemons', '~> 1.2', '>= 1.2.4'
