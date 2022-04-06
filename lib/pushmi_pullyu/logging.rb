@@ -45,6 +45,7 @@ module PushmiPullyu::Logging
 
     def log_preservation_event(deposited_file, aip_directory)
       preservation_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
+      preservation_json_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.json")
 
       message = "#{deposited_file.name} was successfully deposited into Swift Storage!\n"\
                 "Here are the details of this preservation event:\n"\
@@ -72,8 +73,41 @@ module PushmiPullyu::Logging
       preservation_logger.info(message)
 
       preservation_logger.close
+      
+      message_json_str=preservation_event_to_json(deposited_file,aip_directory)
+      preservation_json_logger.info("#{message_json_str},")
+      preservation_json_logger.close
+      
     end
 
+    def preservation_event_to_json(deposited_file,aip_directory)
+
+      message={}
+
+      message["do_uuid"]="#{deposited_file.name}"
+      message["aip_deposited_at"]="#{deposited_file.last_modified}"
+      message["aip_md5sum"]= "#{deposited_file.etag}"
+      message["aip_sha256"]=""
+      message["aip_metadata"]= "#{deposited_file.metadata.to_json}"
+
+      file_details = file_log_details(aip_directory)
+
+      tmp_details=[]
+      if file_details.present?
+        file_details.each do |file_detail|
+           tmp_hash={}
+           tmp_hash["fileset_uuid"]= "#{file_detail[:fileset_name]}"
+           tmp_hash["file_name"]= "#{file_detail[:file_name]}"
+           tmp_hash["file_type"]= "#{file_detail[:file_extension]}"
+           tmp_hash["file_size"]= "#{file_detail[:file_size]}"
+           tmp_details << tmp_hash
+        end
+      end
+
+      message["aip_file_details"]=tmp_details
+      return message.to_json
+    end
+    
     def reopen
       if @logger
         @logger.reopen
