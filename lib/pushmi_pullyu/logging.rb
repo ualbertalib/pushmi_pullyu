@@ -71,11 +71,39 @@ module PushmiPullyu::Logging
 
       preservation_logger.close
 
-      message_json_str = preservation_event_to_json(deposited_file,aip_directory)
+      message_json_str = preservation_event_to_json(deposited_file, aip_directory)
       preservation_json_logger.info("#{message_json_str},")
       preservation_json_logger.close
     end
-
+    
+    ###
+    # Provides an alternative logging method in json format for the convenience of
+    # parsing in the process of auditing against OpenStack Swift preservation.
+    #
+    # output format:
+    #  I, [2022-04-06T11:07:21.983875 #20791]  INFO -- : \
+    # {
+    #  "do_uuid": "83b5d21f-a60a-43ba-945a-f03deec64a1d",
+    #  "aip_deposited_at": "Thu, 07 Apr 2022 16:37:00 GMT",
+    #  "aip_md5sum": "fe5832a510799b04c1c503e46dc3b589",
+    #  "aip_sha256": "",
+    #  "aip_metadata": "{\"project-id\":\"83b5d21f-a60a-43ba-945a-f03deec64a1d\",
+    #                  \"aip-version\":\"1.0\",
+    #                  \"project\":\"ERA\",
+    #                  \"promise\":\"bronze\"}",
+    #  "aip_file_details": [
+    #   {
+    #     "fileset_uuid": "b2c6ac0f-f2ed-489e-bbae-bd26465207aa",
+    #     "file_name": "Spallacci_Amanda_202103_PhD.pdf",
+    #     "file_type": "pdf",
+    #     "file_size": "2051363"
+    #    }
+    #   ]
+    # }
+    #
+    # note:
+    #   to parse, the prefix "I, ... INFO --:" in each line needs to be 
+    #   stripped using a bash command such as "sed"
     def preservation_event_to_json(deposited_file, aip_directory)
       message = {}
 
@@ -129,8 +157,8 @@ module PushmiPullyu::Logging
           end
         end
       end
-
+ 
       file_details
     end
   end
-end
+end   
