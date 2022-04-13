@@ -5,10 +5,12 @@ module PushmiPullyu::Logging
   # Simple formatter which only displays the message.
   # Taken from ActiveSupport
   class SimpleFormatter < Logger::Formatter
+
     # This method is invoked when a log event occurs
     def call(_severity, _timestamp, _program_name, msg)
       "#{msg.is_a?(String) ? msg : msg.inspect}\n"
     end
+
   end
 
   def logger
@@ -16,6 +18,7 @@ module PushmiPullyu::Logging
   end
 
   class << self
+
     attr_writer :logger
 
     def initialize_logger(log_target = STDOUT)
@@ -45,11 +48,11 @@ module PushmiPullyu::Logging
       preservation_json_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.json")
 
       message = "#{deposited_file.name} was successfully deposited into Swift Storage!\n"\
-      "Here are the details of this preservation event:\n"\
-      "\tUUID: '#{deposited_file.name}'\n"\
-      "\tTimestamp of Completion: '#{deposited_file.last_modified}'\n"\
-      "\tAIP Checksum: '#{deposited_file.etag}'\n"\
-      "\tMetadata: #{deposited_file.metadata}\n"\
+                "Here are the details of this preservation event:\n"\
+                "\tUUID: '#{deposited_file.name}'\n"\
+                "\tTimestamp of Completion: '#{deposited_file.last_modified}'\n"\
+                "\tAIP Checksum: '#{deposited_file.etag}'\n"\
+                "\tMetadata: #{deposited_file.metadata}\n"\
 
       file_details = file_log_details(aip_directory)
 
@@ -75,7 +78,7 @@ module PushmiPullyu::Logging
       preservation_json_logger.info("#{message_json_str},")
       preservation_json_logger.close
     end
-    
+
     ###
     # Provides an alternative logging method in json format for the convenience of
     # parsing in the process of auditing against OpenStack Swift preservation.
@@ -102,7 +105,7 @@ module PushmiPullyu::Logging
     # }
     #
     # note:
-    #   to parse, the prefix "I, ... INFO --:" in each line needs to be 
+    #   to parse, the prefix "I, ... INFO --:" in each line needs to be
     #   stripped using a bash command such as "sed"
     def preservation_event_to_json(deposited_file, aip_directory)
       message = {}
@@ -157,8 +160,9 @@ module PushmiPullyu::Logging
           end
         end
       end
- 
+
       file_details
     end
+
   end
-end   
+end
