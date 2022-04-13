@@ -44,10 +44,10 @@ RSpec.describe PushmiPullyu::PreservationQueue do
       now = Time.now
       Timecop.freeze(now)
 
-      expect(queue.next_item).to be nil
+      expect(queue.next_item).to be_nil
 
       Timecop.travel(now + 14.minutes)
-      expect(queue.next_item).to be nil
+      expect(queue.next_item).to be_nil
 
       Timecop.travel(now + 15.minutes)
       expect(queue.next_item).to eq 'noid1'

@@ -21,7 +21,7 @@ module PushmiPullyu::Logging
 
     attr_writer :logger
 
-    def initialize_logger(log_target = STDOUT)
+    def initialize_logger(log_target = $stdout)
       @logger = Logger.new(log_target)
       @logger.level = Logger::INFO
       @logger
