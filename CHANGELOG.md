@@ -8,6 +8,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Log to preservation_events.json as well in an easy to use json format.
 - Changed Danger token in Github Actions
 - remove pg dependency
 
