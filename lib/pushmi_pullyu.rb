@@ -40,12 +40,14 @@ module PushmiPullyu
     },
     rollbar: {
     },
+    # rubocop disable: Style/FetchEnvVar
     jupiter: {
-      user: ENV['JUPITER_USER'],
-      api_key: ENV['JUPITER_API_KEY'],
-      jupiter_url: ENV['JUPITER_URL'] || 'http://localhost:3000/',
-      aip_api_path: ENV['JUPITER_AIP_API_PATH'] || 'aip/v1'
+      user: ENV.fetch('JUPITER_USER', nil),
+      api_key: ENV.fetch('JUPITER_API_KEY', nil),
+      jupiter_url: ENV.fetch('JUPITER_URL', nil) || 'http://localhost:3000/',
+      aip_api_path: ENV.fetch('JUPITER_AIP_API_PATH', nil) || 'aip/v1'
     }
+    # rubocop enable: Style/FetchEnvVar
   }.freeze
 
   def self.options
