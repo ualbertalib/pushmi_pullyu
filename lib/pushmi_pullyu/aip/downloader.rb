@@ -103,9 +103,7 @@ class PushmiPullyu::AIP::Downloader
 
     response = @http.request(request)
     is_success = if response.is_a?(Net::HTTPSuccess)
-                   File.open(local, 'wb') do |file|
-                     file.write(response.body)
-                   end
+                   File.binwrite(local, response.body)
                    # Response was a success and the file was saved to local
                    File.exist? local
                  end

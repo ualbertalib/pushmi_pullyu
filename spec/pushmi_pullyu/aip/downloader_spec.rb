@@ -103,24 +103,24 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
 
     it 'creates the expected structure' do
       # Should not exist yet
-      expect(File.exist?(aip_folder)).to eq(false)
+      expect(File.exist?(aip_folder)).to be(false)
 
       VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
 
       # Now it exists
-      expect(File.exist?(aip_folder)).to eq(true)
+      expect(File.exist?(aip_folder)).to be(true)
 
       # 13 folders exist
       folders.each do |dir|
-        expect(File.exist?(dir)).to eq(true)
+        expect(File.exist?(dir)).to be(true)
       end
 
       # 11 files exist
       files = files_copied + files_downloaded
       files.each do |file|
-        expect(File.exist?(file)).to eq(true)
+        expect(File.exist?(file)).to be(true)
       end
 
       # 24 files and directories total were created
