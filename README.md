@@ -6,7 +6,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/pushmi_pullyu.svg)](https://rubygems.org/gems/pushmi_pullyu)
 [![Github Build Status](https://github.com/ualbertalib/pushmi_pullyu/workflows/CI/badge.svg)](https://github.com/ualbertalib/pushmi_pullyu/actions)
-[![Coverage Status](https://coveralls.io/repos/github/ualbertalib/pushmi_pullyu/badge.svg?branch=master)](https://coveralls.io/github/ualbertalib/pushmi_pullyu?branch=master)
 
 PushmiPullyu is a Ruby application, running behind the firewall that protects our Swift environment.
 
