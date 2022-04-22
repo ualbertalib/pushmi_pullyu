@@ -48,9 +48,9 @@ RSpec.describe 'Acceptance test', type: :feature do
     expect(entity[:uuid]).to eq uuid
 
     # Should not exist yet
-    expect(File.exist?(aip_folder)).to eq(false)
-    expect(File.exist?(aip_file)).to eq(false)
-    expect(File.exist?("#{log_folder}/preservation_events.log")).to eq(false)
+    expect(File.exist?(aip_folder)).to be(false)
+    expect(File.exist?(aip_file)).to be(false)
+    expect(File.exist?("#{log_folder}/preservation_events.log")).to be(false)
 
     # Download data from Jupiter, bag and tar AIP directory and cleanup after block code
     VCR.use_cassette('aip_download_and_swift_upload', erb:
@@ -61,8 +61,8 @@ RSpec.describe 'Acceptance test', type: :feature do
       PushmiPullyu::AIP.create(entity) do |aip_filename|
         expect(aip_file).to eq(aip_filename)
         # aip file and folder should have been created by the creator
-        expect(File.exist?(aip_folder)).to eq(true)
-        expect(File.exist?(aip_file)).to eq(true)
+        expect(File.exist?(aip_folder)).to be(true)
+        expect(File.exist?(aip_file)).to be(true)
 
         # Push tarred AIP to swift API
         deposited_file = cli.send(:swift).deposit_file(aip_filename, PushmiPullyu.options[:swift][:container])
@@ -80,7 +80,7 @@ RSpec.describe 'Acceptance test', type: :feature do
       end
     end
 
-    expect(File.exist?("#{log_folder}/preservation_events.log")).to eq(true)
+    expect(File.exist?("#{log_folder}/preservation_events.log")).to be(true)
     log_details = <<~HEREDOC
       #{uuid} was successfully deposited into Swift Storage!
       Here are the details of this preservation event:
@@ -116,7 +116,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     expect(log_file).to include(file_details_two)
 
     # aip file and folder should have been cleaned up
-    expect(File.exist?(aip_folder)).to eq(false)
-    expect(File.exist?(aip_file)).to eq(false)
+    expect(File.exist?(aip_folder)).to be(false)
+    expect(File.exist?(aip_file)).to be(false)
   end
 end

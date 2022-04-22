@@ -74,7 +74,7 @@ RSpec.describe PushmiPullyu::Logging do
 
       PushmiPullyu::Logging.log_aip_activity(tmp_aip_dir, 'This is a test message')
 
-      expect(File.exist?("#{tmp_log_aip_dir}/aipcreation.log")).to eq(true)
+      expect(File.exist?("#{tmp_log_aip_dir}/aipcreation.log")).to be(true)
       expect(File.read("#{tmp_log_aip_dir}/aipcreation.log")).to include('This is a test message')
       expect(PushmiPullyu::Logging.logger).to have_received(:info).with('This is a test message').once
     end
@@ -102,7 +102,7 @@ RSpec.describe PushmiPullyu::Logging do
 
       PushmiPullyu::Logging.log_preservation_event(deposited_file, tmp_aip_dir)
 
-      expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to eq(true)
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
       expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once
       expect(
         File.read("#{tmp_log_dir}/preservation_events.log")

@@ -22,28 +22,28 @@ RSpec.describe PushmiPullyu::AIP::Creator do
   describe '#run' do
     it 'creates the aip' do
       # Mocked download data should exist
-      expect(File.exist?(aip_folder)).to eq(true)
+      expect(File.exist?(aip_folder)).to be(true)
 
       # Should not exist yet
-      expect(File.exist?(aip_file)).to eq(false)
+      expect(File.exist?(aip_file)).to be(false)
 
       creator.run
 
       # Work directory exists
-      expect(File.exist?(aip_folder)).to eq(true)
+      expect(File.exist?(aip_folder)).to be(true)
       # AIP exists
-      expect(File.exist?(aip_file)).to eq(true)
+      expect(File.exist?(aip_file)).to be(true)
     end
 
     it 'creates the correct files in the bag' do
       creator.run
 
-      expect(File.exist?("#{aip_folder}/manifest-sha1.txt")).to eq(true)
-      expect(File.exist?("#{aip_folder}/manifest-md5.txt")).to eq(true)
-      expect(File.exist?("#{aip_folder}/tagmanifest-sha1.txt")).to eq(true)
-      expect(File.exist?("#{aip_folder}/tagmanifest-md5.txt")).to eq(true)
-      expect(File.exist?("#{aip_folder}/bagit.txt")).to eq(true)
-      expect(File.exist?("#{aip_folder}/bag-info.txt")).to eq(true)
+      expect(File.exist?("#{aip_folder}/manifest-sha1.txt")).to be(true)
+      expect(File.exist?("#{aip_folder}/manifest-md5.txt")).to be(true)
+      expect(File.exist?("#{aip_folder}/tagmanifest-sha1.txt")).to be(true)
+      expect(File.exist?("#{aip_folder}/tagmanifest-md5.txt")).to be(true)
+      expect(File.exist?("#{aip_folder}/bagit.txt")).to be(true)
+      expect(File.exist?("#{aip_folder}/bag-info.txt")).to be(true)
 
       # The downloaded AIP should have 16 directories and 11 files including the log
       # (see the downloader_spec for more elaboration about this),
@@ -101,7 +101,7 @@ RSpec.describe PushmiPullyu::AIP::Creator do
           expect(value).to eq(now.strftime('%F'))
         else
           # Don't care about the values for these ones
-          expect(['Bag-Software-Agent', 'Payload-Oxum'].include?(key)).to eq(true)
+          expect(['Bag-Software-Agent', 'Payload-Oxum'].include?(key)).to be(true)
         end
       end
       Timecop.return

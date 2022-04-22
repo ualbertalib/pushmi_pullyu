@@ -48,9 +48,9 @@ RSpec.describe PushmiPullyu::AIP do
       expect(downloader).to have_received(:run).once
 
       # Work directory has been removed
-      expect(File.exist?(aip_folder)).to eq(false)
+      expect(File.exist?(aip_folder)).to be(false)
       # AIP tar file has been removed
-      expect(File.exist?(aip_file)).to eq(false)
+      expect(File.exist?(aip_file)).to be(false)
       # cleanup workdir
       FileUtils.rm_rf(workdir)
     end
