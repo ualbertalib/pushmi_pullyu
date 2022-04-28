@@ -44,7 +44,7 @@ module PushmiPullyu
     jupiter: {
       user: ENV.fetch('JUPITER_USER', nil),
       api_key: ENV.fetch('JUPITER_API_KEY', nil),
-      jupiter_url: ENV.fetch('JUPITER_URL', nil) || 'http://localhost:3000/',
+      jupiter_url: ENV.fetch('JUPITER_URL', nil) || 'http://era.lvh.me:3000/',
       aip_api_path: ENV.fetch('JUPITER_AIP_API_PATH', nil) || 'aip/v1'
     }
     # rubocop enable: Style/FetchEnvVar

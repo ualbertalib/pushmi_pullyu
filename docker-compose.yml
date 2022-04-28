@@ -1,0 +1,11 @@
+services:
+  swift:
+    # useful if you need to re-run the tests/spec
+    # https://docs.openstack.org/ocata/cli-reference/swift.html
+    # manual steps to set environment variables and create container
+    # swift auth -v -U test:tester -K testing -A http://localhost:8080/auth/v1.0
+    # swift auth
+    # swift post ERA
+    image: openstackswift/saio
+    ports:
+      - '8080:8080'

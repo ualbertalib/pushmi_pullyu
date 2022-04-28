@@ -103,6 +103,12 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Testing
 
+Pre-requisites:
+
+Will need jupiter running locally and Openstack Swift running on port 8080.
+- [Instructions for jupiter](https://github.com/ualbertalib/jupiter#docker)
+- Use `docker-compose up -d` to start Swift (additional instructions in docker-compose.yml)
+
 To run the test suite:
 
 ```bash

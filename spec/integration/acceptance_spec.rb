@@ -82,17 +82,17 @@ RSpec.describe 'Acceptance test', type: :feature do
 
     expect(File.exist?("#{log_folder}/preservation_events.log")).to be(true)
     log_details = <<~HEREDOC
-      #{uuid} was successfully deposited into Swift Storage!
+      e2ec88e3-3266-4e95-8575-8b04fac2a679 was successfully deposited into Swift Storage!
       Here are the details of this preservation event:
-      \tUUID: '#{uuid}'
-      \tTimestamp of Completion: 'Fri, 07 Aug 2020 20:59:14 GMT'
-      \tAIP Checksum: 'e2676cef279c9ad09c2d8369082f92da'
-      \tMetadata: {"project-id"=>"#{uuid}", "aip-version"=>"1.0", "promise"=>"bronze", "project"=>"ERA"}
+      \tUUID: 'e2ec88e3-3266-4e95-8575-8b04fac2a679'
+      \tTimestamp of Completion: 'Wed, 27 Apr 2022 23:30:50 GMT'
+      \tAIP Checksum: '549aa16f0f42e7f58f4595ca09ec9ba1'
+      \tMetadata: {"project-id"=>"e2ec88e3-3266-4e95-8575-8b04fac2a679", "aip-version"=>"1.0", "project"=>"ERA", "promise"=>"bronze"}
       \tFile Details:
     HEREDOC
 
     file_details_one = <<~HEREDOC
-      \t\t{"fileset_uuid": "4dfb117e-a1af-4c16-b6c9-9c4e2ee70981",
+      \t\t{"fileset_uuid": "343c647c-6b01-4552-8643-9911da02e30b",
       \t\t"details": {
       \t\t\t"file_name": "image-sample.jpeg",
       \t\t\t"file_type": "jpeg",
@@ -101,7 +101,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     HEREDOC
 
     file_details_two = <<~HEREDOC
-      \t\t{"fileset_uuid": "5d043fa7-13b1-4367-a71b-dd13c37950bb",
+      \t\t{"fileset_uuid": "6c152bf5-3f91-4358-afa5-18a9726623be",
       \t\t"details": {
       \t\t\t"file_name": "image-sample2.jpeg",
       \t\t\t"file_type": "jpeg",

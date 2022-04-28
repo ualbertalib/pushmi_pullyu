@@ -11,6 +11,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 - Changed Danger token in Github Actions
 - remove pg dependency
 - unblock CI (rubocop and coveralls)
+- Log to preservation_events.json as well in an easy to use json format.
 
 ## [2.0.2] - 2021-11-22
 
@@ -26,4 +27,5 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 ### Removed
 - Data output for original_file information
 
+- 
 ## [1.0.6] - 2018-11-29
