@@ -155,7 +155,7 @@ module PushmiPullyu::Logging
               fileset_name: File.dirname(file).split('/')[-1],
               file_name: File.basename(file),
               file_size: File.size(file),
-              file_extension: File.extname(file).strip.downcase[1..-1]
+              file_extension: File.extname(file).strip.downcase[1..]
             }
           end
         end
