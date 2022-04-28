@@ -12,7 +12,7 @@ AllCops:
     - 'vendor/**/*'
     - 'Dangerfile'
   ExtraDetails: true
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   NewCops: enable
 
 # readability is Actually Good

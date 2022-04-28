@@ -18,9 +18,8 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6.6
-    - name: Install dependencies
-      run: bundle install
+        ruby-version: 2.7.6 # blocked from 3.0 see https://github.com/ualbertalib/pushmi_pullyu/issues/251
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Lint with RuboCop
       run: bundle exec rubocop --parallel
     - name: Run Danger
