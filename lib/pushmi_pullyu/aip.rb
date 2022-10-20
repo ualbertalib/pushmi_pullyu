@@ -12,13 +12,16 @@ module PushmiPullyu::AIP
 
     aip_directory = "#{PushmiPullyu.options[:workdir]}/#{entity[:uuid]}"
     aip_filename = "#{aip_directory}.tar"
+    begin
+      PushmiPullyu::AIP::Downloader.new(entity, aip_directory).run
+      PushmiPullyu::AIP::Creator.new(entity[:uuid], aip_directory, aip_filename).run
 
-    PushmiPullyu::AIP::Downloader.new(entity, aip_directory).run
-    PushmiPullyu::AIP::Creator.new(entity[:uuid], aip_directory, aip_filename).run
-
-    yield aip_filename, aip_directory
-
-    FileUtils.rm_rf(aip_filename)
-    FileUtils.rm_rf(aip_directory)
+      yield aip_filename, aip_directory
+    # Leave expection handling to logic at a higher level
+    ensure
+      # We need to remove the files after creation no matter what
+      FileUtils.rm_rf(aip_filename)
+      FileUtils.rm_rf(aip_directory)
+    end
   end
 end
