@@ -18,7 +18,7 @@ module PushmiPullyu::AIP
 
     yield aip_filename, aip_directory
 
-    FileUtils.rm_rf(aip_filename) if File.exist?(aip_filename)
-    FileUtils.rm_rf(aip_directory) if File.exist?(aip_directory)
+    FileUtils.rm_rf(aip_filename)
+    FileUtils.rm_rf(aip_directory)
   end
 end
