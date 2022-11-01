@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Bump to Ruby 2.7
+
 ## [2.0.3] - 2022-04-28
 
 - Changed Danger token in Github Actions

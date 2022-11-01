@@ -255,7 +255,7 @@ RSpec.describe PushmiPullyu::CLI do
 
       after do
         # double makes sure file is deleted
-        File.unlink tmp_path if File.exist? tmp_path
+        FileUtils.rm_rf tmp_path
       end
 
       it 'results in an identical options hash, except for config_file' do
