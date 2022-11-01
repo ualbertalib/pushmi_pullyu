@@ -17,7 +17,9 @@ module PushmiPullyu::AIP
       PushmiPullyu::AIP::Creator.new(entity[:uuid], aip_directory, aip_filename).run
 
       yield aip_filename, aip_directory
-    # Leave expection handling to logic at a higher level
+    # Here we will ensure the files are removed even if an exception comes up.
+    # We will leave the exception handling when we actually create an AIP using
+    # this method.
     ensure
       # We need to remove the files after creation no matter what
       FileUtils.rm_rf(aip_filename)
