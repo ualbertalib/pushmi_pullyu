@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Fix issue with temporary work files not being deleted after a failed swift deposit [#242](https://github.com/ualbertalib/pushmi_pullyu/issues/242)
+
 ## [2.0.3] - 2022-04-28
 
 - Changed Danger token in Github Actions
