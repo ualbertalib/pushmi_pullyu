@@ -21,7 +21,6 @@ module PushmiPullyu::AIP
     # We will leave the exception handling when we actually create an AIP using
     # this method.
     ensure
-      # We need to remove the files after creation no matter what
       FileUtils.rm_rf(aip_filename)
       FileUtils.rm_rf(aip_directory)
     end

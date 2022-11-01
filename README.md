@@ -26,7 +26,7 @@ Its primary job is to manage the flow of content from Jupiter into Swift for pre
 
 ## Requirements
 
-PushmiPullyu supports Ruby 2.3.1+
+PushmiPullyu supports Ruby 2.7
 
 ## Installation
 
