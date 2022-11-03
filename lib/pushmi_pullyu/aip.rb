@@ -18,8 +18,7 @@ module PushmiPullyu::AIP
 
       yield aip_filename, aip_directory
     # Here we will ensure the files are removed even if an exception comes up.
-    # We will leave the exception handling when we actually create an AIP using
-    # this method.
+    # You will notice there is no rescue block.  We will catch exceptions in `PushmiPullyu::CLI`
     ensure
       FileUtils.rm_rf(aip_filename)
       FileUtils.rm_rf(aip_directory)
