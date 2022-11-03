@@ -54,5 +54,33 @@ RSpec.describe PushmiPullyu::AIP do
       # cleanup workdir
       FileUtils.rm_rf(workdir)
     end
+
+    it 'removes files even if there is an error during creation' do
+      FileUtils.mkdir_p(aip_folder)
+      FileUtils.touch(aip_file)
+
+      # stub out creator/downloader classes
+      creator = instance_double(PushmiPullyu::AIP::Creator)
+      allow(PushmiPullyu::AIP::Creator).to receive(:new).and_return(creator)
+      allow(creator).to receive(:run)
+
+      downloader = instance_double(PushmiPullyu::AIP::Downloader)
+      allow(PushmiPullyu::AIP::Downloader).to receive(:new).and_return(downloader)
+      allow(downloader).to receive(:run)
+
+      begin
+        PushmiPullyu::AIP.create(uuid: uuid, type: type) do
+          # Oh no, something happened when creating the AIP!
+          raise StandardError
+        end
+      rescue StandardError
+        # Work directory has been removed
+        expect(File.exist?(aip_folder)).to be(false)
+        # AIP tar file has been removed
+        expect(File.exist?(aip_file)).to be(false)
+      end
+      # cleanup workdir
+      FileUtils.rm_rf(workdir)
+    end
   end
 end
