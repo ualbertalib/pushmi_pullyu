@@ -68,6 +68,12 @@ class PushmiPullyu::PreservationQueue
     end
   end
 
+  def add_entity_json(entity_json)
+    @redis.with do |connection|
+      connection.zadd @queue_name, Time.now.to_f, entity_json
+    end
+  end
+
   protected
 
   def connected?

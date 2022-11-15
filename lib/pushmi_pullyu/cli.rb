@@ -182,11 +182,10 @@ class PushmiPullyu::CLI
   end
 
   def run_preservation_cycle
-    entity_json = JSON.parse(queue.wait_next_item)
-    entity = {
-      type: entity_json['type'],
-      uuid: entity_json['uuid']
-    }
+    entity_json = queue.wait_next_item
+    # jupiter is submitting the entries to reddis in a hash format using fat arrows. We need to change them to clons in
+    # order to parse them corretrly from json
+    entity = JSON.parse(entity_json.gsub('=>', ':'), { symbolize_names: true })
     return unless entity[:type].present? && entity[:uuid].present?
 
     # add additional information about the error context to errors that occur while processing this item.
@@ -203,6 +202,7 @@ class PushmiPullyu::CLI
     rescue Exception => e
       Rollbar.error(e)
       logger.error(e)
+      queue.add_entity_json(entity_json)
       # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
       # move on to the next item.
       # rubocop:enable Lint/RescueException
