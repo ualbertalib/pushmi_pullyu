@@ -198,14 +198,21 @@ class PushmiPullyu::CLI
         # Log successful preservation event to the log files
         PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
       end
-      # rubocop:disable Lint/RescueException
+    # An EntityInvalid expection means there is a problem with the entity information format so there is no point in
+    # readding it to the queue as it will always fail
+    rescue PushmiPullyu::AIP::EntityInvalid => e
+    rescue StandardError => e
+      queue.add_entity_json(entity_json)
+
+    # rubocop:disable Lint/RescueException
+    # Something other than a StandardError exception means something happened which we were not expecting!
+    # Make sure we log the problem
     rescue Exception => e
+      raise e
+    # rubocop:enable Lint/RescueException
+    ensure
       Rollbar.error(e)
       logger.error(e)
-      queue.add_entity_json(entity_json)
-      # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
-      # move on to the next item.
-      # rubocop:enable Lint/RescueException
     end
   end
 

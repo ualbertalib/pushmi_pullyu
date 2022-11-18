@@ -272,6 +272,30 @@ RSpec.describe PushmiPullyu::CLI do
 
         expect(old_options).to eq new_options
       end
+
+      it 'makes sure an entities information is readded to reddis when deposit fails' do
+        cli.parse(['-C', 'spec/fixtures/config_wrong_swift.yml'])
+        redis = Redis.new
+        redis.zadd(PushmiPullyu.options[:queue_name], 10,
+                   '{"uuid": "123e4567-e89b-12d3-a456-426614174000", "type": "items"}')
+
+        original_entity_information, original_entity_score = redis.zrange(PushmiPullyu.options[:queue_name],
+                                                                          0, 0, with_scores: true).first
+
+        VCR.use_cassette('aip_download_and_swift_upload') do
+          # The run_preservation_cycle method will take the item from the redis queue, it will then run into an error
+          # and will re-add the original entity information back into the queue with a different score.
+          # We know that we will be getting an error on this method so lets filter out the logs for this bit.
+          PushmiPullyu::Logging.logger.fatal!
+          cli.send(:run_preservation_cycle)
+          PushmiPullyu::Logging.initialize_logger
+          readded_entity, readded_entity_score = redis.zrange(PushmiPullyu.options[:queue_name],
+                                                              0, 0, with_scores: true).first
+          expect(original_entity_information).to eq readded_entity
+          expect(original_entity_score).not_to eq readded_entity_score
+        end
+        redis.del(PushmiPullyu.options[:queue_name])
+      end
     end
   end
 end
