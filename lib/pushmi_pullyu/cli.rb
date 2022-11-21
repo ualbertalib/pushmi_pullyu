@@ -182,11 +182,10 @@ class PushmiPullyu::CLI
   end
 
   def run_preservation_cycle
-    entity_json = JSON.parse(queue.wait_next_item)
-    entity = {
-      type: entity_json['type'],
-      uuid: entity_json['uuid']
-    }
+    entity_json = queue.wait_next_item
+    # jupiter is submitting the entries to reddis in a hash format using fat arrows. We need to change them to colons in
+    # order to parse them correctly from json
+    entity = JSON.parse(entity_json.gsub('=>', ':'), { symbolize_names: true })
     return unless entity[:type].present? && entity[:uuid].present?
 
     # add additional information about the error context to errors that occur while processing this item.
@@ -199,13 +198,21 @@ class PushmiPullyu::CLI
         # Log successful preservation event to the log files
         PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
       end
-      # rubocop:disable Lint/RescueException
+    # An EntityInvalid expection means there is a problem with the entity information format so there is no point in
+    # readding it to the queue as it will always fail
+    rescue PushmiPullyu::AIP::EntityInvalid => e
+    rescue StandardError => e
+      queue.add_entity_json(entity_json)
+
+    # rubocop:disable Lint/RescueException
+    # Something other than a StandardError exception means something happened which we were not expecting!
+    # Make sure we log the problem
     rescue Exception => e
+      raise e
+    # rubocop:enable Lint/RescueException
+    ensure
       Rollbar.error(e)
       logger.error(e)
-      # TODO: we could re-raise here and let the daemon die on any preservation error, or just log the issue and
-      # move on to the next item.
-      # rubocop:enable Lint/RescueException
     end
   end
 
