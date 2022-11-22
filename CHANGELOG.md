@@ -8,22 +8,23 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [2.0.4] - 2022-11-22
+
 - Fix issue with temporary work files not being deleted after a failed swift deposit [#242](https://github.com/ualbertalib/pushmi_pullyu/issues/242)
 - Bump to Ruby 2.7
 - Fix issue with entity information consumed even after failed deposit [#232](https://github.com/ualbertalib/pushmi_pullyu/issues/232)
-
-## [2.0.3] - 2022-04-28
-
-- Changed Danger token in Github Actions
-- remove pg dependency
-- unblock CI (rubocop and coveralls)
-- Log to preservation_events.json as well in an easy to use json format.
 - Bump rspec from 3.10.0 to 3.12.0
 - Bump rollbar from 3.3.0 to 3.3.2
 - Bump pry-byebug from 3.8.0 to 3.10.1
 - Bump webmock from 3.14.0 to 3.18.1
 - Bump rubocop-rspec from 2.6.0 to 2.11.1
 - Bump timecop from 0.9.4 to 0.9.5
+## [2.0.3] - 2022-04-28
+
+- Changed Danger token in Github Actions
+- remove pg dependency
+- unblock CI (rubocop and coveralls)
+- Log to preservation_events.json as well in an easy to use json format.
 
 ## [2.0.2] - 2021-11-22
 
