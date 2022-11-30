@@ -144,7 +144,7 @@ This will cut a tag version, builds the gem, and pushes the gem up to Rubygems
 
 Note: You may need permission to push a gem up to Rubygems!
 You will first need to create an account on rubygems.org.
-Once you have an account, bug Shane or Matt to [add you as an owner](http://guides.rubygems.org/command-reference/#gem-owner) to pushmi_pullyu Rubygem. Once you are an owner you should be able to push new versions of pushmi_pullyu up to Rubygems.
+Once you have an account, bug Tricia, Omar, or Henry to [add you as an owner](http://guides.rubygems.org/command-reference/#gem-owner) to pushmi_pullyu Rubygem. Once you are an owner you should be able to push new versions of pushmi_pullyu up to Rubygems.
 
 ## Deployment
 
