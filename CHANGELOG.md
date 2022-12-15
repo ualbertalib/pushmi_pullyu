@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Add rescue block to catch exceptions while waiting for next item [#280](https://github.com/ualbertalib/pushmi_pullyu/issues/280)
+
 ## [2.0.4] - 2022-11-22
 
 - Fix issue with temporary work files not being deleted after a failed swift deposit [#242](https://github.com/ualbertalib/pushmi_pullyu/issues/242)
