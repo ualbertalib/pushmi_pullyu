@@ -182,11 +182,18 @@ class PushmiPullyu::CLI
   end
 
   def run_preservation_cycle
-    entity_json = queue.wait_next_item
-    # jupiter is submitting the entries to reddis in a hash format using fat arrows. We need to change them to colons in
-    # order to parse them correctly from json
-    entity = JSON.parse(entity_json.gsub('=>', ':'), { symbolize_names: true })
-    return unless entity[:type].present? && entity[:uuid].present?
+    begin
+      entity_json = queue.wait_next_item
+      return unless entity_json
+
+      # jupiter is submitting the entries to reddis in a hash format using fat arrows. We need to change them to colons
+      # in order to parse them correctly from json
+      entity = JSON.parse(entity_json.gsub('=>', ':'), { symbolize_names: true })
+      return unless entity[:type].present? && entity[:uuid].present?
+    rescue StandardError => e
+      Rollbar.error(e)
+      logger.error(e)
+    end
 
     # add additional information about the error context to errors that occur while processing this item.
     Rollbar.scoped(entity_uuid: entity[:uuid]) do
