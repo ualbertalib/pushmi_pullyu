@@ -35,6 +35,10 @@ class PushmiPullyu::AIP::Downloader
     # Main object metadata
     download_and_log(object_aip_paths[:main_object_remote],
                      object_aip_paths[:main_object_local])
+
+    # Communities and collections do not have their own files.
+    return if (@entity[:type] == 'collections') || (@entity[:type] == 'communities')
+
     download_and_log(object_aip_paths[:file_sets_remote],
                      object_aip_paths[:file_sets_local])
 
