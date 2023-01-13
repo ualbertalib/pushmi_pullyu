@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: http://localhost:3000/auth/system
+    uri: http://era.lvh.me:3000/auth/system
     body:
       encoding: US-ASCII
       string: email=ditech%40ualberta.ca&api_key=3eeb395e-63b7-11ea-bc55-0242ac130003
@@ -58,7 +58,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:03 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679
     body:
       encoding: US-ASCII
       string: ''
@@ -115,11 +115,11 @@ http_interactions:
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679> a pcdm:Object;
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679> a pcdm:Object;
           dc:title "dcterms:title1$ Some Title for Item";
-          pcdm:hasMember <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981>,
-            <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb>;
-          pcdm:memberOf <http://localhost:3000/aip/v1/collections/23afe4d2-bc7e-416e-8552-c44b7114bd77>;
+          pcdm:hasMember <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981>,
+            <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb>;
+          pcdm:memberOf <http://era.lvh.me:3000/aip/v1/collections/23afe4d2-bc7e-416e-8552-c44b7114bd77>;
           <http://prismstandard.org/namespaces/basic/3.0/doi> "doi:10.7939/xxxxxxxxx";
           dc11:contributor "dc:contributor1$ Perez, Juan",
             "dc:contributor2$ Perez, Maria";
@@ -160,7 +160,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:03 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets
     body:
       encoding: US-ASCII
       string: ''
@@ -218,7 +218,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:03 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/file_paths
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/file_paths
     body:
       encoding: US-ASCII
       string: ''
@@ -271,7 +271,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:03 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981/fixity
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981/fixity
     body:
       encoding: US-ASCII
       string: ''
@@ -324,10 +324,10 @@ http_interactions:
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981> premis:hasFixity <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981/fixity>;
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981> premis:hasFixity <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981/fixity>;
           premis:hasMessageDigest "GxpIjJsC4KnRoBKNjWnkJA==";
           premis:hasSize 12086 .
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981/fixity> a premis:Fixity,
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981/fixity> a premis:Fixity,
             premis:EventOutcomeDetail;
           premis:hasEventOutcome "SUCCESS";
           premis:hasMessageDigestAlgorithm "md5" .
@@ -335,7 +335,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:03 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981
     body:
       encoding: US-ASCII
       string: ''
@@ -393,13 +393,13 @@ http_interactions:
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981> a fcrepo4:Resource,
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/4dfb117e-a1af-4c16-b6c9-9c4e2ee70981> a fcrepo4:Resource,
             fcrepo4:Container,
             pcdm:Object,
             pcdm:File;
-          fcrepo4:hasFixityService <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/fixity>;
-          fcrepo4:hasParent <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/>;
-          pcdm:memberOf <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/collections/23afe4d2-bc7e-416e-8552-c44b7114bd77>;
+          fcrepo4:hasFixityService <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/fixity>;
+          fcrepo4:hasParent <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/>;
+          pcdm:memberOf <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/collections/23afe4d2-bc7e-416e-8552-c44b7114bd77>;
           dc:accessRights "http://terms.library.ualberta.ca/public";
           bibo:owner "admin@ualberta.ca";
           <http://terms.library.ualberta.ca/recordCreatedInJupiter> "2000-01-01T00:00:00.007Z"^^xsd:dateTime;
@@ -414,7 +414,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:04 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb/fixity
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb/fixity
     body:
       encoding: US-ASCII
       string: ''
@@ -467,10 +467,10 @@ http_interactions:
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb> premis:hasFixity <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb/fixity>;
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb> premis:hasFixity <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb/fixity>;
           premis:hasMessageDigest "/KC0nmafh5E2KWQKu7uCgQ==";
           premis:hasSize 136784 .
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb/fixity> a premis:Fixity,
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb/fixity> a premis:Fixity,
             premis:EventOutcomeDetail;
           premis:hasEventOutcome "SUCCESS";
           premis:hasMessageDigestAlgorithm "md5" .
@@ -478,7 +478,7 @@ http_interactions:
   recorded_at: Fri, 07 Aug 2020 16:57:04 GMT
 - request:
     method: get
-    uri: http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb
+    uri: http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb
     body:
       encoding: US-ASCII
       string: ''
@@ -536,13 +536,13 @@ http_interactions:
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-        <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb> a fcrepo4:Resource,
+        <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/5d043fa7-13b1-4367-a71b-dd13c37950bb> a fcrepo4:Resource,
             fcrepo4:Container,
             pcdm:Object,
             pcdm:File;
-          fcrepo4:hasFixityService <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/fixity>;
-          fcrepo4:hasParent <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/>;
-          pcdm:memberOf <http://localhost:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/collections/23afe4d2-bc7e-416e-8552-c44b7114bd77>;
+          fcrepo4:hasFixityService <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/fixity>;
+          fcrepo4:hasParent <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/filesets/>;
+          pcdm:memberOf <http://era.lvh.me:3000/aip/v1/items/e2ec88e3-3266-4e95-8575-8b04fac2a679/collections/23afe4d2-bc7e-416e-8552-c44b7114bd77>;
           dc:accessRights "http://terms.library.ualberta.ca/public";
           bibo:owner "admin@ualberta.ca";
           <http://terms.library.ualberta.ca/recordCreatedInJupiter> "2000-01-01T00:00:00.007Z"^^xsd:dateTime;

@@ -8,7 +8,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       jupiter: {
         user: 'ditech@ualberta.ca',
         api_key: '3eeb395e-63b7-11ea-bc55-0242ac130003',
-        jupiter_url: 'http://localhost:3000/',
+        jupiter_url: 'http://era.lvh.me:3000/',
         aip_api_path: 'aip/v1'
       }
     }
@@ -19,10 +19,21 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   let(:file_set_uuids) do
     ['4dfb117e-a1af-4c16-b6c9-9c4e2ee70981', '5d043fa7-13b1-4367-a71b-dd13c37950bb']
   end
+  let(:community_uuid) { '7c787de9-a33b-469e-8786-ba002b5ed66f' }
+  let(:community_definition) { { uuid: community_uuid, type: 'communities' } }
+
+  let(:collection_uuid) { '7e6cfffd-3c9a-44b6-a5d1-67fc0e2f1c43' }
+  let(:collection_definition) { { uuid: collection_uuid, type: 'collections' } }
 
   let(:aip_folder) { "#{workdir}/#{uuid}" }
+  let(:aip_community_folder) { "#{workdir}/#{community_uuid}" }
+  let(:aip_collection_folder) { "#{workdir}/#{collection_uuid}" }
+
   let(:downloader) { PushmiPullyu::AIP::Downloader.new(entity_definition, aip_folder) }
-  let(:folders) do
+  let(:downloader_community) { PushmiPullyu::AIP::Downloader.new(community_definition, aip_community_folder) }
+  let(:downloader_collection) { PushmiPullyu::AIP::Downloader.new(collection_definition, aip_collection_folder) }
+
+  let(:folders_with_files) do
     [
       "tmp/downloader_spec/#{uuid}/data",
       "tmp/downloader_spec/#{uuid}/data/logs",
@@ -37,6 +48,14 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       "tmp/downloader_spec/#{uuid}/data/objects/files",
       "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[0]}",
       "tmp/downloader_spec/#{uuid}/data/objects/files/#{file_set_uuids[1]}"
+    ]
+  end
+  let(:folders_without_files) do
+    [
+      "tmp/downloader_spec/#{uuid}/data",
+      "tmp/downloader_spec/#{uuid}/data/logs",
+      "tmp/downloader_spec/#{uuid}/data/objects",
+      "tmp/downloader_spec/#{uuid}/data/objects/metadata"
     ]
   end
   let(:files_copied) do
@@ -55,6 +74,27 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/file_order.xml",
       "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[0]}/file_set_metadata.n3",
       "tmp/downloader_spec/#{uuid}/data/objects/metadata/files_metadata/#{file_set_uuids[1]}/file_set_metadata.n3"
+    ]
+  end
+  let(:community_files_created) do
+    [
+      "tmp/downloader_spec/#{community_uuid}/data",
+      "tmp/downloader_spec/#{community_uuid}/data/objects",
+      "tmp/downloader_spec/#{community_uuid}/data/objects/metadata",
+      "tmp/downloader_spec/#{community_uuid}/data/objects/metadata/object_metadata.n3",
+      "tmp/downloader_spec/#{community_uuid}/data/logs",
+      "tmp/downloader_spec/#{community_uuid}/data/logs/aipcreation.log"
+    ]
+  end
+  let(:collection_files_created) do
+    # Community and collection aips will have the same set of files
+    [
+      "tmp/downloader_spec/#{collection_uuid}/data",
+      "tmp/downloader_spec/#{collection_uuid}/data/objects",
+      "tmp/downloader_spec/#{collection_uuid}/data/objects/metadata",
+      "tmp/downloader_spec/#{collection_uuid}/data/objects/metadata/object_metadata.n3",
+      "tmp/downloader_spec/#{collection_uuid}/data/logs",
+      "tmp/downloader_spec/#{collection_uuid}/data/logs/aipcreation.log"
     ]
   end
   let(:aip_downloader_run_arguments) do
@@ -76,7 +116,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
   end
 
   describe '#run' do
-    it 'copies the correct files' do
+    it 'copies the correct files for entities with files' do
       VCR.use_cassette('aip_downloader_run', erb: aip_downloader_run_arguments) do
         downloader.run
       end
@@ -101,7 +141,33 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       expect(folders_content.sort).to eq(files_downloaded.sort)
     end
 
-    it 'creates the expected structure' do
+    it 'downloads the correct files for community' do
+      VCR.use_cassette('aip_downloader_community_run') do
+        downloader_community.run
+      end
+
+      # List all of the created content
+      folders_content = Dir[
+        "tmp/downloader_spec/#{community_uuid}/**/*",
+      ]
+
+      expect(folders_content.sort).to eq(community_files_created.sort)
+    end
+
+    it 'downloads the correct files for collection' do
+      VCR.use_cassette('aip_downloader_collection_run') do
+        downloader_collection.run
+      end
+
+      # List all of the created content
+      folders_content = Dir[
+        "tmp/downloader_spec/#{collection_uuid}/**/*",
+      ]
+
+      expect(folders_content.sort).to eq(collection_files_created.sort)
+    end
+
+    it 'creates the expected structure for entities with files' do
       # Should not exist yet
       expect(File.exist?(aip_folder)).to be(false)
 
@@ -113,7 +179,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       expect(File.exist?(aip_folder)).to be(true)
 
       # 13 folders exist
-      folders.each do |dir|
+      folders_with_files.each do |dir|
         expect(File.exist?(dir)).to be(true)
       end
 
@@ -124,7 +190,7 @@ RSpec.describe PushmiPullyu::AIP::Downloader do
       end
 
       # 24 files and directories total were created
-      expect(Dir["tmp/downloader_spec/#{uuid}/**/*"].sort).to eq((folders + files).sort)
+      expect(Dir["tmp/downloader_spec/#{uuid}/**/*"].sort).to eq((folders_with_files + files).sort)
     end
   end
 end
