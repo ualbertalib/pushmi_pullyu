@@ -199,7 +199,7 @@ class PushmiPullyu::AIP::Downloader
       main_object_remote: object_uri,
       main_object_local: "#{aip_dirs[:metadata]}/object_metadata.n3",
       file_sets_remote: "#{object_uri}/filesets",
-      # This directory needs to be created before we can dowloand the file order information
+      # This directory needs to be created before we can downloaded the file order information
       file_sets_directory_local: "#{@aip_directory}/data/objects/metadata/files_metadata",
       file_sets_local: "#{@aip_directory}/data/objects/metadata/files_metadata/file_order.xml",
       # This is downloaded for processing but not saved
