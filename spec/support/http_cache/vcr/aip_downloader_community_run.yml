@@ -1,0 +1,128 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://era.lvh.me:3000/auth/system
+    body:
+      encoding: US-ASCII
+      string: email=ditech%40ualberta.ca&api_key=3eeb395e-63b7-11ea-bc55-0242ac130003
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - text/html
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self'' https:; font-src ''self'' https: data:; img-src ''self''
+        https: data: analytics.library.ualberta.ca www.google-analytics.com; object-src
+        ''none''; script-src ''unsafe-inline'' ''self'' https: analytics.library.ualberta.ca
+        www.google-analytics.com www.googletagmanager.com; style-src ''unsafe-inline''
+        ''self'' https:; connect-src ''self'' https: http://localhost:3035 ws://localhost:3035'
+      Set-Cookie:
+      - _jupiter_session=0MSY%2FJ%2F0B3x2d0QAsPY%2FsFfPoAGNp45RLL6LpcqiyISFSxckYJqKRxw%2FJ3%2BQzCXPdyh%2FjOP0yp6A38u0ukx5iGWaF%2BkNsksK%2Bxl%2B5hhbTG4vB2jy7CLTP1jKizN1p%2FVwYkN4q%2FLd6n2AOtq7lLeawLu%2BF6kgXe5HSSVwRdc7xils64G9YQkFdfeBoUBDrh2hACSQT5ugbUU%3D--sf%2BkUMT6z5aFlhVH--IlMecHTAehg6InuZStcp2w%3D%3D;
+        path=/; HttpOnly; SameSite=Lax
+      X-Request-Id:
+      - 7738a1b8-0cf3-4395-bb94-f550e66e23d1
+      X-Runtime:
+      - '0.246532'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: null
+  recorded_at: Tue, 17 Jan 2023 21:59:15 GMT
+- request:
+    method: get
+    uri: http://era.lvh.me:3000/aip/v1/communities/7c787de9-a33b-469e-8786-ba002b5ed66f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=0MSY%2FJ%2F0B3x2d0QAsPY%2FsFfPoAGNp45RLL6LpcqiyISFSxckYJqKRxw%2FJ3%2BQzCXPdyh%2FjOP0yp6A38u0ukx5iGWaF%2BkNsksK%2Bxl%2B5hhbTG4vB2jy7CLTP1jKizN1p%2FVwYkN4q%2FLd6n2AOtq7lLeawLu%2BF6kgXe5HSSVwRdc7xils64G9YQkFdfeBoUBDrh2hACSQT5ugbUU%3D--sf%2BkUMT6z5aFlhVH--IlMecHTAehg6InuZStcp2w%3D%3D;
+        path=/; HttpOnly; SameSite=Lax
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - text/plain; charset=utf-8
+      Etag:
+      - W/"52f6137916d8bb9ae95863c2decab3bc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Security-Policy:
+      - 'default-src ''self'' https:; font-src ''self'' https: data:; img-src ''self''
+        https: data: analytics.library.ualberta.ca www.google-analytics.com; object-src
+        ''none''; script-src ''unsafe-inline'' ''self'' https: analytics.library.ualberta.ca
+        www.google-analytics.com www.googletagmanager.com; style-src ''unsafe-inline''
+        ''self'' https:; connect-src ''self'' https: http://localhost:3035 ws://localhost:3035'
+      Set-Cookie:
+      - _jupiter_session=h7hVzHE61ZgLmmB%2B4Ce2HJszff%2FbQVDmqsOYvWG30Q8HaHDQYJgXmxUtb8%2Bp8atlpED6Oc5wMhJ02IRzBfxWjrP13x%2BMbq3VzTXeVrIsr7sKIc7tq3MwBjzi0o5DKpG67d0TEucw71ZYT5eAJuShsbBjCk2t%2Bp003pGlVkWkmjS%2B3gmCG1%2FInTqwJ4VLrVzm8FLIeS9we9%2BbDJccErlNRQsEbOeoaxo0EcmPOaycmMYTwlvRQwkePIWT6salnVMy5C3ruWavF1oQW2dmCy%2FZpkZQEk%2B2g46O2YBUJ9%2BqodBa9hy%2BwIQDDC6fKeVkLrxJ3DoNPIb4ZSUfKJBnu7q3o20PjoabgaJK--7O3%2BVHkwC%2BQmhBwp--M8UbDK9NvyRdUWni9F4hFA%3D%3D;
+        path=/; HttpOnly; SameSite=Lax
+      X-Request-Id:
+      - c0da1e3f-54dd-4ade-b5b1-1315dbf4ad09
+      X-Runtime:
+      - '0.027858'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        @prefix dc: <http://purl.org/dc/terms/> .
+        @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+        <http://era.lvh.me:3000/aip/v1/communities/7c787de9-a33b-469e-8786-ba002b5ed66f> a <http://terms.library.ualberta.ca/Community>;
+            dc:title "Special reports about dogs";
+            dc:description "Repudiandae occaecati et pariatur non aut debitis temporibus voluptatem quia modi accusantium ab dolorum magni voluptatem autem provident consequatur iure";
+            dc:accessRights "http://terms.library.ualberta.ca/public";
+            dc:created "2022-08-24T19:23:15.445Z"^^xsd:dateTime;
+            <http://terms.library.ualberta.ca/recordCreatedInJupiter> "2022-08-24T19:23:15.440Z"^^xsd:dateTime .
+    http_version: null
+  recorded_at: Tue, 17 Jan 2023 21:59:15 GMT
+recorded_with: VCR 5.1.0

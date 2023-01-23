@@ -1,0 +1,131 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://era.lvh.me:3000/auth/system
+    body:
+      encoding: US-ASCII
+      string: email=ditech%40ualberta.ca&api_key=3eeb395e-63b7-11ea-bc55-0242ac130003
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - text/html
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self'' https:; font-src ''self'' https: data:; img-src ''self''
+        https: data: analytics.library.ualberta.ca www.google-analytics.com; object-src
+        ''none''; script-src ''unsafe-inline'' ''self'' https: analytics.library.ualberta.ca
+        www.google-analytics.com www.googletagmanager.com; style-src ''unsafe-inline''
+        ''self'' https:; connect-src ''self'' https: http://localhost:3035 ws://localhost:3035'
+      Set-Cookie:
+      - _jupiter_session=He%2B%2Bprk8TYa%2FTuGIHTj8pk0SGEbDInKVAlwaGWPK18XMfOyFwWDk2yQu2zmxhLXzpPZLaosfCgmAon9A7VP%2FDPlJdRHwFAktThioly5sBUIS%2BnO5FrnzuvhwDyEiJ7urHPdbwR45%2FtHoJFlYcXyLAysmqcQUttjG9x3FuN2obDEh7PB3rliWHdxl0yWDl1moP8gShfuFLXw%3D--V7fQ1sYj5RP33Xfd--I41kr8U3IPLmuS3n6iBrbA%3D%3D;
+        path=/; HttpOnly; SameSite=Lax
+      X-Request-Id:
+      - 29c4a8df-336b-497b-8715-4b45e4c7d933
+      X-Runtime:
+      - '0.248701'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: null
+  recorded_at: Wed, 18 Jan 2023 20:49:16 GMT
+- request:
+    method: get
+    uri: http://era.lvh.me:3000/aip/v1/collections/7e6cfffd-3c9a-44b6-a5d1-67fc0e2f1c43
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Cookie:
+      - _jupiter_session=He%2B%2Bprk8TYa%2FTuGIHTj8pk0SGEbDInKVAlwaGWPK18XMfOyFwWDk2yQu2zmxhLXzpPZLaosfCgmAon9A7VP%2FDPlJdRHwFAktThioly5sBUIS%2BnO5FrnzuvhwDyEiJ7urHPdbwR45%2FtHoJFlYcXyLAysmqcQUttjG9x3FuN2obDEh7PB3rliWHdxl0yWDl1moP8gShfuFLXw%3D--V7fQ1sYj5RP33Xfd--I41kr8U3IPLmuS3n6iBrbA%3D%3D;
+        path=/; HttpOnly; SameSite=Lax
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - text/plain; charset=utf-8
+      Etag:
+      - W/"99b520b2d9f0093ccd9d79edf41e7d7e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Security-Policy:
+      - 'default-src ''self'' https:; font-src ''self'' https: data:; img-src ''self''
+        https: data: analytics.library.ualberta.ca www.google-analytics.com; object-src
+        ''none''; script-src ''unsafe-inline'' ''self'' https: analytics.library.ualberta.ca
+        www.google-analytics.com www.googletagmanager.com; style-src ''unsafe-inline''
+        ''self'' https:; connect-src ''self'' https: http://localhost:3035 ws://localhost:3035'
+      Set-Cookie:
+      - _jupiter_session=zHCfzL5g%2BKmT2ehYOkOvdqvsaDRpzo5V69Ax%2FvfP1RkaLUTLYnqa3g%2Fsxk%2BKJSTZPkpzDal10hAC%2FjyYNBxS%2FKkozf0nl%2BgI2L4zfRC77dmop%2BosZI9HXOrr6dHsjgEYnavD56qdgf6DlyHfJ7FhVTFwdHsCo5nGdxExTpjXPEqOElS%2Bz%2FdPlSB1DCOxra1mkPQPqzD5PFycXF0n3dysxKVQQUkD0DBdveJdijEQYsMDpH%2F287D9D1liYVTzl0wwJRrl6GZkOxMG4NmF783sya89r1K0C12dMrtdEOv5%2FlKx32DMYXRJyXsxOgvb8tGwMc6OdVDA9cwIqt8Q8QikyEQ15JjGdYKY--T8oMmVUTjhoOXPZe--xwa7x9NIbg7ktSlbC2iOfA%3D%3D;
+        path=/; HttpOnly; SameSite=Lax
+      X-Request-Id:
+      - d8ead5e1-f47a-46ec-bd47-1e1f9b88d553
+      X-Runtime:
+      - '0.026209'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        @prefix dc: <http://purl.org/dc/terms/> .
+        @prefix pcdm: <http://pcdm.org/models#> .
+        @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+        <http://era.lvh.me:3000/aip/v1/collections/7e6cfffd-3c9a-44b6-a5d1-67fc0e2f1c43> a pcdm:Collection;
+            dc:title "New collection";
+            dc:description "";
+            pcdm:memberOf "7c787de9-a33b-469e-8786-ba002b5ed66f";
+            dc:accessRights "http://terms.library.ualberta.ca/public";
+            dc:created "2023-01-12T22:22:12.828Z"^^xsd:dateTime;
+            <http://terms.library.ualberta.ca/recordCreatedInJupiter> "2023-01-12T22:22:12.814Z"^^xsd:dateTime;
+            <http://terms.library.ualberta.ca/restrictedCollection> false .
+    http_version: null
+  recorded_at: Wed, 18 Jan 2023 20:49:16 GMT
+recorded_with: VCR 5.1.0

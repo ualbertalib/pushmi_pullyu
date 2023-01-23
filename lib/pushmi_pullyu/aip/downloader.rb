@@ -35,6 +35,11 @@ class PushmiPullyu::AIP::Downloader
     # Main object metadata
     download_and_log(object_aip_paths[:main_object_remote],
                      object_aip_paths[:main_object_local])
+
+    # Communities and collections do not have their own files.
+    return unless can_have_files?
+
+    FileUtils.mkdir_p(object_aip_paths[:file_sets_directory_local])
     download_and_log(object_aip_paths[:file_sets_remote],
                      object_aip_paths[:file_sets_local])
 
@@ -139,25 +144,26 @@ class PushmiPullyu::AIP::Downloader
     PushmiPullyu::Logging.log_aip_activity(@aip_directory, message)
   end
 
+  def can_have_files?
+    @entity[:type] == 'items' || @entity[:type] == 'theses'
+  end
+
   ### Directories
 
   def aip_dirs
     @aip_dirs ||= {
       objects: "#{@aip_directory}/data/objects",
       metadata: "#{@aip_directory}/data/objects/metadata",
-      files: "#{@aip_directory}/data/objects/files",
-      files_metadata: "#{@aip_directory}/data/objects/metadata/files_metadata",
-      logs: "#{@aip_directory}/data/logs",
-      file_logs: "#{@aip_directory}/data/logs/files_logs"
+      logs: "#{@aip_directory}/data/logs"
     }
   end
 
   def file_set_dirs(file_set_uuid)
     @file_set_dirs ||= {}
     @file_set_dirs[file_set_uuid] ||= {
-      metadata: "#{aip_dirs[:files_metadata]}/#{file_set_uuid}",
-      files: "#{aip_dirs[:files]}/#{file_set_uuid}",
-      logs: "#{aip_dirs[:file_logs]}/#{file_set_uuid}"
+      files: "#{@aip_directory}/data/objects/files/#{file_set_uuid}",
+      logs: "#{@aip_directory}/data/logs/files_logs/#{file_set_uuid}",
+      metadata: "#{@aip_directory}/data/objects/metadata/files_metadata/#{file_set_uuid}"
     }
   end
 
@@ -193,7 +199,9 @@ class PushmiPullyu::AIP::Downloader
       main_object_remote: object_uri,
       main_object_local: "#{aip_dirs[:metadata]}/object_metadata.n3",
       file_sets_remote: "#{object_uri}/filesets",
-      file_sets_local: "#{aip_dirs[:files_metadata]}/file_order.xml",
+      # This directory needs to be created before we can downloaded the file order information
+      file_sets_directory_local: "#{@aip_directory}/data/objects/metadata/files_metadata",
+      file_sets_local: "#{@aip_directory}/data/objects/metadata/files_metadata/file_order.xml",
       # This is downloaded for processing but not saved
       file_paths_remote: "#{object_uri}/file_paths"
     }.freeze
