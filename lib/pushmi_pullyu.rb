@@ -26,6 +26,9 @@ module PushmiPullyu
     workdir: 'tmp/work',
     process_name: 'pushmi_pullyu',
     queue_name: 'dev:pmpy_queue',
+    ingestion_prefix: 'prod:pmpy_ingest_attempt:',
+    ingestion_attempts: 15,
+    first_failed_wait: 10,
     redis: {
       url: 'redis://localhost:6379'
     },

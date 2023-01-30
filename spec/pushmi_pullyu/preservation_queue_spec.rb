@@ -8,10 +8,10 @@ RSpec.describe PushmiPullyu::PreservationQueue do
 
     before do
       PushmiPullyu.server_running = true
-      redis.zadd 'test:pmpy_queue', 1, 'noid1'
-      redis.zadd 'test:pmpy_queue', 3, 'noid3'
-      redis.zadd 'test:pmpy_queue', 4, 'noid2'
-      redis.zadd 'test:pmpy_queue', 10, 'noid1'
+      redis.zadd 'test:pmpy_queue', 1, '{"uuid":"9e3be94f-a5de-4589-96ca-b18efba280c1","type":"items"}'
+      redis.zadd 'test:pmpy_queue', 3, '{"uuid":"9e3be94f-a5de-4589-96ca-b18efba280c3","type":"items"}'
+      redis.zadd 'test:pmpy_queue', 4, '{"uuid":"9e3be94f-a5de-4589-96ca-b18efba280c2","type":"items"}'
+      redis.zadd 'test:pmpy_queue', 10, '{"uuid":"9e3be94f-a5de-4589-96ca-b18efba280c1","type":"items"}'
     end
 
     after do
@@ -19,9 +19,13 @@ RSpec.describe PushmiPullyu::PreservationQueue do
     end
 
     it 'retrieves 3 items in priority order' do
-      expect(queue.wait_next_item).to eq 'noid3'
-      expect(queue.wait_next_item).to eq 'noid2'
-      expect(queue.wait_next_item).to eq 'noid1'
+      next_item = queue.wait_next_item
+
+      expect(next_item[:uuid]).to eq '9e3be94f-a5de-4589-96ca-b18efba280c3'
+      next_item = queue.wait_next_item
+      expect(next_item[:uuid]).to eq '9e3be94f-a5de-4589-96ca-b18efba280c2'
+      next_item = queue.wait_next_item
+      expect(next_item[:uuid]).to eq '9e3be94f-a5de-4589-96ca-b18efba280c1'
     end
   end
 
@@ -32,7 +36,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
     let!(:redis) { Redis.new }
 
     before do
-      redis.zadd 'test:pmpy_queue', Time.now.to_f, 'noid1'
+      redis.zadd 'test:pmpy_queue', Time.now.to_f, '{"uuid":"9e3be94f-a5de-4589-96ca-b18efba280c1","type":"items"}'
     end
 
     after do
@@ -50,7 +54,7 @@ RSpec.describe PushmiPullyu::PreservationQueue do
       expect(queue.next_item).to be_nil
 
       Timecop.travel(now + 15.minutes)
-      expect(queue.next_item).to eq 'noid1'
+      expect(queue.next_item[:uuid]).to eq '9e3be94f-a5de-4589-96ca-b18efba280c1'
     end
   end
 end

@@ -148,6 +148,21 @@ class PushmiPullyu::CLI
         opts[:queue_name] = queue
       end
 
+      o.on('-i', '--ingestion_prefix PREFIX',
+           'Prefix for keys used in counting the number of failed ingestion attempts') do |prefix|
+        opts[:ingestion_prefix] = prefix
+      end
+
+      o.on('-x', '--ingestion_attempts NUMBER', Integer,
+           'Max number of attempts to try ingesting an entity') do |ingestion_attempts|
+        opts[:ingestion_attempts] = ingestion_attempts
+      end
+
+      o.on('-f', '--first_failed_wait NUMBER', Integer,
+           'Time in seconds to wait after first failed deposit. Time will double every failed attempt') do |failed_wait|
+        opts[:first_failed_wait] = failed_wait
+      end
+
       o.separator ''
       o.separator 'Common options:'
 
@@ -183,16 +198,10 @@ class PushmiPullyu::CLI
 
   def run_preservation_cycle
     begin
-      entity_json = queue.wait_next_item
-      return unless entity_json
-
-      # jupiter is submitting the entries to reddis in a hash format using fat arrows. We need to change them to colons
-      # in order to parse them correctly from json
-      entity = JSON.parse(entity_json.gsub('=>', ':'), { symbolize_names: true })
-      return unless entity[:type].present? && entity[:uuid].present?
+      entity = queue.wait_next_item
+      return unless entity && entity[:type].present? && entity[:uuid].present?
     rescue StandardError => e
-      Rollbar.error(e)
-      logger.error(e)
+      log_exception(e)
     end
 
     # add additional information about the error context to errors that occur while processing this item.
@@ -209,7 +218,11 @@ class PushmiPullyu::CLI
     # readding it to the queue as it will always fail
     rescue PushmiPullyu::AIP::EntityInvalid => e
     rescue StandardError => e
-      queue.add_entity_json(entity_json)
+      begin
+        queue.add_entity_in_timeframe(entity)
+      rescue MaxDepositAttemptsReached => e
+        log_exception(e)
+      end
 
     # rubocop:disable Lint/RescueException
     # Something other than a StandardError exception means something happened which we were not expecting!
@@ -218,8 +231,7 @@ class PushmiPullyu::CLI
       raise e
     # rubocop:enable Lint/RescueException
     ensure
-      Rollbar.error(e)
-      logger.error(e)
+      log_exception(e)
     end
   end
 
@@ -292,6 +304,11 @@ class PushmiPullyu::CLI
       Dir.chdir(pwd)
       start_server
     end
+  end
+
+  def log_exception(exception)
+    Rollbar.error(exception)
+    logger.error(exception)
   end
 
 end

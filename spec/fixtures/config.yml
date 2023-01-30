@@ -7,6 +7,9 @@ monitor: false
 piddir: tmp/spec/pids
 workdir: tmp/spec/work
 process_name: test_pushmi_pullyu
+ingestion_prefix: 'prod:pmpy_ingest_attempt:'
+ingestion_attempts: 15
+first_failed_wait: 10
 minimum_age: 1
 queue_name: test:pmpy_queue
 rollbar:
