@@ -39,11 +39,7 @@ RSpec.describe 'Acceptance test', type: :feature do
     cli = PushmiPullyu::CLI.instance
     cli.parse(['-C', 'spec/fixtures/config.yml', '-W', workdir])
 
-    entity_json = JSON.parse(cli.send(:queue).wait_next_item)
-    entity = {
-      type: entity_json['type'],
-      uuid: entity_json['uuid']
-    }
+    entity = cli.send(:queue).wait_next_item
 
     expect(entity[:uuid]).to eq uuid
 

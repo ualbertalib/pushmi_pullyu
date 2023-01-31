@@ -66,7 +66,10 @@ Specific options:
   -W, --workdir PATH               Path for directory where AIP creation work takes place in
   -N, --process_name NAME          Name of the application process
   -m, --monitor                    Start monitor process for a deamon
-  -q, --queue NAME                 Name of the queue to read from
+  -q, --queue NAME                 Name of the queue to read from    
+  -i, --ingestion_prefix PREFIX    Prefix for keys used in counting the number of failed ingestion attempts
+  -x, --ingestion_attempts NUMBER  Max number of attempts to try ingesting an entity
+  -f, --first_failed_wait NUMBER   Time in seconds to wait after first failed entity deposit. This time will double every failed attempt
 
 Common options:
   -v, --version                    Show version

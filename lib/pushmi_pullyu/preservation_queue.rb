@@ -20,6 +20,7 @@ require 'connection_pool'
 class PushmiPullyu::PreservationQueue
 
   class ConnectionError < StandardError; end
+  class MaxDepositAttemptsReached < StandardError; end
 
   def initialize(redis_url: 'redis://localhost:6379',
                  pool_opts: { size: 1, timeout: 5 },
@@ -50,7 +51,8 @@ class PushmiPullyu::PreservationQueue
           rd.multi do |tx|
             tx.zrem(@queue_name, element) # remove the top element transactionally
           end
-          return element
+
+          return JSON.parse(element, { symbolize_names: true })
         else
           rd.unwatch # cancel the transaction since there was nothing in the queue
           return nil
@@ -68,10 +70,25 @@ class PushmiPullyu::PreservationQueue
     end
   end
 
-  def add_entity_json(entity_json)
+  def add_entity_in_timeframe(entity)
+    entity_attempts_key = "#{PushmiPullyu.options[:ingestion_prefix]}#{entity[:uuid]}"
+
     @redis.with do |connection|
-      connection.zadd @queue_name, Time.now.to_f, entity_json
+      # separate information for priority information and queue
+      deposit_attempt = connection.incr entity_attempts_key
+
+      if deposit_attempt <= PushmiPullyu.options[:ingestion_attempts]
+        connection.zadd @queue_name, Time.now.to_f + self.class.extra_wait_time(deposit_attempt),
+                        entity.slice(:uuid, :type).to_json
+      else
+        connection.del entity_attempts_key
+        raise MaxDepositAttemptsReached
+      end
     end
+  end
+
+  def self.extra_wait_time(deposit_attempt)
+    (2**deposit_attempt) * PushmiPullyu.options[:first_failed_wait]
   end
 
   protected
