@@ -304,10 +304,13 @@ RSpec.describe PushmiPullyu::CLI do
               time_now = Time.now.to_i
               _readded_entity, readded_entity_score = redis.zrange(PushmiPullyu.options[:queue_name],
                                                                    0, 0, with_scores: true).first
-              deposit_attempt = redis.get(attempt_key).to_i
-              extra_wait_time = PushmiPullyu::PreservationQueue.extra_wait_time(deposit_attempt)
+              new_deposit_attempt = redis.get(attempt_key).to_i
+              extra_wait_time = PushmiPullyu::PreservationQueue.extra_wait_time(new_deposit_attempt)
+              # Make sure the deposits attempts are increasing by 1
+              expect(new_deposit_attempt).to eq deposit_attempt + 1
               expect(readded_entity_score.to_i - time_now).to eq extra_wait_time
               # We dont want to wait for defined minimum age so we add it to the time travel shenanigans
+              deposit_attempt = new_deposit_attempt
               Timecop.travel(extra_wait_time + PushmiPullyu.options[:minimum_age])
             end
           end

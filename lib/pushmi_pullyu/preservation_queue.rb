@@ -88,11 +88,7 @@ class PushmiPullyu::PreservationQueue
   end
 
   def self.extra_wait_time(deposit_attempt)
-    extra = 0
-    deposit_attempt.times do |n|
-      extra += (2**n) * PushmiPullyu.options[:first_failed_wait]
-    end
-    extra
+    (2**deposit_attempt) * PushmiPullyu.options[:first_failed_wait]
   end
 
   protected
