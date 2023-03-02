@@ -106,7 +106,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 You'll need to set these two env vars otherwise you'll likely run into an error (Errno::ECONNRESET: Connection reset by peer):
 
-```export JUPITER_API_KEY=3eeb395e-63b7-11ea-bc55-0242ac130003
+```bash
+export JUPITER_API_KEY=3eeb395e-63b7-11ea-bc55-0242ac130003
 export JUPITER_USER=ditech@ualberta.ca
 ```
 
