@@ -104,6 +104,13 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+You'll need to set these two env vars otherwise you'll likely run into an error (Errno::ECONNRESET: Connection reset by peer):
+
+```bash
+export JUPITER_API_KEY=3eeb395e-63b7-11ea-bc55-0242ac130003
+export JUPITER_USER=ditech@ualberta.ca
+```
+
 ## Testing
 
 Pre-requisites:
