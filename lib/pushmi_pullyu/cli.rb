@@ -220,7 +220,7 @@ class PushmiPullyu::CLI
     rescue StandardError => e
       begin
         queue.add_entity_in_timeframe(entity)
-      rescue MaxDepositAttemptsReached => e
+      rescue PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached => e
         log_exception(e)
       end
 
