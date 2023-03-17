@@ -86,7 +86,7 @@ class PushmiPullyu::AIP::Downloader
     @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
     @http = Net::HTTP.new(@uri.host, @uri.port)
     @http.use_ssl = true if @uri.instance_of? URI::HTTPS
-    request = Net::HTTP::Post.new("#{@uri.request_uri}auth/system")
+    request = Net::HTTP::Post.new(URI.join(@uri, '/auth/system'))
     request.set_form_data(
       email: PushmiPullyu.options[:jupiter][:user],
       api_key: PushmiPullyu.options[:jupiter][:api_key]
@@ -102,7 +102,7 @@ class PushmiPullyu::AIP::Downloader
     log_downloading(remote, local)
 
     @uri = URI.parse(PushmiPullyu.options[:jupiter][:jupiter_url])
-    request = Net::HTTP::Get.new(@uri.request_uri + remote)
+    request = Net::HTTP::Get.new(URI.join(@uri, remote))
     # add previously stored cookies
     request['Cookie'] = @cookies
 
@@ -118,7 +118,7 @@ class PushmiPullyu::AIP::Downloader
   end
 
   def get_file_paths(url)
-    request = Net::HTTP::Get.new(@uri.request_uri + url)
+    request = Net::HTTP::Get.new(URI.join(@uri, url))
     # add previously stored cookies
     request['Cookie'] = @cookies
 
