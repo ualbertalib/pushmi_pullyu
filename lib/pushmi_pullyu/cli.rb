@@ -230,8 +230,8 @@ class PushmiPullyu::CLI
     rescue Exception => e
       log_exception(e)
       raise e
-    # rubocop:enable Lint/RescueException
     end
+    # rubocop:enable Lint/RescueException
   end
 
   def run_tick_loop
