@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Fix nil exception. [#314](https://github.com/ualbertalib/pushmi_pullyu/issues/314)
+
 ## [2.0.6] - 2023-03-17
 
 - Fix URI concatenation for jupiter's base url. [#309](https://github.com/ualbertalib/pushmi_pullyu/issues/309)
