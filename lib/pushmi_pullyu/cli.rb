@@ -224,15 +224,14 @@ class PushmiPullyu::CLI
         log_exception(e)
       end
 
-    # rubocop:disable Lint/RescueException
     # Something other than a StandardError exception means something happened which we were not expecting!
     # Make sure we log the problem
+    # rubocop:disable Lint/RescueException
     rescue Exception => e
-      raise e
-    # rubocop:enable Lint/RescueException
-    ensure
       log_exception(e)
+      raise e
     end
+    # rubocop:enable Lint/RescueException
   end
 
   def run_tick_loop
