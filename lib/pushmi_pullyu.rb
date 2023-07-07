@@ -41,8 +41,7 @@ module PushmiPullyu
       project_domain_name: 'default',
       container: 'ERA'
     },
-    rollbar: {
-    },
+    rollbar: {},
     # rubocop disable: Style/FetchEnvVar
     jupiter: {
       user: ENV.fetch('JUPITER_USER', nil),
