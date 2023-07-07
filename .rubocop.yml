@@ -20,7 +20,6 @@ Layout/EmptyLinesAroundClassBody:
   EnforcedStyle: empty_lines_except_namespace
 
 Layout/IndentationConsistency:
-  Enabled: true
   EnforcedStyle: normal
 
 # A calculated magnitude based on number of assignments,
@@ -60,15 +59,6 @@ Style/ClassAndModuleChildren:
 
 Style/Documentation:
   Enabled: false
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
 
 Naming/FileName:
   Exclude:
