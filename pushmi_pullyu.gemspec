@@ -34,17 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rollbar', '>= 2.18', '< 4.0'
   spec.add_runtime_dependency 'uuid', '~> 2.3.9'
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'danger', '~> 9.2'
-  spec.add_development_dependency 'pry', '~> 0.10', '>= 0.10.4'
-  spec.add_development_dependency 'pry-byebug', '~> 3.6'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 1.23'
-  spec.add_development_dependency 'rubocop-rspec', '~> 2.6'
-  spec.add_development_dependency 'timecop', '~> 0.8'
-  spec.add_development_dependency 'vcr', '~> 5.0'
-  spec.add_development_dependency 'webmock', '~> 3.3'
   spec.metadata = {
     'rubygems_mfa_required' => 'true'
   }
