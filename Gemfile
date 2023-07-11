@@ -11,7 +11,7 @@ group :development, :test do
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.0'
   gem 'rubocop', '~> 1.23'
-  gem 'rubocop-rspec', '~> 2.6'
+  gem 'rubocop-rspec', '~> 2.22'
   gem 'timecop', '~> 0.8'
   gem 'vcr', '~> 5.0'
   gem 'webmock', '~> 3.3'
