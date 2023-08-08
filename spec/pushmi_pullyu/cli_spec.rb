@@ -107,8 +107,10 @@ RSpec.describe PushmiPullyu::CLI do
     end
 
     it 'initialize setup with config yaml if given' do
-      allow(cli).to receive(:parse_options).and_return(config_file: 'config/pushmi_pullyu.yml')
-      allow(cli).to receive(:parse_config).and_return({})
+      allow(cli).to receive_messages(
+        parse_options: { config_file: 'config/pushmi_pullyu.yml' },
+        parse_config: {}
+      )
 
       cli.parse
 
