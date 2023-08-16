@@ -10,9 +10,9 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.6'
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.0'
-  gem 'rubocop', '~> 1.54'
-  gem 'rubocop-rspec', '~> 2.22'
-  gem 'timecop', '~> 0.8'
+  gem 'rubocop', '~> 1.56'
+  gem 'rubocop-rspec', '~> 2.23'
+  gem 'timecop', '~> 0.9'
   gem 'vcr', '~> 5.0'
   gem 'webmock', '~> 3.3'
 end
