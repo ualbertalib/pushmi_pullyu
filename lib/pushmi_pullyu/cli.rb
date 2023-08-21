@@ -218,6 +218,7 @@ class PushmiPullyu::CLI
     # readding it to the queue as it will always fail
     rescue PushmiPullyu::AIP::EntityInvalid => e
     rescue StandardError => e
+      log_exception(e)
       begin
         queue.add_entity_in_timeframe(entity)
       rescue PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached => e

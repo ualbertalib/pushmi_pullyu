@@ -10,7 +10,7 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 - Fix nil exception. [#314](https://github.com/ualbertalib/pushmi_pullyu/issues/314)
 - Bump rubocop from 1.28.1 to 1.54.1 [PR#348](https://github.com/ualbertalib/pushmi_pullyu/pull/348)
-
+- Add missing logging for standard exception
 ## [2.0.6] - 2023-03-17
 
 - Fix URI concatenation for jupiter's base url. [#309](https://github.com/ualbertalib/pushmi_pullyu/issues/309)
