@@ -33,12 +33,11 @@ module PushmiPullyu
       url: 'redis://localhost:6379'
     },
     swift: {
-      tenant: 'tester',
       username: 'test:tester',
       password: 'testing',
       auth_url: 'http://localhost:8080/auth/v1.0',
       project_name: 'demo',
-      project_domain_name: 'default',
+      user_domain: 'default',
       container: 'ERA'
     },
     rollbar: {},

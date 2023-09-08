@@ -266,9 +266,8 @@ class PushmiPullyu::CLI
   def swift
     @swift ||= PushmiPullyu::SwiftDepositer.new(username: options[:swift][:username],
                                                 password: options[:swift][:password],
-                                                tenant: options[:swift][:tenant],
                                                 project_name: options[:swift][:project_name],
-                                                project_domain_name: options[:swift][:project_domain_name],
+                                                user_domain: options[:swift][:user_domain],
                                                 auth_url: options[:swift][:auth_url])
   end
 
