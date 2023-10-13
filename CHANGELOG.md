@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [2.0.7] - 2023-09-13
+
 - Fix nil exception. [#314](https://github.com/ualbertalib/pushmi_pullyu/issues/314)
 - Bump rubocop from 1.28.1 to 1.54.1 [PR#348](https://github.com/ualbertalib/pushmi_pullyu/pull/348)
 - Add missing logging for standard exception
@@ -54,5 +56,4 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 ### Removed
 - Data output for original_file information
 
-- 
 ## [1.0.6] - 2018-11-29
