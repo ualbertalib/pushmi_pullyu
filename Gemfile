@@ -10,7 +10,7 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.6'
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.0'
-  gem 'rubocop', '~> 1.57'
+  gem 'rubocop', '~> 1.58'
   gem 'rubocop-rspec', '~> 2.24'
   gem 'timecop', '~> 0.9'
   gem 'vcr', '~> 5.0'
