@@ -39,7 +39,9 @@ module PushmiPullyu
       auth_url: 'http://localhost:8080/auth/v1.0',
       project_name: 'demo',
       project_domain_name: 'default',
-      container: 'ERA'
+      container: 'ERA',
+      auth_version: 'v1',
+      user_domain: 'default'
     },
     rollbar: {},
     # rubocop disable: Style/FetchEnvVar

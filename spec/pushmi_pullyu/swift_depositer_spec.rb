@@ -43,5 +43,25 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
         end.to change { swift_depositer.swift_connection.container('ERA').count.to_i }.by(1)
       end
     end
+
+    it 'authenticates against v3' do
+      VCR.use_cassette('swift_auth_v3') do
+        swift_depositer = PushmiPullyu::SwiftDepositer.new(
+          username: 'era_olrc_user',
+          password: 'era_olrc_user_password',
+          auth_url: 'https://olrc2auth.scholarsportal.info/v3/',
+          user_domain: 'alberta',
+          container: 'era',
+          project_name: 'demo',
+          auth_method: 'password',
+          service_type: 'object-store',
+          auth_version: 'v3'
+        )
+        expect(swift_depositer).not_to be_nil
+        # rubocop:disable Layout/LineLength
+        expect(swift_depositer.swift_connection.connection.authtoken).to eq('gAAAAABl8hYAouKZJLkt8NDmuA2NjA1zOasGOAX-b2MfKpjiM_kf8sZHe42ipcs6Vb-57-aATajbTg54wIwhNhl2HKRfz5_rKfSJ0PnBQNFCVd4bKrdC0pHzoJMn9hkAa2tjBkqppBcMayvfqz-Ppxn0USnHw0z9zLLKDxGbRZwyhDJDhGOcIZg')
+        # rubocop:enable Layout/LineLength
+      end
+    end
   end
 end
