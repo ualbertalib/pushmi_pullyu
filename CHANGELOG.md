@@ -8,6 +8,8 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+- Add logic to perform authentication against the V3 Auth protocol
+
 ## [2.0.7] - 2023-09-13
 
 - Fix nil exception [#314](https://github.com/ualbertalib/pushmi_pullyu/issues/314)

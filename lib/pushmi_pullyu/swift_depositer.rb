@@ -6,16 +6,24 @@ class PushmiPullyu::SwiftDepositer
   attr_reader :swift_connection
 
   def initialize(connection)
-    @swift_connection = OpenStack::Connection.create(
+    # Generic authentication parameters
+    swift_connection_parameters = {
       username: connection[:username],
       api_key: connection[:password],
-      auth_method: 'password',
       auth_url: connection[:auth_url],
       project_name: connection[:project_name],
-      project_domain_name: connection[:project_domain_name],
-      authtenant_name: connection[:tenant],
+      auth_method: 'password',
       service_type: 'object-store'
-    )
+    }
+
+    if connection[:auth_version] == 'v3'
+      swift_connection_parameters[:user_domain] = connection[:user_domain]
+    else
+      swift_connection_parameters[:project_domain_name] = connection[:project_domain_name]
+      swift_connection_parameters[:authtenant_name] = connection[:tenant]
+    end
+
+    @swift_connection = OpenStack::Connection.create(swift_connection_parameters)
   end
 
   def deposit_file(file_name, swift_container)

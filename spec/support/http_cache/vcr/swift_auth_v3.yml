@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://olrc2auth.scholarsportal.info/v3/auth/tokens
+    body:
+      encoding: UTF-8
+      string: '{"auth":{"identity":{"methods":["password"],"password":{"user":{"name":"era_olrc_user","password":"era_olrc_user_password","domain":{"name":"alberta"}}}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Date:
+      - Wed, 13 Mar 2024 21:09:20 GMT
+      Server:
+      - Apache/2.4.41 (Ubuntu)
+      Content-Length:
+      - '1886'
+      X-Subject-Token:
+      - gAAAAABl8hYAouKZJLkt8NDmuA2NjA1zOasGOAX-b2MfKpjiM_kf8sZHe42ipcs6Vb-57-aATajbTg54wIwhNhl2HKRfz5_rKfSJ0PnBQNFCVd4bKrdC0pHzoJMn9hkAa2tjBkqppBcMayvfqz-Ppxn0USnHw0z9zLLKDxGbRZwyhDJDhGOcIZg
+      Vary:
+      - X-Auth-Token
+      X-Openstack-Request-Id:
+      - req-cb9774f0-ca68-41ca-94a8-5c609484d89a
+      Content-Type:
+      - application/json
+      Strict-Transport-Security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"token": {"methods": ["password"], "user": {"domain": {"id": "60033000eb9b493c821fe34be81330b9",
+        "name": "alberta"}, "id": "e422e226f1334b1aa36123b63756f3a4", "name": "era_olrc_user",
+        "password_expires_at": null}, "audit_ids": ["qjsTzr_SRE-kV3xcOycoEA"], "expires_at":
+        "2024-03-14T21:09:20.000000Z", "issued_at": "2024-03-13T21:09:20.000000Z",
+        "project": {"domain": {"id": "60033000eb9b493c821fe34be81330b9", "name": "alberta"},
+        "id": "94df3c9b19b94cb1b7226a2508f829fe", "name": "demo"}, "is_domain": false,
+        "roles": [{"id": "4aa402bf191f4386a255dc6fcf68ee1f", "name": "reader"}, {"id":
+        "6cec17d597684f8b802c8104edef4f1a", "name": "member"}], "catalog": [{"endpoints":
+        [{"id": "4106d3839f954125b11c04b74b0c8291", "interface": "admin", "region_id":
+        "RegionOne", "url": "http://lb.olrcdata.sp:5000/v3/", "region": "RegionOne"},
+        {"id": "60820abcda1540b28080a5a1b22b1978", "interface": "internal", "region_id":
+        "RegionOne", "url": "http://lb.olrcdata.sp:5000/v3/", "region": "RegionOne"},
+        {"id": "779f1fcc40e842e6815b4e8c4dd633e8", "interface": "public", "region_id":
+        "RegionOne", "url": "https://olrc2auth.scholarsportal.info/v3/", "region":
+        "RegionOne"}], "id": "8d38d27a36ac44b1af75cf576558825c", "type": "identity",
+        "name": "keystone"}, {"endpoints": [{"id": "407fe60111604028830faeb87d5e54d3",
+        "interface": "internal", "region_id": "RegionOne", "url": "http://lb.olrcdata.sp:8080/v1/AUTH_94df3c9b19b94cb1b7226a2508f829fe",
+        "region": "RegionOne"}, {"id": "cbc5239dbf1d41b8a5f3b3b21df40c37", "interface":
+        "public", "region_id": "RegionOne", "url": "https://olrc2.scholarsportal.info/v1/AUTH_94df3c9b19b94cb1b7226a2508f829fe",
+        "region": "RegionOne"}, {"id": "e1f3055570034d6c8492add7a315df88", "interface":
+        "admin", "region_id": "RegionOne", "url": "http://lb.olrcdata.sp:8080/v1",
+        "region": "RegionOne"}], "id": "cf170fa779df4e34bf4def2bea3bdecd", "type":
+        "object-store", "name": "swift"}]}}'
+    http_version: null
+  recorded_at: Wed, 13 Mar 2024 21:09:20 GMT
+recorded_with: VCR 5.1.0

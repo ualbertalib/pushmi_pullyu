@@ -266,10 +266,12 @@ class PushmiPullyu::CLI
   def swift
     @swift ||= PushmiPullyu::SwiftDepositer.new(username: options[:swift][:username],
                                                 password: options[:swift][:password],
-                                                tenant: options[:swift][:tenant],
                                                 project_name: options[:swift][:project_name],
+                                                tenant: options[:swift][:tenant],
                                                 project_domain_name: options[:swift][:project_domain_name],
-                                                auth_url: options[:swift][:auth_url])
+                                                user_domain: options[:swift][:user_domain],
+                                                auth_url: options[:swift][:auth_url],
+                                                auth_version: options[:swift][:auth_version])
   end
 
   # On first call of shutdown, this will gracefully close the main run loop

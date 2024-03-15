@@ -33,6 +33,9 @@ swift:
   project_name: demo
   project_domain_name: default
   container: ERA
+  # These 2 extra parameters are now required for keystone v3 authentication
+  auth_version: v3
+  user_domain: default
 
 rollbar:
   token: 'abc123xyz'
