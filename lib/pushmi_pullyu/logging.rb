@@ -43,7 +43,7 @@ module PushmiPullyu::Logging
       aip_logger.close
     end
 
-    def log_preservation_event(deposited_file, aip_directory)
+    def log_preservation_success(deposited_file, aip_directory)
       preservation_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
       preservation_json_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.json")
 

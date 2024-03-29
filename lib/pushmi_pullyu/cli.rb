@@ -212,7 +212,7 @@ class PushmiPullyu::CLI
         # Push tarred AIP to swift API
         deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
         # Log successful preservation event to the log files
-        PushmiPullyu::Logging.log_preservation_event(deposited_file, aip_directory)
+        PushmiPullyu::Logging.log_preservation_success(deposited_file, aip_directory)
       end
     # An EntityInvalid expection means there is a problem with the entity information format so there is no point in
     # readding it to the queue as it will always fail
