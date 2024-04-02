@@ -136,7 +136,7 @@ GEM
     public_suffix (5.0.3)
     racc (1.7.1)
     rainbow (3.1.1)
-    rake (13.0.6)
+    rake (13.2.0)
     rchardet (1.8.0)
     rdf (3.2.11)
       link_header (~> 0.0, >= 0.0.8)
@@ -247,7 +247,7 @@ DEPENDENCIES
   pry (~> 0.10, >= 0.10.4)
   pry-byebug (~> 3.6)
   pushmi_pullyu!
-  rake (~> 13.0)
+  rake (~> 13.2)
   rspec (~> 3.0)
   rubocop (~> 1.57)
   rubocop-rspec (~> 2.24)
