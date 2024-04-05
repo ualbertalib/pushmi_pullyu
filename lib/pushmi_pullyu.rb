@@ -39,8 +39,8 @@ module PushmiPullyu
       auth_url: 'http://localhost:8080/auth/v1.0',
       project_name: 'demo',
       project_domain_name: 'default',
-      container: 'ERA',
-      auth_version: 'v1',
+      container: 'era',
+      auth_version: 'v3',
       user_domain: 'default'
     },
     rollbar: {},

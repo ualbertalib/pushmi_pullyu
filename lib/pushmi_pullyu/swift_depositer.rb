@@ -18,7 +18,7 @@ class PushmiPullyu::SwiftDepositer
 
     if connection[:auth_version] == 'v3'
       swift_connection_parameters[:user_domain] = connection[:user_domain]
-    else
+    elsif connection[:auth_version] == 'v1'
       swift_connection_parameters[:project_domain_name] = connection[:project_domain_name]
       swift_connection_parameters[:authtenant_name] = connection[:tenant]
     end

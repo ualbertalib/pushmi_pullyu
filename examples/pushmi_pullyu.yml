@@ -32,7 +32,7 @@ swift:
   auth_url: http://localhost:8080/auth/v1.0
   project_name: demo
   project_domain_name: default
-  container: ERA
+  container: era
   # These 2 extra parameters are now required for keystone v3 authentication
   auth_version: v3
   user_domain: default
