@@ -199,6 +199,8 @@ class PushmiPullyu::CLI
   def run_preservation_cycle
     begin
       entity = queue.wait_next_item
+      PushmiPullyu::Logging.log_preservation_attempt(entity,
+                                                     queue.get_entity_ingestion_attempt(entity))
       return unless entity && entity[:type].present? && entity[:uuid].present?
     rescue StandardError => e
       log_exception(e)
@@ -221,7 +223,9 @@ class PushmiPullyu::CLI
       log_exception(e)
       begin
         queue.add_entity_in_timeframe(entity)
+        PushmiPullyu::Logging.log_preservation_fail_and_retry(entity, queue.get_entity_ingestion_attempt(entity), e)
       rescue PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached => e
+        PushmiPullyu::Logging.log_preservation_failure(entity, queue.get_entity_ingestion_attempt(entity), e)
         log_exception(e)
       end
 
@@ -244,7 +248,11 @@ class PushmiPullyu::CLI
 
   def setup_log
     if options[:daemonize]
-      PushmiPullyu::Logging.initialize_logger(PushmiPullyu.application_log_file)
+      PushmiPullyu::Logging.initialize_loggers(
+        log_target: PushmiPullyu.application_log_file,
+        events_target: "#{PushmiPullyu.options[:logdir]}/preservation_events.log",
+        json_target: "#{PushmiPullyu.options[:logdir]}/preservation_events.json"
+      )
     else
       logger.formatter = PushmiPullyu::Logging::SimpleFormatter.new
     end

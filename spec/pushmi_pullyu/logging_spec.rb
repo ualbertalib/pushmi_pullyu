@@ -31,7 +31,13 @@ RSpec.describe PushmiPullyu::Logging do
   describe '.reopen' do
     let(:tmp_dir) { 'tmp/test_dir' }
     let(:logfile) { "#{tmp_dir}/pushmi_pullyu.log" }
-    let(:logger) { PushmiPullyu::Logging.initialize_logger(logfile) }
+    let(:log_events) { "#{tmp_dir}/events.log" }
+    let(:log_json) { "#{tmp_dir}/json.log" }
+    let(:logger) do
+      PushmiPullyu::Logging.initialize_loggers(log_target: logfile,
+                                               events_target: log_events,
+                                               json_target: log_json)
+    end
 
     before do
       FileUtils.mkdir_p(tmp_dir)
@@ -84,8 +90,19 @@ RSpec.describe PushmiPullyu::Logging do
     let(:tmp_log_dir) { 'tmp/logs' }
     let(:tmp_aip_dir) { 'tmp/test_aip_dir' }
 
+    before do
+      FileUtils.mkdir_p(tmp_aip_dir)
+    end
+
+    after do
+      FileUtils.rm_rf(tmp_aip_dir)
+    end
+
     it 'logs preservation event to both preservation log and application log' do
       FileUtils.mkdir_p(tmp_log_dir)
+      # Make sure we are initialize logger with expected file destinations and not default stdout destination
+      PushmiPullyu::Logging.initialize_loggers(events_target: "#{tmp_log_dir}/preservation_events.log",
+                                               json_target: "#{tmp_log_dir}/preservation_events.json")
       allow(PushmiPullyu::Logging.logger).to receive(:info)
       allow(PushmiPullyu).to receive(:options) { { logdir: tmp_log_dir } }
 
@@ -109,6 +126,27 @@ RSpec.describe PushmiPullyu::Logging do
       ).to include("#{deposited_file.name} was successfully deposited into Swift Storage!")
 
       FileUtils.rm_rf(tmp_log_dir)
+    end
+  end
+
+  # XXX Placeholder test to be filled in
+  describe '.log_preservation_attempt' do
+    it 'logs preservation attempts' do
+      expect(true).to be(false)
+    end
+  end
+
+  # XXX Placeholder test to be filled in
+  describe '.log_preservation_fail_and_retry' do
+    it 'logs preservation fail and retry' do
+      expect(true).to be(false)
+    end
+  end
+
+  # XXX Placeholder test to be filled in
+  describe '.log_preservation_failure' do
+    it 'logs preservation failure' do
+      expect(true).to be(false)
     end
   end
 

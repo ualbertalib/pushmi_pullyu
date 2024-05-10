@@ -24,7 +24,8 @@ RSpec.describe 'Acceptance test', type: :feature do
 
     FileUtils.mkdir_p(workdir)
     FileUtils.mkdir_p(log_folder)
-
+    PushmiPullyu::Logging.initialize_loggers(events_target: "#{log_folder}/preservation_events.log",
+                                             json_target: "#{log_folder}/preservation_events.json")
     allow(PushmiPullyu::Logging.logger).to receive(:info)
   end
 
@@ -46,7 +47,6 @@ RSpec.describe 'Acceptance test', type: :feature do
     # Should not exist yet
     expect(File.exist?(aip_folder)).to be(false)
     expect(File.exist?(aip_file)).to be(false)
-    expect(File.exist?("#{log_folder}/preservation_events.log")).to be(false)
 
     # Download data from Jupiter, bag and tar AIP directory and cleanup after block code
     VCR.use_cassette('aip_download_and_swift_upload', erb:

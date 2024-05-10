@@ -290,7 +290,7 @@ RSpec.describe PushmiPullyu::CLI do
         # expect((readded_entity_score.to_i - test_time).to_i).to eq 10
         cli.parse(['-C', 'spec/fixtures/config_wrong_swift.yml'])
         redis = Redis.new
-        entity = { uuid: '123e4567-e89b-12d3-a456-426614174000', type: 'items' }
+        entity = { uuid: 'e2ec88e3-3266-4e95-8575-8b04fac2a679', type: 'items' }
 
         start_time = Time.now - 10
         attempt_key = "#{PushmiPullyu.options[:ingestion_prefix]}#{entity[:uuid]}"
@@ -302,7 +302,7 @@ RSpec.describe PushmiPullyu::CLI do
             VCR.use_cassette('aip_download_and_swift_upload') do
               PushmiPullyu::Logging.logger.fatal!
               cli.send(:run_preservation_cycle)
-              PushmiPullyu::Logging.initialize_logger
+              PushmiPullyu::Logging.initialize_loggers
               time_now = Time.now.to_i
               _readded_entity, readded_entity_score = redis.zrange(PushmiPullyu.options[:queue_name],
                                                                    0, 0, with_scores: true).first
@@ -322,7 +322,7 @@ RSpec.describe PushmiPullyu::CLI do
       it 'makes sure an entities information is readded to redis when deposit fails' do
         cli.parse(['-C', 'spec/fixtures/config_wrong_swift.yml'])
         redis = Redis.new
-        entity = { uuid: '123e4567-e89b-12d3-a456-426614174000', type: 'items' }
+        entity = { uuid: 'e2ec88e3-3266-4e95-8575-8b04fac2a679', type: 'items' }
 
         redis.zadd(PushmiPullyu.options[:queue_name], 10, entity.to_json)
         redis.set("#{PushmiPullyu.options[:ingestion_prefix]}#{entity[:uuid]}", 0)
@@ -335,8 +335,8 @@ RSpec.describe PushmiPullyu::CLI do
           # and will re-add the original entity information back into the queue with a different score.
           # We know that we will be getting an error on this method so lets filter out the logs for this bit.
           PushmiPullyu::Logging.logger.fatal!
+          PushmiPullyu::Logging.initialize_loggers
           cli.send(:run_preservation_cycle)
-          PushmiPullyu::Logging.initialize_logger
           readded_entity, readded_entity_score = redis.zrange(PushmiPullyu.options[:queue_name],
                                                               0, 0, with_scores: true).first
           readded_attempt = redis.get("#{PushmiPullyu.options[:ingestion_prefix]}#{entity[:uuid]}")

@@ -21,14 +21,17 @@ module PushmiPullyu::Logging
 
     attr_writer :logger
 
-    def initialize_logger(log_target = $stdout)
+    def initialize_loggers(log_target: $stdout, events_target: $stdout, json_target: $stdout)
+      @preservation_logger = Logger.new(events_target)
+      @preservation_json_logger = Logger.new(json_target)
+
       @logger = Logger.new(log_target)
       @logger.level = Logger::INFO
       @logger
     end
 
     def logger
-      @logger ||= initialize_logger
+      @logger ||= initialize_loggers
     end
 
     def log_aip_activity(aip_directory, message)
@@ -44,16 +47,9 @@ module PushmiPullyu::Logging
     end
 
     def log_preservation_event(message, message_json)
-      preservation_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.log")
-      preservation_json_logger = Logger.new("#{PushmiPullyu.options[:logdir]}/preservation_events.json")
-
       logger.info(message)
-      preservation_logger.info(message)
-
-      preservation_logger.close
-
-      preservation_json_logger.info("#{message_json},")
-      preservation_json_logger.close
+      @preservation_logger.info(message)
+      @preservation_json_logger.info("#{message_json},")
     end
 
     def log_preservation_success(deposited_file, aip_directory)
@@ -86,7 +82,7 @@ module PushmiPullyu::Logging
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
                 "\tReadding to preservation queue with retry attempt: #{retry_attempt}\n" \
-                "\tError of tyoe: #{exception.type}\n" \
+                "\tError of type: #{exception.class.name}\n" \
                 "\tError message: #{exception.message}\n"
 
       message_information = {
@@ -95,7 +91,7 @@ module PushmiPullyu::Logging
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
         retry_attempt: retry_attempt,
-        error_type: exception.type,
+        error_type: exception.class.name,
         error_message: exception.message
       }
 
@@ -114,7 +110,7 @@ module PushmiPullyu::Logging
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
         retry_attempt: retry_attempt,
-        error_type: exception.type,
+        error_type: exception.class.name,
         error_message: exception.message
       }
 
@@ -173,7 +169,7 @@ module PushmiPullyu::Logging
       message['aip_deposited_at'] = deposited_file.last_modified.to_s
       message['aip_md5sum'] = deposited_file.etag.to_s
       message['aip_sha256'] = ''
-      message['aip_metadata'] = deposited_file.metadata.to_json.to_s
+      message['aip_metadata'] = deposited_file.metadata.to_json
 
       file_details = file_log_details(aip_directory)
 
@@ -197,7 +193,7 @@ module PushmiPullyu::Logging
       if @logger
         @logger.reopen
       else
-        @logger = initialize_logger
+        @logger = initialize_loggers
       end
     end
 
