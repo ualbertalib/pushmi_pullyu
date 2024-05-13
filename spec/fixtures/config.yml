@@ -18,6 +18,8 @@ rollbar:
   proxy_port: '80'
 swift:
   auth_url: http://127.0.0.1:8080/auth/v1.0
+  auth_version: 'v1'
+  container: 'ERA'
 jupiter:
   user: 'ditech@ualberta.ca'
   api_key: '3eeb395e-63b7-11ea-bc55-0242ac130003'
