@@ -8,7 +8,7 @@ group :development, :test do
   gem 'danger', '~> 9.3'
   gem 'pry', '~> 0.10', '>= 0.10.4'
   gem 'pry-byebug', '~> 3.6'
-  gem 'rake', '~> 13.0'
+  gem 'rake', '~> 13.2'
   gem 'rspec', '~> 3.0'
   gem 'rubocop', '~> 1.57'
   gem 'rubocop-rspec', '~> 2.24'
