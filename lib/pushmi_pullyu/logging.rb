@@ -91,7 +91,6 @@ module PushmiPullyu::Logging
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
         retry_attempt: retry_attempt,
-        error_type: exception.class.name,
         error_message: exception.message
       }
 
@@ -110,7 +109,6 @@ module PushmiPullyu::Logging
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
         retry_attempt: retry_attempt,
-        error_type: exception.class.name,
         error_message: exception.message
       }
 
@@ -169,7 +167,7 @@ module PushmiPullyu::Logging
       message['aip_deposited_at'] = deposited_file.last_modified.to_s
       message['aip_md5sum'] = deposited_file.etag.to_s
       message['aip_sha256'] = ''
-      message['aip_metadata'] = deposited_file.metadata.to_json
+      message['aip_metadata'] = deposited_file.metadata
 
       file_details = file_log_details(aip_directory)
 

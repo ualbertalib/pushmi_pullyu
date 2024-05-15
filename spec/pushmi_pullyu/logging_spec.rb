@@ -1,5 +1,6 @@
 require 'spec_helper'
-
+require 'time'
+require 'timecop'
 ##
 # Dummy class, so that we can mix in the Logging module and test it.
 #
@@ -92,14 +93,17 @@ RSpec.describe PushmiPullyu::Logging do
 
     before do
       FileUtils.mkdir_p(tmp_aip_dir)
+      FileUtils.mkdir_p(tmp_log_dir)
+      Timecop.freeze(Time.now)
     end
 
     after do
       FileUtils.rm_rf(tmp_aip_dir)
+      FileUtils.mkdir_p(tmp_log_dir)
+      Timecop.return
     end
 
     it 'logs preservation event to both preservation log and application log' do
-      FileUtils.mkdir_p(tmp_log_dir)
       # Make sure we are initialize logger with expected file destinations and not default stdout destination
       PushmiPullyu::Logging.initialize_loggers(events_target: "#{tmp_log_dir}/preservation_events.log",
                                                json_target: "#{tmp_log_dir}/preservation_events.json")
@@ -119,34 +123,170 @@ RSpec.describe PushmiPullyu::Logging do
 
       PushmiPullyu::Logging.log_preservation_success(deposited_file, tmp_aip_dir)
 
+      # Check log
       expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
       expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once
       expect(
         File.read("#{tmp_log_dir}/preservation_events.log")
       ).to include("#{deposited_file.name} was successfully deposited into Swift Storage!")
 
-      FileUtils.rm_rf(tmp_log_dir)
+      # Check JSON log
+      json_data = JSON.parse(File.read("#{tmp_log_dir}/preservation_events.json").split("\n").last[/{.+}/])
+      expect(json_data).to include(
+        'do_uuid' => '9p2909328',
+        'aip_deposited_at' => 'Fri, 02 Jun 2017 18:29:07 GMT',
+        'aip_md5sum' => '0f32868de20f3b1d4685bfa497a2c243',
+        'aip_sha256' => '',
+        'aip_metadata' => {
+          'project-id' => '9p2909328',
+          'aip-version' => '1.0',
+          'promise' => 'bronze',
+          'project' => 'ERA'
+        },
+        'aip_file_details' => []
+      )
     end
   end
 
-  # XXX Placeholder test to be filled in
   describe '.log_preservation_attempt' do
+    let(:tmp_log_dir) { 'tmp/logs' }
+
+    before do
+      FileUtils.mkdir_p(tmp_log_dir)
+      # Lets freeze time to make sure timestamp checks match
+      Timecop.freeze(Time.now)
+    end
+
+    after do
+      FileUtils.rm_rf(tmp_log_dir)
+      Timecop.return
+    end
+
     it 'logs preservation attempts' do
-      expect(true).to be(false)
+      # Make sure we are initialize logger with expected file destinations and not default stdout destination
+      PushmiPullyu::Logging.initialize_loggers(events_target: "#{tmp_log_dir}/preservation_events.log",
+                                               json_target: "#{tmp_log_dir}/preservation_events.json")
+      allow(PushmiPullyu::Logging.logger).to receive(:info)
+      allow(PushmiPullyu).to receive(:options) { { logdir: tmp_log_dir } }
+      # Test goes here
+      entity = { uuid: 'e2ec88e3-3266-4e95-8575-8b04fac2a679', type: 'items' }
+      PushmiPullyu::Logging.log_preservation_attempt(entity, 1)
+
+      # Check log
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
+      log_data = File.read("#{tmp_log_dir}/preservation_events.log")
+      expect(log_data).to include("#{entity[:type]} will attempt to be deposited.")
+      expect(log_data).to include("#{entity[:type]} uuid: #{entity[:uuid]}	Retry attempt: 1")
+
+      # Check JSON log
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.json")).to be(true)
+      # Get the JSON object from the log file
+      json_data = JSON.parse(File.read("#{tmp_log_dir}/preservation_events.json").split("\n").last[/{.+}/])
+
+      expect(json_data).to include(
+        'event_type' => 'attempt',
+        'entity_type' => 'items',
+        'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
+        'retry_attempt' => 1,
+        'event_time' => Time.now.to_s
+      )
     end
   end
 
-  # XXX Placeholder test to be filled in
   describe '.log_preservation_fail_and_retry' do
+    let(:tmp_log_dir) { 'tmp/logs' }
+
+    before do
+      FileUtils.mkdir_p(tmp_log_dir)
+      Timecop.freeze(Time.now)
+    end
+
+    after do
+      FileUtils.rm_rf(tmp_log_dir)
+      Timecop.return
+    end
+
     it 'logs preservation fail and retry' do
-      expect(true).to be(false)
+      # Make sure we are initialize logger with expected file destinations and not default stdout destination
+      PushmiPullyu::Logging.initialize_loggers(events_target: "#{tmp_log_dir}/preservation_events.log",
+                                               json_target: "#{tmp_log_dir}/preservation_events.json")
+      allow(PushmiPullyu::Logging.logger).to receive(:info)
+      allow(PushmiPullyu).to receive(:options) { { logdir: tmp_log_dir } }
+      # Test goes here
+      entity = { uuid: 'e2ec88e3-3266-4e95-8575-8b04fac2a679', type: 'items' }
+      PushmiPullyu::Logging.log_preservation_fail_and_retry(
+        entity,
+        2,
+        PushmiPullyu::AIP::Downloader::JupiterDownloadError.new
+      )
+
+      # Check log
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
+      log_data = File.read("#{tmp_log_dir}/preservation_events.log")
+      expect(log_data).to include("#{entity[:type]} failed to be deposited and will try again.")
+      expect(log_data).to include(
+        "#{entity[:type]} uuid: #{entity[:uuid]}	Readding to preservation queue with retry attempt: 2"
+      )
+
+      # Check JSON log
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.json")).to be(true)
+      # Get the JSON object from the log file
+      json_data = JSON.parse(File.read("#{tmp_log_dir}/preservation_events.json").split("\n").last[/{.+}/])
+
+      expect(json_data).to include(
+        'event_type' => 'fail_and_retry',
+        'entity_type' => 'items',
+        'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
+        'retry_attempt' => 2,
+        'error_message' => 'PushmiPullyu::AIP::Downloader::JupiterDownloadError',
+        'event_time' => Time.now.to_s
+      )
     end
   end
 
-  # XXX Placeholder test to be filled in
   describe '.log_preservation_failure' do
+    let(:tmp_log_dir) { 'tmp/logs' }
+
+    before do
+      FileUtils.mkdir_p(tmp_log_dir)
+      Timecop.freeze(Time.now)
+    end
+
+    after do
+      FileUtils.rm_rf(tmp_log_dir)
+      Timecop.return
+    end
+
     it 'logs preservation failure' do
-      expect(true).to be(false)
+      # Make sure we are initialize logger with expected file destinations and not default stdout destination
+      PushmiPullyu::Logging.initialize_loggers(events_target: "#{tmp_log_dir}/preservation_events.log",
+                                               json_target: "#{tmp_log_dir}/preservation_events.json")
+      allow(PushmiPullyu::Logging.logger).to receive(:info)
+      allow(PushmiPullyu).to receive(:options) { { logdir: tmp_log_dir } }
+      # Test goes here
+      entity = { uuid: 'e2ec88e3-3266-4e95-8575-8b04fac2a679', type: 'items' }
+      PushmiPullyu::Logging.log_preservation_failure(entity,
+                                                     15,
+                                                     PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached.new)
+
+      # Check log
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
+      log_data = File.read("#{tmp_log_dir}/preservation_events.log")
+      expect(log_data).to include("#{entity[:type]} failed to be deposited.")
+      expect(log_data).to include("#{entity[:type]} uuid: #{entity[:uuid]}	Retry attempt: 15")
+
+      # Check JSON log
+      expect(File.exist?("#{tmp_log_dir}/preservation_events.json")).to be(true)
+      # Get the JSON object from the log file
+      json_data = JSON.parse(File.read("#{tmp_log_dir}/preservation_events.json").split("\n").last[/{.+}/])
+      expect(json_data).to include(
+        'event_type' => 'fail_and_retry',
+        'entity_type' => 'items',
+        'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
+        'retry_attempt' => 15,
+        'error_message' => 'PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached',
+        'event_time' => Time.now.to_s
+      )
     end
   end
 
