@@ -86,6 +86,8 @@ module PushmiPullyu::Logging
     end
 
     def log_preservation_fail_and_retry(entity, try_attempt, exception)
+      # We add + 1 to try_attempt because humans like to start counting from 1
+      try_attempt += 1
       message = "#{entity[:type]} failed to be deposited and will try again.\n" \
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
@@ -106,10 +108,12 @@ module PushmiPullyu::Logging
     end
 
     def log_preservation_failure(entity, try_attempt, exception)
+      # We add + 1 to try_attempt because humans like to start counting from 1
+      try_attempt += 1
       message = "#{entity[:type]} failed to be deposited.\n" \
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
-                "\tRetry attempt: #{try_attempt}\n"
+                "\tTry attempt: #{try_attempt}\n"
 
       message_information = {
         event_type: :failure,
@@ -124,10 +128,12 @@ module PushmiPullyu::Logging
     end
 
     def log_preservation_attempt(entity, try_attempt)
+      # We add + 1 to try_attempt because humans like to start counting from 1
+      try_attempt += 1
       message = "#{entity[:type]} will attempt to be deposited.\n" \
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
-                "\tRetry attempt: #{try_attempt}\n"
+                "\tTry attempt: #{try_attempt}\n"
 
       message_information = {
         event_type: :attempt,

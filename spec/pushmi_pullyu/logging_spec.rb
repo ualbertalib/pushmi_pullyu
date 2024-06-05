@@ -183,7 +183,7 @@ RSpec.describe PushmiPullyu::Logging do
       expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
       log_data = File.read("#{tmp_log_dir}/preservation_events.log")
       expect(log_data).to include("#{entity[:type]} will attempt to be deposited.")
-      expect(log_data).to include("#{entity[:type]} uuid: #{entity[:uuid]}	Retry attempt: 1")
+      expect(log_data).to include("#{entity[:type]} uuid: #{entity[:uuid]}	Try attempt: 2")
 
       # Check JSON log
       expect(File.exist?("#{tmp_log_dir}/preservation_events.json")).to be(true)
@@ -194,7 +194,7 @@ RSpec.describe PushmiPullyu::Logging do
         'event_type' => 'attempt',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
-        'try_attempt' => 1,
+        'try_attempt' => 2,
         'event_time' => Time.now.to_s
       )
     end
@@ -232,7 +232,7 @@ RSpec.describe PushmiPullyu::Logging do
       log_data = File.read("#{tmp_log_dir}/preservation_events.log")
       expect(log_data).to include("#{entity[:type]} failed to be deposited and will try again.")
       expect(log_data).to include(
-        "#{entity[:type]} uuid: #{entity[:uuid]}	Readding to preservation queue with try attempt: 2"
+        "#{entity[:type]} uuid: #{entity[:uuid]}	Readding to preservation queue with try attempt: 3"
       )
 
       # Check JSON log
@@ -244,7 +244,7 @@ RSpec.describe PushmiPullyu::Logging do
         'event_type' => 'fail_and_retry',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
-        'try_attempt' => 2,
+        'try_attempt' => 3,
         'error_message' => 'PushmiPullyu::AIP::Downloader::JupiterDownloadError',
         'event_time' => Time.now.to_s
       )
@@ -280,7 +280,7 @@ RSpec.describe PushmiPullyu::Logging do
       expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
       log_data = File.read("#{tmp_log_dir}/preservation_events.log")
       expect(log_data).to include("#{entity[:type]} failed to be deposited.")
-      expect(log_data).to include("#{entity[:type]} uuid: #{entity[:uuid]}	Retry attempt: 15")
+      expect(log_data).to include("#{entity[:type]} uuid: #{entity[:uuid]}	Try attempt: 16")
 
       # Check JSON log
       expect(File.exist?("#{tmp_log_dir}/preservation_events.json")).to be(true)
@@ -290,7 +290,7 @@ RSpec.describe PushmiPullyu::Logging do
         'event_type' => 'failure',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
-        'try_attempt' => 15,
+        'try_attempt' => 16,
         'error_message' => 'PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached',
         'event_time' => Time.now.to_s
       )

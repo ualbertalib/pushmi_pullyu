@@ -199,9 +199,8 @@ class PushmiPullyu::CLI
   def run_preservation_cycle
     begin
       entity = queue.wait_next_item
-      # We add + 1 to the get_entity_ingestion_attempt because humans like to start counting from 1
       PushmiPullyu::Logging.log_preservation_attempt(entity,
-                                                     queue.get_entity_ingestion_attempt(entity) + 1)
+                                                     queue.get_entity_ingestion_attempt(entity))
       return unless entity && entity[:type].present? && entity[:uuid].present?
     rescue StandardError => e
       log_exception(e)
@@ -224,10 +223,9 @@ class PushmiPullyu::CLI
       log_exception(e)
       begin
         queue.add_entity_in_timeframe(entity)
-        # We add + 1 to the get_entity_ingestion_attempt because humans like to start counting from 1
-        PushmiPullyu::Logging.log_preservation_fail_and_retry(entity, queue.get_entity_ingestion_attempt(entity) + 1, e)
+        PushmiPullyu::Logging.log_preservation_fail_and_retry(entity, queue.get_entity_ingestion_attempt(entity), e)
       rescue PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached => e
-        PushmiPullyu::Logging.log_preservation_failure(entity, queue.get_entity_ingestion_attempt(entity) + 1, e)
+        PushmiPullyu::Logging.log_preservation_failure(entity, queue.get_entity_ingestion_attempt(entity), e)
         log_exception(e)
       end
 
