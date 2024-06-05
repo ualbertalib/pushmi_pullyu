@@ -287,7 +287,7 @@ RSpec.describe PushmiPullyu::Logging do
       # Get the JSON object from the log file
       json_data = JSON.parse(File.read("#{tmp_log_dir}/preservation_events.json").split("\n").last[/{.+}/])
       expect(json_data).to include(
-        'event_type' => 'fail_and_retry',
+        'event_type' => 'failure',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
         'try_attempt' => 15,
