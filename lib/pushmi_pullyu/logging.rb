@@ -112,7 +112,7 @@ module PushmiPullyu::Logging
                 "\tRetry attempt: #{try_attempt}\n"
 
       message_information = {
-        event_type: :fail_and_retry,
+        event_type: :failure,
         event_time: Time.now.to_s,
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
