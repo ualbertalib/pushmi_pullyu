@@ -73,7 +73,7 @@ class PushmiPullyu::PreservationQueue
   def get_entity_ingestion_attempt(entity)
     entity_attempts_key = "#{PushmiPullyu.options[:ingestion_prefix]}#{entity[:uuid]}"
     @redis.with do |connection|
-      return connection.get entity_attempts_key
+      return connection.get(entity_attempts_key).to_i
     end
   end
 

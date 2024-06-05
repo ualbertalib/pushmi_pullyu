@@ -72,7 +72,7 @@ RSpec.describe 'Acceptance test', type: :feature do
         expect(deposited_file.metadata['promise']).to eql 'bronze'
 
         # Log successful preservation event to the log files
-        PushmiPullyu::Logging.log_preservation_success(deposited_file, aip_folder)
+        PushmiPullyu::Logging.log_preservation_success(entity, deposited_file, aip_folder)
       end
     end
 
