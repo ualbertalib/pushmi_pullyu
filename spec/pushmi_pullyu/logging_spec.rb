@@ -120,8 +120,9 @@ RSpec.describe PushmiPullyu::Logging do
                     'promise' => 'bronze',
                     'project' => 'ERA' }
       )
+      entity = { uuid: 'e2ec88e3-3266-4e95-8575-8b04fac2a679', type: 'items' }
 
-      PushmiPullyu::Logging.log_preservation_success(deposited_file, tmp_aip_dir)
+      PushmiPullyu::Logging.log_preservation_success(entity, deposited_file, tmp_aip_dir)
 
       # Check log
       expect(File.exist?("#{tmp_log_dir}/preservation_events.log")).to be(true)
@@ -133,17 +134,23 @@ RSpec.describe PushmiPullyu::Logging do
       # Check JSON log
       json_data = JSON.parse(File.read("#{tmp_log_dir}/preservation_events.json").split("\n").last[/{.+}/])
       expect(json_data).to include(
-        'do_uuid' => '9p2909328',
-        'aip_deposited_at' => 'Fri, 02 Jun 2017 18:29:07 GMT',
-        'aip_md5sum' => '0f32868de20f3b1d4685bfa497a2c243',
-        'aip_sha256' => '',
-        'aip_metadata' => {
-          'project-id' => '9p2909328',
-          'aip-version' => '1.0',
-          'promise' => 'bronze',
-          'project' => 'ERA'
-        },
-        'aip_file_details' => []
+        'event_type' => 'success',
+        'event_time' => Time.now.to_s,
+        'entity_type' => entity[:type],
+        'entity_uuid' => entity[:uuid],
+        'event_details' => {
+          'do_uuid' => '9p2909328',
+          'aip_deposited_at' => 'Fri, 02 Jun 2017 18:29:07 GMT',
+          'aip_md5sum' => '0f32868de20f3b1d4685bfa497a2c243',
+          'aip_sha256' => '',
+          'aip_metadata' => {
+            'project-id' => '9p2909328',
+            'aip-version' => '1.0',
+            'promise' => 'bronze',
+            'project' => 'ERA'
+          },
+          'aip_file_details' => []
+        }
       )
     end
   end
@@ -187,7 +194,7 @@ RSpec.describe PushmiPullyu::Logging do
         'event_type' => 'attempt',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
-        'retry_attempt' => 1,
+        'try_attempt' => 1,
         'event_time' => Time.now.to_s
       )
     end
@@ -225,7 +232,7 @@ RSpec.describe PushmiPullyu::Logging do
       log_data = File.read("#{tmp_log_dir}/preservation_events.log")
       expect(log_data).to include("#{entity[:type]} failed to be deposited and will try again.")
       expect(log_data).to include(
-        "#{entity[:type]} uuid: #{entity[:uuid]}	Readding to preservation queue with retry attempt: 2"
+        "#{entity[:type]} uuid: #{entity[:uuid]}	Readding to preservation queue with try attempt: 2"
       )
 
       # Check JSON log
@@ -237,7 +244,7 @@ RSpec.describe PushmiPullyu::Logging do
         'event_type' => 'fail_and_retry',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
-        'retry_attempt' => 2,
+        'try_attempt' => 2,
         'error_message' => 'PushmiPullyu::AIP::Downloader::JupiterDownloadError',
         'event_time' => Time.now.to_s
       )
@@ -283,7 +290,7 @@ RSpec.describe PushmiPullyu::Logging do
         'event_type' => 'fail_and_retry',
         'entity_type' => 'items',
         'entity_uuid' => 'e2ec88e3-3266-4e95-8575-8b04fac2a679',
-        'retry_attempt' => 15,
+        'try_attempt' => 15,
         'error_message' => 'PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached',
         'event_time' => Time.now.to_s
       )

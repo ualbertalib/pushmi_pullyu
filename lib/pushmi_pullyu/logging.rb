@@ -52,7 +52,7 @@ module PushmiPullyu::Logging
       @preservation_json_logger.info("#{message_json},")
     end
 
-    def log_preservation_success(deposited_file, aip_directory)
+    def log_preservation_success(entity, deposited_file, aip_directory)
       message = "#{deposited_file.name} was successfully deposited into Swift Storage!\n" \
                 "Here are the details of this preservation event:\n" \
                 "\tUUID: '#{deposited_file.name}'\n" \
@@ -74,14 +74,22 @@ module PushmiPullyu::Logging
         end
       end
 
-      log_preservation_event(message, preservation_success_to_json(deposited_file, aip_directory))
+      message_information = {
+        event_type: :success,
+        event_time: Time.now.to_s,
+        entity_type: entity[:type],
+        entity_uuid: entity[:uuid],
+        event_details: preservation_success_to_json(deposited_file, aip_directory)
+      }
+
+      log_preservation_event(message, message_information.to_json)
     end
 
-    def log_preservation_fail_and_retry(entity, retry_attempt, exception)
+    def log_preservation_fail_and_retry(entity, try_attempt, exception)
       message = "#{entity[:type]} failed to be deposited and will try again.\n" \
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
-                "\tReadding to preservation queue with retry attempt: #{retry_attempt}\n" \
+                "\tReadding to preservation queue with try attempt: #{try_attempt}\n" \
                 "\tError of type: #{exception.class.name}\n" \
                 "\tError message: #{exception.message}\n"
 
@@ -90,43 +98,43 @@ module PushmiPullyu::Logging
         event_time: Time.now.to_s,
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
-        retry_attempt: retry_attempt,
+        try_attempt: try_attempt,
         error_message: exception.message
       }
 
       log_preservation_event(message, message_information.to_json)
     end
 
-    def log_preservation_failure(entity, retry_attempt, exception)
+    def log_preservation_failure(entity, try_attempt, exception)
       message = "#{entity[:type]} failed to be deposited.\n" \
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
-                "\tRetry attempt: #{retry_attempt}\n"
+                "\tRetry attempt: #{try_attempt}\n"
 
       message_information = {
         event_type: :fail_and_retry,
         event_time: Time.now.to_s,
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
-        retry_attempt: retry_attempt,
+        try_attempt: try_attempt,
         error_message: exception.message
       }
 
       log_preservation_event(message, message_information.to_json)
     end
 
-    def log_preservation_attempt(entity, retry_attempt)
+    def log_preservation_attempt(entity, try_attempt)
       message = "#{entity[:type]} will attempt to be deposited.\n" \
                 "Here are the details of this preservation event:\n" \
                 "\t#{entity[:type]} uuid: #{entity[:uuid]}" \
-                "\tRetry attempt: #{retry_attempt}\n"
+                "\tRetry attempt: #{try_attempt}\n"
 
       message_information = {
         event_type: :attempt,
         event_time: Time.now.to_s,
         entity_type: entity[:type],
         entity_uuid: entity[:uuid],
-        retry_attempt: retry_attempt
+        try_attempt: try_attempt
       }
 
       log_preservation_event(message, message_information.to_json)
@@ -184,7 +192,7 @@ module PushmiPullyu::Logging
       end
 
       message['aip_file_details'] = tmp_details
-      message.to_json
+      message
     end
 
     def reopen

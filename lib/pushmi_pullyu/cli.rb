@@ -199,8 +199,9 @@ class PushmiPullyu::CLI
   def run_preservation_cycle
     begin
       entity = queue.wait_next_item
+      # We add + 1 to the get_entity_ingestion_attempt because humans like to start counting from 1
       PushmiPullyu::Logging.log_preservation_attempt(entity,
-                                                     queue.get_entity_ingestion_attempt(entity))
+                                                     queue.get_entity_ingestion_attempt(entity) + 1)
       return unless entity && entity[:type].present? && entity[:uuid].present?
     rescue StandardError => e
       log_exception(e)
@@ -214,7 +215,7 @@ class PushmiPullyu::CLI
         # Push tarred AIP to swift API
         deposited_file = swift.deposit_file(aip_filename, options[:swift][:container])
         # Log successful preservation event to the log files
-        PushmiPullyu::Logging.log_preservation_success(deposited_file, aip_directory)
+        PushmiPullyu::Logging.log_preservation_success(entity, deposited_file, aip_directory)
       end
     # An EntityInvalid expection means there is a problem with the entity information format so there is no point in
     # readding it to the queue as it will always fail
@@ -223,9 +224,10 @@ class PushmiPullyu::CLI
       log_exception(e)
       begin
         queue.add_entity_in_timeframe(entity)
-        PushmiPullyu::Logging.log_preservation_fail_and_retry(entity, queue.get_entity_ingestion_attempt(entity), e)
+        # We add + 1 to the get_entity_ingestion_attempt because humans like to start counting from 1
+        PushmiPullyu::Logging.log_preservation_fail_and_retry(entity, queue.get_entity_ingestion_attempt(entity) + 1, e)
       rescue PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached => e
-        PushmiPullyu::Logging.log_preservation_failure(entity, queue.get_entity_ingestion_attempt(entity), e)
+        PushmiPullyu::Logging.log_preservation_failure(entity, queue.get_entity_ingestion_attempt(entity) + 1, e)
         log_exception(e)
       end
 
