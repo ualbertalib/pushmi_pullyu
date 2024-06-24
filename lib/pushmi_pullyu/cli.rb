@@ -226,7 +226,7 @@ class PushmiPullyu::CLI
         queue.add_entity_in_timeframe(entity)
         PushmiPullyu::Logging.log_preservation_fail_and_retry(entity, queue.get_entity_ingestion_attempt(entity), e)
       rescue PushmiPullyu::PreservationQueue::MaxDepositAttemptsReached => e
-        PushmiPullyu::Logging.log_preservation_failure(entity, queue.get_entity_ingestion_attempt(entity), e)
+        PushmiPullyu::Logging.log_preservation_failure(entity, PushmiPullyu.options[:ingestion_attempts], e)
         log_exception(e)
       end
 
