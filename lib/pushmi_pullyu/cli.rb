@@ -199,13 +199,14 @@ class PushmiPullyu::CLI
   def run_preservation_cycle
     begin
       entity = queue.wait_next_item
-      PushmiPullyu::Logging.log_preservation_attempt(entity,
-                                                     queue.get_entity_ingestion_attempt(entity))
-      return unless entity && entity[:type].present? && entity[:uuid].present?
     rescue StandardError => e
       log_exception(e)
     end
 
+    return unless entity && entity[:type].present? && entity[:uuid].present?
+
+    PushmiPullyu::Logging.log_preservation_attempt(entity,
+                                                   queue.get_entity_ingestion_attempt(entity))
     # add additional information about the error context to errors that occur while processing this item.
     Rollbar.scoped(entity_uuid: entity[:uuid]) do
       # Download AIP from Jupiter, bag and tar AIP directory and cleanup after
