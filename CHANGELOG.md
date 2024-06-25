@@ -6,7 +6,7 @@ PushmiPullyu is a Ruby application, whose primary job is to manage the flow of c
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [2.1.2]
  - Simplify get entity code [#280](https://github.com/ualbertalib/pushmi_pullyu/issues/280)
 
 ## [2.1.1]
