@@ -40,7 +40,7 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
 
           expect(first_deposit.name).to eq(second_deposit.name)
           expect(first_deposit.container.name).to eq(second_deposit.container.name)
-        end.to change { swift_depositer.swift_connection.container('ERA').count.to_i }.by(1)
+        end.to change { swift_depositer.instance_variable_get('@swift_connection').container('ERA').count.to_i }.by(1)
       end
     end
 
@@ -59,7 +59,7 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
         )
         expect(swift_depositer).not_to be_nil
         # rubocop:disable Layout/LineLength
-        expect(swift_depositer.swift_connection.connection.authtoken).to eq('gAAAAABl8hYAouKZJLkt8NDmuA2NjA1zOasGOAX-b2MfKpjiM_kf8sZHe42ipcs6Vb-57-aATajbTg54wIwhNhl2HKRfz5_rKfSJ0PnBQNFCVd4bKrdC0pHzoJMn9hkAa2tjBkqppBcMayvfqz-Ppxn0USnHw0z9zLLKDxGbRZwyhDJDhGOcIZg')
+        expect(swift_depositer.instance_variable_get('@swift_connection').connection.authtoken).to eq('gAAAAABl8hYAouKZJLkt8NDmuA2NjA1zOasGOAX-b2MfKpjiM_kf8sZHe42ipcs6Vb-57-aATajbTg54wIwhNhl2HKRfz5_rKfSJ0PnBQNFCVd4bKrdC0pHzoJMn9hkAa2tjBkqppBcMayvfqz-Ppxn0USnHw0z9zLLKDxGbRZwyhDJDhGOcIZg')
         # rubocop:enable Layout/LineLength
       end
     end
