@@ -62,8 +62,7 @@ class PushmiPullyu::SwiftDepositer
       # and metadata as additional key/value string pairs in the hash
       headers = { 'etag' => checksum,
                   'content-type' => 'application/x-tar',
-                  'X-Auth-New-Token' => 'true'
-                }.merge(metadata)
+                  'X-Auth-New-Token' => 'true' }.merge(metadata)
       deposited_file = era_container.object(file_base_name)
       deposited_file.write(File.open(file_name), headers)
     else
@@ -71,8 +70,7 @@ class PushmiPullyu::SwiftDepositer
       headers = { etag: checksum,
                   content_type: 'application/x-tar',
                   metadata: metadata,
-                  'X-Auth-New-Token' => 'true'
-                 }
+                  'X-Auth-New-Token' => 'true' }
       deposited_file = era_container.create_object(file_base_name, headers, File.open(file_name))
     end
 
