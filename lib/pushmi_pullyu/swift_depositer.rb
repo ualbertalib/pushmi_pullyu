@@ -13,7 +13,11 @@ class PushmiPullyu::SwiftDepositer
       auth_url: connection[:auth_url],
       project_name: connection[:project_name],
       auth_method: 'password',
-      service_type: 'object-store'
+      service_type: 'object-store',
+      # The retry_auth value should be true by default. It is currently set
+      # to nil which causes the connection to die without giving more error
+      # details.
+      retry_auth: true
     }
 
     if connection[:auth_version] == 'v3'

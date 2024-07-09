@@ -11,6 +11,8 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
                                                            tenant: 'tester',
                                                            auth_url: 'http://127.0.0.1:8080/auth/v1.0')
 
+        expect(swift_depositer.inspect).to include '@retry_auth=true' # retry_auth isn't exposed                                                           
+
         deposited_file = swift_depositer.deposit_file(sample_file, 'ERA')
 
         expect(deposited_file).not_to be_nil
