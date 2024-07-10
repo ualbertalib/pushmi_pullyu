@@ -5,7 +5,7 @@ services:
     # manual steps to set environment variables and create container
     # swift auth -v -U test:tester -K testing -A http://localhost:8080/auth/v1.0
     # swift auth
-    # swift post ERA
+    # swift post era
     image: openstackswift/saio:change_846891_latest
     ports:
       - '8080:8080'
