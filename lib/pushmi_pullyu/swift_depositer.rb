@@ -13,7 +13,8 @@ class PushmiPullyu::SwiftDepositer
       auth_url: connection[:auth_url],
       project_name: connection[:project_name],
       auth_method: 'password',
-      service_type: 'object-store'
+      service_type: 'object-store',
+      retry_auth: false
     }
 
     if connection[:auth_version] == 'v3'
