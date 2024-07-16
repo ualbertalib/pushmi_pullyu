@@ -67,12 +67,12 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
     it 'uses ruby-openstack gem behaviour to refresh authentication token' do
       VCR.use_cassette('swift_new_deposit') do
         swift_depositer = PushmiPullyu::SwiftDepositer.new(username: 'test:tester',
-                                                          password: 'testing',
-                                                          tenant: 'tester',
-                                                          auth_url: 'http://127.0.0.1:8080/auth/v1.0',
-                                                          retry_auth: true)
+                                                           password: 'testing',
+                                                           tenant: 'tester',
+                                                           auth_url: 'http://127.0.0.1:8080/auth/v1.0',
+                                                           retry_auth: true)
 
-        expect(swift_depositer.instance_variable_get("@swift_connection")
+        expect(swift_depositer.instance_variable_get('@swift_connection')
                               .instance_variable_get('@connection')
                               .instance_variable_get('@retry_auth')).to be true
       end
