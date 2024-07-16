@@ -2,10 +2,9 @@ require 'digest/md5'
 require 'openstack'
 class PushmiPullyu::SwiftDepositer
 
-  def initialize(connection, connection_wait_time: 10)
-    @connection_wait_time = connection_wait_time
+  def initialize(connection)
     # Generic authentication parameters
-    @swift_connection_parameters = {
+    swift_connection_parameters = {
       username: connection[:username],
       api_key: connection[:password],
       auth_url: connection[:auth_url],
@@ -19,28 +18,19 @@ class PushmiPullyu::SwiftDepositer
     }
 
     if connection[:auth_version] == 'v3'
-      @swift_connection_parameters[:user_domain] = connection[:user_domain]
+      swift_connection_parameters[:user_domain] = connection[:user_domain]
     elsif connection[:auth_version] == 'v1'
-      @swift_connection_parameters[:project_domain_name] = connection[:project_domain_name]
-      @swift_connection_parameters[:authtenant_name] = connection[:tenant]
+      swift_connection_parameters[:project_domain_name] = connection[:project_domain_name]
+      swift_connection_parameters[:authtenant_name] = connection[:tenant]
     end
 
-    establish_connection
+    @swift_connection = OpenStack::Connection.create(swift_connection_parameters)
   end
 
   def deposit_file(file_name, swift_container)
     file_base_name = File.basename(file_name, '.*')
     checksum = Digest::MD5.file(file_name).hexdigest
-    begin
-      era_container = @swift_connection.container(swift_container)
-    rescue OpenStack::Exception::ExpiredAuthToken => e
-      Rollbar.error(e)
-      logger.error(e)
-      # PMPY needs to be able to communicate with swift to continue working
-      sleep @connection_wait_time
-      establish_connection
-      retry
-    end
+    era_container = @swift_connection.container(swift_container)
 
     # Add swift metadata with in accordance to AIP spec:
     # https://docs.google.com/document/d/154BqhDPAdGW-I9enrqLpBYbhkF9exX9lV3kMaijuwPg/edit#
@@ -61,26 +51,18 @@ class PushmiPullyu::SwiftDepositer
       # for update: construct hash for key/value pairs as strings,
       # and metadata as additional key/value string pairs in the hash
       headers = { 'etag' => checksum,
-                  'content-type' => 'application/x-tar',
-                  'X-Auth-New-Token' => 'true' }.merge(metadata)
+                  'content-type' => 'application/x-tar' }.merge(metadata)
       deposited_file = era_container.object(file_base_name)
       deposited_file.write(File.open(file_name), headers)
     else
       # for creating new: construct hash with symbols as keys, add metadata as a hash within the header hash
       headers = { etag: checksum,
                   content_type: 'application/x-tar',
-                  metadata: metadata,
-                  'X-Auth-New-Token' => 'true' }
+                  metadata: metadata }
       deposited_file = era_container.create_object(file_base_name, headers, File.open(file_name))
     end
 
     deposited_file
-  end
-
-  private
-
-  def establish_connection
-    @swift_connection = OpenStack::Connection.create(@swift_connection_parameters)
   end
 
 end
