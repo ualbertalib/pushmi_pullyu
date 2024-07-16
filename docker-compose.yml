@@ -6,6 +6,8 @@ services:
     # swift auth -v -U test:tester -K testing -A http://localhost:8080/auth/v1.0
     # swift auth
     # swift post ERA
-    image: openstackswift/saio
+    # image: openstackswift/saio
+    # The previously used image was getting connection problems
+    image: openstackswift/saio:change_846891_latest
     ports:
       - '8080:8080'
