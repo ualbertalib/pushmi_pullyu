@@ -40,7 +40,7 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
 
           expect(first_deposit.name).to eq(second_deposit.name)
           expect(first_deposit.container.name).to eq(second_deposit.container.name)
-        end.to change { swift_depositer.swift_connection.container('ERA').count.to_i }.by(1)
+        end.to change { swift_depositer.instance_variable_get('@swift_connection').container('ERA').count.to_i }.by(1)
       end
     end
 
@@ -59,8 +59,20 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
         )
         expect(swift_depositer).not_to be_nil
         # rubocop:disable Layout/LineLength
-        expect(swift_depositer.swift_connection.connection.authtoken).to eq('gAAAAABl8hYAouKZJLkt8NDmuA2NjA1zOasGOAX-b2MfKpjiM_kf8sZHe42ipcs6Vb-57-aATajbTg54wIwhNhl2HKRfz5_rKfSJ0PnBQNFCVd4bKrdC0pHzoJMn9hkAa2tjBkqppBcMayvfqz-Ppxn0USnHw0z9zLLKDxGbRZwyhDJDhGOcIZg')
+        expect(swift_depositer.instance_variable_get('@swift_connection').connection.authtoken).to eq('gAAAAABl8hYAouKZJLkt8NDmuA2NjA1zOasGOAX-b2MfKpjiM_kf8sZHe42ipcs6Vb-57-aATajbTg54wIwhNhl2HKRfz5_rKfSJ0PnBQNFCVd4bKrdC0pHzoJMn9hkAa2tjBkqppBcMayvfqz-Ppxn0USnHw0z9zLLKDxGbRZwyhDJDhGOcIZg')
         # rubocop:enable Layout/LineLength
+      end
+    end
+
+    it 'uses ruby-openstack gem behaviour to refresh authentication token' do
+      VCR.use_cassette('swift_new_deposit') do
+        swift_depositer = PushmiPullyu::SwiftDepositer.new(username: 'test:tester',
+                                                           password: 'testing',
+                                                           tenant: 'tester',
+                                                           auth_url: 'http://127.0.0.1:8080/auth/v1.0',
+                                                           retry_auth: true)
+
+        expect(swift_depositer.inspect).to include '@retry_auth=true' # retry_auth isn't exposed
       end
     end
   end
