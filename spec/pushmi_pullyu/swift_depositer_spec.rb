@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'byebug'
+
 RSpec.describe PushmiPullyu::SwiftDepositer do
   describe '#deposit_file' do
     it 'deposits new file' do
@@ -72,9 +72,7 @@ RSpec.describe PushmiPullyu::SwiftDepositer do
                                                            auth_url: 'http://127.0.0.1:8080/auth/v1.0',
                                                            retry_auth: true)
 
-        expect(swift_depositer.instance_variable_get('@swift_connection')
-                              .instance_variable_get('@connection')
-                              .instance_variable_get('@retry_auth')).to be true
+        expect(swift_depositer.inspect).to include '@retry_auth=true' # retry_auth isn't exposed
       end
     end
   end
