@@ -1,0 +1,58 @@
+# Sample configuration file for PushmiPullyu.
+# Options here can still be overridden by cmd line args.
+
+# Pass this file at config/pushmi_pullyu.yml and PushmiPullyu will
+# pick it up automatically. Or pass this file into pushmi_pullyu on command line
+# via `pushmi_pullyu -C path/to/pushmi_pullyu.yml`
+
+# PushmiPullyu will run this file through ERB when reading it so you can
+# even put in dynamic logic, like consuming ENV Variables.
+
+aip_version: 'lightaip-2.0'
+debug: false
+logdir: log
+monitor: false
+piddir: tmp/pids
+workdir: tmp/work
+process_name: pushmi_pullyu
+queue_name: dev:pmpy_queue
+ingestion_prefix: "'prod:pmpy_ingest_attempt:'" 
+ingestion_attempts: 15
+first_failed_wait: 10
+minimum_age: 0
+
+redis:
+  url: redis://localhost:6379
+
+#parameters project_name and project_domain_name are required only for keystone v3 authentication
+swift:
+  username: 'swift'
+  password: 'fingertips'
+  project_name: 'service'
+  user_domain_name: 'Default'
+  project_domain_name: 'Default'
+  auth_url: 'http://127.0.0.1:35357/v3'
+  auth_version: '3'
+  container: 'era' 
+  auth_method: 'password'
+  service_type: 'object-store'
+
+# works!
+#  tenant: tester
+#  username: test:tester
+#  password: testing
+#  auth_url: http://localhost:8080/auth/v1.0
+#  project_name: demo
+#  project_domain_name: default
+#  container: era
+
+rollbar:
+  token: 'abc123xyz'
+  proxy_host: 'your_proxy_host_url'
+  proxy_port: '80'
+
+jupiter:
+  user: ditech@ualberta.ca
+  api_key: 3eeb395e-63b7-11ea-bc55-0242ac130003
+  jupiter_url: http://era.lvh.me:3000/
+  aip_api_path: aip/v1

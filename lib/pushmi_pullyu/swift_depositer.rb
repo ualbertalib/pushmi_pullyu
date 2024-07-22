@@ -12,14 +12,15 @@ class PushmiPullyu::SwiftDepositer
       api_key: connection[:password],
       auth_url: connection[:auth_url],
       project_name: connection[:project_name],
+      project_domain_name: connection[:project_domain_name],
       auth_method: 'password',
-      service_type: 'object-store'
+      service_type: 'object-store',
+      auth_retry: false
     }
 
-    if connection[:auth_version] == 'v3'
-      swift_connection_parameters[:user_domain] = connection[:user_domain]
+    if connection[:auth_version] == '3'
+      swift_connection_parameters[:user_domain_name] = connection[:user_domain_name]
     elsif connection[:auth_version] == 'v1'
-      swift_connection_parameters[:project_domain_name] = connection[:project_domain_name]
       swift_connection_parameters[:authtenant_name] = connection[:tenant]
     end
 

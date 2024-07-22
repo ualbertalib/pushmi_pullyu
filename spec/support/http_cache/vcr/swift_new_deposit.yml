@@ -24,23 +24,27 @@ http_interactions:
     headers:
       X-Storage-Url:
       - http://127.0.0.1:8080/v1/AUTH_test
+      X-Auth-Token-Expires:
+      - '0'
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Content-Type:
       - text/html; charset=UTF-8
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Content-Length:
       - '0'
       X-Trans-Id:
-      - txf3e0771bfbfd4b779f2f2-005f2d8ecb
+      - tx3975b05440e049ae98235-0066901638
+      X-Openstack-Request-Id:
+      - tx3975b05440e049ae98235-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:26:35 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:26:35 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: head
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA
@@ -49,47 +53,55 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       Content-Type:
       - application/json
       X-Openstack-Request-Id:
-      - req-7f28e8b2-3554-4ec8-b9ec-694432c38996
+      - req-04c7e7c2-0a67-41f9-81a3-560d67ad7038
   response:
     status:
       code: 204
       message: No Content
     headers:
-      Content-Length:
-      - '0'
       X-Container-Object-Count:
-      - '6'
+      - '0'
       Accept-Ranges:
       - bytes
-      X-Timestamp:
-      - '1582230147.87799'
+      X-Storage-Policy:
+      - 1replica
+      Last-Modified:
+      - Thu, 11 Jul 2024 17:24:24 GMT
       X-Container-Bytes-Used:
-      - '699904'
+      - '0'
+      X-Timestamp:
+      - '1720718663.59019'
       Content-Type:
       - application/json; charset=utf-8
+      Vary:
+      - Accept
+      Content-Length:
+      - '0'
       X-Trans-Id:
-      - tx7ef7916931e14edfb40e1-005f2d8ed7
+      - tx79f43387e92f4ca89b7d9-0066901638
+      X-Openstack-Request-Id:
+      - tx79f43387e92f4ca89b7d9-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:26:47 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:26:47 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: head
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA/config
@@ -98,19 +110,19 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       Content-Type:
       - application/json
       X-Openstack-Request-Id:
-      - req-586bc602-8046-4c0e-9c5e-edc90cf7f4c1
+      - req-fc065af6-7461-4f37-985c-b5dea0fcf4af
   response:
     status:
       code: 404
@@ -121,16 +133,18 @@ http_interactions:
       Content-Type:
       - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx3605745244c6468caeead-005f2d8ed7
+      - tx8378dc8cef3a4e23b5fee-0066901638
+      X-Openstack-Request-Id:
+      - tx8378dc8cef3a4e23b5fee-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:26:47 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:26:47 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: put
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA/config
@@ -142,22 +156,24 @@ http_interactions:
         b246ICdsaWdodGFpcC0yLjAnCmRlYnVnOiB0cnVlCmxvZ2RpcjogdG1wL3Nw
         ZWMvbG9nCm1vbml0b3I6IGZhbHNlCnBpZGRpcjogdG1wL3NwZWMvcGlkcwp3
         b3JrZGlyOiB0bXAvc3BlYy93b3JrCnByb2Nlc3NfbmFtZTogdGVzdF9wdXNo
-        bWlfcHVsbHl1Cm1pbmltdW1fYWdlOiAxCnF1ZXVlX25hbWU6IHRlc3Q6cG1w
-        eV9xdWV1ZQpyb2xsYmFyOgogIHRva2VuOiAnYWJjMTIzeHl6JwogIHByb3h5
-        X2hvc3Q6ICd5b3VyX3Byb3h5X3VybCcKICBwcm94eV9wb3J0OiAnODAnCnN3
-        aWZ0OgogIGF1dGhfdXJsOiBodHRwOi8vMTI3LjAuMC4xOjgwODAvYXV0aC92
-        MS4wCmp1cGl0ZXI6CiAgdXNlcjogJ2RpdGVjaEB1YWxiZXJ0YS5jYScKICBh
-        cGlfa2V5OiAnM2VlYjM5NWUtNjNiNy0xMWVhLWJjNTUtMDI0MmFjMTMwMDAz
-        Jwo=
+        bWlfcHVsbHl1CmluZ2VzdGlvbl9wcmVmaXg6ICdwcm9kOnBtcHlfaW5nZXN0
+        X2F0dGVtcHQ6Jwppbmdlc3Rpb25fYXR0ZW1wdHM6IDE1CmZpcnN0X2ZhaWxl
+        ZF93YWl0OiAxMAptaW5pbXVtX2FnZTogMQpxdWV1ZV9uYW1lOiB0ZXN0OnBt
+        cHlfcXVldWUKcm9sbGJhcjoKICB0b2tlbjogJ2FiYzEyM3h5eicKICBwcm94
+        eV9ob3N0OiAneW91cl9wcm94eV91cmwnCiAgcHJveHlfcG9ydDogJzgwJwpz
+        d2lmdDoKICBhdXRoX3VybDogaHR0cDovLzEyNy4wLjAuMTo4MDgwL2F1dGgv
+        djEuMAogIGF1dGhfdmVyc2lvbjogJ3YxJwogIGNvbnRhaW5lcjogJ0VSQScK
+        anVwaXRlcjoKICB1c2VyOiAnZGl0ZWNoQHVhbGJlcnRhLmNhJwogIGFwaV9r
+        ZXk6ICczZWViMzk1ZS02M2I3LTExZWEtYmM1NS0wMjQyYWMxMzAwMDMnCg==
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       X-Object-Meta-Project:
@@ -171,7 +187,7 @@ http_interactions:
       Content-Type:
       - application/x-tar
       Etag:
-      - 8d1f8fdfb3bce6b335d96eb9e1abad3e
+      - b2895066daceffbdfecd635e491ba546
       Transfer-Encoding:
       - chunked
       Accept-Encoding:
@@ -182,24 +198,26 @@ http_interactions:
       message: Created
     headers:
       Last-Modified:
-      - Fri, 07 Aug 2020 17:26:48 GMT
+      - Thu, 11 Jul 2024 17:28:25 GMT
       Content-Length:
       - '0'
       Etag:
-      - 8d1f8fdfb3bce6b335d96eb9e1abad3e
+      - b2895066daceffbdfecd635e491ba546
       Content-Type:
       - text/html; charset=UTF-8
       X-Trans-Id:
-      - tx4ae6838c877c48a8834b9-005f2d8ed7
+      - tx2297d63f3511447caa79b-0066901638
+      X-Openstack-Request-Id:
+      - tx2297d63f3511447caa79b-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:26:47 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:26:47 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: head
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA/config
@@ -208,19 +226,19 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       Content-Type:
       - application/json
       X-Openstack-Request-Id:
-      - req-af77189f-6aff-4192-9e6b-7e970496f370
+      - req-528369fa-c76e-4d6b-a8d9-f59543ae42ec
   response:
     status:
       code: 200
@@ -229,34 +247,36 @@ http_interactions:
       X-Object-Meta-Project-Id:
       - config
       Content-Length:
-      - '497'
+      - '628'
+      Etag:
+      - b2895066daceffbdfecd635e491ba546
       X-Object-Meta-Aip-Version:
       - '1.0'
       Accept-Ranges:
       - bytes
       Last-Modified:
-      - Fri, 07 Aug 2020 17:26:48 GMT
-      Etag:
-      - 8d1f8fdfb3bce6b335d96eb9e1abad3e
-      X-Timestamp:
-      - '1596821207.20409'
-      X-Object-Meta-Promise:
-      - bronze
+      - Thu, 11 Jul 2024 17:28:25 GMT
       X-Object-Meta-Project:
       - ERA
+      X-Timestamp:
+      - '1720718904.45301'
+      X-Object-Meta-Promise:
+      - bronze
       Content-Type:
       - application/x-tar
       X-Trans-Id:
-      - tx4072e99c550445b3b234b-005f2d8f06
+      - txde1fa001c4ae46d4ba7b1-0066901638
+      X-Openstack-Request-Id:
+      - txde1fa001c4ae46d4ba7b1-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:27:34 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:27:34 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: head
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA/config
@@ -265,19 +285,19 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       Content-Type:
       - application/json
       X-Openstack-Request-Id:
-      - req-1cef22df-1bb9-4b4e-a427-b753ba99bb45
+      - req-2f3c4499-9292-4159-a9c6-f1bd353de1f2
   response:
     status:
       code: 200
@@ -286,34 +306,36 @@ http_interactions:
       X-Object-Meta-Project-Id:
       - config
       Content-Length:
-      - '497'
+      - '628'
+      Etag:
+      - b2895066daceffbdfecd635e491ba546
       X-Object-Meta-Aip-Version:
       - '1.0'
       Accept-Ranges:
       - bytes
       Last-Modified:
-      - Fri, 07 Aug 2020 17:26:48 GMT
-      Etag:
-      - 8d1f8fdfb3bce6b335d96eb9e1abad3e
-      X-Timestamp:
-      - '1596821207.20409'
-      X-Object-Meta-Promise:
-      - bronze
+      - Thu, 11 Jul 2024 17:28:25 GMT
       X-Object-Meta-Project:
       - ERA
+      X-Timestamp:
+      - '1720718904.45301'
+      X-Object-Meta-Promise:
+      - bronze
       Content-Type:
       - application/x-tar
       X-Trans-Id:
-      - tx50d767067737418495d90-005f2d8f07
+      - tx0f83da566d7e435f8f9b1-0066901638
+      X-Openstack-Request-Id:
+      - tx0f83da566d7e435f8f9b1-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:27:35 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:27:35 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: head
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA/config
@@ -322,19 +344,19 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       Content-Type:
       - application/json
       X-Openstack-Request-Id:
-      - req-0a9b2161-3e34-4139-8f7f-f85ef09661e9
+      - req-609d68b0-7eab-4eb7-ab56-efa5595a9588
   response:
     status:
       code: 200
@@ -343,34 +365,36 @@ http_interactions:
       X-Object-Meta-Project-Id:
       - config
       Content-Length:
-      - '497'
+      - '628'
+      Etag:
+      - b2895066daceffbdfecd635e491ba546
       X-Object-Meta-Aip-Version:
       - '1.0'
       Accept-Ranges:
       - bytes
       Last-Modified:
-      - Fri, 07 Aug 2020 17:26:48 GMT
-      Etag:
-      - 8d1f8fdfb3bce6b335d96eb9e1abad3e
-      X-Timestamp:
-      - '1596821207.20409'
-      X-Object-Meta-Promise:
-      - bronze
+      - Thu, 11 Jul 2024 17:28:25 GMT
       X-Object-Meta-Project:
       - ERA
+      X-Timestamp:
+      - '1720718904.45301'
+      X-Object-Meta-Promise:
+      - bronze
       Content-Type:
       - application/x-tar
       X-Trans-Id:
-      - txec35564281a245a2bae55-005f2d8f08
+      - tx36962656ceac4d8d89438-0066901638
+      X-Openstack-Request-Id:
+      - tx36962656ceac4d8d89438-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:27:36 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:27:36 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 - request:
     method: head
     uri: http://127.0.0.1:8080/v1/AUTH_test/ERA/config
@@ -379,19 +403,19 @@ http_interactions:
       string: ''
     headers:
       X-Auth-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       X-Storage-Token:
-      - AUTH_tk3044d7db34a04b64aa5d8a6c6e091674
+      - AUTH_tk891bc74d831945d191aca8c10b5e50fd
       Connection:
       - Keep-Alive
       User-Agent:
-      - OpenStack Ruby API 3.0.8
+      - OpenStack Ruby API 3.1.6
       Accept:
       - application/json
       Content-Type:
       - application/json
       X-Openstack-Request-Id:
-      - req-77ecae71-4c09-4296-ba9a-3ca4cef8654c
+      - req-5927c51c-165d-463e-a09a-d89f2cb11348
   response:
     status:
       code: 200
@@ -400,32 +424,34 @@ http_interactions:
       X-Object-Meta-Project-Id:
       - config
       Content-Length:
-      - '497'
+      - '628'
+      Etag:
+      - b2895066daceffbdfecd635e491ba546
       X-Object-Meta-Aip-Version:
       - '1.0'
       Accept-Ranges:
       - bytes
       Last-Modified:
-      - Fri, 07 Aug 2020 17:26:48 GMT
-      Etag:
-      - 8d1f8fdfb3bce6b335d96eb9e1abad3e
-      X-Timestamp:
-      - '1596821207.20409'
-      X-Object-Meta-Promise:
-      - bronze
+      - Thu, 11 Jul 2024 17:28:25 GMT
       X-Object-Meta-Project:
       - ERA
+      X-Timestamp:
+      - '1720718904.45301'
+      X-Object-Meta-Promise:
+      - bronze
       Content-Type:
       - application/x-tar
       X-Trans-Id:
-      - txa8c40fa8d6a54844b81d6-005f2d8f09
+      - tx2fdaee936a124af78ef23-0066901638
+      X-Openstack-Request-Id:
+      - tx2fdaee936a124af78ef23-0066901638
       Date:
-      - Fri, 07 Aug 2020 17:27:37 GMT
+      - Thu, 11 Jul 2024 17:28:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version: null
-  recorded_at: Fri, 07 Aug 2020 17:27:37 GMT
+  recorded_at: Thu, 11 Jul 2024 17:28:24 GMT
 recorded_with: VCR 5.1.0
