@@ -5,7 +5,7 @@ gemspec
 
 group :development, :test do
   gem 'bundler', '~> 2.0'
-  gem 'danger', '~> 9.3'
+  gem 'danger', '~> 9.5'
   gem 'pry', '~> 0.10', '>= 0.10.4'
   gem 'pry-byebug', '~> 3.6'
   gem 'rake', '~> 13.0'
