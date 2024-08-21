@@ -6,6 +6,11 @@ PushmiPullyu is a Ruby application, whose primary job is to manage the flow of c
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+ - Bring in and enforce inclusive language cops [PR#3544](https://github.com/ualbertalib/jupiter/pull/3544)
+
 ## [2.1.3]
  - Refresh authentication token after it expires [#311](https://github.com/ualbertalib/pushmi_pullyu/issues/311)
 
