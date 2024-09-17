@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'time'
 require 'timecop'
 ##
-# Dummy class, so that we can mix in the Logging module and test it.
+# Mock class, so that we can mix in the Logging module and test it.
 #
 class LoggerTest
 
@@ -298,25 +298,25 @@ RSpec.describe PushmiPullyu::Logging do
   end
 
   context 'when included in classes' do
-    let(:dummy_class) { LoggerTest.new }
+    let(:mock_class) { LoggerTest.new }
 
     it 'has a logger' do
-      expect(dummy_class.logger).to be_an_instance_of(Logger)
+      expect(mock_class.logger).to be_an_instance_of(Logger)
     end
 
     it 'uses the default logger' do
-      expect(dummy_class.logger).to be PushmiPullyu::Logging.logger
+      expect(mock_class.logger).to be PushmiPullyu::Logging.logger
     end
 
     it 'allows custom loggers' do
       PushmiPullyu::Logging.logger = Logger.new($stderr)
-      expect(dummy_class.logger).to be PushmiPullyu::Logging.logger
+      expect(mock_class.logger).to be PushmiPullyu::Logging.logger
     end
 
     it 'logs' do
       allow(PushmiPullyu::Logging.logger).to receive(:info)
 
-      dummy_class.logger.info('test')
+      mock_class.logger.info('test')
 
       expect(PushmiPullyu::Logging.logger).to have_received(:info).with(an_instance_of(String)).once
     end

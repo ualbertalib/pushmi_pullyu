@@ -4,6 +4,9 @@
 # https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml
 require: rubocop-rspec
 
+inherit_from:
+  - https://raw.githubusercontent.com/ualbertalib/library_applications_development_inclusive_language/main/inclusive_language_rubocop.yml
+
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
