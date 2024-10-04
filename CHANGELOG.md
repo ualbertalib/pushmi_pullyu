@@ -11,6 +11,9 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 ### Added
  - Bring in and enforce inclusive language cops [PR#469](https://github.com/ualbertalib/pushmi_pullyu/pull/469)
 
+### Fixed
+ - Use `File.open` with a block for simple exception handling and ensuring files are closed [#475](https://github.com/ualbertalib/pushmi_pullyu/issues/475)
+
 ## [2.1.3]
  - Refresh authentication token after it expires [#311](https://github.com/ualbertalib/pushmi_pullyu/issues/311)
 

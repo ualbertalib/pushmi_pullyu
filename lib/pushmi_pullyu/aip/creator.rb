@@ -41,7 +41,9 @@ class PushmiPullyu::AIP::Creator
     tar_aip_filename = File.expand_path(@aip_filename)
 
     Dir.chdir(PushmiPullyu.options[:workdir]) do
-      Minitar.pack(@noid, File.open(tar_aip_filename, 'wb'))
+      File.open(tar_aip_filename, 'wb') do |tar|
+        Minitar.pack(@noid, tar)
+      end
     end
   end
 
