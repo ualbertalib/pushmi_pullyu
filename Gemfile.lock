@@ -150,9 +150,9 @@ GEM
     rdf-xsd (3.2.1)
       rdf (~> 3.2)
       rexml (~> 3.2)
-    redis (5.0.8)
-      redis-client (>= 0.17.0)
-    redis-client (0.17.1)
+    redis (5.3.0)
+      redis-client (>= 0.22.0)
+    redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
     rest-client (2.1.0)
