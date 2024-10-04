@@ -18,7 +18,7 @@ declared_trivial = (github.pr_title + github.pr_body).include?('#trivial') || !h
 
 if !git.modified_files.include?('CHANGELOG.md') && !declared_trivial
   error_message = "Please include a CHANGELOG entry. \nYou can find it at " \
-                  '[CHANGELOG.md](https://github.com/ualbertalib/pushmi_pullyu/blob/master/CHANGELOG.md).'
+                  '[CHANGELOG.md](https://github.com/ualbertalib/pushmi_pullyu/blob/main/CHANGELOG.md).'
   fail(error_message, sticky: false)
 end
 

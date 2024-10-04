@@ -86,7 +86,7 @@ You can also provide a configuration file which PushmiPullyu will use with the -
 
 By default, if no configuration file is specified, PushmiPullyu will look for a configuration file at config/pushmi_pullyu.yml.
 
-Take the following [sample configuration](https://github.com/ualbertalib/pushmi_pullyu/blob/master/examples/pushmi_pullyu.yml) as inspiration or check out the [DEFAULTS hash](https://github.com/ualbertalib/pushmi_pullyu/blob/master/lib/pushmi_pullyu.rb) in the main module to see all available options.
+Take the following [sample configuration](https://github.com/ualbertalib/pushmi_pullyu/blob/main/examples/pushmi_pullyu.yml) as inspiration or check out the [DEFAULTS hash](https://github.com/ualbertalib/pushmi_pullyu/blob/main/lib/pushmi_pullyu.rb) in the main module to see all available options.
 
 Options passed on the command line will also override options specified in the config file.
 
@@ -144,7 +144,7 @@ To release a new version, bump the version file found here: `lib/pushmi_pullyu/v
 
 Try to bump versions using [semantic versioning](http://semver.org/).
 
-Commit this change into master branch via a PR.
+Commit this change into main branch via a PR.
 
 Once committed, you can do a release by running the following rake command:
 
