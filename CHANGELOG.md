@@ -14,6 +14,9 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 ### Fixed
  - Use `File.open` with a block for simple exception handling and ensuring files are closed [#475](https://github.com/ualbertalib/pushmi_pullyu/issues/475)
 
+### Chores
+ - Use add_dependency instead of add_runtime_dependency. [PR#473](https://github.com/ualbertalib/pushmi_pullyu/pull/473)
+
 ## [2.1.3]
  - Refresh authentication token after it expires [#311](https://github.com/ualbertalib/pushmi_pullyu/issues/311)
 
