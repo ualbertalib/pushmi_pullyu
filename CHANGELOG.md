@@ -8,14 +8,34 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [2.1.4]
+
 ### Added
  - Bring in and enforce inclusive language cops [PR#469](https://github.com/ualbertalib/pushmi_pullyu/pull/469)
 
 ### Fixed
  - Use `File.open` with a block for simple exception handling and ensuring files are closed [#475](https://github.com/ualbertalib/pushmi_pullyu/issues/475)
+ - Fix problem with authentication token expiration by @lagoan in https://github.com/ualbertalib/pushmi_pullyu/pull/457
+ 
+### Changed 
+ - Bump bundler from 2.3.12 to 2.4.9 [PR#483](https://github.com/ualbertalib/pushmi_pullyu/pull/483)
 
 ### Chores
  - Use add_dependency instead of add_runtime_dependency. [PR#473](https://github.com/ualbertalib/pushmi_pullyu/pull/473)
+ - Bump rexml from 3.2.8 to 3.3.2 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/462
+ - Bump timecop from 0.9.8 to 0.9.10 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/450
+ - Bump redis from 5.0.8 to 5.3.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/468
+ - Update CI for branch name changes by @pgwillia in https://github.com/ualbertalib/pushmi_pullyu/pull/480
+ - Bump danger from 9.3.2 to 9.5.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/466
+ - Bump bagit from 0.4.6 to 0.6.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/482
+ - Update minitar requirement from ~> 0.7 to >= 0.7, < 2.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/481
+ - Bump rubocop-rspec from 2.24.1 to 3.1.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/478
+ - Bump rdf from 3.2.11 to 3.2.12 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/479
+ - Bump webmock from 3.19.1 to 3.24.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/477
+ - Bump rubocop from 1.64.0 to 1.66.1 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/473
+ - Bump rollbar from 3.4.1 to 3.6.0 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/472
+ - Bump activesupport from 7.1.1 to 7.1.4 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/470
+ - Bump rake from 13.0.6 to 13.2.1 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/426
 
 ## [2.1.3]
  - Refresh authentication token after it expires [#311](https://github.com/ualbertalib/pushmi_pullyu/issues/311)
