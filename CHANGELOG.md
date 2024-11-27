@@ -8,6 +8,9 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+### Fixed
+- Permit versions of dependencies that work with Ruby 2.7
+
 ## [2.1.4]
 
 ### Added

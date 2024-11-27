@@ -2,14 +2,14 @@ PATH
   remote: .
   specs:
     pushmi_pullyu (2.1.4)
-      activesupport (>= 5, < 8)
+      activesupport (>= 5, < 7.2)
       bagit (~> 0.4)
       connection_pool (~> 2.2)
       daemons (~> 1.2, >= 1.2.4)
-      minitar (>= 0.7, < 2.0)
+      minitar (>= 0.7, < 1.0)
       openstack (~> 3.3, >= 3.3.10)
-      rdf (>= 1.99, < 4.0)
-      rdf-n3 (>= 1.99, < 4.0)
+      rdf (>= 1.99, < 3.3)
+      rdf-n3 (>= 1.99, < 3.3)
       redis (>= 3.3, < 6.0)
       rest-client (>= 1.8, < 3.0)
       rollbar (>= 2.18, < 4.0)
