@@ -21,14 +21,14 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.7'
 
-  spec.add_dependency 'activesupport', '>= 5', '< 8'
+  spec.add_dependency 'activesupport', '>= 5', '< 7.2'
   spec.add_dependency 'bagit', '~> 0.4'
   spec.add_dependency 'connection_pool', '~> 2.2'
   spec.add_dependency 'daemons', '~> 1.2', '>= 1.2.4'
-  spec.add_dependency 'minitar', '>= 0.7', '< 2.0'
+  spec.add_dependency 'minitar', '>= 0.7', '< 1.0'
   spec.add_dependency 'openstack', '~> 3.3', '>= 3.3.10'
-  spec.add_dependency 'rdf', '>= 1.99', '< 4.0'
-  spec.add_dependency 'rdf-n3', '>= 1.99', '< 4.0'
+  spec.add_dependency 'rdf', '>= 1.99', '< 3.3'
+  spec.add_dependency 'rdf-n3', '>= 1.99', '< 3.3'
   spec.add_dependency 'redis', '>= 3.3', '< 6.0'
   spec.add_dependency 'rest-client', '>= 1.8', '< 3.0'
   spec.add_dependency 'rollbar', '>= 2.18', '< 4.0'
