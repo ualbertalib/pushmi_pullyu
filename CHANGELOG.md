@@ -8,8 +8,15 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+## [2.1.5] 2024-11-27
+
 ### Fixed
-- Permit versions of dependencies that work with Ruby 2.7
+ - Permit versions of activesupport that work with Ruby 2.7 by @pgwillia in https://github.com/ualbertalib/pushmi_pullyu/pull/492
+
+### Chores
+ - Bump rexml from 3.3.8 to 3.3.9 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/489
+ - Bump activesupport from 7.1.4 to 7.1.4.2 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/487
+ - Bump danger from 9.5.0 to 9.5.1 by @dependabot in https://github.com/ualbertalib/pushmi_pullyu/pull/486
 
 ## [2.1.4]
 
