@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis', '>= 3.3', '< 6.0'
   spec.add_dependency 'rest-client', '>= 1.8', '< 3.0'
   spec.add_dependency 'rollbar', '>= 2.18', '< 4.0'
+  spec.add_dependency 'securerandom', '~> 0.3.2'
   spec.add_dependency 'uuid', '~> 2.3.9'
 
   spec.metadata = {
