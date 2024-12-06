@@ -8,6 +8,9 @@ and releases in PushmiPullyu adheres to [Semantic Versioning](https://semver.org
 
 ## [Unreleased]
 
+### Fixed
+- pin version of securerandom that work with Ruby 2.7
+
 ## [2.1.5] 2024-11-27
 
 ### Fixed
