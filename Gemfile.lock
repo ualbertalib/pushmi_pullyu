@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pushmi_pullyu (2.1.5)
+    pushmi_pullyu (2.1.6)
       activesupport (>= 5, < 7.2)
       bagit (~> 0.4)
       connection_pool (~> 2.2)
